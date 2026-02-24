@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import ProjectsPage from './pages/ProjectsPage'
 import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
 import Footer from './components/Footer'
 import Lenis from 'lenis'
 
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/blog" element={<BlogPage />} />
+                    <Route path="/blog/:id" element={<BlogPostPage />} />
                 </Routes>
 
                 <Footer />
