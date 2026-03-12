@@ -46,13 +46,6 @@ export const FloatingNav = ({
 
     return (
         <>
-            <RouterLink
-                to="/"
-                className="fixed top-4 left-4 z-[5001] rounded-full bg-white/80 dark:bg-slate-900/80 border border-white/60 dark:border-slate-800 shadow-md px-3 py-2"
-            >
-                <img src="/images/logo.png" alt="Logo" className="h-10 w-auto object-contain" />
-            </RouterLink>
-
             <AnimatePresence mode="wait">
                 <motion.div
                     initial={{

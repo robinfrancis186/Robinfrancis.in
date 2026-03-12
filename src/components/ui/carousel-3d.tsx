@@ -142,19 +142,6 @@ export const Carousel3D = ({
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
-                                {/* Featured Badge for center item */}
-                                {index === currentIndex && (
-                                    <div className="absolute top-6 right-6">
-                                        <div className="inline-flex items-center gap-1 rounded-full bg-blue-500 px-3 py-1.5 text-xs font-medium text-white">
-                                            <span className="relative flex h-2 w-2 mr-1">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                                            </span>
-                                            Featured
-                                        </div>
-                                    </div>
-                                )}
-
                                 <div className="absolute bottom-6 left-6 right-6">
                                     <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20 mb-3 backdrop-blur-md">
                                         <span className="text-blue-400 font-bold">•</span>

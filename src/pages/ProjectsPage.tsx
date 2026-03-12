@@ -68,7 +68,7 @@ const ProjectsPage = () => {
             >
                 <div className="flex sm:mb-8 mb-6 items-end justify-between">
                     <div className="">
-                        <p className="text-[11px] sm:text-xs tracking-widest text-neutral-500 uppercase font-geist">(03) Selected Work</p>
+                        <p className="text-[11px] sm:text-xs tracking-widest text-neutral-500 uppercase font-geist">how i speand my time</p>
                         <h3 className="mt-2 text-2xl sm:text-3xl tracking-tight font-geist font-medium">A few projects I'm proud of.</h3>
                     </div>
                     <a href="/#work" className="hidden sm:inline-flex items-center gap-2 ring-1 ring-neutral-200 hover:shadow text-sm text-neutral-700 font-geist bg-white rounded-full pt-2 pr-4 pb-2 pl-4 dark:bg-slate-900 dark:text-neutral-300 dark:ring-neutral-700 dark:hover:bg-slate-800 transition-colors">

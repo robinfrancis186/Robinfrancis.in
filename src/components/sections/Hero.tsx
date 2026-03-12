@@ -160,17 +160,35 @@ const Hero = () => {
                             transition={{ delay: 0.6, duration: 1 }}
                             className="flex items-center justify-center gap-8 z-20 relative -mt-2"
                         >
-                            <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300">
-                                <LottieIcon animationData={mailAnimation} size={28} />
+                            <a
+                                href="mailto:robinfrancis186@gmail.com"
+                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                            >
+                                <LottieIcon animationData={mailAnimation} size={28} className="dark:invert" />
                             </a>
-                            <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
-                                <LottieIcon animationData={linkedinAnimation} size={28} />
+                            <a
+                                href="https://www.linkedin.com/in/robin-francis-b43565175"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                            >
+                                <LottieIcon animationData={linkedinAnimation} size={28} className="dark:invert" />
                             </a>
-                            <a href="https://www.instagram.com/robinfrancis186/" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
-                                <LottieIcon animationData={instagramAnimation} size={28} />
+                            <a
+                                href="https://www.instagram.com/robinfrancis186/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                            >
+                                <LottieIcon animationData={instagramAnimation} size={28} className="dark:invert" />
                             </a>
-                            <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
-                                <LottieIcon animationData={githubAnimation} size={28} />
+                            <a
+                                href="https://github.com/robinfrancis186"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                            >
+                                <LottieIcon animationData={githubAnimation} size={28} className="dark:invert" />
                             </a>
                         </motion.div>
                     </motion.div>
