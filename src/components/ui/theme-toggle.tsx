@@ -35,6 +35,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
             onClick={() => setTheme(isDark ? "light" : "dark")}
             role="button"
             tabIndex={0}
+            aria-label="Toggle dark mode"
         >
             <div className="flex justify-between items-center w-full">
                 <div

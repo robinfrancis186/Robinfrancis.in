@@ -26,6 +26,8 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             <img
                 src={baseImage}
                 alt={alt}
+                width={800}
+                height={1067}
                 className="w-full h-auto object-cover block dark:hidden"
                 draggable={false}
             />
@@ -34,6 +36,8 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             <img
                 src={darkImage || baseImage}
                 alt={alt}
+                width={800}
+                height={1067}
                 className="w-full h-auto object-cover hidden dark:block"
                 draggable={false}
             />

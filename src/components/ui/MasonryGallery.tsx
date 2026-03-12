@@ -258,6 +258,8 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                         <img 
                             src={item.img} 
                             alt={item.alt || item.title || "Gallery image"} 
+                            width={500}
+                            height={500}
                             className="w-full h-full object-cover" 
                             loading="lazy" 
                         />

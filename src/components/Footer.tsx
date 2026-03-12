@@ -20,13 +20,13 @@ const Footer = () => {
                     </div>
 
                     <div className="flex items-center space-x-6">
-                        <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300">
+                        <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300" aria-label="Email Robin Francis">
                             <LottieIcon animationData={mailAnimation} size={20} />
                         </a>
-                        <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
+                        <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="LinkedIn Profile">
                             <LottieIcon animationData={linkedinAnimation} size={20} />
                         </a>
-                        <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
+                        <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="GitHub Profile">
                             <LottieIcon animationData={githubAnimation} size={20} />
                         </a>
                     </div>

@@ -19,9 +19,15 @@ const Hero = () => {
             if (cancelled) return false;
             // @ts-ignore - provided by Unicorn script
             const us = window.UnicornStudio;
-            if (us?.init) {
-                us.init();
-                return true;
+            // Ensure the canvas container actually exists before init
+            if (us?.init && document.querySelector('[data-us-project]')) {
+                try {
+                    us.init();
+                    return true;
+                } catch (e) {
+                    console.error("Unicorn Studio init error safely caught:", e);
+                    return true; // Stop retrying if it fundamentally crashed
+                }
             }
             return false;
         };
@@ -163,6 +169,7 @@ const Hero = () => {
                             <a
                                 href="mailto:robinfrancis186@gmail.com"
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                                aria-label="Email Robin Francis"
                             >
                                 <LottieIcon animationData={mailAnimation} size={28} className="dark:invert" />
                             </a>
@@ -171,6 +178,7 @@ const Hero = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                                aria-label="LinkedIn Profile"
                             >
                                 <LottieIcon animationData={linkedinAnimation} size={28} className="dark:invert" />
                             </a>
@@ -179,6 +187,7 @@ const Hero = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                                aria-label="Instagram Profile"
                             >
                                 <LottieIcon animationData={instagramAnimation} size={28} className="dark:invert" />
                             </a>
@@ -187,6 +196,7 @@ const Hero = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
+                                aria-label="GitHub Profile"
                             >
                                 <LottieIcon animationData={githubAnimation} size={28} className="dark:invert" />
                             </a>

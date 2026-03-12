@@ -12,5 +12,15 @@ export default defineConfig({
     },
     build: {
         outDir: 'docs',
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    reactConfig: ['react', 'react-dom', 'react-router-dom'],
+                    threejs: ['three', '@react-three/fiber', '@react-three/drei'],
+                    animations: ['framer-motion', 'gsap', 'lottie-react'],
+                    sanityClient: ['@sanity/client', '@sanity/image-url', '@portabletext/react']
+                }
+            }
+        }
     },
 })

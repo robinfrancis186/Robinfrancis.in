@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense, lazy } from 'react'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import ProjectsPage from './pages/ProjectsPage'
-import BlogPage from './pages/BlogPage'
-import BlogPostPage from './pages/BlogPostPage'
-import GalleryPage from './pages/GalleryPage'
 import Footer from './components/Footer'
 import LoadingScreen from './components/ui/LoadingScreen'
 import Lenis from 'lenis'
+
+// Lazy load heavy page components
+const Home = lazy(() => import('./pages/Home'))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
+const BlogPage = lazy(() => import('./pages/BlogPage'))
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
+const GalleryPage = lazy(() => import('./pages/GalleryPage'))
 
 function App() {
     const [loading, setLoading] = useState(true)
@@ -49,13 +51,15 @@ function App() {
                 </div>
                 <Navbar />
 
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/projects" element={<ProjectsPage />} />
-                    <Route path="/blog" element={<BlogPage />} />
-                    <Route path="/blog/:id" element={<BlogPostPage />} />
-                    <Route path="/gallery" element={<GalleryPage />} />
-                </Routes>
+                <Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/projects" element={<ProjectsPage />} />
+                        <Route path="/blog" element={<BlogPage />} />
+                        <Route path="/blog/:id" element={<BlogPostPage />} />
+                        <Route path="/gallery" element={<GalleryPage />} />
+                    </Routes>
+                </Suspense>
 
                 <Footer />
             </div>
