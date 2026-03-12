@@ -1,5 +1,9 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+
 import { WavePath } from "@/components/ui/wave-path";
+import LottieIcon from '@/components/ui/LottieIcon';
+import githubAnimation from '@/assets/lottie/github.json';
+import linkedinAnimation from '@/assets/lottie/linkedin.json';
+import mailAnimation from '@/assets/lottie/mail.json';
 
 const Footer = () => {
     return (
@@ -15,15 +19,15 @@ const Footer = () => {
                         </p>
                     </div>
 
-                    <div className="flex space-x-6">
-                        <a href="mailto:robinfrancis186@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
-                            <Mail size={20} />
+                    <div className="flex items-center space-x-6">
+                        <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300">
+                            <LottieIcon animationData={mailAnimation} size={20} />
                         </a>
-                        <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                            <Linkedin size={20} />
+                        <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
+                            <LottieIcon animationData={linkedinAnimation} size={20} />
                         </a>
-                        <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                            <Github size={20} />
+                        <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
+                            <LottieIcon animationData={githubAnimation} size={20} />
                         </a>
                     </div>
                 </div>
@@ -33,3 +37,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

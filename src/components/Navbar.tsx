@@ -1,5 +1,7 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, User, Briefcase, FileText, Mail } from "lucide-react";
+import { Home, User, Briefcase, FileText, ImageIcon } from "lucide-react";
+import LottieIcon from '@/components/ui/LottieIcon';
+import mailAnimation from '@/assets/lottie/mail.json';
 
 const Navbar = () => {
     const navItems = [
@@ -24,9 +26,14 @@ const Navbar = () => {
             icon: <FileText className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
+            name: "Gallery",
+            link: "/gallery",
+            icon: <ImageIcon className="h-4 w-4 text-neutral-500 dark:text-white" />,
+        },
+        {
             name: "Contact",
             link: "/#contact",
-            icon: <Mail className="h-4 w-4 text-neutral-500 dark:text-white" />,
+            icon: <LottieIcon animationData={mailAnimation} size={16} />,
         },
     ];
 
