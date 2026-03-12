@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { motion } from "framer-motion";
 import { GraduationCap, Award } from "lucide-react";
@@ -53,6 +55,17 @@ const About = () => {
         }
     ];
 
+    const { resolvedTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const imageSrc = mounted && resolvedTheme === 'light' 
+        ? "/images/about/robin-francis-light.jpg" 
+        : "/images/about/robin-francis-main.png";
+
     return (
         <section id="about" className="py-20 bg-background relative overflow-hidden">
             <TracingBeam className="px-6">
@@ -67,7 +80,7 @@ const About = () => {
                         <div className="flex flex-col md:flex-row gap-8 items-start mb-8">
                             <div className="w-full md:w-1/3 flex-shrink-0">
                                 <InteractivePortrait
-                                    baseImage="/images/about/robin-francis-main.png"
+                                    baseImage={imageSrc}
                                     className="w-full max-w-sm lg:max-w-md mx-auto aspect-[3/4] object-cover"
                                 />
                             </div>
