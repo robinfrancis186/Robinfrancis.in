@@ -66,10 +66,9 @@ const About = () => {
                         <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
                         <div className="flex flex-col md:flex-row gap-8 items-start mb-8">
                             <div className="w-full md:w-1/3 flex-shrink-0">
-                                <InteractivePortrait 
+                                <InteractivePortrait
                                     baseImage="/images/about/robin-francis-main.png"
-                                    revealImage="/images/about/robin-francis-reveal.png"
-                                    className="w-full aspect-square"
+                                    className="w-full max-w-sm lg:max-w-md mx-auto aspect-[3/4] object-cover"
                                 />
                             </div>
                             <div className="w-full md:w-2/3">
