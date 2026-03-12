@@ -2,13 +2,15 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface InteractivePortraitProps {
-    baseImage: string;
+    baseImage: string;       // light-mode image
+    darkImage?: string;      // optional dark-mode image
     alt?: string;
     className?: string;
 }
 
 const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
     baseImage,
+    darkImage,
     alt = 'Portrait',
     className
 }) => {
@@ -20,10 +22,19 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             )}
             style={{ isolation: 'isolate' }}
         >
+            {/* Light mode image */}
             <img
                 src={baseImage}
                 alt={alt}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover block dark:hidden"
+                draggable={false}
+            />
+
+            {/* Dark mode image (fallbacks to same as light if not provided) */}
+            <img
+                src={darkImage || baseImage}
+                alt={alt}
+                className="w-full h-auto object-cover hidden dark:block"
                 draggable={false}
             />
         </div>
