@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram } from 'lucide-react';
 import { TextHoverEffect } from '@/components/ui/text-hover-effect';
 import { BeamsBackground } from '@/components/ui/beams-background';
 import LottieIcon from '@/components/ui/LottieIcon';
 import githubAnimation from '@/assets/lottie/github.json';
 import linkedinAnimation from '@/assets/lottie/linkedin.json';
 import mailAnimation from '@/assets/lottie/mail.json';
+import instagramAnimation from '@/assets/lottie/instagram.json';
 
 const Hero = () => {
     // Inject Unicorn Studio once for the hero background
@@ -166,8 +166,8 @@ const Hero = () => {
                             <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
                                 <LottieIcon animationData={linkedinAnimation} size={28} />
                             </a>
-                            <a href="https://www.instagram.com/robinfrancis186/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover:scale-110 transform duration-300">
-                                <Instagram size={28} strokeWidth={1.5} />
+                            <a href="https://www.instagram.com/robinfrancis186/" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
+                                <LottieIcon animationData={instagramAnimation} size={28} />
                             </a>
                             <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300">
                                 <LottieIcon animationData={githubAnimation} size={28} />
