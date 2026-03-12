@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MasonryGallery, { MasonryItem } from '@/components/ui/MasonryGallery';
 import { client, urlFor } from '../lib/sanity';
+import { Helmet } from 'react-helmet-async';
 
 const GalleryPage = () => {
     const [items, setItems] = useState<MasonryItem[]>([]);
@@ -17,6 +18,7 @@ const GalleryPage = () => {
                     img: item.image && item.image.asset ? urlFor(item.image).url() : '',
                     height: item.height || 400,
                     title: item.title || '',
+                    alt: item.alt || `Robin Francis - ${item.title || 'Gallery Image'}`,
                 })).filter((item: MasonryItem) => item.img !== '');
                 
                 setItems(formattedItems);
@@ -31,8 +33,44 @@ const GalleryPage = () => {
         fetchGallery();
     }, []);
 
+    // Generate JSON-LD for Answer Engine Optimization
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Robin Francis Gallery",
+        "description": "A curated collection of moments, landscapes, and visual stories by Robin Francis.",
+        "url": "https://www.robinfrancis.in/gallery",
+        "creator": {
+            "@type": "Person",
+            "name": "Robin Francis",
+            "url": "https://www.robinfrancis.in/"
+        },
+        "hasPart": items.map(item => ({
+            "@type": "ImageObject",
+            "url": item.img,
+            "name": item.title || "Robin Francis Gallery Image",
+            "description": item.alt || `Image from the Robin Francis gallery`,
+            "author": {
+                "@type": "Person",
+                "name": "Robin Francis"
+            }
+        }))
+    };
+
     return (
         <main className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+            <Helmet>
+                <title>Gallery | Robin Francis</title>
+                <meta name="description" content="Explore a curated collection of moments, landscapes, and visual stories by Robin Francis." />
+                <link rel="canonical" href="https://www.robinfrancis.in/gallery" />
+                <meta property="og:title" content="Gallery | Robin Francis" />
+                <meta property="og:description" content="Explore a curated collection of moments, landscapes, and visual stories by AI Innovator Robin Francis." />
+                <meta property="og:url" content="https://www.robinfrancis.in/gallery" />
+                <script type="application/ld+json">
+                    {JSON.stringify(jsonLd)}
+                </script>
+            </Helmet>
+
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <motion.div

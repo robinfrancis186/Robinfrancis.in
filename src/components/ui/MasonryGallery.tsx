@@ -75,6 +75,7 @@ export interface MasonryItem {
     url?: string;
     height: number;
     title?: string;
+    alt?: string;
 }
 
 interface GridItem extends MasonryItem {
@@ -253,10 +254,13 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                     onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
                     onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
                 >
-                    <div
-                        className="w-full h-full bg-cover bg-center bg-no-repeat"
-                        style={{ backgroundImage: `url(${item.img})` }}
-                    >
+                    <div className="w-full h-full relative">
+                        <img 
+                            src={item.img} 
+                            alt={item.alt || item.title || "Gallery image"} 
+                            className="w-full h-full object-cover" 
+                            loading="lazy" 
+                        />
                         {colorShiftOnHover && (
                             <div className="color-overlay absolute inset-0 bg-gradient-to-tr from-primary/40 to-accent/40 opacity-0 pointer-events-none transition-opacity" />
                         )}
