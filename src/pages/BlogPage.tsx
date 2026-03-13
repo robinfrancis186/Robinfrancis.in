@@ -94,7 +94,7 @@ const BlogPage = () => {
                             <a href="#article-1" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
-                                        src="/images/blog/cinque_terre.png"
+                                        src="/images/blog/cinque_terre.webp"
                                         alt="Cinque Terre"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />
@@ -125,7 +125,7 @@ const BlogPage = () => {
                             <a href="#article-2" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
-                                        src="/images/blog/autumn_camping.png"
+                                        src="/images/blog/autumn_camping.webp"
                                         alt="Autumn Camping"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />
@@ -156,7 +156,7 @@ const BlogPage = () => {
                             <a href="#article-3" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
-                                        src="/images/blog/lake_district.png"
+                                        src="/images/blog/lake_district.webp"
                                         alt="Lake District"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />

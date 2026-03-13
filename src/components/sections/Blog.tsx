@@ -22,7 +22,7 @@ const INITIAL_STATIC_POSTS: CarouselItem[] = [
         slug: "ieee-r10-volunteer-award",
         title: "IEEE R10 Outstanding Volunteer Award: My Journey of Impact",
         category: "Leadership",
-        image: "/images/blog/ieee-award.png",
+        image: "/images/blog/ieee-award.webp",
         excerpt: "Reflections on leadership, community-building, and global recognition.",
         content:
             "This write-up covers the leadership principles that scaled our student branches to 100+ events per year. We formalized handover playbooks, paired every lead with a shadow, and ran quarterly retros so new teams inherited context instead of chaos.\n\nWe also built mentorship tracks with clear checkpoints—speaker sourcing, sponsorship decks, logistics checklists, and post-event surveys—to reduce failure points. The result: higher member retention, stronger industry partnerships, and funded innovation programs that kept running even after founders graduated.\n\nThe biggest unlock was data visibility. Simple dashboards for attendance, NPS, and volunteer load helped us rotate responsibilities before burnout and double down on formats that worked (workshops and office hours outperformed large one-off summits).",
@@ -32,7 +32,7 @@ const INITIAL_STATIC_POSTS: CarouselItem[] = [
         slug: "future-of-accessible-technology",
         title: "The Future of Accessible Technology",
         category: "Tech",
-        image: "/images/blog/accessible-tech.png",
+        image: "/images/blog/accessible-tech.webp",
         excerpt: "How AI, multimodal interfaces, and affordable computing can empower millions.",
         content:
             "Accessible tech requires multimodal inputs—voice, gesture, eye-tracking—and low-latency edge compute. We prototyped adaptive layouts that increase target sizes and contrast based on motor ability and vision needs, and we leaned on on-device speech models that tolerate dialectal variety without round-trips to the cloud.\n\nWe tested haptic cues as a redundant channel for critical alerts, added offline fallbacks for intermittent connectivity, and built a settings wizard that asks about comfort preferences up front instead of burying them in menus.\n\nThe takeaway: accessibility is not a bolt-on. It’s a product foundation that improves UX for everyone—faster surfaces for power users, clearer affordances for new users, and resilient behavior when networks are unreliable.",
@@ -42,7 +42,7 @@ const INITIAL_STATIC_POSTS: CarouselItem[] = [
         slug: "scalable-systems-with-communities",
         title: "Building Scalable Systems with Student Communities",
         category: "Community",
-        image: "/images/blog/scalable-systems.png",
+        image: "/images/blog/scalable-systems.webp",
         excerpt: "Lessons from leading 100+ programs and growing organizations.",
         content:
             "We scaled student communities by standardizing playbooks for event ops, creating modular starter kits for hackathons, and setting up OKR-based tracking for chapter health. Kits included sponsor email templates, venue checklists, slide decks, and risk logs—so new chapters could launch in days, not months.\n\nData dashboards surfaced burnout signals (volunteer hours, last-minute cancellations) and helped us rotate leads before bottlenecks formed. We also paired each technical program with a delivery partner—often an NGO—so prototypes had a path to real users after demo day.\n\nResult: more consistent events, higher volunteer retention, and projects that survived beyond judging. The system favored repeatable processes over heroics, which made leadership sustainable.",
@@ -52,7 +52,7 @@ const INITIAL_STATIC_POSTS: CarouselItem[] = [
         slug: "people-centric-ai",
         title: "Designing People-Centric AI Solutions",
         category: "Design",
-        image: "/images/blog/people-centric-ai.png",
+        image: "/images/blog/people-centric-ai.webp",
         excerpt: "Balancing tech innovation with empathy and social awareness.",
         content:
             "People-centric AI starts with interviewing across ability, age, and bandwidth profiles. We tailored UX for intermittent connectivity, added offline fallbacks for critical actions, and kept error states explicit (“here’s what failed, here’s what we’ll try next”).\n\nWe used progressive disclosure for model decisions: concise plain-language reasons first, deeper evidence on demand, and opt-out controls for data retention. Every release ran through fairness checks (demographic parity on key flows), explainability reviews (what signals drove this action), and trust surveys.\n\nThe main lesson: transparency without overwhelm. Users responded best when we gave just enough reasoning to build trust, plus a clear escape hatch to disable automation if it felt wrong.",

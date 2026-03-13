@@ -37,7 +37,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-                        image="/images/project-soulsync.png"
+                        image="/images/project-soulsync.webp"
                         title="SoulSync"
                         description="AI Companion for Cognitive Wellness. Features facial recognition, emotion tracking, and memory recall."
                         tags={["AI", "Facial Recognition", "Wellness"]}
@@ -47,7 +47,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-                        image="/images/project-foodloop.png"
+                        image="/images/project-foodloop.webp"
                         title="FoodLoop"
                         description="AI Platform for Responsible Food Redistribution. Reduces food waste using ML surplus prediction."
                         tags={["Machine Learning", "Sustainability", "React"]}
@@ -57,7 +57,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-                        image="/images/project-techx.png"
+                        image="/images/project-techx.webp"
                         title="TechX Infinia"
                         description="Emerging Tech Flagship Event. Founded and led a large-scale tech festival with 450+ participants."
                         tags={["Leadership", "Event Management", "Strategy"]}

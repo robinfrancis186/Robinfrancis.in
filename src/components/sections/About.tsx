@@ -67,8 +67,8 @@ const About = () => {
                         <div className="flex flex-col md:flex-row gap-8 items-start mb-8">
                             <div className="w-full md:w-1/3 flex-shrink-0">
                                 <InteractivePortrait
-                                    baseImage="/images/about/robin-light.png"
-                                    darkImage="/images/about/robin-dark.png"
+                                    baseImage="/images/about/robin-light.webp"
+                                    darkImage="/images/about/robin-dark.webp"
                                     className="w-full max-w-sm lg:max-w-md mx-auto aspect-[3/4] object-cover"
                                 />
                             </div>
