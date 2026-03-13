@@ -29,11 +29,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script>
+        // Enforce HTTPS and canonical www domain
+        if (window.location.hostname === 'robinfrancis.in') {
+            window.location.replace('https://www.robinfrancis.in' + window.location.pathname + window.location.search);
+        } else if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            window.location.replace('https://' + window.location.hostname + window.location.pathname + window.location.search);
+        }
+
         // GitHub Pages SPA redirect fallback for the Sanity CMS nested path
         if (window.location.pathname.startsWith('/cms')) {
             window.location.replace('/cms/');
         }
     </script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
     <title>Robin Francis | AI Innovator & Community Leader</title>
     <meta name="description"
