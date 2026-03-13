@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+    <!-- Enforce HTTPS -->
+    <script>
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            location.replace('https://' + location.hostname + location.pathname + location.search + location.hash);
+        }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6M7KWQMHP"></script>
     <script>
