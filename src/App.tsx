@@ -17,30 +17,41 @@ function App() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // Initialize Lenis for smooth scrolling
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            orientation: 'vertical',
-            gestureOrientation: 'vertical',
-            smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
-        })
+        let lenis: Lenis | null = null;
+        let animationFrameId: number;
 
-        function raf(time: number) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
+        // Defer Lenis initialization to free up main thread during initial load (Improves FCP & TBT)
+        const initTimer = setTimeout(() => {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+            });
 
-        requestAnimationFrame(raf)
+            function raf(time: number) {
+                if (lenis) {
+                    lenis.raf(time);
+                }
+                animationFrameId = requestAnimationFrame(raf);
+            }
+
+            animationFrameId = requestAnimationFrame(raf);
+        }, 1500);
 
         return () => {
-            lenis.destroy()
-        }
-    }, [])
-
-
+            clearTimeout(initTimer);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            if (lenis) {
+                lenis.destroy();
+            }
+        };
+    }, []);
 
     return (
         <Router>
