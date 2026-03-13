@@ -15,7 +15,7 @@ const GalleryPage = () => {
                 const data = await client.fetch(`*[_type == "galleryItem"] | order(_createdAt desc)`);
                 const formattedItems: MasonryItem[] = data.map((item: any) => ({
                     id: item._id,
-                    img: item.image && item.image.asset ? urlFor(item.image).url() : '',
+                    img: item.image && item.image.asset ? urlFor(item.image).format('webp').quality(80).url() : '',
                     height: item.height || 400,
                     title: item.title || '',
                     alt: item.alt || `Robin Francis - ${item.title || 'Gallery Image'}`,

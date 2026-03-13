@@ -20,7 +20,7 @@ const ProjectsPage = () => {
     };
 
     const renderProjectCard = (project: any, index: number) => {
-        const imageUrl = project.image && project.image.asset ? urlFor(project.image).width(800).url() : '';
+        const imageUrl = project.image && project.image.asset ? urlFor(project.image).width(800).format('webp').quality(80).url() : '';
         const title = project.title || 'Untitled Project';
         const category = project.category || 'Category';
         const link = project.link || '/#work';

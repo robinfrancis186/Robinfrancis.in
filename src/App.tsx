@@ -55,7 +55,7 @@ function App() {
 
     return (
         <Router>
-            {loading && <LoadingScreen onFinished={() => setLoading(false)} />}
+            {loading && <LoadingScreen minDisplayTime={500} onFinished={() => setLoading(false)} />}
             <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
                 <div className="fixed top-4 right-4 z-[5001]">
                     <ThemeToggle />

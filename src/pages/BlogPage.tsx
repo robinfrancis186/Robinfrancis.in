@@ -14,7 +14,7 @@ const BlogPage = () => {
     }, []);
 
     const renderSanityPost = (post: any) => {
-        const imageUrl = post.image && post.image.asset ? urlFor(post.image).width(800).url() : '';
+        const imageUrl = post.image && post.image.asset ? urlFor(post.image).width(800).format('webp').quality(80).url() : '';
         const title = post.title || 'Untitled Post';
         const excerpt = post.excerpt || '';
         const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';

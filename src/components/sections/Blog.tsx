@@ -74,7 +74,7 @@ const Blog = () => {
                         slug: post.slug?.current || post._id,
                         title: post.title || 'Untitled',
                         category: post.tags && post.tags.length > 0 ? post.tags[0] : 'POST',
-                        image: post.image && post.image.asset ? urlFor(post.image).width(800).url() : '/images/blog/1720937570476.jpeg',
+                        image: post.image && post.image.asset ? urlFor(post.image).width(800).format('webp').quality(80).url() : '/images/blog/1720937570476.jpeg',
                         excerpt: post.excerpt || '',
                         content: post.excerpt || ''
                     }));

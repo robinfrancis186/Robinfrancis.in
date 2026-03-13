@@ -1,44 +1,23 @@
-import { useRef } from 'react';
-import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { lazy, Suspense } from 'react';
+
+// Lazy load the actual Lottie library wrapper to split it from the main bundle
+const LottieClient = lazy(() => import('./LottieClient'));
 
 interface LottieIconProps {
-    animationData: object;
+    animationName: string;
     size?: number;
     className?: string;
 }
 
 /**
  * A reusable Lottie micro-animation icon component.
- * Plays the animation on hover and reverses on mouse leave.
+ * Completely split from the main chunk to fix TBT and LCP scores.
  */
-const LottieIcon = ({ animationData, size = 28, className = '' }: LottieIconProps) => {
-    const lottieRef = useRef<LottieRefCurrentProps>(null);
-
-    const handleMouseEnter = () => {
-        lottieRef.current?.setDirection(1);
-        lottieRef.current?.play();
-    };
-
-    const handleMouseLeave = () => {
-        lottieRef.current?.setDirection(-1);
-        lottieRef.current?.play();
-    };
-
+const LottieIcon = ({ animationName, size = 28, className = '' }: LottieIconProps) => {
     return (
-        <div
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            className={className}
-            style={{ width: size, height: size, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-            <Lottie
-                lottieRef={lottieRef}
-                animationData={animationData}
-                loop={false}
-                autoplay={false}
-                style={{ width: size, height: size }}
-            />
-        </div>
+        <Suspense fallback={<div className={className} style={{ width: size, height: size, display: 'inline-block' }} />}>
+            <LottieClient animationName={animationName} size={size} className={className} />
+        </Suspense>
     );
 };
 

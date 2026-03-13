@@ -1,9 +1,6 @@
 
 import { WavePath } from "@/components/ui/wave-path";
 import LottieIcon from '@/components/ui/LottieIcon';
-import githubAnimation from '@/assets/lottie/github.json';
-import linkedinAnimation from '@/assets/lottie/linkedin.json';
-import mailAnimation from '@/assets/lottie/mail.json';
 
 const Footer = () => {
     return (
@@ -21,13 +18,13 @@ const Footer = () => {
 
                     <div className="flex items-center space-x-6">
                         <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300" aria-label="Email Robin Francis">
-                            <LottieIcon animationData={mailAnimation} size={20} />
+                            <LottieIcon animationName="mail" size={20} />
                         </a>
                         <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="LinkedIn Profile">
-                            <LottieIcon animationData={linkedinAnimation} size={20} />
+                            <LottieIcon animationName="linkedin" size={20} />
                         </a>
                         <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="GitHub Profile">
-                            <LottieIcon animationData={githubAnimation} size={20} />
+                            <LottieIcon animationName="github" size={20} />
                         </a>
                     </div>
                 </div>

@@ -3,17 +3,15 @@ import { motion } from 'framer-motion';
 import { TextHoverEffect } from '@/components/ui/text-hover-effect';
 import { BeamsBackground } from '@/components/ui/beams-background';
 import LottieIcon from '@/components/ui/LottieIcon';
-import githubAnimation from '@/assets/lottie/github.json';
-import linkedinAnimation from '@/assets/lottie/linkedin.json';
-import mailAnimation from '@/assets/lottie/mail.json';
-import instagramAnimation from '@/assets/lottie/instagram.json';
 
 const Hero = () => {
-    // Inject Unicorn Studio once for the hero background
+    // Inject Unicorn Studio once for the hero background, heavily deferred to fix TBT
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
         let cancelled = false;
+        let retryInterval: NodeJS.Timeout;
+        let retryTimeout: NodeJS.Timeout;
 
         const tryInit = () => {
             if (cancelled) return false;
@@ -32,35 +30,37 @@ const Hero = () => {
             return false;
         };
 
-        const existingScript = document.querySelector<HTMLScriptElement>('script[data-unicornstudio]');
+        const executeInjection = () => {
+            if (cancelled) return;
+            const existingScript = document.querySelector<HTMLScriptElement>('script[data-unicornstudio]');
 
-        // If script already present, attempt init immediately
-        if (existingScript) {
-            tryInit();
-        } else {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js';
-            script.async = true;
-            script.dataset.unicornstudio = 'true';
-            script.onload = () => {
+            // If script already present, attempt init immediately
+            if (existingScript) {
                 tryInit();
-            };
-
-            (document.head || document.body).appendChild(script);
-        }
-
-        // Retry a few times in case script loads slowly
-        const retryInterval = setInterval(() => {
-            if (tryInit()) {
-                clearInterval(retryInterval);
+            } else {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js';
+                script.async = true;
+                script.dataset.unicornstudio = 'true';
+                script.onload = () => tryInit();
+                (document.head || document.body).appendChild(script);
             }
-        }, 500);
-        const retryTimeout = setTimeout(() => clearInterval(retryInterval), 5000);
+
+            // Retry a few times in case script loads slowly
+            retryInterval = setInterval(() => {
+                if (tryInit()) clearInterval(retryInterval);
+            }, 500);
+            retryTimeout = setTimeout(() => clearInterval(retryInterval), 5000);
+        };
+
+        // Defer WebGL compilation completely out of the critical rendering path
+        const initDelay = setTimeout(executeInjection, 2500);
 
         return () => {
             cancelled = true;
-            clearInterval(retryInterval);
-            clearTimeout(retryTimeout);
+            clearTimeout(initDelay);
+            if (retryInterval) clearInterval(retryInterval);
+            if (retryTimeout) clearTimeout(retryTimeout);
         };
     }, []);
 
@@ -171,7 +171,7 @@ const Hero = () => {
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
                                 aria-label="Email Robin Francis"
                             >
-                                <LottieIcon animationData={mailAnimation} size={28} className="dark:invert" />
+                                <LottieIcon animationName="mail" size={28} className="dark:invert" />
                             </a>
                             <a
                                 href="https://www.linkedin.com/in/robin-francis-b43565175"
@@ -180,7 +180,7 @@ const Hero = () => {
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
                                 aria-label="LinkedIn Profile"
                             >
-                                <LottieIcon animationData={linkedinAnimation} size={28} className="dark:invert" />
+                                <LottieIcon animationName="linkedin" size={28} className="dark:invert" />
                             </a>
                             <a
                                 href="https://www.instagram.com/robinfrancis186/"
@@ -189,7 +189,7 @@ const Hero = () => {
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
                                 aria-label="Instagram Profile"
                             >
-                                <LottieIcon animationData={instagramAnimation} size={28} className="dark:invert" />
+                                <LottieIcon animationName="instagram" size={28} className="dark:invert" />
                             </a>
                             <a
                                 href="https://github.com/robinfrancis186"
@@ -198,7 +198,7 @@ const Hero = () => {
                                 className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
                                 aria-label="GitHub Profile"
                             >
-                                <LottieIcon animationData={githubAnimation} size={28} className="dark:invert" />
+                                <LottieIcon animationName="github" size={28} className="dark:invert" />
                             </a>
                         </motion.div>
                     </motion.div>
