@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Install CMS dependencies
-        run: npm ci --prefix portfolio-cms
+        run: npm install --legacy-peer-deps --prefix portfolio-cms
 
       - name: Build
         run: npm run build
