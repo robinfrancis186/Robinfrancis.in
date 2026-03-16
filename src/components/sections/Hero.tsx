@@ -1,66 +1,7 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { easeOut, motion } from 'framer-motion';
 import LottieIcon from '@/components/ui/LottieIcon';
 
 const Hero = () => {
-    // Inject Unicorn Studio once for the hero background, heavily deferred to fix TBT
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        let cancelled = false;
-        let retryInterval: NodeJS.Timeout;
-        let retryTimeout: NodeJS.Timeout;
-
-        const tryInit = () => {
-            if (cancelled) return false;
-            // @ts-ignore - provided by Unicorn script
-            const us = window.UnicornStudio;
-            if (us?.init && document.querySelector('[data-us-project]')) {
-                try {
-                    us.init();
-                    return true;
-                } catch (e) {
-                    console.error("Unicorn Studio init error safely caught:", e);
-                    return true;
-                }
-            }
-            return false;
-        };
-
-        const executeInjection = () => {
-            if (cancelled) return;
-            
-            // Disable heavy WebGL shader compilation on mobile to prevent 7000ms+ TBT penalties
-            if (window.innerWidth < 768) return;
-
-            const existingScript = document.querySelector<HTMLScriptElement>('script[data-unicornstudio]');
-            if (existingScript) {
-                tryInit();
-            } else {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js';
-                script.async = true;
-                script.dataset.unicornstudio = 'true';
-                script.onload = () => tryInit();
-                (document.head || document.body).appendChild(script);
-            }
-
-            retryInterval = setInterval(() => {
-                if (tryInit()) clearInterval(retryInterval);
-            }, 500);
-            retryTimeout = setTimeout(() => clearInterval(retryInterval), 5000);
-        };
-
-        const initDelay = setTimeout(executeInjection, 2500);
-
-        return () => {
-            cancelled = true;
-            clearTimeout(initDelay);
-            if (retryInterval) clearInterval(retryInterval);
-            if (retryTimeout) clearTimeout(retryTimeout);
-        };
-    }, []);
-
     const skills = [
         { label: 'AI Development', active: false },
         { label: 'Community Leadership', active: true },
@@ -73,11 +14,8 @@ const Hero = () => {
             id="home"
             className="relative min-h-screen bg-background overflow-hidden flex flex-col"
         >
-            {/* Subtle Unicorn Studio background — desktop only */}
-            <div
-                data-us-project="cqcLtDwfoHqqRPttBbQE"
-                className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-10 hidden md:block"
-            />
+            {/* Subtle dotted background matching the editorial style */}
+            <div className="absolute inset-0 z-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:24px_24px] opacity-50" />
 
             {/* SEO-only h1 */}
             <h1 className="sr-only">Robin Francis | AI Innovator, Community Leader, 3× Hackathon Winner</h1>
@@ -90,7 +28,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="flex items-center justify-between mb-6"
+                    className="flex items-center justify-between mb-2 md:mb-6"
                 >
                     <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">
                         * Robin Francis
@@ -101,67 +39,73 @@ const Hero = () => {
                     </span>
                 </motion.div>
 
-                {/* ── MASSIVE EDITORIAL NAME ── */}
-                <div className="relative flex-1 flex flex-col justify-center">
-                    <div className="relative">
-                        {/* Giant background name text */}
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                            aria-hidden="true"
-                            className="text-[13vw] md:text-[12vw] font-black leading-none tracking-tighter text-primary select-none"
-                            style={{ fontFamily: "'Inter', sans-serif" }}
-                        >
-                            ROBIN
-                        </motion.h2>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                            aria-hidden="true"
-                            className="text-[13vw] md:text-[12vw] font-black leading-none tracking-tighter text-foreground select-none -mt-2 md:-mt-4"
-                            style={{ fontFamily: "'Inter', sans-serif" }}
-                        >
-                            FRANCIS
-                        </motion.h2>
+                {/* ── MASSIVE EDITORIAL NAME & PORTRAIT ── */}
+                <div className="relative flex-1 flex flex-col items-center justify-center mt-2 md:mt-4 mb-12 md:mb-0">
+                    
+                    {/* Giant background name text - Pushed higher up */}
+                    <div className="absolute top-[10%] md:top-[18%] z-0 flex flex-col items-center w-full px-2">
+                        <div className="flex items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-8 leading-[0.85] whitespace-nowrap">
+                            <motion.h2
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                                aria-hidden="true"
+                                className="text-[16vw] md:text-[10vw] font-black tracking-tighter text-primary select-none"
+                                style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                                ROBIN
+                            </motion.h2>
+                            <motion.h2
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                                aria-hidden="true"
+                                className="text-[16vw] md:text-[10vw] font-black tracking-tighter text-foreground select-none"
+                                style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                                FRANCIS
+                            </motion.h2>
+                        </div>
+                    </div>
 
-                        {/* Portrait overlaid on name — right-center, clipped within section */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="absolute bottom-0 right-[8%] md:right-[15%] w-[36vw] max-w-[320px] pointer-events-none select-none"
-                            style={{ transform: 'translateY(8%)' }}
-                        >
+                    {/* Portrait overlaid on name — perfectly centered horizontally */}
+                    <motion.div
+                        initial={{ opacity: 0, y: "30%", x: "-50%" }}
+                        animate={{ opacity: 1, y: "0%", x: "-50%" }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute bottom-0 left-1/2 w-[75vw] md:w-[45vw] max-w-[480px] pointer-events-none select-none z-10"
+                    >
+                        <div className="relative w-full h-full">
                             <img
                                 src="/images/about/robin-light.webp"
                                 alt="Robin Francis"
-                                width={400}
-                                height={533}
-                                className="w-full h-auto object-cover dark:hidden"
+                                width={480}
+                                height={640}
+                                className="w-full h-auto object-cover dark:hidden drop-shadow-2xl"
                                 draggable={false}
                             />
                             <img
                                 src="/images/about/robin-dark.webp"
                                 alt="Robin Francis"
-                                width={400}
-                                height={533}
-                                className="w-full h-auto object-cover hidden dark:block"
+                                width={480}
+                                height={640}
+                                className="w-full h-auto object-cover hidden dark:block drop-shadow-2xl"
                                 draggable={false}
                             />
-                        </motion.div>
-                    </div>
+                            {/* Fade out bottom to blend smoothly into the space below */}
+                            <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-background to-transparent" />
+                        </div>
+                    </motion.div>
 
-                    {/* ── BOTTOM CONTENT ROW: bio left | skills right ── */}
-                    <div className="flex flex-col md:flex-row md:items-end md:justify-between mt-8 md:mt-6 gap-8 pb-4">
+                    {/* ── BIO & SKILLS (Absolute Left & Right on Desktop) ── */}
+                    <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-start md:absolute md:top-[65%] md:-translate-y-1/2 z-20 pointer-events-none mt-[260px] md:mt-0 gap-8 px-2 md:px-0">
 
                         {/* LEFT: bio + CTA */}
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.35 }}
-                            className="max-w-xs space-y-5"
+                            className="w-full md:w-[32%] max-w-sm space-y-5 pointer-events-auto text-center md:text-left"
                         >
                             <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">
                                 Hey there! I'm an AI Innovator &amp; Community Leader building accessible,
@@ -169,21 +113,23 @@ const Hero = () => {
                             </p>
 
                             {/* CTA */}
-                            <a
-                                href="#projects"
-                                className="group inline-flex items-center gap-3 text-sm font-bold tracking-wider text-foreground hover:text-primary transition-colors duration-300"
-                            >
-                                <span className="text-primary opacity-70">{'// '}</span>
-                                VIEW MY WORK
-                                <span className="group-hover:translate-x-2 transition-transform duration-300 text-primary">→</span>
-                            </a>
+                            <div className="flex justify-center md:justify-start">
+                                <a
+                                    href="#projects"
+                                    className="group inline-flex items-center gap-3 text-sm font-bold tracking-wider text-foreground hover:text-primary transition-colors duration-300"
+                                >
+                                    <span className="text-primary opacity-70">{'// '}</span>
+                                    VIEW MY WORK
+                                    <span className="group-hover:translate-x-2 transition-transform duration-300 text-primary">→</span>
+                                </a>
+                            </div>
 
                             {/* Social icons row */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.6, duration: 0.8 }}
-                                className="flex items-center gap-3 pt-2"
+                                className="flex items-center justify-center md:justify-start gap-3 pt-2"
                             >
                                 <a
                                     href="mailto:robinfrancis186@gmail.com"
@@ -224,7 +170,7 @@ const Hero = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
-                            className="flex flex-col items-start md:items-end gap-2"
+                            className="w-full md:w-[32%] flex flex-col items-center md:items-end gap-2 pointer-events-auto"
                         >
                             {skills.map((skill, i) => (
                                 <motion.span
