@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { TextHoverEffect } from '@/components/ui/text-hover-effect';
-import { BeamsBackground } from '@/components/ui/beams-background';
 import LottieIcon from '@/components/ui/LottieIcon';
 
 const Hero = () => {
@@ -17,14 +15,13 @@ const Hero = () => {
             if (cancelled) return false;
             // @ts-ignore - provided by Unicorn script
             const us = window.UnicornStudio;
-            // Ensure the canvas container actually exists before init
             if (us?.init && document.querySelector('[data-us-project]')) {
                 try {
                     us.init();
                     return true;
                 } catch (e) {
                     console.error("Unicorn Studio init error safely caught:", e);
-                    return true; // Stop retrying if it fundamentally crashed
+                    return true;
                 }
             }
             return false;
@@ -37,8 +34,6 @@ const Hero = () => {
             if (window.innerWidth < 768) return;
 
             const existingScript = document.querySelector<HTMLScriptElement>('script[data-unicornstudio]');
-
-            // If script already present, attempt init immediately
             if (existingScript) {
                 tryInit();
             } else {
@@ -50,14 +45,12 @@ const Hero = () => {
                 (document.head || document.body).appendChild(script);
             }
 
-            // Retry a few times in case script loads slowly
             retryInterval = setInterval(() => {
                 if (tryInit()) clearInterval(retryInterval);
             }, 500);
             retryTimeout = setTimeout(() => clearInterval(retryInterval), 5000);
         };
 
-        // Defer WebGL compilation completely out of the critical rendering path
         const initDelay = setTimeout(executeInjection, 2500);
 
         return () => {
@@ -68,147 +61,214 @@ const Hero = () => {
         };
     }, []);
 
+    const skills = [
+        { label: 'AI Development', active: false },
+        { label: 'Community Leadership', active: true },
+        { label: 'Full-Stack Engineering', active: false },
+        { label: 'Product Strategy', active: false },
+    ];
+
     return (
         <section
             id="home"
-            className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 bg-background"
+            className="relative min-h-screen bg-background overflow-hidden flex flex-col"
         >
-            {/* Base background to respect light/dark theme */}
-            <div className="absolute inset-0 z-0 bg-background" />
-            {/* Background stack with reduced opacity for readability */}
-            <BeamsBackground className="absolute inset-0 z-4 pointer-events-none opacity-25" />
+            {/* Subtle Unicorn Studio background — desktop only */}
             <div
                 data-us-project="cqcLtDwfoHqqRPttBbQE"
-                className="absolute inset-0 z-5 w-full h-full pointer-events-none opacity-15"
+                className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-10 hidden md:block"
             />
 
-            <div className="container mx-auto px-4 z-10 relative">
-                <h1 className="sr-only">Robin Francis | AI Innovator, Community Leader, 3× Hackathon Winner</h1>
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <h2 className="text-lg md:text-xl font-medium text-primary mb-6 tracking-wide uppercase mt-6 md:mt-10">
-                            Hello, I'm
-                        </h2>
+            {/* SEO-only h1 */}
+            <h1 className="sr-only">Robin Francis | AI Innovator, Community Leader, 3× Hackathon Winner</h1>
 
-                        <div className="h-32 md:h-48 flex items-center justify-center mb-8">
-                            <TextHoverEffect text="ROBIN FRANCIS" />
-                        </div>
+            {/* ── MAIN EDITORIAL LAYOUT ── */}
+            <div className="relative z-10 flex flex-col flex-1 px-6 md:px-12 lg:px-20 pt-24 pb-8">
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                {/* ── TOP STATUS BAR ── */}
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center justify-between mb-6"
+                >
+                    <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">
+                        * Robin Francis
+                    </span>
+                    <span className="flex items-center gap-2 text-xs font-medium text-emerald-500">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        Open to work
+                    </span>
+                </motion.div>
+
+                {/* ── MASSIVE EDITORIAL NAME ── */}
+                <div className="relative flex-1 flex flex-col justify-center">
+                    <div className="relative">
+                        {/* Giant background name text */}
+                        <motion.h2
+                            initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
-                            className="flex items-center justify-center gap-4 text-xl md:text-3xl text-slate-900 dark:text-slate-100 mb-10 font-light tracking-tight"
+                            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                            aria-hidden="true"
+                            className="text-[13vw] md:text-[12vw] font-black leading-none tracking-tighter text-primary select-none"
+                            style={{ fontFamily: "'Inter', sans-serif" }}
                         >
-                            <span>AI Innovator</span>
-                            <span className="text-primary opacity-50">|</span>
-                            <span>Community Leader</span>
-                            <span className="text-primary opacity-50">|</span>
-                            <span>3× Hackathon Winner</span>
+                            ROBIN
+                        </motion.h2>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                            aria-hidden="true"
+                            className="text-[13vw] md:text-[12vw] font-black leading-none tracking-tighter text-foreground select-none -mt-2 md:-mt-4"
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                            FRANCIS
+                        </motion.h2>
+
+                        {/* Portrait overlaid on name — right-center, clipped within section */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute bottom-0 right-[8%] md:right-[15%] w-[36vw] max-w-[320px] pointer-events-none select-none"
+                            style={{ transform: 'translateY(8%)' }}
+                        >
+                            <img
+                                src="/images/about/robin-light.webp"
+                                alt="Robin Francis"
+                                width={400}
+                                height={533}
+                                className="w-full h-auto object-cover dark:hidden"
+                                draggable={false}
+                            />
+                            <img
+                                src="/images/about/robin-dark.webp"
+                                alt="Robin Francis"
+                                width={400}
+                                height={533}
+                                className="w-full h-auto object-cover hidden dark:block"
+                                draggable={false}
+                            />
+                        </motion.div>
+                    </div>
+
+                    {/* ── BOTTOM CONTENT ROW: bio left | skills right ── */}
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between mt-8 md:mt-6 gap-8 pb-4">
+
+                        {/* LEFT: bio + CTA */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.35 }}
+                            className="max-w-xs space-y-5"
+                        >
+                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">
+                                Hey there! I'm an AI Innovator &amp; Community Leader building accessible,
+                                people-centric technology and scalable digital solutions.
+                            </p>
+
+                            {/* CTA */}
+                            <a
+                                href="#projects"
+                                className="group inline-flex items-center gap-3 text-sm font-bold tracking-wider text-foreground hover:text-primary transition-colors duration-300"
+                            >
+                                <span className="text-primary opacity-70">{'// '}</span>
+                                VIEW MY WORK
+                                <span className="group-hover:translate-x-2 transition-transform duration-300 text-primary">→</span>
+                            </a>
+
+                            {/* Social icons row */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 0.8 }}
+                                className="flex items-center gap-3 pt-2"
+                            >
+                                <a
+                                    href="mailto:robinfrancis186@gmail.com"
+                                    className="rounded-full p-2 bg-black/5 hover:bg-primary/10 dark:bg-white/10 dark:hover:bg-primary/20 transition-all hover:scale-110 duration-300"
+                                    aria-label="Email Robin Francis"
+                                >
+                                    <LottieIcon animationName="mail" size={22} className="dark:invert" />
+                                </a>
+                                <a
+                                    href="https://www.linkedin.com/in/robin-francis-b43565175"
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="rounded-full p-2 bg-black/5 hover:bg-primary/10 dark:bg-white/10 dark:hover:bg-primary/20 transition-all hover:scale-110 duration-300"
+                                    aria-label="LinkedIn Profile"
+                                >
+                                    <LottieIcon animationName="linkedin" size={22} className="dark:invert" />
+                                </a>
+                                <a
+                                    href="https://www.instagram.com/robinfrancis186/"
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="rounded-full p-2 bg-black/5 hover:bg-primary/10 dark:bg-white/10 dark:hover:bg-primary/20 transition-all hover:scale-110 duration-300"
+                                    aria-label="Instagram Profile"
+                                >
+                                    <LottieIcon animationName="instagram" size={22} className="dark:invert" />
+                                </a>
+                                <a
+                                    href="https://github.com/robinfrancis186"
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="rounded-full p-2 bg-black/5 hover:bg-primary/10 dark:bg-white/10 dark:hover:bg-primary/20 transition-all hover:scale-110 duration-300"
+                                    aria-label="GitHub Profile"
+                                >
+                                    <LottieIcon animationName="github" size={22} className="dark:invert" />
+                                </a>
+                            </motion.div>
                         </motion.div>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3, duration: 0.8 }}
-                            className="text-lg md:text-xl text-slate-900 dark:text-slate-100 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
-                        >
-                            Building technology that empowers people and creates meaningful social impact. <br className="hidden md:block" />
-                            I focus on AI for accessibility, community-driven engineering, and scalable digital solutions.
-                        </motion.p>
-
+                        {/* RIGHT: Skills list */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.8 }}
-                            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="flex flex-col items-start md:items-end gap-2"
                         >
-                            <a href="#projects" className="group relative inline-block">
-                                <button className="group hover:shadow-sky-500/30 hover:shadow-2xl
-                                    hover:scale-[1.02] hover:-translate-y-1 active:scale-95
-                                    transition-all duration-500 ease-out cursor-pointer
-                                    hover:border-sky-400/60 overflow-hidden bg-gradient-to-br
-                                    from-sky-900/40 via-black-900/60 to-black/80
-                                    border-sky-500/30 border-2 rounded-full pt-3 pr-6 pb-3
-                                    pl-6 relative shadow-2xl backdrop-blur-xl">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent
-                                        via-sky-400/30 to-transparent -translate-x-full
-                                        group-hover:translate-x-full transition-transform
-                                        duration-1000 ease-out"></div>
-                                    <div className="group-hover:opacity-100 transition-opacity duration-500
-                                        bg-gradient-to-r from-sky-500/10 via-sky-400/20
-                                        to-sky-500/10 opacity-0 rounded-2xl absolute top-0 right-0
-                                        bottom-0 left-0"></div>
-                                    <div className="relative z-10 flex items-center gap-3">
-                                        <div className="flex-1 text-left">
-                                            <p className="group-hover:text-white transition-colors duration-300
-                                                text-base font-semibold text-white font-geist drop-shadow-sm">View Projects</p>
-                                        </div>
-                                        <div className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                                            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" className="w-5 h-5 text-white">
-                                                <path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </button>
-                            </a>
-                            <a
-                                href="#contact"
-                                className="px-8 py-3.5 border border-input bg-background/30 backdrop-blur-md hover:bg-white/10 hover:text-white rounded-full font-medium transition-all z-20 text-base"
-                            >
-                                Contact Me
-                            </a>
+                            {skills.map((skill, i) => (
+                                <motion.span
+                                    key={skill.label}
+                                    initial={{ opacity: 0, x: 10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.45 + i * 0.08, duration: 0.4 }}
+                                    className={`text-sm md:text-base transition-all duration-300 ${
+                                        skill.active
+                                            ? 'text-foreground font-bold text-base md:text-lg'
+                                            : 'text-muted-foreground font-normal hover:text-foreground cursor-default'
+                                    }`}
+                                >
+                                    {skill.label}
+                                </motion.span>
+                            ))}
                         </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6, duration: 1 }}
-                            className="flex items-center justify-center gap-8 z-20 relative -mt-2"
-                        >
-                            <a
-                                href="mailto:robinfrancis186@gmail.com"
-                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
-                                aria-label="Email Robin Francis"
-                            >
-                                <LottieIcon animationName="mail" size={28} className="dark:invert" />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/robin-francis-b43565175"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
-                                aria-label="LinkedIn Profile"
-                            >
-                                <LottieIcon animationName="linkedin" size={28} className="dark:invert" />
-                            </a>
-                            <a
-                                href="https://www.instagram.com/robinfrancis186/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
-                                aria-label="Instagram Profile"
-                            >
-                                <LottieIcon animationName="instagram" size={28} className="dark:invert" />
-                            </a>
-                            <a
-                                href="https://github.com/robinfrancis186"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded-full p-2 bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-transform hover:scale-110 duration-300"
-                                aria-label="GitHub Profile"
-                            >
-                                <LottieIcon animationName="github" size={28} className="dark:invert" />
-                            </a>
-                        </motion.div>
-                    </motion.div>
+                    </div>
                 </div>
+
+                {/* ── ACHIEVEMENT BADGES (replaces the brand logos row) ── */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    className="flex flex-wrap items-center gap-6 mt-8 pt-6 border-t border-border/40"
+                >
+                    {[
+                        { icon: '🏆', text: 'IEEE R10 Award' },
+                        { icon: '🤖', text: 'IBM watsonx 1st Runner-Up' },
+                        { icon: '⚡', text: '3× Hackathon Winner' },
+                        { icon: '🌏', text: '450+ Event Participants' },
+                    ].map((badge) => (
+                        <div key={badge.text} className="flex items-center gap-2 text-muted-foreground group">
+                            <span className="text-base">{badge.icon}</span>
+                            <span className="text-xs font-medium tracking-wide group-hover:text-foreground transition-colors duration-200">
+                                {badge.text}
+                            </span>
+                        </div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
 };
+
 export default Hero;
