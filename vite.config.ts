@@ -21,16 +21,23 @@ export default defineConfig({
     },
     build: {
         outDir: 'docs',
-        sourcemap: true,
+        // Disable sourcemaps in production - they were adding ~3x to total payload size
+        sourcemap: false,
         rollupOptions: {
             output: {
                 manualChunks: {
+                    // Core React framework separate from app code
                     reactConfig: ['react', 'react-dom', 'react-router-dom'],
-                    threejs: ['three', '@react-three/fiber', '@react-three/drei'],
-                    animations: ['framer-motion', 'gsap', 'lottie-react'],
-                    sanityClient: ['@sanity/client', '@sanity/image-url', '@portabletext/react']
+                    // Framer motion standalone (used widely across the site)
+                    animations: ['framer-motion'],
+                    // Sanity CMS client in its own async chunk
+                    sanityClient: ['@sanity/client', '@sanity/image-url', '@portabletext/react'],
+                    // NOTE: gsap removed (replaced with CSS transitions in MasonryGallery)
+                    // NOTE: three.js removed (lazy-imported only in Contact section now)
+                    // NOTE: lottie-react removed (already lazy-imported via LottieClient.tsx)
                 }
             }
         }
     },
 })
+

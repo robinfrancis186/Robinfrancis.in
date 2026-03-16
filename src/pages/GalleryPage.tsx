@@ -101,12 +101,9 @@ const GalleryPage = () => {
                         <MasonryGallery
                             key={key}
                             items={items}
-                            animateFrom="bottom"
-                            blurToFocus={true}
                             stagger={0.08}
                             scaleOnHover={true}
                             hoverScale={0.96}
-                            colorShiftOnHover={true}
                         />
                     ) : (
                         <div className="text-center text-muted-foreground py-20 italic">
