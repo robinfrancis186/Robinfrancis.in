@@ -32,6 +32,10 @@ const Hero = () => {
 
         const executeInjection = () => {
             if (cancelled) return;
+            
+            // Disable heavy WebGL shader compilation on mobile to prevent 7000ms+ TBT penalties
+            if (window.innerWidth < 768) return;
+
             const existingScript = document.querySelector<HTMLScriptElement>('script[data-unicornstudio]');
 
             // If script already present, attempt init immediately
