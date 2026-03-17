@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 const Hero = () => {
     return (
         <section
@@ -30,12 +28,7 @@ const Hero = () => {
             <div className="container mx-auto px-4 z-10 relative flex flex-col md:flex-row items-center justify-center h-full gap-8 lg:gap-12">
                 
                 {/* LEFT SIDE: Intro & CTA */}
-                <motion.div 
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                    className="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1"
-                >
+                <div className="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
                     <p className="text-base md:text-lg font-medium text-foreground/80 max-w-[280px] md:max-w-xs leading-relaxed mb-6">
                         I design and build <strong className="text-primary font-bold">AI-powered solutions</strong> that make technology <strong className="text-primary font-bold">accessible</strong>, scalable, and people-centric.
                     </p>
@@ -43,15 +36,10 @@ const Hero = () => {
                         LET'S WORK TOGETHER
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
-                </motion.div>
+                </div>
 
                 {/* CENTER PORTRAIT */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="w-full md:w-1/3 flex justify-center order-1 md:order-2 z-20 relative pointer-events-none mt-4 md:mt-0"
-                >
+                <div className="w-full md:w-1/3 flex justify-center order-1 md:order-2 z-20 relative pointer-events-none mt-4 md:mt-0">
                     <img 
                         src="/images/about/robin-light.webp" 
                         alt="Robin Francis — AI Innovator and Software Engineer, professional headshot in formal black shirt" 
@@ -66,20 +54,15 @@ const Hero = () => {
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
                         fetchPriority="high"
                     />
-                </motion.div>
+                </div>
 
                 {/* RIGHT SIDE: Services / Skills */}
-                <motion.div 
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                    className="w-full md:w-1/3 flex flex-col items-center md:items-end text-center md:text-right order-3 gap-3 md:gap-4"
-                >
+                <div className="w-full md:w-1/3 flex flex-col items-center md:items-end text-center md:text-right order-3 gap-3 md:gap-4">
                     <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">AI Engineering</div>
                     <div className="text-sm md:text-base lg:text-lg font-bold text-foreground transition-colors cursor-default">Software Engineering</div>
                     <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">Community Building</div>
                     <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">Product Strategy</div>
-                </motion.div>
+                </div>
             </div>
 
             {/* BOTTOM MARQUEE / LOGOS */}

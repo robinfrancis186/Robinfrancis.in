@@ -1,8 +1,8 @@
 import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react'
 import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
 
 // Lazy load heavy sections
+const About = lazy(() => import('@/components/sections/About'))
 const Skills = lazy(() => import('@/components/sections/Skills'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
 const Blog = lazy(() => import('@/components/sections/Blog'))
@@ -63,7 +63,9 @@ const Home = () => {
     return (
         <main>
             <Hero />
-            <About />
+            <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="300px 0px">
+                <About />
+            </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[32vh]">
                 <Skills />
             </DeferredSection>
