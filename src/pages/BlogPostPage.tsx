@@ -4,7 +4,7 @@ import { client, urlFor } from '../lib/sanity';
 import { PortableText } from '@portabletext/react';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '@/components/seo/PageSeo';
 
 const ptComponents = {
     types: {
@@ -123,29 +123,16 @@ const BlogPostPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground">
-            <Helmet>
-                <title>{post.title} | Robin Francis Journal</title>
-                <meta name="description" content={excerpt} />
-                <link rel="canonical" href={canonicalUrl} />
-                
-                {/* Open Graph Tags */}
-                <meta property="og:title" content={post.title} />
-                <meta property="og:description" content={excerpt} />
-                <meta property="og:url" content={canonicalUrl} />
-                {imageUrl && <meta property="og:image" content={imageUrl} />}
-                <meta property="og:type" content="article" />
-                
-                {/* Twitter Tags */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={post.title} />
-                <meta name="twitter:description" content={excerpt} />
-                {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-                
-                {/* JSON-LD Schema */}
-                <script type="application/ld+json">
-                    {JSON.stringify(jsonLd)}
-                </script>
-            </Helmet>
+            <PageSeo
+                title={`${post.title} | Robin Francis Journal`}
+                description={excerpt}
+                canonical={canonicalUrl}
+                ogType="article"
+                ogTitle={post.title}
+                twitterTitle={post.title}
+                image={imageUrl || undefined}
+                jsonLd={jsonLd}
+            />
 
             <motion.article
                 initial={{ opacity: 0, y: 20 }}

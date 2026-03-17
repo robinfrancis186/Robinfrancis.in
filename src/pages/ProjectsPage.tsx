@@ -3,7 +3,7 @@ import { client, urlFor } from '../lib/sanity';
 
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '@/components/seo/PageSeo';
 
 const ProjectsPage = () => {
     const [sanityProjects, setSanityProjects] = useState<any[]>([]);
@@ -68,32 +68,14 @@ const ProjectsPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <Helmet>
-                <title>Projects | Robin Francis</title>
-                <meta
-                    name="description"
-                    content="Explore AI, accessibility, product, and engineering projects built by Robin Francis."
-                />
-                <link rel="canonical" href="https://www.robinfrancis.in/projects/" />
-                <meta property="og:title" content="Projects | Robin Francis" />
-                <meta
-                    property="og:description"
-                    content="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
-                />
-                <meta property="og:url" content="https://www.robinfrancis.in/projects/" />
-                <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Projects | Robin Francis" />
-                <meta
-                    name="twitter:description"
-                    content="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
-                />
-                <meta name="twitter:image" content="https://www.robinfrancis.in/images/og-image.png" />
-                <script type="application/ld+json">
-                    {JSON.stringify(jsonLd)}
-                </script>
-            </Helmet>
+            <PageSeo
+                title="Projects | Robin Francis"
+                description="Explore AI, accessibility, product, and engineering projects built by Robin Francis."
+                canonical="https://www.robinfrancis.in/projects/"
+                ogDescription="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
+                twitterDescription="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
+                jsonLd={jsonLd}
+            />
             <motion.section
                 id="portfolio"
                 className="mt-10"

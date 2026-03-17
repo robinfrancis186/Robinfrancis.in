@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { client, urlFor } from '../lib/sanity';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '@/components/seo/PageSeo';
 
 const BlogPage = () => {
     const [sanityPosts, setSanityPosts] = useState<any[]>([]);
@@ -52,29 +52,13 @@ const BlogPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto bg-background text-foreground">
-            <Helmet>
-                <title>Blog | Robin Francis</title>
-                <meta
-                    name="description"
-                    content="Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis."
-                />
-                <link rel="canonical" href="https://www.robinfrancis.in/blog/" />
-                <meta property="og:title" content="Blog | Robin Francis" />
-                <meta
-                    property="og:description"
-                    content="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
-                />
-                <meta property="og:url" content="https://www.robinfrancis.in/blog/" />
-                <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Blog | Robin Francis" />
-                <meta
-                    name="twitter:description"
-                    content="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
-                />
-                <meta name="twitter:image" content="https://www.robinfrancis.in/images/og-image.png" />
-            </Helmet>
+            <PageSeo
+                title="Blog | Robin Francis"
+                description="Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis."
+                canonical="https://www.robinfrancis.in/blog/"
+                ogDescription="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
+                twitterDescription="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
+            />
             <motion.section
                 id="blog-feed"
                 className="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24"

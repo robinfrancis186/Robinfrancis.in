@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MasonryGallery, { MasonryItem } from '@/components/ui/MasonryGallery';
 import { client, urlFor } from '../lib/sanity';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '@/components/seo/PageSeo';
 
 const GalleryPage = () => {
     const [items, setItems] = useState<MasonryItem[]>([]);
@@ -59,17 +59,13 @@ const GalleryPage = () => {
 
     return (
         <main className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
-            <Helmet>
-                <title>Gallery | Robin Francis</title>
-                <meta name="description" content="Explore a curated collection of moments, landscapes, and visual stories by Robin Francis." />
-                <link rel="canonical" href="https://www.robinfrancis.in/gallery/" />
-                <meta property="og:title" content="Gallery | Robin Francis" />
-                <meta property="og:description" content="Explore a curated collection of moments, landscapes, and visual stories by AI Innovator Robin Francis." />
-                <meta property="og:url" content="https://www.robinfrancis.in/gallery/" />
-                <script type="application/ld+json">
-                    {JSON.stringify(jsonLd)}
-                </script>
-            </Helmet>
+            <PageSeo
+                title="Gallery | Robin Francis"
+                description="Explore a curated collection of moments, landscapes, and visual stories by Robin Francis."
+                canonical="https://www.robinfrancis.in/gallery/"
+                ogDescription="Explore a curated collection of moments, landscapes, and visual stories by AI Innovator Robin Francis."
+                jsonLd={jsonLd}
+            />
 
             <div className="max-w-7xl mx-auto">
                 {/* Header */}

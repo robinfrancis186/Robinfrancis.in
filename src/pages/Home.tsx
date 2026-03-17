@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react'
-import { Helmet } from 'react-helmet-async'
 import Hero from '@/components/sections/Hero'
+import PageSeo from '@/components/seo/PageSeo'
 
 // Lazy load heavy sections
 const About = lazy(() => import('@/components/sections/About'))
@@ -67,21 +67,11 @@ const Home = () => {
 
     return (
         <main>
-            <Helmet>
-                <title>{pageTitle}</title>
-                <meta name="description" content={pageDescription} />
-                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-                <link rel="canonical" href="https://www.robinfrancis.in/" />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content={pageTitle} />
-                <meta property="og:description" content={pageDescription} />
-                <meta property="og:url" content="https://www.robinfrancis.in/" />
-                <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={pageTitle} />
-                <meta name="twitter:description" content={pageDescription} />
-                <meta name="twitter:image" content="https://www.robinfrancis.in/images/og-image.png" />
-            </Helmet>
+            <PageSeo
+                title={pageTitle}
+                description={pageDescription}
+                canonical="https://www.robinfrancis.in/"
+            />
             <Hero />
             <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="300px 0px">
                 <About />
