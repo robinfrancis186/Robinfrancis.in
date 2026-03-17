@@ -55,12 +55,14 @@ const Hero = () => {
                     <img 
                         src="/images/about/robin-light.webp" 
                         alt="Robin Francis Portrait" 
+                        width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl dark:hidden"
                         fetchPriority="high"
                     />
                     <img 
                         src="/images/about/robin-dark.webp" 
                         alt="Robin Francis Portrait" 
+                        width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
                         fetchPriority="high"
                     />
@@ -73,10 +75,10 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                     className="w-full md:w-1/3 flex flex-col items-center md:items-end text-center md:text-right order-3 gap-3 md:gap-4"
                 >
-                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/40 hover:text-foreground transition-colors cursor-default">AI Engineering</div>
+                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">AI Engineering</div>
                     <div className="text-sm md:text-base lg:text-lg font-bold text-foreground transition-colors cursor-default">Software Engineering</div>
-                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/40 hover:text-foreground transition-colors cursor-default">Community Building</div>
-                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/40 hover:text-foreground transition-colors cursor-default">Product Strategy</div>
+                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">Community Building</div>
+                    <div className="text-sm md:text-base lg:text-lg font-medium text-foreground/70 hover:text-foreground transition-colors cursor-default">Product Strategy</div>
                 </motion.div>
             </div>
 

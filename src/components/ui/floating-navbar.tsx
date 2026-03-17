@@ -72,6 +72,7 @@ export const FloatingNav = ({
                             <a
                                 key={`link=${idx}`}
                                 href={hashTarget}
+                                aria-label={navItem.name}
                                 className={cn(
                                     "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
                                 )}
@@ -83,6 +84,7 @@ export const FloatingNav = ({
                             <RouterLink
                                 key={`link=${idx}`}
                                 to={navItem.link}
+                                aria-label={navItem.name}
                                 className={cn(
                                     "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
                                 )}
