@@ -1,21 +1,20 @@
-import { useEffect, useState, Suspense, lazy } from 'react'
+import { useEffect, Suspense, lazy } from 'react'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import LoadingScreen from './components/ui/LoadingScreen'
 import Lenis from 'lenis'
 
+// Eagerly load the main landing page to prevent network waterfall delays on FCP/LCP
+import Home from './pages/Home'
+
 // Lazy load heavy page components
-const Home = lazy(() => import('./pages/Home'))
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage'))
 
 function App() {
-    const [loading, setLoading] = useState(true)
-
     useEffect(() => {
         let lenis: Lenis | null = null;
         let animationFrameId: number;
@@ -55,7 +54,6 @@ function App() {
 
     return (
         <Router>
-            {loading && <LoadingScreen minDisplayTime={500} onFinished={() => setLoading(false)} />}
             <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
                 <div className="fixed top-4 right-4 z-[5001]">
                     <ThemeToggle />

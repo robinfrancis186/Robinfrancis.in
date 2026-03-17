@@ -51,6 +51,10 @@
     </script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
+    <!-- Preload Critical LCP Hero Images based on color scheme -->
+    <link rel="preload" href="/images/about/robin-light.webp" as="image" type="image/webp" media="(prefers-color-scheme: light)" fetchpriority="high" />
+    <link rel="preload" href="/images/about/robin-dark.webp" as="image" type="image/webp" media="(prefers-color-scheme: dark)" fetchpriority="high" />
+
     <title>Robin Francis | AI Innovator & Community Leader</title>
     <meta name="description"
         content="Portfolio of Robin Francis — AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions." />

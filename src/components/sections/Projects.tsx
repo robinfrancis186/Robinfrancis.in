@@ -66,7 +66,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-                        image="/images/blog/ieee-award.png"
+                        image="/images/blog/ieee-award.webp"
                         title="IEEE R10 Career Fair"
                         description="Co-led the first international virtual career fair with 31 global recruiters and 245 participants."
                         tags={["Global Community", "Networking"]}
@@ -75,7 +75,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-                        image="/images/blog/accessible-tech.png"
+                        image="/images/blog/accessible-tech.webp"
                         title="STRIDE Website"
                         description="Official website for STRIDE Kerala. Central digital hub for assistive technology innovation."
                         tags={["Web Development", "Accessibility", "UI/UX"]}
@@ -111,7 +111,7 @@ const GridItem = ({ area, image, title, description, tags, demoLink, variants }:
                 <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white dark:bg-neutral-950">
                     {image && (
                         <div className="relative h-48 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900">
-                            <img src={image} alt={title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <img src={image} loading="lazy" alt={title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                         </div>
                     )}
                     <div className="flex flex-col flex-1 p-5 md:p-6 justify-between gap-4">
