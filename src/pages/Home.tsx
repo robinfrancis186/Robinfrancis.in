@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 
@@ -9,18 +9,76 @@ const Blog = lazy(() => import('@/components/sections/Blog'))
 const FAQ = lazy(() => import('@/components/sections/FAQ'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 
+interface DeferredSectionProps {
+    children: ReactNode;
+    placeholderClassName?: string;
+    rootMargin?: string;
+}
+
+const DeferredSection = ({
+    children,
+    placeholderClassName = "min-h-[40vh]",
+    rootMargin = "500px 0px",
+}: DeferredSectionProps) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const node = containerRef.current;
+        if (!node || isVisible) return;
+
+        if (typeof IntersectionObserver === 'undefined') {
+            setIsVisible(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin }
+        );
+
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, [isVisible, rootMargin]);
+
+    return (
+        <div ref={containerRef}>
+            {isVisible ? (
+                <Suspense fallback={<div className={placeholderClassName} />}>
+                    {children}
+                </Suspense>
+            ) : (
+                <div className={placeholderClassName} aria-hidden="true" />
+            )}
+        </div>
+    );
+};
+
 const Home = () => {
     return (
         <main>
             <Hero />
             <About />
-            <Suspense fallback={<div className="min-h-screen" />}>
+            <DeferredSection placeholderClassName="min-h-[32vh]">
                 <Skills />
+            </DeferredSection>
+            <DeferredSection placeholderClassName="min-h-[44vh]">
                 <Projects />
+            </DeferredSection>
+            <DeferredSection placeholderClassName="min-h-[44vh]">
                 <Blog />
+            </DeferredSection>
+            <DeferredSection placeholderClassName="min-h-[28vh]">
                 <FAQ />
+            </DeferredSection>
+            <DeferredSection placeholderClassName="min-h-[40vh]">
                 <Contact />
-            </Suspense>
+            </DeferredSection>
         </main>
     );
 };

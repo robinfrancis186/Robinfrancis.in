@@ -1,10 +1,38 @@
-
+import { useEffect, useRef, useState } from "react";
 import { WavePath } from "@/components/ui/wave-path";
 import LottieIcon from '@/components/ui/LottieIcon';
 
 const Footer = () => {
+    const footerRef = useRef<HTMLElement | null>(null);
+    const [shouldLoadIcons, setShouldLoadIcons] = useState(false);
+
+    useEffect(() => {
+        const node = footerRef.current;
+        if (!node || shouldLoadIcons) return;
+
+        if (typeof IntersectionObserver === 'undefined') {
+            setShouldLoadIcons(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setShouldLoadIcons(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '250px 0px' }
+        );
+
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, [shouldLoadIcons]);
+
+    const iconFallback = <span className="inline-block" style={{ width: 20, height: 20 }} aria-hidden="true" />;
+
     return (
-        <footer className="bg-background border-t py-12 relative overflow-hidden">
+        <footer ref={footerRef} className="bg-background border-t py-12 relative overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex justify-center opacity-50">
                 <WavePath />
             </div>
@@ -18,13 +46,13 @@ const Footer = () => {
 
                     <div className="flex items-center space-x-6">
                         <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300" aria-label="Email Robin Francis">
-                            <LottieIcon animationName="mail" size={20} />
+                            {shouldLoadIcons ? <LottieIcon animationName="mail" size={20} /> : iconFallback}
                         </a>
                         <a href="https://www.linkedin.com/in/robin-francis-b43565175" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="LinkedIn Profile">
-                            <LottieIcon animationName="linkedin" size={20} />
+                            {shouldLoadIcons ? <LottieIcon animationName="linkedin" size={20} /> : iconFallback}
                         </a>
                         <a href="https://github.com/robinfrancis186" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110 duration-300" aria-label="GitHub Profile">
-                            <LottieIcon animationName="github" size={20} />
+                            {shouldLoadIcons ? <LottieIcon animationName="github" size={20} /> : iconFallback}
                         </a>
                     </div>
                 </div>
@@ -34,4 +62,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

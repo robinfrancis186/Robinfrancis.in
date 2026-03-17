@@ -22,15 +22,15 @@ export default defineConfig({
     build: {
         outDir: 'docs',
         sourcemap: true,
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    reactConfig: ['react', 'react-dom', 'react-router-dom'],
-                    threejs: ['three', '@react-three/fiber', '@react-three/drei'],
-                    animations: ['framer-motion', 'gsap', 'lottie-react'],
-                    sanityClient: ['@sanity/client', '@sanity/image-url', '@portabletext/react']
-                }
-            }
-        }
+        modulePreload: {
+            resolveDependencies: (_url, deps) =>
+                deps.filter(
+                    (dep) =>
+                        !dep.includes('threejs-') &&
+                        !dep.includes('lottie-') &&
+                        !dep.includes('gsap-') &&
+                        !dep.includes('sanityClient-')
+                ),
+        },
     },
 })
