@@ -25,6 +25,15 @@ export default defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alternative Text',
+                    type: 'string',
+                    description: 'Describe the image for accessibility and SEO.',
+                    validation: (Rule) => Rule.required(),
+                }),
+            ],
             validation: (Rule) => Rule.required(),
         }),
         defineField({

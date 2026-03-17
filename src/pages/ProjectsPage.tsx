@@ -3,6 +3,7 @@ import { client, urlFor } from '../lib/sanity';
 
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const ProjectsPage = () => {
     const [sanityProjects, setSanityProjects] = useState<any[]>([]);
@@ -23,14 +24,15 @@ const ProjectsPage = () => {
         const imageUrl = project.image && project.image.asset ? urlFor(project.image).width(800).format('webp').quality(80).url() : '';
         const title = project.title || 'Untitled Project';
         const category = project.category || 'Category';
-        const link = project.link || '/#work';
+        const link = project.link || '#portfolio';
+        const imageAlt = project.image?.alt || `${title} project visual`;
 
         const heights = ['h-56', 'h-72', 'h-48', 'h-64'];
         const heightClass = heights[index % heights.length];
 
         return (
             <a key={project._id} href={link} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                {imageUrl ? <img src={imageUrl} alt={title} className={`${heightClass} w-full transition-transform duration-500 group-hover:scale-105 object-cover`} /> : <div className={`${heightClass} w-full bg-neutral-100 dark:bg-neutral-800`}></div>}
+                {imageUrl ? <img src={imageUrl} alt={imageAlt} className={`${heightClass} w-full transition-transform duration-500 group-hover:scale-105 object-cover`} /> : <div className={`${heightClass} w-full bg-neutral-100 dark:bg-neutral-800`}></div>}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                     <p className="text-xs text-white/80 font-geist">{category}</p>
@@ -56,9 +58,42 @@ const ProjectsPage = () => {
     };
 
     const sanityCols = sanityProjects.length > 0 ? getColumns(sanityProjects) : null;
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Projects | Robin Francis",
+        "description": "Selected AI, product, and web engineering projects by Robin Francis.",
+        "url": "https://www.robinfrancis.in/projects"
+    };
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <Helmet>
+                <title>Projects | Robin Francis</title>
+                <meta
+                    name="description"
+                    content="Explore AI, accessibility, product, and engineering projects built by Robin Francis."
+                />
+                <link rel="canonical" href="https://www.robinfrancis.in/projects" />
+                <meta property="og:title" content="Projects | Robin Francis" />
+                <meta
+                    property="og:description"
+                    content="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
+                />
+                <meta property="og:url" content="https://www.robinfrancis.in/projects" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Projects | Robin Francis" />
+                <meta
+                    name="twitter:description"
+                    content="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
+                />
+                <meta name="twitter:image" content="https://www.robinfrancis.in/images/og-image.png" />
+                <script type="application/ld+json">
+                    {JSON.stringify(jsonLd)}
+                </script>
+            </Helmet>
             <motion.section
                 id="portfolio"
                 className="mt-10"
@@ -68,10 +103,10 @@ const ProjectsPage = () => {
             >
                 <div className="flex sm:mb-8 mb-6 items-end justify-between">
                     <div className="">
-                        <p className="text-[11px] sm:text-xs tracking-widest text-neutral-500 uppercase font-geist">how i speand my time</p>
+                        <p className="text-[11px] sm:text-xs tracking-widest text-neutral-500 uppercase font-geist">how i spend my time</p>
                         <h3 className="mt-2 text-2xl sm:text-3xl tracking-tight font-geist font-medium">A few projects I'm proud of.</h3>
                     </div>
-                    <a href="/#work" className="hidden sm:inline-flex items-center gap-2 ring-1 ring-neutral-200 hover:shadow text-sm text-neutral-700 font-geist bg-white rounded-full pt-2 pr-4 pb-2 pl-4 dark:bg-slate-900 dark:text-neutral-300 dark:ring-neutral-700 dark:hover:bg-slate-800 transition-colors">
+                    <a href="/#projects" className="hidden sm:inline-flex items-center gap-2 ring-1 ring-neutral-200 hover:shadow text-sm text-neutral-700 font-geist bg-white rounded-full pt-2 pr-4 pb-2 pl-4 dark:bg-slate-900 dark:text-neutral-300 dark:ring-neutral-700 dark:hover:bg-slate-800 transition-colors">
                         View Portfolio
                         <ArrowUpRight className="w-5 h-5" />
                     </a>
@@ -94,7 +129,7 @@ const ProjectsPage = () => {
                         <>
                             {/* Column 1 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <img src="/images/projects/cloud_analytics.webp" alt="Cloud Analytics dashboard project" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -118,8 +153,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/shop_pro.webp" alt="E-commerce platform" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/shop_pro.webp" alt="Pastel e-commerce storefront interface with product cards and shopping cart panel" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">E-commerce • Platform</p>
@@ -142,8 +177,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/creative_hub.webp" alt="Portfolio website" className="h-48 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/creative_hub.webp" alt="Floating glass interface cards on an iridescent gradient, representing a creative portfolio hub" className="h-48 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Portfolio • Website</p>
@@ -169,8 +204,8 @@ const ProjectsPage = () => {
 
                             {/* Column 2 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/boltshift.webp" alt="Product launch landing page" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/boltshift.webp" alt="Futuristic product launch webpage mockup with neon motion trails and glowing UI frame" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Platform • Website</p>
@@ -193,8 +228,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/fit_tracker.webp" alt="Mobile app design" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/fit_tracker.webp" alt="Stacked mobile fitness app screens with activity charts, heart metrics, and progress rings" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Mobile • App</p>
@@ -217,8 +252,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/dataflow.webp" alt="Data visualization" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/dataflow.webp" alt="Isometric analytics dashboard with multi-panel charts, live data streams, and connected network nodes" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Data • Visualization</p>
@@ -244,8 +279,8 @@ const ProjectsPage = () => {
 
                             {/* Column 3 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/nexus_system.webp" alt="Design system" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/nexus_system.webp" alt="Glassmorphism design system board showing buttons, icons, typography scale, and color palettes" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Design • System</p>
@@ -268,7 +303,7 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/b1350108-f0ef-4f66-83ae-fe50447f6f74_800w.jpg" alt="Brand identity and campaign visuals" className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -292,8 +327,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
-                                <a href="/#work" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/taskflow_pro.webp" alt="Web application" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
+                                    <img src="/images/projects/taskflow_pro.webp" alt="Neon task management dashboard with columns for to-do, in-progress, and completed work" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Web • Application</p>
@@ -321,7 +356,7 @@ const ProjectsPage = () => {
                 </div>
 
                 <div className="mt-8 sm:mt-10 flex justify-center">
-                    <a href="/#work" className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-700 px-5 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:shadow dark:hover:bg-slate-800 transition-colors font-geist">
+                    <a href="/#projects" className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-700 px-5 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:shadow dark:hover:bg-slate-800 transition-colors font-geist">
                         View All Work
                         <ArrowUpRight className="w-5 h-5" />
                     </a>

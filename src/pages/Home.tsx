@@ -6,6 +6,7 @@ import About from '@/components/sections/About'
 const Skills = lazy(() => import('@/components/sections/Skills'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
 const Blog = lazy(() => import('@/components/sections/Blog'))
+const FAQ = lazy(() => import('@/components/sections/FAQ'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
                 <Skills />
                 <Projects />
                 <Blog />
+                <FAQ />
                 <Contact />
             </Suspense>
         </main>

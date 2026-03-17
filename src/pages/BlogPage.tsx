@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { client, urlFor } from '../lib/sanity';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const BlogPage = () => {
     const [sanityPosts, setSanityPosts] = useState<any[]>([]);
@@ -19,12 +20,14 @@ const BlogPage = () => {
         const excerpt = post.excerpt || '';
         const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
         const tag = post.tags && post.tags.length > 0 ? post.tags[0] : 'POST';
+        const slug = post.slug?.current || post._id;
+        const imageAlt = post.image?.alt || `Cover image for ${title}`;
 
         return (
             <div key={post._id}>
-                <Link to={`/blog/${post._id}`} className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                <Link to={`/blog/${slug}`} className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                     <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
-                        {imageUrl ? <img src={imageUrl} alt={title} className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" /> : <div className="w-full h-48 sm:h-36 bg-neutral-100 dark:bg-neutral-800" />}
+                        {imageUrl ? <img src={imageUrl} alt={imageAlt} className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" /> : <div className="w-full h-48 sm:h-36 bg-neutral-100 dark:bg-neutral-800" />}
                     </div>
                     <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
                         <div className="flex items-center gap-4 mb-3">
@@ -49,6 +52,29 @@ const BlogPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto bg-background text-foreground">
+            <Helmet>
+                <title>Blog | Robin Francis</title>
+                <meta
+                    name="description"
+                    content="Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis."
+                />
+                <link rel="canonical" href="https://www.robinfrancis.in/blog" />
+                <meta property="og:title" content="Blog | Robin Francis" />
+                <meta
+                    property="og:description"
+                    content="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
+                />
+                <meta property="og:url" content="https://www.robinfrancis.in/blog" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Blog | Robin Francis" />
+                <meta
+                    name="twitter:description"
+                    content="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
+                />
+                <meta name="twitter:image" content="https://www.robinfrancis.in/images/og-image.png" />
+            </Helmet>
             <motion.section
                 id="blog-feed"
                 className="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24"
@@ -63,11 +89,11 @@ const BlogPage = () => {
                             Latest from<br />the Journal
                         </h1>
                         <p className="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed max-w-sm mb-12">
-                            Field notes, photography tips, and stories from our team of explorers on the ground.
+                            Articles on AI systems, accessibility, leadership, and practical lessons from building real products.
                         </p>
 
                         <a
-                            href="#view-all"
+                            href="#blog-feed"
                             className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase hover:text-primary/80 transition-colors"
                         >
                             View All Stories
@@ -91,11 +117,11 @@ const BlogPage = () => {
                         <>
 
                             {/* Article 1 */}
-                            <a href="#article-1" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                            <a id="article-1" href="#article-1" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
                                         src="/images/blog/cinque_terre.webp"
-                                        alt="Cinque Terre"
+                                        alt="Colorful cliffside homes in Cinque Terre above the sea under stormy clouds"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />
                                 </div>
@@ -122,11 +148,11 @@ const BlogPage = () => {
                             <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800"></div>
 
                             {/* Article 2 */}
-                            <a href="#article-2" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                            <a id="article-2" href="#article-2" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
                                         src="/images/blog/autumn_camping.webp"
-                                        alt="Autumn Camping"
+                                        alt="Minimal tent campsite in an autumn forest with fallen leaves and warm morning light"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />
                                 </div>
@@ -153,11 +179,11 @@ const BlogPage = () => {
                             <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800"></div>
 
                             {/* Article 3 */}
-                            <a href="#article-3" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                            <a id="article-3" href="#article-3" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                                 <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                                     <img
                                         src="/images/blog/lake_district.webp"
-                                        alt="Lake District"
+                                        alt="Moody mountain lake landscape with dark clouds and mirror-like water reflection"
                                         className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                                     />
                                 </div>

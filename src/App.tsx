@@ -65,7 +65,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/projects" element={<ProjectsPage />} />
                         <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog/:id" element={<BlogPostPage />} />
+                        <Route path="/blog/:slug" element={<BlogPostPage />} />
                         <Route path="/gallery" element={<GalleryPage />} />
                     </Routes>
                 </Suspense>
@@ -77,4 +77,3 @@ function App() {
 }
 
 export default App
-

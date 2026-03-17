@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build --prefix portfolio-cms && rm -rf public/cms && cp -r portfolio-cms/dist public/cms && node fix_cms_paths.cjs && tsc && vite build && cp docs/index.html docs/404.html",
+    "build": "npm run build --prefix portfolio-cms && rm -rf public/cms && cp -r portfolio-cms/dist public/cms && node fix_cms_paths.cjs && tsc && vite build && node scripts/generate-static-routes.mjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

@@ -14,7 +14,7 @@ const ptComponents = {
             }
             return (
                 <img
-                    alt={value.alt || ' '}
+                    alt={value.alt || 'Blog content image'}
                     loading="lazy"
                     src={urlFor(value).width(800).fit('max').auto('format').url()}
                     className="rounded-lg my-8 w-full max-w-3xl mx-auto"
@@ -46,24 +46,24 @@ const ptComponents = {
 };
 
 const BlogPostPage = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     const [post, setPost] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
 
         window.scrollTo(0, 0);
 
-        const query = `*[_type == "blogPost" && _id == $id][0]`;
-        client.fetch(query, { id }).then((data) => {
+        const query = `*[_type == "blogPost" && (slug.current == $slug || _id == $slug)][0]`;
+        client.fetch(query, { slug }).then((data) => {
             setPost(data);
             setLoading(false);
         }).catch((err) => {
             console.error(err);
             setLoading(false);
         });
-    }, [id]);
+    }, [slug]);
 
     if (loading) {
         return (
@@ -85,11 +85,13 @@ const BlogPostPage = () => {
     }
 
     const imageUrl = post.image && post.image.asset ? urlFor(post.image).width(1200).url() : '';
+    const mainImageAlt = post.image?.alt || `Cover image for ${post.title}`;
     const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
     const isoDate = post.date ? new Date(post.date).toISOString() : '';
     const tag = post.tags && post.tags.length > 0 ? post.tags[0] : '';
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
-    const canonicalUrl = `https://www.robinfrancis.in/blog/${post._id}`;
+    const resolvedSlug = post.slug?.current || slug || post._id;
+    const canonicalUrl = `https://www.robinfrancis.in/blog/${resolvedSlug}`;
 
     // Schema.org JSON-LD for Answer Engines (AEO) and Generative Engines (GEO)
     const jsonLd = {
@@ -134,6 +136,7 @@ const BlogPostPage = () => {
                 <meta property="og:type" content="article" />
                 
                 {/* Twitter Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={post.title} />
                 <meta name="twitter:description" content={excerpt} />
                 {imageUrl && <meta name="twitter:image" content={imageUrl} />}
@@ -167,7 +170,7 @@ const BlogPostPage = () => {
 
                 {imageUrl && (
                     <div className="w-full rounded-2xl overflow-hidden mb-12 shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-800">
-                        <img src={imageUrl} alt={post.title} className="w-full h-auto max-h-[600px] object-cover" />
+                        <img src={imageUrl} alt={mainImageAlt} className="w-full h-auto max-h-[600px] object-cover" />
                     </div>
                 )}
 

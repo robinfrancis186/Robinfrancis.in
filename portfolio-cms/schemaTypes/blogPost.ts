@@ -18,6 +18,16 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
+            name: 'slug',
+            title: 'Slug',
+            type: 'slug',
+            options: {
+                source: 'title',
+                maxLength: 96,
+            },
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'tags',
             title: 'Tags',
             type: 'array',
@@ -37,6 +47,16 @@ export default defineType({
             options: {
                 hotspot: true,
             },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alternative Text',
+                    type: 'string',
+                    description: 'Describe the image for accessibility and SEO.',
+                    validation: (Rule) => Rule.required(),
+                }),
+            ],
+            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'content',
