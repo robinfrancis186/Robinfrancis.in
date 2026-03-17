@@ -69,6 +69,7 @@ const About = () => {
                                 <InteractivePortrait
                                     baseImage="/images/about/robin-light.webp"
                                     darkImage="/images/about/robin-dark.webp"
+                                    alt="Robin Francis — AI developer and community leader, professional portrait"
                                     className="w-full max-w-sm lg:max-w-md mx-auto aspect-[3/4] object-cover"
                                 />
                             </div>
@@ -76,12 +77,15 @@ const About = () => {
                                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                                     I am a passionate AI developer, program strategist, and community builder with a strong track record in leading high-impact technical initiatives. My work spans accessible technology, GenAI solutions, student empowerment, and large-scale program execution. I believe in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity.
                                 </p>
-                                <MovingBorderButton
-                                    borderRadius="1.75rem"
-                                    className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-                                >
-                                    Download CV
-                                </MovingBorderButton>
+                                <a href="/images/robin-francis-resume.pdf" download="Robin_Francis_Resume.pdf">
+                                    <MovingBorderButton
+                                        as="div"
+                                        borderRadius="1.75rem"
+                                        className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+                                    >
+                                        Download CV
+                                    </MovingBorderButton>
+                                </a>
                             </div>
                         </div>
 

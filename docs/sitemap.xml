@@ -2,26 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.robinfrancis.in/</loc>
-        <lastmod>2026-03-12</lastmod>
+        <lastmod>2026-03-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/gallery</loc>
-        <lastmod>2026-03-12</lastmod>
-        <changefreq>weekly</changefreq>
+        <loc>https://www.robinfrancis.in/projects</loc>
+        <lastmod>2026-03-17</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.robinfrancis.in/blog</loc>
-        <lastmod>2026-03-12</lastmod>
+        <lastmod>2026-03-17</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/images/robin-francis-resume.pdf</loc>
-        <lastmod>2026-02-23</lastmod>
-        <changefreq>monthly</changefreq>
+        <loc>https://www.robinfrancis.in/gallery</loc>
+        <lastmod>2026-03-17</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/images/robin-francis-resume.pdf</loc>
+        <lastmod>2026-03-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
 </urlset>

@@ -2,21 +2,48 @@
 
 > AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions.
 
-## Summary
-Robin Francis is an AI developer, program strategist, and community builder. He focuses on AI for accessibility, community-driven engineering, and scalable digital solutions. 
+## About Robin Francis
+Robin Francis is an AI developer, program strategist, and community builder based in Kerala, India. He holds a B.Tech in Computer Science & Engineering from Sahrdaya College of Engineering & Technology (First Class, CGPA 7.17). His work spans accessible technology, Generative AI solutions, student empowerment, and large-scale program execution. He believes in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity.
 
 ## Key Achievements
-- **IBM watsonx GenAI Challenge**: 1st Runner-Up (India)
-- **IEEE R10 Outstanding Volunteer Award 2024**: Recognized across the Asia-Pacific region
-- **3x Hackathon Winner**: Proven ability to build under pressure
+- **IEEE R10 Outstanding Volunteer Award 2024**: First student from the Asia-Pacific Region to receive this honor.
+- **IBM Watsonx GenAI Challenge**: 1st Runner-Up — awarded for building an intelligent GenAI-powered solution.
+- **3× Hackathon Winner**: Wins include GenAI challenges, food sustainability platforms, and game development competitions.
+- **Champion of Impact — IEEE Computer Society**: Recognized for founding & leading TechX Infinia, a flagship event with 450+ participants.
+- **Raised $2,650+ for Community-Impact Projects**: Successfully fundraised for various social initiatives.
+- **National Bronze Medalist — .22 Rifle Shooting**: Awarded at a national competition in Delhi.
+
+## Technical Skills
+### AI & ML
+Python, TensorFlow, PyTorch, Scikit-Learn, Computer Vision, Generative AI
+
+### Backend & Data
+Node.js, C++, PostgreSQL, MongoDB, Firebase, REST APIs
+
+### Frontend & Tools
+React, Next.js, TypeScript, Tailwind CSS, Three.js, Git/GitHub, Figma
+
+## Featured Projects
+- **SoulSync**: AI Companion for Cognitive Wellness — features facial recognition, emotion tracking, and memory recall for elders and caregivers.
+- **FoodLoop**: AI Platform for Responsible Food Redistribution — reduces food waste using ML surplus prediction.
+- **TechX Infinia**: Emerging Tech Flagship Event — founded and led a large-scale tech festival with 450+ participants.
+- **IEEE R10 Career Fair**: Co-led the first international virtual career fair with 31 global recruiters and 245 participants.
+- **STRIDE Website**: Official website for STRIDE Kerala — central digital hub for assistive technology innovation.
+
+## Education
+- **B.Tech in Computer Science & Engineering** (2021–2025) — Sahrdaya College of Engineering & Technology, First Class, CGPA 7.17
+- **Higher Secondary — Computer Science** (2019–2021) — National Higher Secondary School, 96%
+- **Secondary School Certificate** (2019) — Don Bosco High School, 100%
 
 ## Links
 - [Main Website](https://www.robinfrancis.in/)
-- [Gallery](https://www.robinfrancis.in/gallery)
+- [Projects](https://www.robinfrancis.in/projects)
 - [Blog](https://www.robinfrancis.in/blog)
+- [Gallery](https://www.robinfrancis.in/gallery)
+- [Resume (PDF)](https://www.robinfrancis.in/images/robin-francis-resume.pdf)
 - [LinkedIn Profile](https://www.linkedin.com/in/robin-francis-b43565175/)
 - [GitHub Profile](https://github.com/robinfrancis186)
 - [Email](mailto:robinfrancis186@gmail.com)
 
 ## Connect
-Robin builds AI-driven products for accessibility, leads community engineering initiatives, and delivers scalable digital solutions for startups and social impact organizations. Contact him for collaborations or to discuss AI solutions.
+Robin builds AI-driven products for accessibility, leads community engineering initiatives, and delivers scalable digital solutions for startups and social impact organizations. Contact him for collaborations, mentorship, or to discuss AI solutions.

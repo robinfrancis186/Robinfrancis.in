@@ -37,10 +37,10 @@ const Hero = () => {
                     className="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1"
                 >
                     <p className="text-base md:text-lg font-medium text-foreground/80 max-w-[280px] md:max-w-xs leading-relaxed mb-6">
-                        Hey there! I'm an <strong className="text-primary font-bold">AI Innovator</strong> & <strong className="text-primary font-bold">Community Leader</strong> working to build scalable digital solutions.
+                        I design and build <strong className="text-primary font-bold">AI-powered solutions</strong> that make technology <strong className="text-primary font-bold">accessible</strong>, scalable, and people-centric.
                     </p>
                     <a href="#contact" className="group flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors text-foreground">
-                        // HIRE ME 
+                        LET'S WORK TOGETHER
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
                 </motion.div>
@@ -54,14 +54,14 @@ const Hero = () => {
                 >
                     <img 
                         src="/images/about/robin-light.webp" 
-                        alt="Robin Francis Portrait" 
+                        alt="Robin Francis — AI Innovator and Software Engineer, professional headshot in formal black shirt" 
                         width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl dark:hidden"
                         fetchPriority="high"
                     />
                     <img 
                         src="/images/about/robin-dark.webp" 
-                        alt="Robin Francis Portrait" 
+                        alt="Robin Francis — professional portrait with dark background theme" 
                         width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
                         fetchPriority="high"

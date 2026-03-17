@@ -38,26 +38,27 @@ export default function Projects() {
                         variants={item}
                         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
                         image="/images/project-soulsync.webp"
+                        imageAlt="SoulSync AI Companion — facial recognition and emotion tracking wellness dashboard"
                         title="SoulSync"
                         description="AI Companion for Cognitive Wellness. Features facial recognition, emotion tracking, and memory recall."
                         tags={["AI", "Facial Recognition", "Wellness"]}
-                        demoLink="#"
                     />
 
                     <GridItem
                         variants={item}
                         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
                         image="/images/project-foodloop.webp"
+                        imageAlt="FoodLoop food redistribution platform — ML surplus prediction interface"
                         title="FoodLoop"
                         description="AI Platform for Responsible Food Redistribution. Reduces food waste using ML surplus prediction."
                         tags={["Machine Learning", "Sustainability", "React"]}
-                        demoLink="#"
                     />
 
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
                         image="/images/project-techx.webp"
+                        imageAlt="TechX Infinia tech festival — 450+ participants flagship event banner"
                         title="TechX Infinia"
                         description="Emerging Tech Flagship Event. Founded and led a large-scale tech festival with 450+ participants."
                         tags={["Leadership", "Event Management", "Strategy"]}
@@ -67,6 +68,7 @@ export default function Projects() {
                         variants={item}
                         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
                         image="/images/blog/ieee-award.webp"
+                        imageAlt="IEEE R10 international virtual career fair with 31 global recruiters"
                         title="IEEE R10 Career Fair"
                         description="Co-led the first international virtual career fair with 31 global recruiters and 245 participants."
                         tags={["Global Community", "Networking"]}
@@ -76,10 +78,10 @@ export default function Projects() {
                         variants={item}
                         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
                         image="/images/blog/accessible-tech.webp"
+                        imageAlt="STRIDE Kerala assistive technology innovation hub official website"
                         title="STRIDE Website"
                         description="Official website for STRIDE Kerala. Central digital hub for assistive technology innovation."
                         tags={["Web Development", "Accessibility", "UI/UX"]}
-                        demoLink="#"
                     />
                 </motion.ul>
             </div>
@@ -90,6 +92,7 @@ export default function Projects() {
 interface GridItemProps {
     area: string;
     image?: string;
+    imageAlt?: string;
     title: string;
     description: React.ReactNode;
     tags?: string[];
@@ -97,7 +100,7 @@ interface GridItemProps {
     variants?: any;
 }
 
-const GridItem = ({ area, image, title, description, tags, demoLink, variants }: GridItemProps) => {
+const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, variants }: GridItemProps) => {
     return (
         <motion.li variants={variants} className={`min-h-[14rem] list-none ${area}`}>
             <div className="relative h-full rounded-2xl border border-neutral-200/50 dark:border-neutral-800/50 p-2 md:rounded-3xl md:p-3 bg-white/50 dark:bg-black/50 backdrop-blur-md">
@@ -111,7 +114,7 @@ const GridItem = ({ area, image, title, description, tags, demoLink, variants }:
                 <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white dark:bg-neutral-950">
                     {image && (
                         <div className="relative h-48 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900">
-                            <img src={image} loading="lazy" alt={title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <img src={image} loading="lazy" alt={imageAlt || title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                         </div>
                     )}
                     <div className="flex flex-col flex-1 p-5 md:p-6 justify-between gap-4">
@@ -139,7 +142,7 @@ const GridItem = ({ area, image, title, description, tags, demoLink, variants }:
                                 <a
                                     href={demoLink}
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
                                 >
                                     <ExternalLink className="w-3.5 h-3.5" />

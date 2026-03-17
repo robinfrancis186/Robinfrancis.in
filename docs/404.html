@@ -2,47 +2,44 @@
 <html lang="en">
 
 <head>
-    <!-- Enforce HTTPS -->
-    <script>
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-            location.replace(location.href.replace('http:', 'https:'));
-        }
-    </script>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6M7KWQMHP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-J6M7KWQMHP');
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KGFM5K9N');</script>
-    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Enforce HTTPS + www canonical domain (single consolidated script) -->
+    <script>
+        (function () {
+            var h = location.hostname, p = location.protocol;
+            if (h === 'robinfrancis.in') {
+                location.replace('https://www.robinfrancis.in' + location.pathname + location.search);
+            } else if (p === 'http:' && h !== 'localhost' && h !== '127.0.0.1') {
+                location.replace('https://' + h + location.pathname + location.search);
+            }
+            // GitHub Pages SPA redirect fallback for the Sanity CMS nested path
+            if (location.pathname.startsWith('/cms')) {
+                location.replace('/cms/');
+            }
+        })();
+    </script>
+
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; frame-ancestors 'self'" />
+
+    <!-- Preconnect to critical 3rd-party origins (reduces DNS+TLS latency) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.sanity.io" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+    <!-- Preload Critical LCP Hero Images based on color scheme -->
+    <link rel="preload" href="/images/about/robin-light.webp" as="image" type="image/webp" media="(prefers-color-scheme: light)" fetchpriority="high" />
+    <link rel="preload" href="/images/about/robin-dark.webp" as="image" type="image/webp" media="(prefers-color-scheme: dark)" fetchpriority="high" />
+
+    <!-- Favicons & Manifest -->
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/favicon.png" />
     <link rel="manifest" href="/assets/manifest-BsfgRWQP.json" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script>
-        // GitHub Pages SPA redirect fallback for the Sanity CMS nested path
-        if (window.location.pathname.startsWith('/cms')) {
-            window.location.replace('/cms/');
-        }
-    </script>
-
+    <!-- Primary SEO Meta -->
     <title>Robin Francis | AI Innovator & Community Leader</title>
     <meta name="description"
         content="Portfolio of Robin Francis — AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions." />
@@ -52,7 +49,7 @@
     <link rel="alternate" type="text/markdown" href="/llms.txt" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="keywords"
-        content="Robin Francis, AI Innovator, Community Leader, Software Engineer, Portfolio, Hackathon Winner, React Developer, Accessible Tech" />
+        content="Robin Francis, AI Innovator, Community Leader, Software Engineer, Portfolio, Hackathon Winner, React Developer, Accessible Tech, Kerala, IEEE R10, IBM Watsonx" />
     <link rel="canonical" href="https://www.robinfrancis.in/" />
     <link rel="alternate" hreflang="en" href="https://www.robinfrancis.in/" />
 
@@ -63,9 +60,15 @@
         content="AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions." />
     <meta property="og:url" content="https://www.robinfrancis.in/" />
     <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Robin Francis Portfolio" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@robinfrancis186" />
+    <meta name="twitter:creator" content="@robinfrancis186" />
     <meta name="twitter:title" content="Robin Francis | AI Innovator & Community Leader" />
     <meta name="twitter:description"
         content="AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions." />
@@ -73,20 +76,71 @@
 
     <meta name="theme-color" content="#0f172a" />
 
+    <!-- ProfilePage + Person Structured Data (unified for Knowledge Panel) -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Robin Francis",
-            "url": "https://www.robinfrancis.in/",
-            "image": "https://www.robinfrancis.in/images/favicon.png",
-            "jobTitle": "AI Innovator and Community Leader",
-            "description": "AI innovator, community leader, and 3× hackathon winner focused on accessible, people-centric technology and scalable digital solutions.",
-            "email": "mailto:robinfrancis186@gmail.com",
-            "telephone": "+918078256598",
-            "sameAs": [
-                "https://www.linkedin.com/in/robin-francis-b43565175",
-                "https://github.com/robinfrancis186"
+            "@type": "ProfilePage",
+            "dateCreated": "2024-01-01",
+            "dateModified": "2026-03-17",
+            "mainEntity": {
+                "@type": "Person",
+                "name": "Robin Francis",
+                "givenName": "Robin",
+                "familyName": "Francis",
+                "url": "https://www.robinfrancis.in/",
+                "image": "https://www.robinfrancis.in/images/about/robin-light.webp",
+                "jobTitle": "AI Innovator and Community Leader",
+                "description": "AI innovator, community leader, and 3× hackathon winner focused on accessible, people-centric technology and scalable digital solutions.",
+                "email": "mailto:robinfrancis186@gmail.com",
+                "telephone": "+918078256598",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Kerala",
+                    "addressCountry": "IN"
+                },
+                "alumniOf": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "Sahrdaya College of Engineering & Technology"
+                },
+                "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Generative AI", "React", "TypeScript", "Node.js", "Python", "TensorFlow", "Community Building", "Accessible Technology"],
+                "award": [
+                    "IEEE R10 Outstanding Volunteer Award 2024",
+                    "IBM Watsonx GenAI Challenge — 1st Runner-Up",
+                    "3× Hackathon Winner",
+                    "Champion of Impact — IEEE Computer Society",
+                    "National Bronze Medalist — .22 Rifle Shooting"
+                ],
+                "sameAs": [
+                    "https://www.linkedin.com/in/robin-francis-b43565175",
+                    "https://github.com/robinfrancis186",
+                    "https://twitter.com/robinfrancis186"
+                ]
+            }
+        }
+    </script>
+
+    <!-- SoftwareApplication Schemas for Projects (AI Discovery + Rich Snippets) -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "SoulSync",
+                    "description": "AI Companion for Cognitive Wellness featuring facial recognition, emotion tracking, and memory recall for elders and caregivers.",
+                    "applicationCategory": "HealthApplication",
+                    "author": { "@type": "Person", "name": "Robin Francis" },
+                    "operatingSystem": "Web"
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "FoodLoop",
+                    "description": "AI Platform for Responsible Food Redistribution using ML surplus prediction to reduce food waste.",
+                    "applicationCategory": "SocialNetworkingApplication",
+                    "author": { "@type": "Person", "name": "Robin Francis" },
+                    "operatingSystem": "Web"
+                }
             ]
         }
     </script>
@@ -97,42 +151,12 @@
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": "https://www.robinfrancis.in/#home"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "About",
-                    "item": "https://www.robinfrancis.in/#about"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Projects",
-                    "item": "https://www.robinfrancis.in/#projects"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "name": "Skills",
-                    "item": "https://www.robinfrancis.in/#skills"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 5,
-                    "name": "Blog",
-                    "item": "https://www.robinfrancis.in/#blog"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 6,
-                    "name": "Contact",
-                    "item": "https://www.robinfrancis.in/#contact"
-                }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.robinfrancis.in/" },
+                { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.robinfrancis.in/#about" },
+                { "@type": "ListItem", "position": 3, "name": "Projects", "item": "https://www.robinfrancis.in/#projects" },
+                { "@type": "ListItem", "position": 4, "name": "Skills", "item": "https://www.robinfrancis.in/#skills" },
+                { "@type": "ListItem", "position": 5, "name": "Blog", "item": "https://www.robinfrancis.in/blog" },
+                { "@type": "ListItem", "position": 6, "name": "Contact", "item": "https://www.robinfrancis.in/#contact" }
             ]
         }
     </script>
@@ -148,15 +172,23 @@
                     "name": "Who is Robin Francis?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Robin Francis is an AI innovator, community leader, and 3\u00d7 hackathon winner focused on accessible, people-centric technology and scalable digital solutions."
+                        "text": "Robin Francis is an AI innovator, community leader, and 3× hackathon winner from Kerala, India. He holds a B.Tech in Computer Science from Sahrdaya College of Engineering & Technology and is focused on accessible, people-centric technology and scalable digital solutions."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "What services does Robin offer?",
+                    "name": "What are Robin Francis's key achievements?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Robin builds AI-driven products for accessibility, leads community engineering initiatives, and delivers scalable digital solutions for startups and social impact organizations."
+                        "text": "Robin is the first student from the Asia-Pacific Region to receive the IEEE R10 Outstanding Volunteer Award 2024. He was also 1st Runner-Up in the IBM Watsonx GenAI Challenge, a 3× Hackathon Winner, and received the Champion of Impact award from IEEE Computer Society."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What services does Robin Francis offer?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Robin builds AI-driven products for accessibility, leads community engineering initiatives, and delivers scalable digital solutions for startups and social impact organizations. His expertise spans AI engineering, software development, community building, and product strategy."
                     }
                 },
                 {
@@ -164,15 +196,15 @@
                     "name": "How can I contact Robin Francis?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Use the contact form on the site or email robinfrancis186@gmail.com. You can also connect via LinkedIn at https://www.linkedin.com/in/robin-francis-b43565175."
+                        "text": "Use the contact form on https://www.robinfrancis.in/#contact or email robinfrancis186@gmail.com. You can also connect via LinkedIn at https://www.linkedin.com/in/robin-francis-b43565175."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "Where can I see Robin's work and achievements?",
+                    "name": "What technical skills does Robin Francis have?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Visit the Projects and Achievements sections to see recent AI builds, community initiatives, and awards including IBM watsonx GenAI Challenge 1st Runner-Up and IEEE R10 Outstanding Volunteer Award 2024."
+                        "text": "Robin is skilled in Python, TensorFlow, PyTorch, Generative AI, React, Next.js, TypeScript, Node.js, PostgreSQL, MongoDB, Firebase, Three.js, and Tailwind CSS. He specializes in AI/ML, full-stack development, and accessible technology."
                     }
                 }
             ]
@@ -181,11 +213,11 @@
 
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="nho5uSkIv-W_3SGQo0IzX5Jirz0sHtEqOXk5Ft9-LZg" />
-  <script type="module" crossorigin src="/assets/index-Df3IvyaK.js"></script>
+  <script type="module" crossorigin src="/assets/index-uvoYkxMk.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/reactConfig-BBnIpS6R.js">
   <link rel="modulepreload" crossorigin href="/assets/threejs-DCZv9mnd.js">
-  <link rel="modulepreload" crossorigin href="/assets/animations-52dTnFc4.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-CRI266YN.css">
+  <link rel="modulepreload" crossorigin href="/assets/animations-uTbJCfua.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DmYVMJXE.css">
 </head>
 
 <body>
@@ -194,6 +226,24 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
+
+    <!-- Analytics scripts deferred to AFTER page paint (improves FCP by ~1-2s) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6M7KWQMHP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-J6M7KWQMHP');
+    </script>
+    <!-- Google Tag Manager (also deferred to after paint) -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KGFM5K9N');</script>
 </body>
 
 </html>

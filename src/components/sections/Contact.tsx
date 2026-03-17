@@ -1,10 +1,6 @@
-import { lazy, Suspense, useState } from "react";
+import { DotScreenShader } from "@/components/ui/dot-shader-background";
 import { Button } from "@/components/ui/neon-button";
-
-// Lazy load the Three.js shader to split the 839KB three.js bundle from the initial JS payload
-const DotScreenShader = lazy(() =>
-    import("@/components/ui/dot-shader-background").then(m => ({ default: m.DotScreenShader }))
-);
+import { useState } from "react";
 
 const Contact = () => {
     const [name, setName] = useState("");
@@ -19,14 +15,13 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="h-[40rem] w-full rounded-md bg-white relative flex flex-col items-center justify-center antialiased">
+        <section id="contact" className="h-[40rem] w-full rounded-md bg-background relative flex flex-col items-center justify-center antialiased">
             <div className="max-w-2xl mx-auto p-4">
-                <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 to-neutral-500  text-center font-sans font-bold">
+                <h1 className="relative z-10 text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground text-center font-sans font-bold">
                     Get in touch
                 </h1>
-                <p></p>
-                <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
-                    I’m always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology
+                <p className="text-muted-foreground max-w-lg mx-auto my-2 text-sm text-center relative z-10">
+                    I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
                 </p>
                 <div className="relative z-10 mt-8">
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -63,9 +58,7 @@ const Contact = () => {
                 </div>
             </div>
             <div className="absolute inset-0 z-0">
-                <Suspense fallback={<div className="absolute inset-0 bg-white dark:bg-neutral-950" />}>
-                    <DotScreenShader />
-                </Suspense>
+                <DotScreenShader />
             </div>
         </section>
     );
