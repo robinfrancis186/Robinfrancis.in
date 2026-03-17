@@ -28,6 +28,11 @@ const client = createClient({
   apiVersion: '2023-05-03',
 });
 
+function withTrailingSlash(route) {
+  if (route === '/') return route;
+  return route.endsWith('/') ? route : `${route}/`;
+}
+
 function toLastMod(value, fallback) {
   if (!value) return fallback;
   const parsed = new Date(value);
@@ -80,7 +85,7 @@ function buildSitemapXml(entries) {
 function buildRouteHtml(baseHtml, route) {
   if (route === '/') return baseHtml;
 
-  const routeUrl = `${BASE_URL}${route}`;
+  const routeUrl = `${BASE_URL}${withTrailingSlash(route)}`;
   let html = baseHtml
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${routeUrl}" />`)
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${routeUrl}" />`);
@@ -129,11 +134,11 @@ async function main() {
 
   const sitemapEntries = [
     { loc: `${BASE_URL}/`, lastmod: today, changefreq: 'weekly', priority: '1.0' },
-    { loc: `${BASE_URL}/projects`, lastmod: today, changefreq: 'monthly', priority: '0.8' },
-    { loc: `${BASE_URL}/blog`, lastmod: today, changefreq: 'daily', priority: '0.8' },
-    { loc: `${BASE_URL}/gallery`, lastmod: today, changefreq: 'weekly', priority: '0.7' },
+    { loc: `${BASE_URL}/projects/`, lastmod: today, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${BASE_URL}/blog/`, lastmod: today, changefreq: 'daily', priority: '0.8' },
+    { loc: `${BASE_URL}/gallery/`, lastmod: today, changefreq: 'weekly', priority: '0.7' },
     ...blogPosts.map((post) => ({
-      loc: `${BASE_URL}/blog/${post.slug}`,
+      loc: `${BASE_URL}/blog/${post.slug}/`,
       lastmod: toLastMod(post.date, today),
       changefreq: 'monthly',
       priority: '0.7',

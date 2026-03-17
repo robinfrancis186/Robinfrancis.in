@@ -63,7 +63,7 @@ const ProjectsPage = () => {
         "@type": "CollectionPage",
         "name": "Projects | Robin Francis",
         "description": "Selected AI, product, and web engineering projects by Robin Francis.",
-        "url": "https://www.robinfrancis.in/projects"
+        "url": "https://www.robinfrancis.in/projects/"
     };
 
     return (
@@ -74,13 +74,13 @@ const ProjectsPage = () => {
                     name="description"
                     content="Explore AI, accessibility, product, and engineering projects built by Robin Francis."
                 />
-                <link rel="canonical" href="https://www.robinfrancis.in/projects" />
+                <link rel="canonical" href="https://www.robinfrancis.in/projects/" />
                 <meta property="og:title" content="Projects | Robin Francis" />
                 <meta
                     property="og:description"
                     content="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
                 />
-                <meta property="og:url" content="https://www.robinfrancis.in/projects" />
+                <meta property="og:url" content="https://www.robinfrancis.in/projects/" />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
                 <meta name="twitter:card" content="summary_large_image" />

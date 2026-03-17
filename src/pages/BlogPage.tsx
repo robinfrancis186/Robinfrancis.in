@@ -58,13 +58,13 @@ const BlogPage = () => {
                     name="description"
                     content="Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis."
                 />
-                <link rel="canonical" href="https://www.robinfrancis.in/blog" />
+                <link rel="canonical" href="https://www.robinfrancis.in/blog/" />
                 <meta property="og:title" content="Blog | Robin Francis" />
                 <meta
                     property="og:description"
                     content="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
                 />
-                <meta property="og:url" content="https://www.robinfrancis.in/blog" />
+                <meta property="og:url" content="https://www.robinfrancis.in/blog/" />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content="https://www.robinfrancis.in/images/og-image.png" />
                 <meta name="twitter:card" content="summary_large_image" />

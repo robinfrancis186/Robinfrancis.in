@@ -113,6 +113,7 @@ export const Carousel3D = ({
     return (
         <div className="flex mt-16 relative items-center justify-center" style={{ perspective: "1200px" }}>
             <button
+                type="button"
                 onClick={prev}
                 className="absolute left-4 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/80 ring-1 ring-black/5 hover:bg-white shadow-sm transition text-neutral-800"
                 aria-label="Previous"
@@ -130,10 +131,10 @@ export const Carousel3D = ({
                         return (
                         <button
                                 key={item.id}
+                                type="button"
                                 className={className}
                                 style={style}
                             onClick={() => onSelect?.(item)}
-                                aria-label={`Open post ${item.title}`}
                             >
                                 <img
                                     src={item.image}
@@ -164,6 +165,7 @@ export const Carousel3D = ({
             </div>
 
             <button
+                type="button"
                 onClick={next}
                 className="absolute right-4 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/80 ring-1 ring-black/5 hover:bg-white shadow-sm transition text-neutral-800"
                 aria-label="Next"

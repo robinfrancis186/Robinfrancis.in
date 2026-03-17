@@ -39,7 +39,7 @@ const GalleryPage = () => {
         "@type": "CollectionPage",
         "name": "Robin Francis Gallery",
         "description": "A curated collection of moments, landscapes, and visual stories by Robin Francis.",
-        "url": "https://www.robinfrancis.in/gallery",
+        "url": "https://www.robinfrancis.in/gallery/",
         "creator": {
             "@type": "Person",
             "name": "Robin Francis",
@@ -62,10 +62,10 @@ const GalleryPage = () => {
             <Helmet>
                 <title>Gallery | Robin Francis</title>
                 <meta name="description" content="Explore a curated collection of moments, landscapes, and visual stories by Robin Francis." />
-                <link rel="canonical" href="https://www.robinfrancis.in/gallery" />
+                <link rel="canonical" href="https://www.robinfrancis.in/gallery/" />
                 <meta property="og:title" content="Gallery | Robin Francis" />
                 <meta property="og:description" content="Explore a curated collection of moments, landscapes, and visual stories by AI Innovator Robin Francis." />
-                <meta property="og:url" content="https://www.robinfrancis.in/gallery" />
+                <meta property="og:url" content="https://www.robinfrancis.in/gallery/" />
                 <script type="application/ld+json">
                     {JSON.stringify(jsonLd)}
                 </script>
