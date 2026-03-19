@@ -21,7 +21,21 @@ export default defineConfig({
     },
     build: {
         outDir: 'docs',
-        sourcemap: true,
+        sourcemap: false, // Disabled for production - reduces bundle size and parser overhead
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    // Separate Three.js and heavy 3D libraries into their own chunk
+                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+                    // Separate Lottie animations
+                    'lottie-vendor': ['lottie-react'],
+                    // Separate Sanity CMS
+                    'sanity-vendor': ['@sanity/client', '@sanity/image-url', '@portabletext/react'],
+                    // Separate animation libraries
+                    'animation-vendor': ['framer-motion', 'gsap'],
+                },
+            },
+        },
         modulePreload: {
             resolveDependencies: (_url, deps) =>
                 deps.filter(
@@ -32,5 +46,6 @@ export default defineConfig({
                         !dep.includes('sanityClient-')
                 ),
         },
+        chunkSizeWarningLimit: 600, // Warn if chunks exceed 600KB
     },
 })

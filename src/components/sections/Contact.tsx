@@ -1,6 +1,12 @@
-import { DotScreenShader } from "@/components/ui/dot-shader-background";
 import { Button } from "@/components/ui/neon-button";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
+
+// Lazy load the heavy Three.js shader background (saves ~300KB on initial load)
+const DotScreenShader = lazy(() => 
+    import("@/components/ui/dot-shader-background").then(module => ({ 
+        default: module.DotScreenShader 
+    }))
+);
 
 const Contact = () => {
     const [name, setName] = useState("");
@@ -58,7 +64,9 @@ const Contact = () => {
                 </div>
             </div>
             <div className="absolute inset-0 z-0">
-                <DotScreenShader />
+                <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20" />}>
+                    <DotScreenShader />
+                </Suspense>
             </div>
         </section>
     );

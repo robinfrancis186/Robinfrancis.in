@@ -1,3 +1,5 @@
+import { Mail, Linkedin, Github, Instagram } from "lucide-react";
+
 const Hero = () => {
     return (
         <section
@@ -24,6 +26,69 @@ const Hero = () => {
                 }} />
             </div>
 
+            {/* Social Media Icons - Fixed Left Side (Desktop) */}
+            <div className="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-6">
+                <a 
+                    href="mailto:robinfrancis186@gmail.com" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label="Email Robin Francis"
+                >
+                    <div className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+                        <Mail className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
+                    </div>
+                    <span className="absolute left-full ml-4 px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        Email Me
+                    </span>
+                </a>
+                
+                <a 
+                    href="https://www.linkedin.com/in/robin-francis-b43565175" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label="LinkedIn Profile"
+                >
+                    <div className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+                        <Linkedin className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
+                    </div>
+                    <span className="absolute left-full ml-4 px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        LinkedIn
+                    </span>
+                </a>
+                
+                <a 
+                    href="https://github.com/robinfrancis186" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label="GitHub Profile"
+                >
+                    <div className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+                        <Github className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
+                    </div>
+                    <span className="absolute left-full ml-4 px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        GitHub
+                    </span>
+                </a>
+                
+                <a 
+                    href="https://www.instagram.com/robinfrancis186" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label="Instagram Profile"
+                >
+                    <div className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+                        <Instagram className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
+                    </div>
+                    <span className="absolute left-full ml-4 px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        Instagram
+                    </span>
+                </a>
+            </div>
+
             {/* Main Content Container */}
             <div className="container mx-auto px-4 z-10 relative flex flex-col md:flex-row items-center justify-center h-full gap-8 lg:gap-12">
                 
@@ -32,10 +97,61 @@ const Hero = () => {
                     <p className="text-base md:text-lg font-medium text-foreground/80 max-w-[280px] md:max-w-xs leading-relaxed mb-6">
                         I design and build <strong className="text-primary font-bold">AI-powered solutions</strong> that make technology <strong className="text-primary font-bold">accessible</strong>, scalable, and people-centric.
                     </p>
-                    <a href="#contact" className="group flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors text-foreground">
+                    <a href="#contact" className="group flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors text-foreground mb-6">
                         LET'S WORK TOGETHER
                         <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
+                    
+                    {/* Social Media Icons - Mobile/Tablet */}
+                    <div className="flex lg:hidden gap-4 mt-2">
+                        <a 
+                            href="mailto:robinfrancis186@gmail.com" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group"
+                            aria-label="Email Robin Francis"
+                        >
+                            <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
+                                <Mail className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
+                            </div>
+                        </a>
+                        
+                        <a 
+                            href="https://www.linkedin.com/in/robin-francis-b43565175" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group"
+                            aria-label="LinkedIn Profile"
+                        >
+                            <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
+                                <Linkedin className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
+                            </div>
+                        </a>
+                        
+                        <a 
+                            href="https://github.com/robinfrancis186" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group"
+                            aria-label="GitHub Profile"
+                        >
+                            <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
+                                <Github className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
+                            </div>
+                        </a>
+                        
+                        <a 
+                            href="https://www.instagram.com/robinfrancis186" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group"
+                            aria-label="Instagram Profile"
+                        >
+                            <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
+                                <Instagram className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
                 {/* CENTER PORTRAIT */}
