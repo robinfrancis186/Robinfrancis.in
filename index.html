@@ -14,8 +14,8 @@
             } else if (p === 'http:' && h !== 'localhost' && h !== '127.0.0.1') {
                 location.replace('https://' + h + location.pathname + location.search);
             }
-            // GitHub Pages SPA redirect fallback for the Sanity CMS nested path
-            if (location.pathname.startsWith('/cms')) {
+            // GitHub Pages SPA redirect fallback for the Sanity CMS root path.
+            if (location.pathname === '/cms' || location.pathname === '/cms/index.html') {
                 location.replace('/cms/');
             }
         })();
@@ -46,7 +46,8 @@
     <meta name="author" content="Robin Francis" />
     <meta name="publisher" content="Robin Francis" />
     <link rel="author" href="/humans.txt" />
-    <link rel="alternate" type="text/markdown" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM summary" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="LLM full context" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="keywords"
         content="Robin Francis, AI Innovator, Community Leader, Software Engineer, Portfolio, Hackathon Winner, React Developer, Accessible Tech, Kerala, IEEE R10, IBM Watsonx" />

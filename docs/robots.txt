@@ -2,29 +2,40 @@ User-agent: *
 Allow: /
 Allow: /images/
 Allow: /assets/
+Disallow: /cms/
 
 # AI and LLM Bots (Generative Engine Optimization)
 # Explicitly allow AI crawlers to access the portfolio to be included in AI Overviews and ChatGPT
 User-agent: GPTBot
 Allow: /
+Disallow: /cms/
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /cms/
 User-agent: Google-Extended
 Allow: /
+Disallow: /cms/
 User-agent: CCBot
 Allow: /
+Disallow: /cms/
 User-agent: anthropic-ai
 Allow: /
+Disallow: /cms/
 User-agent: Claude-Web
 Allow: /
+Disallow: /cms/
 User-agent: ClaudeBot
 Allow: /
+Disallow: /cms/
 User-agent: PerplexityBot
 Allow: /
+Disallow: /cms/
 User-agent: OmgiliBot
 Allow: /
+Disallow: /cms/
 User-agent: FacebookBot
 Allow: /
+Disallow: /cms/
 
 # Sitemaps
 Sitemap: https://www.robinfrancis.in/sitemap.xml

@@ -9,8 +9,8 @@ coverage/
 tmp/
 .env
 .env.local
-
-
-
-
+backup/
+lighthouse-report*.html
+chromewebdata_*.report.html
+*.report.html
 public/cms/

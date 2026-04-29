@@ -1,0 +1,7 @@
+Security Policy
+
+Please report suspected security issues for robinfrancis.in by emailing robinfrancis186@gmail.com.
+
+Include affected URL paths, reproducible steps, browser or tool versions, and any relevant screenshots or logs. Do not access, modify, or exfiltrate data that does not belong to you.
+
+Expected response target: acknowledgement within 7 days.

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { Canvas, ThreeEvent, useFrame, useThree } from '@react-three/fiber'
 import { shaderMaterial, useTrailTexture } from '@react-three/drei'
 import { useTheme } from 'next-themes'
@@ -176,6 +176,22 @@ function Scene() {
 }
 
 export const DotScreenShader = () => {
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+        updatePreference()
+        mediaQuery.addEventListener('change', updatePreference)
+
+        return () => mediaQuery.removeEventListener('change', updatePreference)
+    }, [])
+
+    if (prefersReducedMotion) {
+        return <div className="h-full w-full bg-gradient-to-b from-background to-muted/20" aria-hidden="true" />
+    }
+
     return (
         <Canvas
             gl={{

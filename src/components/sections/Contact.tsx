@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/neon-button";
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, type FormEvent } from "react";
 import GitHubActivity from "./GitHubActivity";
 
 // Lazy load the heavy Three.js shader background (saves ~300KB on initial load)
@@ -14,7 +14,7 @@ const Contact = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         const subject = `Portfolio Contact from ${name}`;
         const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
@@ -34,28 +34,48 @@ const Contact = () => {
                     <div className="mt-8">
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+                                <label htmlFor="contact-name" className="sr-only">
+                                    Your name
+                                </label>
                                 <input
+                                    id="contact-name"
+                                    name="name"
                                     type="text"
                                     placeholder="Your Name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
+                                    autoComplete="name"
+                                    maxLength={80}
                                     required
                                     className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
                                 />
+                                <label htmlFor="contact-email" className="sr-only">
+                                    Your email
+                                </label>
                                 <input
+                                    id="contact-email"
+                                    name="email"
                                     type="email"
                                     placeholder="Your Email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    autoComplete="email"
+                                    maxLength={120}
                                     required
                                     className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
                                 />
                             </div>
+                            <label htmlFor="contact-message" className="sr-only">
+                                Your message
+                            </label>
                             <textarea
+                                id="contact-message"
+                                name="message"
                                 placeholder="Your Message"
                                 rows={5}
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
+                                maxLength={1500}
                                 required
                                 className="mt-4 w-full resize-none rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
                             />

@@ -222,6 +222,7 @@ const GitHubActivity = () => {
     const total = activity.total || chartDays.reduce((sum, day) => sum + day.count, 0);
     const profileUrl = activity.profile?.html_url ?? `https://github.com/${GITHUB_USERNAME}`;
     const profileName = activity.profile?.login ?? GITHUB_USERNAME;
+    const activeDays = chartDays.filter((day) => day.count > 0).length;
 
     return (
         <motion.aside
@@ -240,6 +241,7 @@ const GitHubActivity = () => {
             <GitHubRadialChart
                 days={chartDays}
                 total={total}
+                activeDays={activeDays}
                 profileUrl={profileUrl}
                 profileName={profileName}
                 isLoading={activity.status === "loading"}
@@ -283,12 +285,14 @@ const GitHubMetric = ({ value, label }: { value: string; label: string }) => (
 const GitHubRadialChart = ({
     days,
     total,
+    activeDays,
     profileUrl,
     profileName,
     isLoading,
 }: {
     days: ContributionDay[];
     total: number;
+    activeDays: number;
     profileUrl: string;
     profileName: string;
     isLoading: boolean;
@@ -346,11 +350,14 @@ const GitHubRadialChart = ({
 
     return (
         <div ref={containerRef} className="relative mx-auto flex w-full flex-col items-center gap-3">
+            <p className="sr-only">
+                GitHub profile @{profileName} has {total.toLocaleString()} contributions across {activeDays.toLocaleString()} active days in the last year.
+            </p>
             <svg
                 viewBox="0 0 340 340"
                 className="h-[280px] w-[280px] lg:h-[320px] lg:w-[320px]"
                 role="img"
-                aria-label={`${total.toLocaleString()} GitHub contributions in the last year`}
+                aria-label={`${total.toLocaleString()} GitHub contributions across ${activeDays.toLocaleString()} active days in the last year`}
             >
                 {dayLabels.map((label, index) => {
                     const angle = index * sectorDegrees + sectorDegrees / 2;

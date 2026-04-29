@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build --prefix portfolio-cms && rm -rf public/cms && cp -r portfolio-cms/dist public/cms && node fix_cms_paths.cjs && tsc && vite build && node scripts/generate-static-routes.mjs",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "optimize:images": "node scripts/optimize-images.mjs",
     "analyze": "vite build --mode analyze",

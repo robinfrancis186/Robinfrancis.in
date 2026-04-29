@@ -94,4 +94,10 @@ Robin believes in building technology that solves real human problems while upli
 
 ---
 
-Last Updated: March 2026
+## AI Discovery Files
+
+- Summary: https://www.robinfrancis.in/llms.txt
+- Full context: https://www.robinfrancis.in/llms-full.txt
+- Sitemap: https://www.robinfrancis.in/sitemap.xml
+
+Last Updated: April 2026

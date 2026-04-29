@@ -37,14 +37,10 @@ export default defineConfig({
             },
         },
         modulePreload: {
-            resolveDependencies: (_url, deps) =>
-                deps.filter(
-                    (dep) =>
-                        !dep.includes('threejs-') &&
-                        !dep.includes('lottie-') &&
-                        !dep.includes('gsap-') &&
-                        !dep.includes('sanityClient-')
-                ),
+            resolveDependencies: (_url, deps) => {
+                const lazyVendorChunks = ['three-vendor', 'lottie-vendor', 'animation-vendor', 'sanity-vendor']
+                return deps.filter((dep) => !lazyVendorChunks.some((chunkName) => dep.includes(chunkName)))
+            },
         },
         chunkSizeWarningLimit: 600, // Warn if chunks exceed 600KB
     },

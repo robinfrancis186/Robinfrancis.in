@@ -14,8 +14,8 @@
             } else if (p === 'http:' && h !== 'localhost' && h !== '127.0.0.1') {
                 location.replace('https://' + h + location.pathname + location.search);
             }
-            // GitHub Pages SPA redirect fallback for the Sanity CMS nested path
-            if (location.pathname.startsWith('/cms')) {
+            // GitHub Pages SPA redirect fallback for the Sanity CMS root path.
+            if (location.pathname === '/cms' || location.pathname === '/cms/index.html') {
                 location.replace('/cms/');
             }
         })();
@@ -46,7 +46,8 @@
     <meta name="author" content="Robin Francis" />
     <meta name="publisher" content="Robin Francis" />
     <link rel="author" href="/humans.txt" />
-    <link rel="alternate" type="text/markdown" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM summary" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="LLM full context" />
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
     <meta name="keywords"
         content="Robin Francis, AI Innovator, Community Leader, Software Engineer, Portfolio, Hackathon Winner, React Developer, Accessible Tech, Kerala, IEEE R10, IBM Watsonx" />
@@ -223,10 +224,8 @@
 
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="nho5uSkIv-W_3SGQo0IzX5Jirz0sHtEqOXk5Ft9-LZg" />
-  <script type="module" crossorigin src="/assets/index-BmBF2v0T.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/three-vendor-B5mlBQ8X.js">
-  <link rel="modulepreload" crossorigin href="/assets/animation-vendor-6YuXqIIc.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-k5zAJBEV.css">
+  <script type="module" crossorigin src="/assets/index-5EUseK23.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CO9FEoMF.css">
 </head>
 
 <body>
