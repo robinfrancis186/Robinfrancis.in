@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/neon-button";
 import { useState, lazy, Suspense } from "react";
+import GitHubActivity from "./GitHubActivity";
 
 // Lazy load the heavy Three.js shader background (saves ~300KB on initial load)
 const DotScreenShader = lazy(() => 
@@ -21,47 +22,50 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="h-[40rem] w-full rounded-md bg-background relative flex flex-col items-center justify-center antialiased">
-            <div className="max-w-2xl mx-auto p-4">
-                <h1 className="relative z-10 text-lg md:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground text-center font-sans font-bold">
-                    Get in touch
-                </h1>
-                <p className="text-muted-foreground max-w-lg mx-auto my-2 text-sm text-center relative z-10">
-                    I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
-                </p>
-                <div className="relative z-10 mt-8">
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10 w-full">
-                            <input
-                                type="text"
-                                placeholder="Your Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+        <section id="contact" className="relative w-full overflow-hidden bg-background py-20 antialiased md:py-28">
+            <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,520px)] lg:px-8">
+                <div className="mx-auto w-full max-w-2xl lg:mx-0">
+                    <h1 className="text-center font-sans text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground md:text-7xl lg:text-left">
+                        Get in touch
+                    </h1>
+                    <p className="mx-auto my-3 max-w-lg text-center text-sm text-muted-foreground lg:mx-0 lg:text-left">
+                        I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
+                    </p>
+                    <div className="mt-8">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+                                <input
+                                    type="text"
+                                    placeholder="Your Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                    className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="Your Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
+                                />
+                            </div>
+                            <textarea
+                                placeholder="Your Message"
+                                rows={5}
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
                                 required
-                                className="rounded-lg border border-neutral-200/50 dark:border-neutral-800 focus:ring-2 focus:ring-primary/50 w-full bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-100 px-4 py-3 outline-none transition-all"
+                                className="mt-4 w-full resize-none rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
                             />
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="rounded-lg border border-neutral-200/50 dark:border-neutral-800 focus:ring-2 focus:ring-primary/50 w-full bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-100 px-4 py-3 outline-none transition-all"
-                            />
-                        </div>
-                        <textarea
-                            placeholder="Your Message"
-                            rows={5}
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            required
-                            className="rounded-lg border border-neutral-200/50 dark:border-neutral-800 focus:ring-2 focus:ring-primary/50 w-full relative z-10 mt-4 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-100 px-4 py-3 outline-none transition-all resize-none"
-                        />
-                        <Button neon={true} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground border-transparent font-medium py-6 text-sm">
-                            Send Message
-                        </Button>
-                    </form>
+                            <Button neon={true} className="w-full border-transparent bg-primary py-6 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+                                Send Message
+                            </Button>
+                        </form>
+                    </div>
                 </div>
+                <GitHubActivity />
             </div>
             <div className="absolute inset-0 z-0">
                 <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20" />}>

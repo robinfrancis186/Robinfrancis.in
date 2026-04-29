@@ -1,84 +1,73 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Moon, Sun } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useTheme } from "next-themes"
+import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
+
+import { useDomTheme } from "@/hooks/use-dom-theme";
+import { cn } from "@/lib/utils";
 
 interface ThemeToggleProps {
-    className?: string
+    className?: string;
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
-    const { theme, setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    if (!mounted) {
-        return null
-    }
-
-    const isDark = theme === "dark"
+    const { setTheme } = useTheme();
+    const isDark = useDomTheme();
 
     return (
-        <div
+        <button
+            type="button"
             className={cn(
-                "flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300",
-                isDark
-                    ? "bg-zinc-950 border border-zinc-800"
-                    : "bg-white border border-zinc-200",
+                "flex size-11 items-center justify-center rounded-full border shadow-sm transition-all duration-300 active:scale-95",
+                isDark ? "border-zinc-800 bg-black text-white" : "border-zinc-200 bg-white text-black",
                 className
             )}
             onClick={() => setTheme(isDark ? "light" : "dark")}
-            role="button"
-            tabIndex={0}
             aria-label="Toggle dark mode"
         >
-            <div className="flex justify-between items-center w-full">
-                <div
-                    className={cn(
-                        "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
-                        isDark
-                            ? "transform translate-x-0 bg-zinc-800"
-                            : "transform translate-x-8 bg-gray-200"
-                    )}
-                >
-                    {isDark ? (
-                        <Moon
-                            className="w-4 h-4 text-white"
-                            strokeWidth={1.5}
-                        />
-                    ) : (
-                        <Sun
-                            className="w-4 h-4 text-gray-700"
-                            strokeWidth={1.5}
-                        />
-                    )}
-                </div>
-                <div
-                    className={cn(
-                        "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
-                        isDark
-                            ? "bg-transparent"
-                            : "transform -translate-x-8"
-                    )}
-                >
-                    {isDark ? (
-                        <Sun
-                            className="w-4 h-4 text-gray-500"
-                            strokeWidth={1.5}
-                        />
-                    ) : (
-                        <Moon
-                            className="w-4 h-4 text-black"
-                            strokeWidth={1.5}
-                        />
-                    )}
-                </div>
-            </div>
-        </div>
-    )
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                fill="currentColor"
+                strokeLinecap="round"
+                viewBox="0 0 32 32"
+                className="size-7"
+            >
+                <clipPath id="skiper-theme-toggle">
+                    <motion.path
+                        animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
+                        transition={{ ease: "easeInOut", duration: 0.35 }}
+                        d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
+                    />
+                </clipPath>
+                <g clipPath="url(#skiper-theme-toggle)">
+                    <motion.circle
+                        animate={{ r: isDark ? 10 : 8 }}
+                        transition={{ ease: "easeInOut", duration: 0.35 }}
+                        cx="16"
+                        cy="16"
+                    />
+                    <motion.g
+                        animate={{
+                            rotate: isDark ? -100 : 0,
+                            scale: isDark ? 0.5 : 1,
+                            opacity: isDark ? 0 : 1,
+                        }}
+                        transition={{ ease: "easeInOut", duration: 0.35 }}
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                    >
+                        <path d="M16 5.5v-4" />
+                        <path d="M16 30.5v-4" />
+                        <path d="M1.5 16h4" />
+                        <path d="M26.5 16h4" />
+                        <path d="m23.4 8.6 2.8-2.8" />
+                        <path d="m5.7 26.3 2.9-2.9" />
+                        <path d="m5.8 5.8 2.8 2.8" />
+                        <path d="m23.4 23.4 2.9 2.9" />
+                    </motion.g>
+                </g>
+            </svg>
+        </button>
+    );
 }

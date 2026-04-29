@@ -1,10 +1,13 @@
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { motion } from "framer-motion";
-import { GraduationCap, Award } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import InteractivePortrait from "@/components/ui/InteractivePortrait";
+import { useDomTheme } from "@/hooks/use-dom-theme";
 
 const About = () => {
+    const isDarkTheme = useDomTheme();
+
     const education = [
         {
             year: "2021 – 2025",
@@ -28,35 +31,48 @@ const About = () => {
 
     const achievements = [
         {
-            title: "IEEE R10 Outstanding Volunteer Award 2024",
-            description: "First student from the Asia-Pacific Region to receive this honor."
+            value: "IEEE R10",
+            title: "Outstanding Volunteer Award",
+            description: "First student from the Asia-Pacific Region to receive the 2024 honor.",
+            image: "/images/blog/ieee-award.webp",
         },
         {
-            title: "IBM Watsonx GenAI Challenge — 1st Runner-Up",
-            description: "Awarded for building an intelligent GenAI-powered solution."
+            value: "1st Runner-Up",
+            title: "IBM watsonx GenAI Challenge",
+            description: "Recognized for building an intelligent GenAI-powered solution.",
+            image: "/images/blog/1720937570476.webp",
         },
         {
-            title: "3× Hackathon Winner",
-            description: "Wins include GenAI challenges, food sustainability platforms, and game development competitions."
+            value: "3x",
+            title: "Hackathon Winner",
+            description: "Wins across GenAI, food sustainability, and game development competitions.",
+            image: "/images/project-techx.webp",
         },
         {
-            title: "Champion of Impact – IEEE Computer Society",
-            description: "Recognized for founding & leading a flagship event with 450+ participants."
+            value: "450+",
+            title: "Participants Led",
+            description: "Founded and led a flagship IEEE Computer Society impact event.",
+            image: "/images/blog/1720937571684.webp",
         },
         {
-            title: "Raised $2,650+ for community-impact projects",
-            description: "Successfully fundraised for various social initiatives and community events."
+            value: "$2.65K+",
+            title: "Community Funding",
+            description: "Raised for social initiatives, student programs, and community events.",
+            image: "/images/blog/people-centric-ai.webp",
         },
         {
-            title: "National Bronze Medalist – .22 Rifle Shooting",
-            description: "Awarded at a national competition in Delhi."
+            value: "Bronze",
+            title: "National Rifle Shooting",
+            description: "Medalist in .22 rifle shooting at a national competition in Delhi.",
+            image: "/images/blog/scalable-systems.webp",
         }
     ];
+    const achievementLoop = [...achievements, ...achievements];
 
     return (
         <section id="about" className="py-20 bg-background relative overflow-hidden">
             <TracingBeam className="px-6">
-                <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+                <div className="max-w-3xl mx-auto antialiased pt-4 relative">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -117,32 +133,62 @@ const About = () => {
                             ))}
                         </div>
                     </div>
-
-                    <div>
-                        <div className="flex items-center gap-3 mb-8">
-                            <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                                <Award className="h-6 w-6" />
-                            </div>
-                            <h3 className="text-2xl font-bold">Achievements</h3>
-                        </div>
-                        <div className="grid gap-6">
-                            {achievements.map((achievement, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    whileHover={{ scale: 1.02, backgroundColor: "rgba(var(--primary), 0.05)" }}
-                                    className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-xl"
-                                >
-                                    <h4 className="text-lg font-bold mb-2">{achievement.title}</h4>
-                                    <p className="text-muted-foreground leading-relaxed">{achievement.description}</p>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </TracingBeam>
+            <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="mt-8 border-y border-border/70 py-10 text-foreground shadow-sm transition-colors duration-300 dark:border-white/10 dark:text-white md:py-12"
+                style={{ backgroundColor: isDarkTheme ? "#070707" : "hsl(var(--card))" }}
+            >
+                <div className="mb-6 flex items-center gap-4 px-4 md:px-8 lg:px-10">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-primary">
+                        Achievements
+                    </span>
+                    <span className="h-px flex-1 bg-primary/20" />
+                </div>
+                <div className="overflow-hidden pl-4 md:pl-8 lg:pl-10">
+                    <div className="mj-achieve-track flex w-max gap-8 md:gap-10">
+                        {achievementLoop.map((achievement, index) => (
+                            <article
+                                key={`${achievement.title}-${index}`}
+                                aria-hidden={index >= achievements.length}
+                                className="group relative flex h-[240px] w-[280px] shrink-0 flex-col justify-end overflow-hidden rounded-3xl border border-border/70 bg-black p-6 shadow-sm transition-all duration-500 hover:border-primary/40 dark:border-white/10 dark:bg-[#111111]/40 md:h-[270px] md:w-[320px] md:p-8"
+                            >
+                                <div
+                                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                    style={{ background: "radial-gradient(400px circle at 50% 30%, hsl(var(--primary) / 0.08), transparent)" }}
+                                />
+                                <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                                    <img
+                                        src={achievement.image}
+                                        alt={achievement.title}
+                                        className="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40 dark:opacity-20 dark:group-hover:opacity-30"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <span className="relative text-[clamp(1.4rem,3vw,2rem)] font-bold leading-none text-white transition-colors duration-500 group-hover:text-primary">
+                                    {achievement.value}
+                                </span>
+                                <div className="relative mt-2">
+                                    <span className="block text-xs font-semibold text-white md:text-sm">
+                                        {achievement.title}
+                                    </span>
+                                    <span className="mt-1 block text-[10px] leading-relaxed text-white/55 md:text-xs">
+                                        {achievement.description}
+                                    </span>
+                                </div>
+                                <div className="absolute right-6 top-6 h-10 w-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:right-8 md:top-8">
+                                    <div className="absolute right-0 top-0 h-full w-px bg-primary/30" />
+                                    <div className="absolute right-0 top-0 h-px w-full bg-primary/30" />
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </motion.div>
         </section>
     );
 };

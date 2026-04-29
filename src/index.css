@@ -82,7 +82,7 @@
     /* Marquee animation for InfiniteMovingCards */
     .animate-scroll {
         animation: scroll var(--animation-duration, 40s) linear infinite;
-        animation-direction: var(--animation-direction, forwards);
+        animation-direction: var(--animation-direction, normal);
     }
 
     @keyframes scroll {
@@ -91,6 +91,32 @@
         }
         to {
             transform: translateX(-50%);
+        }
+    }
+
+    .mj-achieve-track {
+        animation: mj-achievement-scroll 34s linear infinite;
+    }
+
+    .mj-achieve-track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes mj-achievement-scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(calc(-50% - 1.25rem));
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animate-scroll,
+        .animate-marquee,
+        .mj-achieve-track {
+            animation: none !important;
+            transform: none !important;
         }
     }
 }
