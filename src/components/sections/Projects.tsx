@@ -32,7 +32,7 @@ export default function Projects() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2"
+                    className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:grid-rows-[minmax(20rem,auto)_minmax(20rem,auto)]"
                 >
                     <GridItem
                         variants={item}
@@ -102,7 +102,7 @@ interface GridItemProps {
 
 const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, variants }: GridItemProps) => {
     return (
-        <motion.li variants={variants} className={`min-h-[14rem] list-none ${area}`}>
+        <motion.li variants={variants} className={`min-h-[20rem] list-none ${area}`}>
             <div className="relative h-full rounded-2xl border border-neutral-200/50 dark:border-neutral-800/50 p-2 md:rounded-3xl md:p-3 bg-white/50 dark:bg-black/50 backdrop-blur-md">
                 <GlowingEffect
                     spread={40}
@@ -113,21 +113,21 @@ const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, v
                 />
                 <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white dark:bg-neutral-950">
                     {image && (
-                        <div className="relative h-48 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900">
+                        <div className="relative h-36 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900 sm:h-40 xl:h-44">
                             <img src={image} loading="lazy" alt={imageAlt || title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                         </div>
                     )}
-                    <div className="flex flex-col flex-1 p-5 md:p-6 justify-between gap-4">
-                        <div className="space-y-3">
+                    <div className="flex flex-col flex-1 p-4 md:p-5 justify-between gap-3">
+                        <div className="space-y-2.5">
                             <h3 className="font-sans text-xl font-bold text-neutral-900 dark:text-neutral-100">
                                 {title}
                             </h3>
-                            <p className="font-sans text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3">
+                            <p className="font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3">
                                 {description}
                             </p>
 
                             {tags && tags.length > 0 && (
-                                <div className="flex flex-wrap gap-2 pt-2">
+                                <div className="flex flex-wrap gap-2 pt-1.5">
                                     {tags.map((tag, idx) => (
                                         <span key={idx} className="px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold rounded-md bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-300 ring-1 ring-inset ring-neutral-200 dark:ring-neutral-800">
                                             {tag}
