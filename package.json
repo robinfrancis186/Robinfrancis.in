@@ -16,7 +16,9 @@
     "postbuild": "npm run audit:performance"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@portabletext/react": "^6.0.2",
+    "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",

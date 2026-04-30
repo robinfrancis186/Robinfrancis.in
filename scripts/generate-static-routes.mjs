@@ -4,7 +4,7 @@ import { createClient } from '@sanity/client';
 
 const BASE_URL = 'https://www.robinfrancis.in';
 const DOCS_DIR = path.resolve('docs');
-const ROOT_ROUTES = ['/', '/projects', '/blog', '/gallery'];
+const ROOT_ROUTES = ['/', '/projects', '/blog', '/gallery', '/card'];
 const EXTRA_URLS = ['/images/robin-francis-resume.pdf'];
 const ROUTE_META = {
   '/projects': {
@@ -18,6 +18,10 @@ const ROUTE_META = {
   '/gallery': {
     title: 'Gallery | Robin Francis',
     description: 'Explore a curated collection of moments, landscapes, and visual stories by Robin Francis.',
+  },
+  '/card': {
+    title: 'Robin Francis Card | AI Innovator & Community Leader',
+    description: 'A focused digital profile card for Robin Francis, AI innovator, software builder, and community leader from Kerala, India.',
   },
 };
 
@@ -137,6 +141,7 @@ async function main() {
     { loc: `${BASE_URL}/projects/`, lastmod: today, changefreq: 'monthly', priority: '0.8' },
     { loc: `${BASE_URL}/blog/`, lastmod: today, changefreq: 'daily', priority: '0.8' },
     { loc: `${BASE_URL}/gallery/`, lastmod: today, changefreq: 'weekly', priority: '0.7' },
+    { loc: `${BASE_URL}/card/`, lastmod: today, changefreq: 'monthly', priority: '0.7' },
     ...blogPosts.map((post) => ({
       loc: `${BASE_URL}/blog/${post.slug}/`,
       lastmod: toLastMod(post.date, today),

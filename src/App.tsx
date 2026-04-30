@@ -13,6 +13,7 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage'))
+const CardPage = lazy(() => import('./pages/CardPage'))
 
 function App() {
     useEffect(() => {
@@ -67,6 +68,7 @@ function App() {
                         <Route path="/blog" element={<BlogPage />} />
                         <Route path="/blog/:slug" element={<BlogPostPage />} />
                         <Route path="/gallery" element={<GalleryPage />} />
+                        <Route path="/card/*" element={<CardPage />} />
                     </Routes>
                 </Suspense>
 
