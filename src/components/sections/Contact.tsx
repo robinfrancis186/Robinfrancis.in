@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/neon-button";
-import { useState, lazy, Suspense, type FormEvent } from "react";
+import { SlideButton } from "@/components/ui/slide-button";
+import { useRef, useState, lazy, Suspense, type FormEvent } from "react";
 import GitHubActivity from "./GitHubActivity";
 
 // Lazy load the heavy Three.js shader background (saves ~300KB on initial load)
@@ -10,29 +10,48 @@ const DotScreenShader = lazy(() =>
 );
 
 const Contact = () => {
+    const formRef = useRef<HTMLFormElement | null>(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [buttonStatus, setButtonStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [resetKey, setResetKey] = useState(0);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+        setButtonStatus("success");
         const subject = `Portfolio Contact from ${name}`;
         const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
         window.location.href = `mailto:robinfrancis186@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    const handleSlideComplete = () => {
+        const form = formRef.current;
+        if (!form) return false;
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            setResetKey((value) => value + 1);
+            return false;
+        }
+
+        setButtonStatus("loading");
+        form.requestSubmit();
+        return true;
     };
 
     return (
         <section id="contact" className="relative w-full overflow-hidden bg-background py-20 antialiased md:py-28">
             <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,520px)] lg:px-8">
                 <div className="mx-auto w-full max-w-2xl lg:mx-0">
-                    <h1 className="text-center font-sans text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground md:text-7xl lg:text-left">
+                    <h2 className="text-center font-sans text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground md:text-7xl lg:text-left">
                         Get in touch
-                    </h1>
+                    </h2>
                     <p className="mx-auto my-3 max-w-lg text-center text-sm text-muted-foreground lg:mx-0 lg:text-left">
                         I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
                     </p>
                     <div className="mt-8">
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                                 <label htmlFor="contact-name" className="sr-only">
                                     Your name
@@ -79,9 +98,12 @@ const Contact = () => {
                                 required
                                 className="mt-4 w-full resize-none rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
                             />
-                            <Button neon={true} className="w-full border-transparent bg-primary py-6 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-                                Send Message
-                            </Button>
+                            <SlideButton
+                                label="Slide to send"
+                                status={buttonStatus}
+                                resetKey={resetKey}
+                                onSlideComplete={handleSlideComplete}
+                            />
                         </form>
                     </div>
                 </div>
