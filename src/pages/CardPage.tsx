@@ -1,6 +1,6 @@
-import { Github, Instagram, Linkedin } from 'lucide-react';
 import PageSeo from '@/components/seo/PageSeo';
 import { GlassmorphismProfileCard } from '@/components/ui/profile-card-1';
+import { Github, Instagram, Linkedin, BookOpenText } from 'lucide-react';
 
 const profileJsonLd = {
     '@context': 'https://schema.org',
@@ -16,6 +16,7 @@ const profileJsonLd = {
             'https://github.com/robinfrancis186',
             'https://www.linkedin.com/in/robin-francis-b43565175',
             'https://www.instagram.com/robinfrancis186',
+            'https://medium.com/@robinfrancis186',
         ],
     },
 };
@@ -36,12 +37,13 @@ const CardPage = () => {
                     name="Robin Francis"
                     title="AI Innovator & Community Leader"
                     bio="Available for meaningful AI, product, accessibility, and community collaborations."
-                    displayAvatar={false}
                     socialLinks={[
                         { id: 'github', icon: Github, label: 'GitHub', href: 'https://github.com/robinfrancis186' },
                         { id: 'linkedin', icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/robin-francis-b43565175' },
                         { id: 'instagram', icon: Instagram, label: 'instagram', href: 'https://www.instagram.com/robinfrancis186' },
+                        { id: 'medium', icon: BookOpenText, label: 'Medium', href: 'https://medium.com/@robinfrancis186' },
                     ]}
+                    actionButton={{ text: 'Contact Me', href: '/#contact' }}
                 />
             </main>
         </>
