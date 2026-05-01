@@ -31,7 +31,8 @@ const CardPage = () => {
                 jsonLd={profileJsonLd}
             />
 
-            <main className="flex min-h-screen items-center justify-center bg-background px-5 py-24 text-foreground">
+            <main className="relative isolate flex min-h-screen items-start justify-center overflow-hidden bg-slate-50 px-5 pb-14 pt-14 text-foreground dark:bg-black md:items-center md:py-24">
+                <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-primary/[0.08] to-transparent dark:from-primary/[0.16]" />
                 <GlassmorphismProfileCard
                     avatarUrl="/images/card/robin-francis-primary.jpg"
                     name="Robin Francis"
