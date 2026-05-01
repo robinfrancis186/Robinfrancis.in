@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText, type LucideIcon } from "lucide-react";
 
 type SocialLink = {
@@ -12,11 +13,18 @@ type ActionButtonProps = {
     href: string;
 };
 
+type ProfileImageSlide = {
+    src: string;
+    alt: string;
+    fit?: "cover" | "contain";
+};
+
 type GlassmorphismProfileCardProps = {
     avatarUrl: string;
     name: string;
     title: string;
     bio: string;
+    imageSlides?: ProfileImageSlide[];
     socialLinks?: SocialLink[];
     actionButton: ActionButtonProps;
 };
@@ -31,10 +39,14 @@ export function Component() {
 
 const ProfileCardDemo = () => {
     const cardProps = {
-        avatarUrl: "/images/about/robin-dark.webp",
+        avatarUrl: "/images/card/robin-francis-primary.jpg",
         name: "Robin Francis",
         title: "AI Innovator & Community Leader",
         bio: "Available for meaningful AI, product, accessibility, and community collaborations.",
+        imageSlides: [
+            { src: "/images/card/robin-francis-primary.jpg", alt: "Robin Francis portrait", fit: "cover" as const },
+            { src: "/images/card/robin-francis-3d.png", alt: "Robin Francis 3D figure", fit: "contain" as const },
+        ],
         socialLinks: [
             { id: "github", icon: Github, label: "GitHub", href: "https://github.com/robinfrancis186" },
             { id: "linkedin", icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/robin-francis-b43565175" },
@@ -55,9 +67,36 @@ const GlassmorphismProfileCard = ({
     name,
     title,
     bio,
+    imageSlides,
     socialLinks = [],
     actionButton,
 }: GlassmorphismProfileCardProps) => {
+    const slides = imageSlides?.length
+        ? imageSlides
+        : [{ src: avatarUrl, alt: `${name}'s avatar`, fit: "cover" as const }];
+    const [activeImage, setActiveImage] = useState(0);
+    const [touchStartX, setTouchStartX] = useState<number | null>(null);
+    const currentSlide = slides[activeImage] ?? slides[0];
+
+    const showPreviousImage = () => {
+        setActiveImage((current) => (current - 1 + slides.length) % slides.length);
+    };
+
+    const showNextImage = () => {
+        setActiveImage((current) => (current + 1) % slides.length);
+    };
+
+    const handleTouchEnd = (x: number) => {
+        if (touchStartX === null || slides.length < 2) return;
+
+        const deltaX = touchStartX - x;
+        if (Math.abs(deltaX) > 32) {
+            if (deltaX > 0) showNextImage();
+            else showPreviousImage();
+        }
+        setTouchStartX(null);
+    };
+
     return (
         <div className="relative w-full max-w-sm">
             <div
@@ -66,16 +105,42 @@ const GlassmorphismProfileCard = ({
                     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
                 }}
             >
-                <div className="mb-4 size-24 rounded-full border-2 border-white/20 p-1">
-                    <img
-                        src={avatarUrl}
-                        alt={`${name}'s avatar`}
-                        className="size-full rounded-full object-cover"
-                        onError={(event) => {
-                            event.currentTarget.onerror = null;
-                            event.currentTarget.src = `https://placehold.co/96x96/0A84FF/white?text=${name.charAt(0)}`;
-                        }}
-                    />
+                <div
+                    className="mb-4 flex flex-col items-center gap-3"
+                    onTouchStart={(event) => setTouchStartX(event.touches[0]?.clientX ?? null)}
+                    onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0]?.clientX ?? 0)}
+                >
+                    <button
+                        type="button"
+                        className="relative size-32 overflow-hidden rounded-3xl border-2 border-white/20 bg-secondary/40 p-1 transition-transform duration-300 hover:scale-[1.02] active:scale-95"
+                        onClick={slides.length > 1 ? showNextImage : undefined}
+                        aria-label="Switch profile image"
+                    >
+                        <img
+                            src={currentSlide.src}
+                            alt={currentSlide.alt}
+                            className={`size-full rounded-[1.25rem] ${currentSlide.fit === "contain" ? "object-contain" : "object-cover"}`}
+                            onError={(event) => {
+                                event.currentTarget.onerror = null;
+                                event.currentTarget.src = `https://placehold.co/96x96/0A84FF/white?text=${name.charAt(0)}`;
+                            }}
+                        />
+                    </button>
+
+                    {slides.length > 1 && (
+                        <div className="flex items-center justify-center gap-2" aria-label="Profile image selector">
+                            {slides.map((slide, index) => (
+                                <button
+                                    key={slide.src}
+                                    type="button"
+                                    className={`size-2.5 rounded-full transition-all duration-300 ${index === activeImage ? "w-5 bg-primary" : "bg-muted-foreground/25 hover:bg-muted-foreground/45"}`}
+                                    onClick={() => setActiveImage(index)}
+                                    aria-label={`Show ${slide.alt}`}
+                                    aria-current={index === activeImage ? "true" : undefined}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <h1 className="text-2xl font-bold text-card-foreground">{name}</h1>

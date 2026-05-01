@@ -33,10 +33,14 @@ const CardPage = () => {
 
             <main className="flex min-h-screen items-center justify-center bg-background px-5 py-24 text-foreground">
                 <GlassmorphismProfileCard
-                    avatarUrl="/images/about/robin-dark.webp"
+                    avatarUrl="/images/card/robin-francis-primary.jpg"
                     name="Robin Francis"
                     title="AI Innovator & Community Leader"
                     bio="Available for meaningful AI, product, accessibility, and community collaborations."
+                    imageSlides={[
+                        { src: '/images/card/robin-francis-primary.jpg', alt: 'Robin Francis portrait', fit: 'cover' },
+                        { src: '/images/card/robin-francis-3d.png', alt: 'Robin Francis 3D figure', fit: 'contain' },
+                    ]}
                     socialLinks={[
                         { id: 'github', icon: Github, label: 'GitHub', href: 'https://github.com/robinfrancis186' },
                         { id: 'linkedin', icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/robin-francis-b43565175' },
