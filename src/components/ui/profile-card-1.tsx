@@ -29,6 +29,14 @@ type GlassmorphismProfileCardProps = {
     actionButton: ActionButtonProps;
 };
 
+const flipPerspectiveStyle = { perspective: "900px" };
+const flipInnerStyle = { transformStyle: "preserve-3d" } as React.CSSProperties;
+const flipFaceStyle = { backfaceVisibility: "hidden" } as React.CSSProperties;
+const flipBackStyle = {
+    backfaceVisibility: "hidden",
+    transform: "rotateY(180deg)",
+} as React.CSSProperties;
+
 export function Component() {
     return (
         <div className="flex min-h-screen w-full items-center justify-center bg-background p-4 font-sans transition-colors duration-500 sm:p-8">
@@ -76,7 +84,9 @@ const GlassmorphismProfileCard = ({
         : [{ src: avatarUrl, alt: `${name}'s avatar`, fit: "cover" as const }];
     const [activeImage, setActiveImage] = useState(0);
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
-    const currentSlide = slides[activeImage] ?? slides[0];
+    const frontSlide = slides[0];
+    const backSlide = slides[1] ?? slides[0];
+    const isFlipped = activeImage === 1;
 
     const showPreviousImage = () => {
         setActiveImage((current) => (current - 1 + slides.length) % slides.length);
@@ -112,19 +122,31 @@ const GlassmorphismProfileCard = ({
                 >
                     <button
                         type="button"
-                        className="relative size-32 overflow-hidden rounded-3xl border-2 border-white/20 bg-secondary/40 p-1 transition-transform duration-300 hover:scale-[1.02] active:scale-95"
+                        className="relative size-32 rounded-full outline-none transition-transform duration-300 hover:scale-[1.02] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+                        style={flipPerspectiveStyle}
                         onClick={slides.length > 1 ? showNextImage : undefined}
-                        aria-label="Switch profile image"
+                        aria-label={isFlipped ? "Show portrait image" : "Show 3D figure image"}
                     >
-                        <img
-                            src={currentSlide.src}
-                            alt={currentSlide.alt}
-                            className={`size-full rounded-[1.25rem] ${currentSlide.fit === "contain" ? "object-contain" : "object-cover"}`}
-                            onError={(event) => {
-                                event.currentTarget.onerror = null;
-                                event.currentTarget.src = `https://placehold.co/96x96/0A84FF/white?text=${name.charAt(0)}`;
+                        <span
+                            className="relative block size-full rounded-full transition-transform duration-700 ease-out"
+                            style={{
+                                ...flipInnerStyle,
+                                transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
                             }}
-                        />
+                        >
+                            <span
+                                className="absolute inset-0 overflow-hidden rounded-full border-2 border-white/20 bg-secondary/40 p-1 shadow-lg shadow-primary/10"
+                                style={flipFaceStyle}
+                            >
+                                <ProfileImage slide={frontSlide} fallbackName={name} />
+                            </span>
+                            <span
+                                className="absolute inset-0 overflow-hidden rounded-full border-2 border-white/20 bg-secondary/40 p-1 shadow-lg shadow-primary/10"
+                                style={flipBackStyle}
+                            >
+                                <ProfileImage slide={backSlide} fallbackName={name} />
+                            </span>
+                        </span>
                     </button>
 
                     {slides.length > 1 && (
@@ -162,6 +184,24 @@ const GlassmorphismProfileCard = ({
         </div>
     );
 };
+
+const ProfileImage = ({
+    slide,
+    fallbackName,
+}: {
+    slide: ProfileImageSlide;
+    fallbackName: string;
+}) => (
+    <img
+        src={slide.src}
+        alt={slide.alt}
+        className={`size-full rounded-full ${slide.fit === "contain" ? "object-contain" : "object-cover"}`}
+        onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src = `https://placehold.co/96x96/0A84FF/white?text=${fallbackName.charAt(0)}`;
+        }}
+    />
+);
 
 const SocialButton = ({
     item,
