@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText, type LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type SocialLink = {
     id: string;
@@ -17,6 +18,7 @@ type ProfileImageSlide = {
     src: string;
     alt: string;
     fit?: "cover" | "contain";
+    position?: string;
 };
 
 type GlassmorphismProfileCardProps = {
@@ -28,14 +30,6 @@ type GlassmorphismProfileCardProps = {
     socialLinks?: SocialLink[];
     actionButton: ActionButtonProps;
 };
-
-const flipPerspectiveStyle = { perspective: "900px" };
-const flipInnerStyle = { transformStyle: "preserve-3d" } as React.CSSProperties;
-const flipFaceStyle = { backfaceVisibility: "hidden" } as React.CSSProperties;
-const flipBackStyle = {
-    backfaceVisibility: "hidden",
-    transform: "rotateY(180deg)",
-} as React.CSSProperties;
 
 export function Component() {
     return (
@@ -52,8 +46,8 @@ const ProfileCardDemo = () => {
         title: "AI Innovator & Community Leader",
         bio: "Available for meaningful AI, product, accessibility, and community collaborations.",
         imageSlides: [
-            { src: "/images/card/robin-francis-primary.jpg", alt: "Robin Francis portrait", fit: "cover" as const },
-            { src: "/images/card/robin-francis-3d.png", alt: "Robin Francis 3D figure", fit: "contain" as const },
+            { src: "/images/card/robin-francis-primary.jpg", alt: "Robin Francis portrait", fit: "cover" as const, position: "50% 18%" },
+            { src: "/images/card/robin-francis-3d.png", alt: "Robin Francis 3D figure", fit: "contain" as const, position: "50% 50%" },
         ],
         socialLinks: [
             { id: "github", icon: Github, label: "GitHub", href: "https://github.com/robinfrancis186" },
@@ -83,10 +77,11 @@ const GlassmorphismProfileCard = ({
         ? imageSlides
         : [{ src: avatarUrl, alt: `${name}'s avatar`, fit: "cover" as const }];
     const [activeImage, setActiveImage] = useState(0);
+    const [isImageHovered, setIsImageHovered] = useState(false);
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
     const frontSlide = slides[0];
     const backSlide = slides[1] ?? slides[0];
-    const isFlipped = activeImage === 1;
+    const isFlipped = slides.length > 1 && (isImageHovered || activeImage === 1);
 
     const showPreviousImage = () => {
         setActiveImage((current) => (current - 1 + slides.length) % slides.length);
@@ -117,32 +112,44 @@ const GlassmorphismProfileCard = ({
             >
                 <div
                     className="mb-4 flex flex-col items-center gap-3"
+                    onMouseEnter={() => setIsImageHovered(true)}
+                    onMouseLeave={() => setIsImageHovered(false)}
                     onTouchStart={(event) => setTouchStartX(event.touches[0]?.clientX ?? null)}
                     onTouchEnd={(event) => handleTouchEnd(event.changedTouches[0]?.clientX ?? 0)}
                 >
                     <button
                         type="button"
-                        className="relative size-32 rounded-full outline-none transition-transform duration-300 hover:scale-[1.02] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-                        style={flipPerspectiveStyle}
+                        className="group relative size-32 rounded-full outline-none [perspective:2000px] transition-transform duration-300 hover:scale-[1.02] active:scale-95 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
                         onClick={slides.length > 1 ? showNextImage : undefined}
                         aria-label={isFlipped ? "Show portrait image" : "Show 3D figure image"}
                     >
                         <span
-                            className="relative block size-full rounded-full transition-transform duration-700 ease-out"
-                            style={{
-                                ...flipInnerStyle,
-                                transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                            }}
+                            className={cn(
+                                "relative block size-full rounded-full",
+                                "[transform-style:preserve-3d]",
+                                "transition-all duration-700 ease-out",
+                                isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]"
+                            )}
                         >
                             <span
-                                className="absolute inset-0 overflow-hidden rounded-full border-2 border-white/20 bg-secondary/40 p-1 shadow-lg shadow-primary/10"
-                                style={flipFaceStyle}
+                                className={cn(
+                                    "absolute inset-0 size-full overflow-hidden rounded-full",
+                                    "[backface-visibility:hidden] [transform:rotateY(0deg)]",
+                                    "border-2 border-white/20 bg-secondary/40 p-1",
+                                    "shadow-lg shadow-primary/10 transition-all duration-700",
+                                    isFlipped ? "opacity-0" : "opacity-100"
+                                )}
                             >
                                 <ProfileImage slide={frontSlide} fallbackName={name} />
                             </span>
                             <span
-                                className="absolute inset-0 overflow-hidden rounded-full border-2 border-white/20 bg-secondary/40 p-1 shadow-lg shadow-primary/10"
-                                style={flipBackStyle}
+                                className={cn(
+                                    "absolute inset-0 size-full overflow-hidden rounded-full",
+                                    "[backface-visibility:hidden] [transform:rotateY(180deg)]",
+                                    "border-2 border-white/20 bg-secondary/40 p-1",
+                                    "shadow-lg shadow-primary/10 transition-all duration-700",
+                                    isFlipped ? "opacity-100" : "opacity-0"
+                                )}
                             >
                                 <ProfileImage slide={backSlide} fallbackName={name} />
                             </span>
@@ -156,7 +163,10 @@ const GlassmorphismProfileCard = ({
                                     key={slide.src}
                                     type="button"
                                     className={`size-2.5 rounded-full transition-all duration-300 ${index === activeImage ? "w-5 bg-primary" : "bg-muted-foreground/25 hover:bg-muted-foreground/45"}`}
-                                    onClick={() => setActiveImage(index)}
+                                    onClick={() => {
+                                        setActiveImage(index);
+                                        setIsImageHovered(false);
+                                    }}
                                     aria-label={`Show ${slide.alt}`}
                                     aria-current={index === activeImage ? "true" : undefined}
                                 />
@@ -196,6 +206,7 @@ const ProfileImage = ({
         src={slide.src}
         alt={slide.alt}
         className={`size-full rounded-full ${slide.fit === "contain" ? "object-contain" : "object-cover"}`}
+        style={{ objectPosition: slide.position ?? "50% 50%" }}
         onError={(event) => {
             event.currentTarget.onerror = null;
             event.currentTarget.src = `https://placehold.co/96x96/0A84FF/white?text=${fallbackName.charAt(0)}`;

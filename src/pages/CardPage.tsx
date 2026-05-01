@@ -38,8 +38,8 @@ const CardPage = () => {
                     title="AI Innovator & Community Leader"
                     bio="Available for meaningful AI, product, accessibility, and community collaborations."
                     imageSlides={[
-                        { src: '/images/card/robin-francis-primary.jpg', alt: 'Robin Francis portrait', fit: 'cover' },
-                        { src: '/images/card/robin-francis-3d.png', alt: 'Robin Francis 3D figure', fit: 'contain' },
+                        { src: '/images/card/robin-francis-primary.jpg', alt: 'Robin Francis portrait', fit: 'cover', position: '50% 18%' },
+                        { src: '/images/card/robin-francis-3d.png', alt: 'Robin Francis 3D figure', fit: 'contain', position: '50% 50%' },
                     ]}
                     socialLinks={[
                         { id: 'github', icon: Github, label: 'GitHub', href: 'https://github.com/robinfrancis186' },
