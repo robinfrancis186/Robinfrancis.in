@@ -77,11 +77,12 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-                        image="/images/blog/accessible-tech.webp"
-                        imageAlt="STRIDE Kerala assistive technology innovation hub official website"
+                        image="/images/projects/stride-website.png"
+                        imageAlt="Official STRIDE Kerala website hero page"
                         title="STRIDE Website"
-                        description="Official website for STRIDE Kerala. Central digital hub for assistive technology innovation."
-                        tags={["Web Development", "Accessibility", "UI/UX"]}
+                        description="Developed the official STRIDE website from scratch, creating a modern and accessible platform for an inclusive innovation initiative focused on assistive technology and social impact."
+                        tags={["Accessibility", "Social Impact", "Assistive Tech"]}
+                        demoLink="https://stride.kerala.gov.in/"
                     />
                 </motion.ul>
             </div>

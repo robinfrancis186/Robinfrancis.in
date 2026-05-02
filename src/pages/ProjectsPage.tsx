@@ -1,12 +1,56 @@
 import { useEffect, useState } from 'react';
 import { client, urlFor } from '../lib/sanity';
 
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageSeo from '@/components/seo/PageSeo';
 
 const ProjectsPage = () => {
     const [sanityProjects, setSanityProjects] = useState<any[]>([]);
+    const [selectedProject, setSelectedProject] = useState<null | {
+        title: string;
+        category: string;
+        summary: string;
+        image: string;
+        imageAlt: string;
+        repo?: string;
+        live?: string;
+        images?: { src: string; alt: string; }[];
+    }>(null);
+
+    const argusProject = {
+        title: 'Argus',
+        category: 'AI QA • Browser Agent',
+        summary: 'Argus is a local-first autonomous QA agent that scouts a website, understands the product, deploys synthetic user personas, and returns evidence-backed bug reports with screenshots, logs, and run summaries.',
+        image: '/images/projects/argus.png',
+        imageAlt: 'Argus autonomous QA browser agent launch screen',
+        repo: 'https://github.com/robinfrancis186/argus.git',
+    };
+
+    const bulkyFiProject = {
+        title: 'BulkyFi',
+        category: 'Certificates • Local-First Tool',
+        summary: 'BulkyFi is a local-first bulk certificate generator for creating professional certificates from templates and recipient spreadsheets. It runs in the browser, stores projects locally, and exports high-quality PDF or PNG certificates without requiring a backend.',
+        image: '/images/projects/bulkyfi-landing-v2.png',
+        imageAlt: 'BulkyFi landing page for instant bulk certificate generation',
+        repo: 'https://github.com/robinfrancis186/bulkyfi',
+        live: 'https://bulkyfi.vercel.app/',
+        images: [
+            {
+                src: '/images/projects/bulkyfi-dashboard-v2.png',
+                alt: 'BulkyFi certificate batch dashboard with template design and recipient preview',
+            },
+        ],
+    };
+
+    const strideProject = {
+        title: 'STRIDE Website',
+        category: 'Accessibility • Social Impact',
+        summary: 'Developed the official STRIDE website from scratch, creating a modern and accessible platform for an inclusive innovation initiative focused on assistive technology and social impact. The website showcases STRIDE’s mission, ecosystem, product catalog, community stories, news updates, and engagement opportunities, helping users understand and participate in Kerala’s inclusive innovation movement.',
+        image: '/images/projects/stride-website.png',
+        imageAlt: 'Official STRIDE Kerala website hero page',
+        live: 'https://stride.kerala.gov.in/',
+    };
 
     useEffect(() => {
         client.fetch(`*[_type == "project"] | order(_createdAt desc)`).then((data) => {
@@ -111,13 +155,13 @@ const ProjectsPage = () => {
                         <>
                             {/* Column 1 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/cloud_analytics.webp" alt="Cloud Analytics dashboard project" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <button type="button" onClick={() => setSelectedProject(argusProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
+                                    <img src={argusProject.image} alt={argusProject.imageAlt} className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                                        <p className="text-xs text-white/80 font-geist">SaaS • Product</p>
+                                        <p className="text-xs text-white/80 font-geist">{argusProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">Cloud Analytics</h4>
+                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{argusProject.title}</h4>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -125,23 +169,23 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">Cloud Analytics</h3>
-                                            <p className="text-sm text-white/90 leading-relaxed mb-4">Advanced analytics platform for SaaS companies. Real-time insights, custom dashboards, and predictive analytics.</p>
+                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{argusProject.title}</h3>
+                                            <p className="text-sm text-white/90 leading-relaxed mb-4">{argusProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
-                                                <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
-                                                Live Project
+                                                <span className="h-2 w-2 rounded-full bg-lime-400"></span>
+                                                View Summary
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </button>
 
-                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/shop_pro.webp" alt="Pastel e-commerce storefront interface with product cards and shopping cart panel" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <button type="button" onClick={() => setSelectedProject(bulkyFiProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+                                    <img src={bulkyFiProject.image} alt={bulkyFiProject.imageAlt} className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                                        <p className="text-xs text-white/80 font-geist">E-commerce • Platform</p>
+                                        <p className="text-xs text-white/80 font-geist">{bulkyFiProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">Shop Pro</h4>
+                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{bulkyFiProject.title}</h4>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -149,15 +193,15 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">Shop Pro</h3>
-                                            <p className="text-sm text-white/90 leading-relaxed mb-4">Modern e-commerce platform with automated inventory, seamless checkout, and real-time sales reporting.</p>
+                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{bulkyFiProject.title}</h3>
+                                            <p className="text-sm text-white/90 leading-relaxed mb-4">{bulkyFiProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
-                                                <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
-                                                Live Project
+                                                <span className="h-2 w-2 rounded-full bg-blue-400"></span>
+                                                View Summary
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </button>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <img src="/images/projects/creative_hub.webp" alt="Floating glass interface cards on an iridescent gradient, representing a creative portfolio hub" className="h-48 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
@@ -261,13 +305,13 @@ const ProjectsPage = () => {
 
                             {/* Column 3 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/nexus_system.webp" alt="Glassmorphism design system board showing buttons, icons, typography scale, and color palettes" className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                <button type="button" onClick={() => setSelectedProject(strideProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400">
+                                    <img src={strideProject.image} alt={strideProject.imageAlt} className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                                        <p className="text-xs text-white/80 font-geist">Design • System</p>
+                                        <p className="text-xs text-white/80 font-geist">{strideProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">Nexus System</h4>
+                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{strideProject.title}</h4>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -275,15 +319,15 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">Nexus System</h3>
-                                            <p className="text-sm text-white/90 leading-relaxed mb-4">Comprehensive design system with reusable components, clear guidelines, and seamless developer handoff.</p>
+                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{strideProject.title}</h3>
+                                            <p className="text-sm text-white/90 leading-relaxed mb-4">{strideProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
-                                                <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
-                                                Production Ready
+                                                <span className="h-2 w-2 rounded-full bg-fuchsia-400"></span>
+                                                View Summary
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </button>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <img src="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/b1350108-f0ef-4f66-83ae-fe50447f6f74_800w.jpg" alt="Brand identity and campaign visuals" className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -336,6 +380,43 @@ const ProjectsPage = () => {
                         </>
                     )}
                 </div>
+
+                {selectedProject && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onClick={() => setSelectedProject(null)}>
+                        <div className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white text-neutral-950 shadow-2xl ring-1 ring-neutral-200 dark:bg-slate-950 dark:text-white dark:ring-neutral-800" onClick={(event) => event.stopPropagation()}>
+                            <button type="button" aria-label="Close project summary" onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black dark:bg-white/10 dark:hover:bg-white/20">
+                                <X className="h-5 w-5" />
+                            </button>
+                            <img src={selectedProject.image} alt={selectedProject.imageAlt} className="h-64 w-full object-cover object-top sm:h-80" />
+                            <div className="p-6 sm:p-8">
+                                <p className="text-xs uppercase tracking-[0.24em] text-lime-600 dark:text-lime-400 font-geist">{selectedProject.category}</p>
+                                <h2 id="project-detail-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{selectedProject.title}</h2>
+                                <p className="mt-4 max-w-3xl text-base leading-7 text-neutral-700 dark:text-neutral-300">{selectedProject.summary}</p>
+                                {selectedProject.images && selectedProject.images.length > 0 && (
+                                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                                        {selectedProject.images.map((image) => (
+                                            <img key={image.src} src={image.src} alt={image.alt} className="h-56 w-full rounded-xl object-cover object-top ring-1 ring-neutral-200 dark:ring-neutral-800" />
+                                        ))}
+                                    </div>
+                                )}
+                                <div className="mt-6 flex flex-wrap gap-3">
+                                    {selectedProject.live && (
+                                        <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-500">
+                                            <ExternalLink className="h-4 w-4" />
+                                            Live App
+                                        </a>
+                                    )}
+                                    {selectedProject.repo && (
+                                        <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200">
+                                            <Github className="h-4 w-4" />
+                                            GitHub Repository
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="mt-8 sm:mt-10 flex justify-center">
                     <a href="/#projects" className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-700 px-5 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:shadow dark:hover:bg-slate-800 transition-colors font-geist">
