@@ -14,3 +14,5 @@ lighthouse-report*.html
 chromewebdata_*.report.html
 *.report.html
 public/cms/
+.vercel
+.env*.local
