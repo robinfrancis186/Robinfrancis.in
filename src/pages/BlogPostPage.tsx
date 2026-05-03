@@ -114,7 +114,7 @@ const BlogPostPage = () => {
             "name": "Robin Francis",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.robinfrancis.in/images/favicon.png"
+                "url": "https://www.robinfrancis.in/images/favicon-r.png"
             }
         },
         "datePublished": isoDate,

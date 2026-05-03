@@ -1,4 +1,4 @@
-import{r as c,j as a,C as h,N as C,S as M,u as d,d as x,s as F,e as w,f as m,V as y}from"./three-vendor-Bgo_zJSc.js";import{z as b}from"./index-Byi5Jlqq.js";import"./animation-vendor-BT51U7pO.js";const S=F({time:0,resolution:new y,dotColor:new m("#FFFFFF"),bgColor:new m("#121212"),mouseTrail:null,render:0,rotation:0,gridSize:50,dotOpacity:.05},`
+import{r as c,j as a,C as h,N as C,S as M,u as d,d as x,s as F,e as w,f as m,V as y}from"./three-vendor-Bgo_zJSc.js";import{z as b}from"./index-BdF_2Ppg.js";import"./animation-vendor-BT51U7pO.js";const S=F({time:0,resolution:new y,dotColor:new m("#FFFFFF"),bgColor:new m("#121212"),mouseTrail:null,render:0,rotation:0,gridSize:50,dotOpacity:.05},`
     void main() {
       gl_Position = vec4(position.xy, 0.0, 1.0);
     }
