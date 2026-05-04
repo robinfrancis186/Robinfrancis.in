@@ -15,14 +15,44 @@ const Contact = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [buttonStatus, setButtonStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [statusMessage, setStatusMessage] = useState("");
     const [resetKey, setResetKey] = useState(0);
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setButtonStatus("success");
-        const subject = `Portfolio Contact from ${name}`;
-        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-        window.location.href = `mailto:robinfrancis186@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setButtonStatus("loading");
+        setStatusMessage("");
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (!response.ok) {
+                const payload = await response.json().catch(() => null);
+                throw new Error(payload?.error || "Message could not be sent right now.");
+            }
+
+            setButtonStatus("success");
+            setStatusMessage("Message sent. I will get back to you soon.");
+            setName("");
+            setEmail("");
+            setMessage("");
+
+            window.setTimeout(() => {
+                setButtonStatus("idle");
+                setStatusMessage("");
+                setResetKey((value) => value + 1);
+            }, 3500);
+        } catch (error) {
+            setButtonStatus("error");
+            setStatusMessage(error instanceof Error ? error.message : "Message could not be sent right now.");
+            setResetKey((value) => value + 1);
+        }
     };
 
     const handleSlideComplete = () => {
@@ -121,6 +151,14 @@ const Contact = () => {
                                 resetKey={resetKey}
                                 onSlideComplete={handleSlideComplete}
                             />
+                            {statusMessage && (
+                                <p
+                                    role="status"
+                                    className="text-center text-sm font-medium text-neutral-600 dark:text-neutral-300"
+                                >
+                                    {statusMessage}
+                                </p>
+                            )}
                         </form>
                     </div>
                 </div>

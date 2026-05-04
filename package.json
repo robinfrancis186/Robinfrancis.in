@@ -42,6 +42,7 @@
     "react-router-dom": "^7.13.0",
     "react-scroll": "^1.9.3",
     "react-useanimations": "^2.10.0",
+    "resend": "^6.12.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.181.2"
