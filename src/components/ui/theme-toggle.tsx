@@ -41,13 +41,13 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                     />
                 </clipPath>
                 <g clipPath="url(#skiper-theme-toggle)">
-                    <motion.circle
-                        animate={{ r: isDark ? 10 : 8 }}
-                        transition={{ ease: "easeInOut", duration: 0.35 }}
+                    <circle
+                        r={isDark ? 10 : 8}
                         cx="16"
                         cy="16"
                     />
                     <motion.g
+                        initial={false}
                         animate={{
                             rotate: isDark ? -100 : 0,
                             scale: isDark ? 0.5 : 1,

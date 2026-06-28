@@ -1,30 +1,21 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { client, urlFor } from '../lib/sanity';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageSeo from '@/components/seo/PageSeo';
+import { STATIC_BLOG_POSTS } from '@/data/blogPosts';
 
 const BlogPage = () => {
-    const [sanityPosts, setSanityPosts] = useState<any[]>([]);
-
-    useEffect(() => {
-        client.fetch(`*[_type == "blogPost"] | order(date desc)`).then((data) => {
-            setSanityPosts(data);
-        }).catch(console.error);
-    }, []);
-
-    const renderSanityPost = (post: any) => {
-        const imageUrl = post.image && post.image.asset ? urlFor(post.image).width(800).format('webp').quality(80).url() : '';
+    const renderPost = (post: (typeof STATIC_BLOG_POSTS)[number]) => {
+        const imageUrl = post.image;
         const title = post.title || 'Untitled Post';
         const excerpt = post.excerpt || '';
         const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-        const tag = post.tags && post.tags.length > 0 ? post.tags[0] : 'POST';
-        const slug = post.slug?.current || post._id;
-        const imageAlt = post.image?.alt || `Cover image for ${title}`;
+        const tag = post.tags.length > 0 ? post.tags[0] : post.category;
+        const slug = post.slug;
+        const imageAlt = `Cover image for ${title}`;
 
         return (
-            <div key={post._id}>
+            <div key={post.id}>
                 <Link to={`/blog/${slug}`} className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                     <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
                         {imageUrl ? <img src={imageUrl} alt={imageAlt} className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" /> : <div className="w-full h-48 sm:h-36 bg-neutral-100 dark:bg-neutral-800" />}
@@ -95,102 +86,7 @@ const BlogPage = () => {
 
                 {/* Right Column - Article Feed */}
                 <div className="flex flex-col gap-8 md:gap-12">
-                    {sanityPosts.length > 0 ? (
-                        sanityPosts.map(renderSanityPost)
-                    ) : (
-                        <>
-
-                            {/* Article 1 */}
-                            <a id="article-1" href="#article-1" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
-                                <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
-                                    <img
-                                        src="/images/blog/cinque_terre.webp"
-                                        alt="Colorful cliffside homes in Cinque Terre above the sea under stormy clouds"
-                                        className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                                    />
-                                </div>
-                                <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
-                                    <div className="flex items-center gap-4 mb-3">
-                                        <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">GUIDE</span>
-                                        <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase">Oct 12, 2024</span>
-                                    </div>
-                                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary text-neutral-900 dark:text-neutral-100 transition-colors">
-                                        Hidden Trails of Cinque Terre
-                                    </h3>
-                                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
-                                        Avoiding the crowds in Italy's most colorful coastal villages by taking the high roads.
-                                    </p>
-
-                                    {/* Arrow that slides in on hover */}
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-600 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                                        <ArrowRight className="w-5 h-5" />
-                                    </div>
-                                </div>
-                            </a>
-
-                            {/* Divider */}
-                            <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800"></div>
-
-                            {/* Article 2 */}
-                            <a id="article-2" href="#article-2" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
-                                <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
-                                    <img
-                                        src="/images/blog/autumn_camping.webp"
-                                        alt="Minimal tent campsite in an autumn forest with fallen leaves and warm morning light"
-                                        className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                                    />
-                                </div>
-                                <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
-                                    <div className="flex items-center gap-4 mb-3">
-                                        <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">GEAR</span>
-                                        <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase">Sep 28, 2024</span>
-                                    </div>
-                                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary text-neutral-900 dark:text-neutral-100 transition-colors">
-                                        Ultralight Packing for Autumn
-                                    </h3>
-                                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
-                                        Our essential checklist for staying warm without the weight during shoulder season.
-                                    </p>
-
-                                    {/* Arrow that slides in on hover */}
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-600 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                                        <ArrowRight className="w-5 h-5" />
-                                    </div>
-                                </div>
-                            </a>
-
-                            {/* Divider */}
-                            <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800"></div>
-
-                            {/* Article 3 */}
-                            <a id="article-3" href="#article-3" className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
-                                <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
-                                    <img
-                                        src="/images/blog/lake_district.webp"
-                                        alt="Moody mountain lake landscape with dark clouds and mirror-like water reflection"
-                                        className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                                    />
-                                </div>
-                                <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
-                                    <div className="flex items-center gap-4 mb-3">
-                                        <span className="text-xs font-bold tracking-widest text-neutral-600 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-800 px-2 py-1 rounded">PHOTO</span>
-                                        <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase">Sep 15, 2024</span>
-                                    </div>
-                                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary text-primary transition-colors">
-                                        Reflections: The Lake District
-                                    </h3>
-                                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
-                                        A photo essay capturing the moody atmosphere of England's most dramatic landscapes.
-                                    </p>
-
-                                    {/* Arrow that slides in on hover */}
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-600 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                                        <ArrowRight className="w-5 h-5" />
-                                    </div>
-                                </div>
-                            </a>
-                        </>
-                    )}
+                    {STATIC_BLOG_POSTS.map(renderPost)}
                 </div>
             </motion.section>
         </main>

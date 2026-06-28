@@ -4,98 +4,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Carousel3D, CarouselItem } from "@/components/ui/carousel-3d";
 import { BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
-import { client, urlFor } from '../../lib/sanity';
+import ArticleActions from "@/components/blog/ArticleActions";
+import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 
-const INITIAL_STATIC_POSTS: CarouselItem[] = [
-    {
-        id: "static-1",
-        slug: "soulsync-emotional-wellness",
-        title: "SoulSync: Building AI for Emotional & Cognitive Wellness",
-        category: "Wellness",
-        image: "/images/blog/1720937570476.jpeg",
-        excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
-        content:
-            "SoulSync explores multimodal AI that monitors tone, pacing, and contextual cues to support elders and caregivers. We built lightweight models that run fully on-device to preserve privacy, and tuned them for low-light and low-bandwidth environments where typical cloud assistants fail.\n\nWe added adaptive prompts for different cognitive states, offered optional journaling summaries that can be shared with clinicians, and designed escalation paths that notify family when risk signals—like sentiment drift, agitation, or prolonged silence—appear. The system emphasizes consent, transparency, and clinician-in-the-loop review before deployment, so that automation augments human care rather than replacing it.\n\nA key learning: usability beats model novelty. Care teams preferred predictable, explainable actions (like “ask a grounding question every X minutes”) over complex, opaque behaviors. This shaped our evaluation rubric for safety, comfort, and trust.",
-    },
-    {
-        id: "static-2",
-        slug: "ieee-r10-volunteer-award",
-        title: "IEEE R10 Outstanding Volunteer Award: My Journey of Impact",
-        category: "Leadership",
-        image: "/images/blog/ieee-award.webp",
-        excerpt: "Reflections on leadership, community-building, and global recognition.",
-        content:
-            "This write-up covers the leadership principles that scaled our student branches to 100+ events per year. We formalized handover playbooks, paired every lead with a shadow, and ran quarterly retros so new teams inherited context instead of chaos.\n\nWe also built mentorship tracks with clear checkpoints—speaker sourcing, sponsorship decks, logistics checklists, and post-event surveys—to reduce failure points. The result: higher member retention, stronger industry partnerships, and funded innovation programs that kept running even after founders graduated.\n\nThe biggest unlock was data visibility. Simple dashboards for attendance, NPS, and volunteer load helped us rotate responsibilities before burnout and double down on formats that worked (workshops and office hours outperformed large one-off summits).",
-    },
-    {
-        id: "static-3",
-        slug: "future-of-accessible-technology",
-        title: "The Future of Accessible Technology",
-        category: "Tech",
-        image: "/images/blog/accessible-tech.webp",
-        excerpt: "How AI, multimodal interfaces, and affordable computing can empower millions.",
-        content:
-            "Accessible tech requires multimodal inputs—voice, gesture, eye-tracking—and low-latency edge compute. We prototyped adaptive layouts that increase target sizes and contrast based on motor ability and vision needs, and we leaned on on-device speech models that tolerate dialectal variety without round-trips to the cloud.\n\nWe tested haptic cues as a redundant channel for critical alerts, added offline fallbacks for intermittent connectivity, and built a settings wizard that asks about comfort preferences up front instead of burying them in menus.\n\nThe takeaway: accessibility is not a bolt-on. It’s a product foundation that improves UX for everyone—faster surfaces for power users, clearer affordances for new users, and resilient behavior when networks are unreliable.",
-    },
-    {
-        id: "static-4",
-        slug: "scalable-systems-with-communities",
-        title: "Building Scalable Systems with Student Communities",
-        category: "Community",
-        image: "/images/blog/scalable-systems.webp",
-        excerpt: "Lessons from leading 100+ programs and growing organizations.",
-        content:
-            "We scaled student communities by standardizing playbooks for event ops, creating modular starter kits for hackathons, and setting up OKR-based tracking for chapter health. Kits included sponsor email templates, venue checklists, slide decks, and risk logs—so new chapters could launch in days, not months.\n\nData dashboards surfaced burnout signals (volunteer hours, last-minute cancellations) and helped us rotate leads before bottlenecks formed. We also paired each technical program with a delivery partner—often an NGO—so prototypes had a path to real users after demo day.\n\nResult: more consistent events, higher volunteer retention, and projects that survived beyond judging. The system favored repeatable processes over heroics, which made leadership sustainable.",
-    },
-    {
-        id: "static-5",
-        slug: "people-centric-ai",
-        title: "Designing People-Centric AI Solutions",
-        category: "Design",
-        image: "/images/blog/people-centric-ai.webp",
-        excerpt: "Balancing tech innovation with empathy and social awareness.",
-        content:
-            "People-centric AI starts with interviewing across ability, age, and bandwidth profiles. We tailored UX for intermittent connectivity, added offline fallbacks for critical actions, and kept error states explicit (“here’s what failed, here’s what we’ll try next”).\n\nWe used progressive disclosure for model decisions: concise plain-language reasons first, deeper evidence on demand, and opt-out controls for data retention. Every release ran through fairness checks (demographic parity on key flows), explainability reviews (what signals drove this action), and trust surveys.\n\nThe main lesson: transparency without overwhelm. Users responded best when we gave just enough reasoning to build trust, plus a clear escape hatch to disable automation if it felt wrong.",
-    },
-];
+const INITIAL_STATIC_POSTS: CarouselItem[] = STATIC_BLOG_POSTS;
 
 const Blog = () => {
-    const [posts, setPosts] = useState<CarouselItem[]>(INITIAL_STATIC_POSTS);
     const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                // Fetch up to 5 latest posts from Sanity
-                const data = await client.fetch(`*[_type == "blogPost"] | order(date desc)[0...5]`);
-                if (data && data.length > 0) {
-                    const formattedPosts: CarouselItem[] = data.map((post: any) => ({
-                        id: post._id,
-                        slug: post.slug?.current || post._id,
-                        title: post.title || 'Untitled',
-                        category: post.tags && post.tags.length > 0 ? post.tags[0] : 'POST',
-                        image: post.image && post.image.asset ? urlFor(post.image).width(800).format('webp').quality(80).url() : '/images/blog/1720937570476.jpeg',
-                        excerpt: post.excerpt || '',
-                        content: post.excerpt || ''
-                    }));
-                    
-                    // If we have fewer than 3 posts from Sanity, the 3D Carousel might look sparse.
-                    // We can pad with static posts if needed, or just use what we have.
-                    // For now, let's use Sanity posts. If they only added 1, it will just show 1.
-                    if (formattedPosts.length >= 3) {
-                         setPosts(formattedPosts);
-                    } else if (formattedPosts.length > 0) {
-                         // Pad with static posts to reach at least 3 for optimal 3D visual effect
-                         const padded = [...formattedPosts, ...INITIAL_STATIC_POSTS.slice(0, 5 - formattedPosts.length)];
-                         setPosts(padded);
-                    }
-                }
-            } catch (error) {
-                console.error("Failed to fetch Sanity blog posts for carousel:", error);
-            }
-        };
-        fetchPosts();
-    }, []);
+    const posts = INITIAL_STATIC_POSTS;
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -192,6 +108,11 @@ const Blog = () => {
                         </div>
 
                         <div className="p-6 md:p-10 space-y-6">
+                            <ArticleActions
+                                title={selectedPost.title}
+                                text={selectedPost.content || selectedPost.excerpt || ""}
+                                className="my-0"
+                            />
                             <p className="text-lg text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-line">
                                 {selectedPost.content || selectedPost.excerpt}
                             </p>

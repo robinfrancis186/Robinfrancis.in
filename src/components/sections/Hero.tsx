@@ -161,14 +161,12 @@ const Hero = () => {
                         alt="Robin Francis — AI Innovator and Software Engineer, professional headshot in formal black shirt" 
                         width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl dark:hidden"
-                        fetchPriority="high"
                     />
                     <img 
                         src="/images/about/robin-dark.webp" 
                         alt="Robin Francis — professional portrait with dark background theme" 
                         width="420" height="550"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
-                        fetchPriority="high"
                     />
                 </div>
 

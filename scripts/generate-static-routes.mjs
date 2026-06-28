@@ -24,6 +24,43 @@ const ROUTE_META = {
     description: 'A focused digital profile card for Robin Francis, AI innovator, software builder, and community leader from Kerala, India.',
   },
 };
+const LOCAL_BLOG_POSTS = [
+  {
+    slug: 'soulsync-emotional-wellness',
+    title: 'SoulSync: Building AI for Emotional & Cognitive Wellness',
+    excerpt: 'A deep dive into creating AI-enabled tools for elders and caregivers.',
+    image: '/images/blog/1720937570476.jpeg',
+    date: '2026-01-12',
+  },
+  {
+    slug: 'ieee-r10-volunteer-award',
+    title: 'IEEE R10 Outstanding Volunteer Award: My Journey of Impact',
+    excerpt: 'Reflections on leadership, community-building, and global recognition.',
+    image: '/images/blog/ieee-award.webp',
+    date: '2025-12-18',
+  },
+  {
+    slug: 'future-of-accessible-technology',
+    title: 'The Future of Accessible Technology',
+    excerpt: 'How AI, multimodal interfaces, and affordable computing can empower millions.',
+    image: '/images/blog/accessible-tech.webp',
+    date: '2025-11-26',
+  },
+  {
+    slug: 'scalable-systems-with-communities',
+    title: 'Building Scalable Systems with Student Communities',
+    excerpt: 'Lessons from leading 100+ programs and growing organizations.',
+    image: '/images/blog/scalable-systems.webp',
+    date: '2025-10-14',
+  },
+  {
+    slug: 'people-centric-ai',
+    title: 'Designing People-Centric AI Solutions',
+    excerpt: 'Balancing tech innovation with empathy and social awareness.',
+    image: '/images/blog/people-centric-ai.webp',
+    date: '2025-09-08',
+  },
+];
 
 const client = createClient({
   projectId: 'so8fb28i',
@@ -44,7 +81,17 @@ function toLastMod(value, fallback) {
   return parsed.toISOString().slice(0, 10);
 }
 
-async function fetchBlogSlugs() {
+function mergeBlogPosts(remotePosts, localPosts) {
+  const postsBySlug = new Map();
+
+  for (const post of [...localPosts, ...remotePosts]) {
+    postsBySlug.set(post.slug, post);
+  }
+
+  return [...postsBySlug.values()];
+}
+
+async function fetchBlogPosts() {
   try {
     const posts = await client.fetch(
       `*[_type == "blogPost"]{
@@ -125,7 +172,7 @@ async function main() {
   await writeFile(path.join(DOCS_DIR, '404.html'), buildNotFoundHtml(html), 'utf8');
 
   const today = new Date().toISOString().slice(0, 10);
-  const blogPosts = await fetchBlogSlugs();
+  const blogPosts = mergeBlogPosts(await fetchBlogPosts(), LOCAL_BLOG_POSTS);
   const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
   const allRoutes = [...new Set([...ROOT_ROUTES, ...blogRoutes])];
 

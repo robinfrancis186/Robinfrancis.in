@@ -1,0 +1,1 @@
+import{c as r,a as t}from"./sanity-vendor-AwSpBUjH.js";const a=r({projectId:"so8fb28i",dataset:"image",useCdn:!0,apiVersion:"2023-05-03"}),i=t(a);function s(e){return i.image(e)}export{a as c,s as u};

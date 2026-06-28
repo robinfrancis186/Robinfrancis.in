@@ -5,6 +5,8 @@ import { PortableText } from '@portabletext/react';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageSeo from '@/components/seo/PageSeo';
+import ArticleActions from '@/components/blog/ArticleActions';
+import { findStaticBlogPost } from '@/data/blogPosts';
 
 const ptComponents = {
     types: {
@@ -45,6 +47,34 @@ const ptComponents = {
     },
 };
 
+function portableTextToPlainText(value: unknown): string {
+    if (!value) {
+        return "";
+    }
+
+    if (typeof value === "string") {
+        return value;
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(portableTextToPlainText).filter(Boolean).join("\n\n");
+    }
+
+    if (typeof value === "object") {
+        const node = value as { text?: unknown; children?: unknown; [key: string]: unknown };
+
+        if (typeof node.text === "string") {
+            return node.text;
+        }
+
+        if (node.children) {
+            return portableTextToPlainText(node.children);
+        }
+    }
+
+    return "";
+}
+
 const BlogPostPage = () => {
     const { slug } = useParams();
     const [post, setPost] = useState<any>(null);
@@ -54,6 +84,13 @@ const BlogPostPage = () => {
         if (!slug) return;
 
         window.scrollTo(0, 0);
+
+        const localPost = findStaticBlogPost(slug);
+        if (localPost) {
+            setPost(localPost);
+            setLoading(false);
+            return;
+        }
 
         const query = `*[_type == "blogPost" && (slug.current == $slug || _id == $slug)][0]`;
         client.fetch(query, { slug }).then((data) => {
@@ -84,7 +121,7 @@ const BlogPostPage = () => {
         );
     }
 
-    const imageUrl = post.image && post.image.asset ? urlFor(post.image).width(1200).url() : '';
+    const imageUrl = typeof post.image === 'string' ? post.image : post.image && post.image.asset ? urlFor(post.image).width(1200).url() : '';
     const mainImageAlt = post.image?.alt || `Cover image for ${post.title}`;
     const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
     const isoDate = post.date ? new Date(post.date).toISOString() : '';
@@ -92,6 +129,7 @@ const BlogPostPage = () => {
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = `https://www.robinfrancis.in/blog/${resolvedSlug}/`;
+    const articleText = portableTextToPlainText(post.content) || excerpt;
 
     // Schema.org JSON-LD for Answer Engines (AEO) and Generative Engines (GEO)
     const jsonLd = {
@@ -161,9 +199,13 @@ const BlogPostPage = () => {
                     </div>
                 )}
 
+                <ArticleActions title={post.title} text={articleText} shareUrl={canonicalUrl} />
+
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-geist prose-headings:font-geist">
-                    {post.content ? (
+                    {Array.isArray(post.content) ? (
                         <PortableText value={post.content} components={ptComponents} />
+                    ) : post.content ? (
+                        <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">{post.content}</p>
                     ) : (
                         <p className="text-neutral-500 italic">This post has no content yet.</p>
                     )}

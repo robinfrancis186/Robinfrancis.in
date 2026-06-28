@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react'
+import { Helmet } from 'react-helmet-async'
 import Hero from '@/components/sections/Hero'
 import PageSeo from '@/components/seo/PageSeo'
 
@@ -72,6 +73,10 @@ const Home = () => {
                 description={pageDescription}
                 canonical="https://www.robinfrancis.in/"
             />
+            <Helmet>
+                <link rel="preload" href="/images/about/robin-light.webp" as="image" type="image/webp" media="(prefers-color-scheme: light)" />
+                <link rel="preload" href="/images/about/robin-dark.webp" as="image" type="image/webp" media="(prefers-color-scheme: dark)" />
+            </Helmet>
             <Hero />
             <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="300px 0px">
                 <About />
