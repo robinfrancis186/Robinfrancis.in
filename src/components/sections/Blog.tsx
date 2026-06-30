@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Carousel3D, CarouselItem } from "@/components/ui/carousel-3d";
-import { BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import ArticleActions from "@/components/blog/ArticleActions";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 
@@ -60,10 +60,6 @@ const Blog = () => {
                 {!selectedPost && (
                     <>
                         <div className="text-center max-w-3xl mx-auto mb-16">
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary ring-1 ring-primary/20 uppercase tracking-wider mb-6">
-                                <BookOpen className="h-3.5 w-3.5" />
-                                Insights
-                            </span>
                             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
                                 Latest <span className="text-primary">Updates</span>
                             </h2>
