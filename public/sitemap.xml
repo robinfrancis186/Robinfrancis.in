@@ -2,32 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.robinfrancis.in/</loc>
-        <lastmod>2026-03-17</lastmod>
+        <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/projects</loc>
-        <lastmod>2026-03-17</lastmod>
+        <loc>https://www.robinfrancis.in/projects/</loc>
+        <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog</loc>
-        <lastmod>2026-03-17</lastmod>
+        <loc>https://www.robinfrancis.in/blog/</loc>
+        <lastmod>2026-07-01</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/gallery</loc>
-        <lastmod>2026-03-17</lastmod>
+        <loc>https://www.robinfrancis.in/gallery/</loc>
+        <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.robinfrancis.in/images/robin-francis-resume.pdf</loc>
-        <lastmod>2026-03-17</lastmod>
+        <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/blog/soulsync-emotional-wellness/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/blog/ieee-r10-volunteer-award/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/blog/future-of-accessible-technology/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/blog/scalable-systems-with-communities/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.robinfrancis.in/blog/people-centric-ai/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 </urlset>

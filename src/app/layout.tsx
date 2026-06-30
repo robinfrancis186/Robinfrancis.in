@@ -4,7 +4,7 @@ import ClientLayout from "./client-layout";
 
 const siteUrl = "https://www.robinfrancis.in";
 const defaultDescription =
-  "Portfolio of Robin Francis — AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions.";
+  "Robin Francis builds accessible AI products, scalable web systems, and community programs for people-centric technology.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      "x-default": "/",
+    },
   },
   openGraph: {
     type: "website",
