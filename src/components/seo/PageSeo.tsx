@@ -32,9 +32,8 @@ const PageSeo = ({
     ogDescription,
     twitterTitle,
     twitterDescription,
-    jsonLd,
+    jsonLd: _jsonLd,
 }: PageSeoProps) => {
-    const normalizedJsonLd = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     const resolvedOgTitle = ogTitle || title;
     const resolvedOgDescription = ogDescription || description;
     const resolvedTwitterTitle = twitterTitle || title;
@@ -58,11 +57,6 @@ const PageSeo = ({
             <meta name="twitter:description" content={resolvedTwitterDescription} />
             <meta name="twitter:image" content={image} />
 
-            {normalizedJsonLd.map((entry, index) => (
-                <script key={index} type="application/ld+json">
-                    {JSON.stringify(entry)}
-                </script>
-            ))}
         </Helmet>
     );
 };

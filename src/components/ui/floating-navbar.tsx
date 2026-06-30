@@ -7,7 +7,9 @@ import {
     useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { ReactElement } from "react";
 
 
 export const FloatingNav = ({
@@ -17,13 +19,13 @@ export const FloatingNav = ({
     navItems: {
         name: string;
         link: string;
-        icon?: JSX.Element;
+        icon?: ReactElement;
     }[];
     className?: string;
 }) => {
     const { scrollYProgress } = useScroll();
-    const location = useLocation();
-    const isHomePage = location.pathname === "/";
+    const pathname = usePathname();
+    const isHomePage = pathname === "/";
 
     const [visible, setVisible] = useState(true);
 
@@ -81,9 +83,9 @@ export const FloatingNav = ({
                                 <span className="hidden sm:block text-sm">{navItem.name}</span>
                             </a>
                         ) : (
-                            <RouterLink
+                            <Link
                                 key={`link=${idx}`}
-                                to={navItem.link}
+                                href={navItem.link}
                                 aria-label={navItem.name}
                                 className={cn(
                                     "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
@@ -91,7 +93,7 @@ export const FloatingNav = ({
                             >
                                 <span className="block sm:hidden">{navItem.icon}</span>
                                 <span className="hidden sm:block text-sm">{navItem.name}</span>
-                            </RouterLink>
+                            </Link>
                         )
                     })}
 
@@ -104,13 +106,13 @@ export const FloatingNav = ({
                             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px" />
                         </a>
                     ) : (
-                        <RouterLink
-                            to="/#contact"
+                        <Link
+                            href="/#contact"
                             className="relative inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-white text-slate-900 border border-slate-300 shadow-sm hover:bg-slate-50 hover:shadow-md transition dark:bg-slate-900 dark:text-white dark:border-slate-600 dark:hover:bg-slate-800"
                         >
                             <span>Contact</span>
                             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px" />
-                        </RouterLink>
+                        </Link>
                     )}
                 </motion.div>
             </AnimatePresence>

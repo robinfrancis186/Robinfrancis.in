@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { useDomTheme } from "@/hooks/use-dom-theme";
 import { cn } from "@/lib/utils";
@@ -11,8 +11,25 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
-    const { setTheme } = useTheme();
     const isDark = useDomTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <button
+                type="button"
+                className={cn(
+                    "flex size-11 items-center justify-center rounded-full border border-zinc-200 bg-white text-black shadow-sm",
+                    className
+                )}
+                aria-label="Toggle dark mode"
+            />
+        );
+    }
 
     return (
         <button
@@ -22,7 +39,12 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                 isDark ? "border-zinc-800 bg-black text-white" : "border-zinc-200 bg-white text-black",
                 className
             )}
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={() => {
+                const nextIsDark = !isDark;
+                document.documentElement.classList.toggle("dark", nextIsDark);
+                document.documentElement.style.colorScheme = nextIsDark ? "dark" : "light";
+                window.localStorage.setItem("theme", nextIsDark ? "dark" : "light");
+            }}
             aria-label="Toggle dark mode"
         >
             <svg

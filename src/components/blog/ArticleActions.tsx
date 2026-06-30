@@ -94,13 +94,13 @@ const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProp
     const [shareStatus, setShareStatus] = useState("");
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const [playbackRate, setPlaybackRate] = useState<PlaybackRate>(1);
+    const [supportsNativeShare, setSupportsNativeShare] = useState(false);
     const mountedRef = useRef(true);
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
     const elapsedRef = useRef(0);
     const timerRef = useRef<number | null>(null);
     const articleWords = useMemo(() => tokenize(`${title}. ${text}`), [title, text]);
     const totalSeconds = useMemo(() => estimateAudioSeconds(articleWords.length, playbackRate), [articleWords.length, playbackRate]);
-    const supportsNativeShare = typeof (navigator as ShareCapableNavigator).share === "function";
     const isActive = listenState !== "idle";
 
     useEffect(() => {
@@ -108,6 +108,8 @@ const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProp
     }, [elapsedSeconds]);
 
     useEffect(() => {
+        setSupportsNativeShare(typeof (navigator as ShareCapableNavigator).share === "function");
+
         return () => {
             mountedRef.current = false;
             if (timerRef.current) {

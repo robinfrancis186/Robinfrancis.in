@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Carousel3D, CarouselItem } from "@/components/ui/carousel-3d";
 import { BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
 import ArticleActions from "@/components/blog/ArticleActions";
@@ -72,7 +72,7 @@ const Blog = () => {
                             </p>
                             
                             <Link
-                                to="/blog"
+                                href="/blog"
                                 onClick={() => window.scrollTo(0, 0)}
                                 className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase hover:text-primary/80 transition-colors"
                             >
@@ -127,7 +127,7 @@ const Blog = () => {
                                 {/* Only link to Sanity posts if the ID doesn't indicate static fallback */}
                                 {!String(selectedPost.id).startsWith("static-") && (
                                     <Link
-                                        to={`/blog/${selectedPost.slug || selectedPost.id}`}
+                                        href={`/blog/${selectedPost.slug || selectedPost.id}`}
                                         onClick={() => window.scrollTo(0, 0)}
                                         className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition shadow-md"
                                     >

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 
-const DEFAULT_SITEMAP_PATH = 'docs/sitemap.xml';
-const DEFAULT_KEY_FILE_PATH = 'docs/a3b70c9d8aec4d78a9cae418efcadd37.txt';
+const DEFAULT_SITEMAP_PATH = 'public/sitemap.xml';
+const DEFAULT_KEY_FILE_PATH = 'public/a3b70c9d8aec4d78a9cae418efcadd37.txt';
 const DEFAULT_KEY_LOCATION = 'https://www.robinfrancis.in/a3b70c9d8aec4d78a9cae418efcadd37.txt';
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/IndexNow';
 

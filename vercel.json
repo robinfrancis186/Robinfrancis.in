@@ -1,9 +1,7 @@
 {
-  "framework": "vite",
+  "framework": "nextjs",
   "installCommand": "npm ci && npm ci --prefix portfolio-cms --legacy-peer-deps",
   "buildCommand": "npm run build",
-  "outputDirectory": "docs",
-  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",

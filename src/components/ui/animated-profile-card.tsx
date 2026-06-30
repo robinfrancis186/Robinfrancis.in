@@ -10,8 +10,8 @@ import {
     CardFooter,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useDomTheme } from "@/hooks/use-dom-theme";
 import { forwardRef, useRef, useCallback } from "react";
-import { useTheme } from "next-themes";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
@@ -182,8 +182,8 @@ export const RevealCardContainer = forwardRef<HTMLDivElement, RevealCardProps>(
     ) => {
         const holderRef = useRef<HTMLDivElement | null>(null);
         const overlayRef = useRef<HTMLDivElement | null>(null);
-        const { resolvedTheme } = useTheme();
-        const overlayMode = resolvedTheme === "dark" ? "light" : "dark";
+        const isDark = useDomTheme();
+        const overlayMode = isDark ? "light" : "dark";
 
         const assignRef = useCallback(
             (el: HTMLDivElement | null) => {

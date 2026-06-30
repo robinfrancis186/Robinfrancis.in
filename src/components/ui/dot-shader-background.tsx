@@ -3,7 +3,7 @@
 import { useMemo, useEffect, useState } from 'react'
 import { Canvas, ThreeEvent, useFrame, useThree } from '@react-three/fiber'
 import { shaderMaterial, useTrailTexture } from '@react-three/drei'
-import { useTheme } from 'next-themes'
+import { useDomTheme } from '@/hooks/use-dom-theme'
 import * as THREE from 'three'
 
 const DotMaterial = shaderMaterial(
@@ -101,13 +101,13 @@ const DotMaterial = shaderMaterial(
 function Scene() {
     const size = useThree((s) => s.size)
     const viewport = useThree((s) => s.viewport)
-    const { theme } = useTheme()
+    const isDark = useDomTheme()
 
     const rotation = 0
     const gridSize = 100
 
     const getThemeColors = () => {
-        switch (theme) {
+        switch (isDark ? 'dark' : 'light') {
             case 'dark':
                 return {
                     dotColor: '#FFFFFF',
@@ -148,7 +148,7 @@ function Scene() {
         dotMaterial.uniforms.dotColor.value.setHex(parseInt(themeColors.dotColor.replace('#', '0x')))
         dotMaterial.uniforms.bgColor.value.setHex(parseInt(themeColors.bgColor.replace('#', '0x')))
         dotMaterial.uniforms.dotOpacity.value = themeColors.dotOpacity
-    }, [theme, dotMaterial, themeColors])
+    }, [isDark, dotMaterial, themeColors])
 
     useFrame((state) => {
         dotMaterial.uniforms.time.value = state.clock.elapsedTime
