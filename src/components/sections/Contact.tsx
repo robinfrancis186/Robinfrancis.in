@@ -80,23 +80,6 @@ const Contact = () => {
                     <p className="mx-auto my-3 max-w-lg text-center text-sm text-muted-foreground lg:mx-0 lg:text-left">
                         I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
                     </p>
-                    <div className="mt-6 flex justify-center lg:justify-start">
-                        <a
-                            href="https://chai4.me/robin"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title="Support Robin on Chai4Me"
-                            className="inline-flex flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white px-8 py-2 no-underline shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-950"
-                        >
-                            <img
-                                src="https://chai4.me/icons/wordmark.png"
-                                alt="Chai4Me"
-                                className="mb-1 h-8 object-contain"
-                                loading="lazy"
-                            />
-                            <span className="font-sans text-sm font-semibold text-neutral-500 dark:text-neutral-400">@robin</span>
-                        </a>
-                    </div>
                     <div className="mt-8">
                         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
