@@ -7,7 +7,7 @@ Use this after deploying production changes to Vercel.
 ```bash
 vercel inspect <deployment-url>
 curl -I https://robinfrancis.in/
-curl -I https://www.robinfrancis.in/
+curl -I https://robinfrancis.in/
 ```
 
 Confirm:
@@ -81,7 +81,7 @@ PY
 
 When routes, sitemap, or metadata change:
 
-- Submit [https://www.robinfrancis.in/sitemap.xml](https://www.robinfrancis.in/sitemap.xml).
+- Submit [https://robinfrancis.in/sitemap.xml](https://robinfrancis.in/sitemap.xml).
 - Request indexing for changed canonical URLs.
 - Check indexing status after a few days.
 

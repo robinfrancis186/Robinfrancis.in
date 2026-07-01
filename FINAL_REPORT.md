@@ -5,7 +5,7 @@
 The portfolio is live on Vercel at:
 
 - [https://robinfrancis.in](https://robinfrancis.in)
-- [https://www.robinfrancis.in](https://www.robinfrancis.in)
+- [https://robinfrancis.in](https://robinfrancis.in)
 
 Current stack:
 

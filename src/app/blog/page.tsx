@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BlogRoute } from "../_components/route-clients";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
+import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const blogDescription =
   "Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis.";
@@ -10,25 +11,33 @@ const blogJsonLd = {
   "@type": "Blog",
   name: "Robin Francis Journal",
   description: blogDescription,
-  url: "https://www.robinfrancis.in/blog/",
+  url: absoluteUrl("/blog/"),
   author: {
     "@type": "Person",
     name: "Robin Francis",
-    url: "https://www.robinfrancis.in/",
+    url: `${siteUrl}/`,
   },
   blogPost: STATIC_BLOG_POSTS.map((post) => ({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    url: `https://www.robinfrancis.in/blog/${post.slug}/`,
+    url: absoluteUrl(`/blog/${post.slug}/`),
     datePublished: post.date,
-    image: `https://www.robinfrancis.in${post.image}`,
+    image: absoluteUrl(post.image),
   })),
 };
 
 export const metadata: Metadata = {
   title: "Blog | Robin Francis",
   description: blogDescription,
+  keywords: [
+    ...defaultSeoKeywords,
+    "AI blog",
+    "accessible technology blog",
+    "community leadership stories",
+    "software engineering articles",
+    "people-centric AI writing",
+  ],
   alternates: {
     canonical: "/blog/",
     languages: {
@@ -39,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog | Robin Francis",
     description: blogDescription,
-    url: "/blog/",
+    url: absoluteUrl("/blog/"),
     images: ["/images/blog/ieee-award.webp"],
   },
   twitter: {

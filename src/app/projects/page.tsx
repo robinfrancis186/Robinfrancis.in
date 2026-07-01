@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProjectsRoute } from "../_components/route-clients";
+import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const projectDescription = "Explore AI, accessibility, product, and engineering projects built by Robin Francis.";
 
@@ -30,14 +31,14 @@ const projects = [
     category: "AI wellness companion",
     description:
       "An AI companion concept for cognitive wellness with emotion tracking, memory recall, and privacy-conscious caregiver support.",
-    url: "https://www.robinfrancis.in/projects/",
+    url: absoluteUrl("/projects/"),
   },
   {
     name: "FoodLoop",
     category: "Responsible food redistribution",
     description:
       "A sustainability platform concept using surplus prediction to reduce food waste and improve redistribution workflows.",
-    url: "https://www.robinfrancis.in/projects/",
+    url: absoluteUrl("/projects/"),
   },
 ];
 
@@ -46,7 +47,7 @@ const projectsJsonLd = {
   "@type": "CollectionPage",
   name: "Projects | Robin Francis",
   description: projectDescription,
-  url: "https://www.robinfrancis.in/projects/",
+  url: absoluteUrl("/projects/"),
   hasPart: projects.map((project) => ({
     "@type": "CreativeWork",
     name: project.name,
@@ -56,7 +57,7 @@ const projectsJsonLd = {
     creator: {
       "@type": "Person",
       name: "Robin Francis",
-      url: "https://www.robinfrancis.in/",
+      url: `${siteUrl}/`,
     },
   })),
 };
@@ -64,6 +65,15 @@ const projectsJsonLd = {
 export const metadata: Metadata = {
   title: "Projects | Robin Francis",
   description: projectDescription,
+  keywords: [
+    ...defaultSeoKeywords,
+    "Robin Francis projects",
+    "AI QA browser agent",
+    "Argus autonomous QA",
+    "BulkyFi certificate generator",
+    "STRIDE Kerala website",
+    "assistive technology projects",
+  ],
   alternates: {
     canonical: "/projects/",
     languages: {
@@ -74,7 +84,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Projects | Robin Francis",
     description: projectDescription,
-    url: "/projects/",
+    url: absoluteUrl("/projects/"),
     images: ["/images/projects/stride-website.webp"],
   },
   twitter: {

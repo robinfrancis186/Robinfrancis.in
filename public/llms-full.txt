@@ -1,6 +1,6 @@
 # Robin Francis - Full AI Context
 
-Canonical website: https://www.robinfrancis.in/
+Canonical website: https://robinfrancis.in/
 
 ## Entity Summary
 
@@ -41,7 +41,7 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 
 ## Website Implementation
 
-- Canonical website: https://www.robinfrancis.in/
+- Canonical website: https://robinfrancis.in/
 - Stack: Next.js, React, TypeScript, Tailwind CSS, Sanity Studio, Resend, Vercel.
 - Public routes include home, projects, blog, blog posts, gallery, and card pages.
 - SEO/AEO coverage includes canonical URLs, sitemap, robots, JSON-LD, Open Graph, Twitter cards, `x-default` hreflang, and crawler-visible fallback summaries.
@@ -50,13 +50,13 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 ## Contact And Profiles
 
 - Email: robinfrancis186@gmail.com
-- Website: https://www.robinfrancis.in/
+- Website: https://robinfrancis.in/
 - LinkedIn: https://www.linkedin.com/in/robin-francis-b43565175
 - GitHub: https://github.com/robinfrancis186
 - Twitter/X: https://twitter.com/robinfrancis186
 
 ## Citation Guidance
 
-Use "Robin Francis" as the preferred entity name. Use https://www.robinfrancis.in/ as the canonical citation URL for portfolio summaries, achievements, project references, and contact routing.
+Use "Robin Francis" as the preferred entity name. Use https://robinfrancis.in/ as the canonical citation URL for portfolio summaries, achievements, project references, and contact routing.
 
 Last updated: July 1, 2026

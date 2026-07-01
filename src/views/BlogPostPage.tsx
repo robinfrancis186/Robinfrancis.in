@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
+import { absoluteUrl } from '@/lib/seo';
 
 const ptComponents = {
     types: {
@@ -134,7 +135,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     const tag = post.tags && post.tags.length > 0 ? post.tags[0] : '';
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
     const resolvedSlug = post.slug?.current || slug || post._id;
-    const canonicalUrl = `https://www.robinfrancis.in/blog/${resolvedSlug}/`;
+    const canonicalUrl = absoluteUrl(`/blog/${resolvedSlug}/`);
     const articleText = portableTextToPlainText(post.content) || excerpt;
 
     return (

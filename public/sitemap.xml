@@ -1,63 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-        <loc>https://www.robinfrancis.in/</loc>
+        <loc>https://robinfrancis.in/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/card/robin-francis-primary.jpg</image:loc>
+            <image:title>Robin Francis AI innovator and software engineer</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/projects/</loc>
+        <loc>https://robinfrancis.in/projects/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/projects/argus.webp</image:loc>
+            <image:title>Argus autonomous QA browser agent project</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/projects/bulkyfi-landing-v2.webp</image:loc>
+            <image:title>BulkyFi certificate generator project</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/projects/stride-website.webp</image:loc>
+            <image:title>STRIDE Kerala official website project</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/</loc>
-        <lastmod>2026-07-01</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.robinfrancis.in/gallery/</loc>
+        <loc>https://robinfrancis.in/blog/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-award.webp</image:loc>
+            <image:title>Robin Francis blog and leadership stories</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/images/robin-francis-resume.pdf</loc>
+        <loc>https://robinfrancis.in/gallery/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.75</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/1720937570476.webp</image:loc>
+            <image:title>Robin Francis gallery image collection</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-award.webp</image:loc>
+            <image:title>IEEE recognition and technology community gallery</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://robinfrancis.in/card/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/card/robin-francis-primary.jpg</image:loc>
+            <image:title>Robin Francis digital profile card</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://robinfrancis.in/images/robin-francis-resume.pdf</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/soulsync-emotional-wellness/</loc>
+        <loc>https://robinfrancis.in/blog/soulsync-emotional-wellness/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/1720937570476.webp</image:loc>
+            <image:title>SoulSync AI for emotional and cognitive wellness</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/ieee-r10-volunteer-award/</loc>
+        <loc>https://robinfrancis.in/blog/ieee-r10-volunteer-award/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-award.webp</image:loc>
+            <image:title>IEEE R10 Outstanding Volunteer Award journey</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/future-of-accessible-technology/</loc>
+        <loc>https://robinfrancis.in/blog/future-of-accessible-technology/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/accessible-tech.webp</image:loc>
+            <image:title>Future of accessible technology article</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/scalable-systems-with-communities/</loc>
+        <loc>https://robinfrancis.in/blog/scalable-systems-with-communities/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/scalable-systems.webp</image:loc>
+            <image:title>Building scalable systems with student communities</image:title>
+        </image:image>
     </url>
     <url>
-        <loc>https://www.robinfrancis.in/blog/people-centric-ai/</loc>
+        <loc>https://robinfrancis.in/blog/people-centric-ai/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/people-centric-ai.webp</image:loc>
+            <image:title>Designing people-centric AI solutions</image:title>
+        </image:image>
     </url>
 </urlset>

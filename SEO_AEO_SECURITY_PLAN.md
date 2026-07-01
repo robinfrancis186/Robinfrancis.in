@@ -6,7 +6,7 @@ Current production stack: Next.js on Vercel with route-level metadata, JSON-LD, 
 
 - Canonical site:
   - [https://robinfrancis.in](https://robinfrancis.in)
-  - [https://www.robinfrancis.in](https://www.robinfrancis.in)
+  - [https://robinfrancis.in](https://robinfrancis.in)
 - Public routes:
   - `/`
   - `/projects/`

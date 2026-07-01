@@ -14,16 +14,16 @@ Current status as of July 1, 2026: the site has moved from the older SPA/GitHub 
 
 ## Current Sitemap URLs
 
-- `https://www.robinfrancis.in/`
-- `https://www.robinfrancis.in/projects/`
-- `https://www.robinfrancis.in/blog/`
-- `https://www.robinfrancis.in/gallery/`
-- `https://www.robinfrancis.in/images/robin-francis-resume.pdf`
-- `https://www.robinfrancis.in/blog/soulsync-emotional-wellness/`
-- `https://www.robinfrancis.in/blog/ieee-r10-volunteer-award/`
-- `https://www.robinfrancis.in/blog/future-of-accessible-technology/`
-- `https://www.robinfrancis.in/blog/scalable-systems-with-communities/`
-- `https://www.robinfrancis.in/blog/people-centric-ai/`
+- `https://robinfrancis.in/`
+- `https://robinfrancis.in/projects/`
+- `https://robinfrancis.in/blog/`
+- `https://robinfrancis.in/gallery/`
+- `https://robinfrancis.in/images/robin-francis-resume.pdf`
+- `https://robinfrancis.in/blog/soulsync-emotional-wellness/`
+- `https://robinfrancis.in/blog/ieee-r10-volunteer-award/`
+- `https://robinfrancis.in/blog/future-of-accessible-technology/`
+- `https://robinfrancis.in/blog/scalable-systems-with-communities/`
+- `https://robinfrancis.in/blog/people-centric-ai/`
 
 ## Search Console Workflow
 

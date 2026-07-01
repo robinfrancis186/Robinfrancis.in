@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostRoute } from "@/app/_components/route-clients";
 import { findStaticBlogPost, STATIC_BLOG_POSTS } from "@/data/blogPosts";
+import { absoluteUrl, defaultSeoImage, siteUrl } from "@/lib/seo";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -27,6 +28,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: `${post.title} | Robin Francis Journal`,
     description: post.excerpt,
+    keywords: [
+      "Robin Francis",
+      post.title,
+      post.category,
+      ...post.tags,
+      "AI engineering",
+      "accessible technology",
+      "community leadership",
+    ],
     alternates: {
       canonical,
       languages: {
@@ -38,9 +48,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: "article",
       title: post.title,
       description: post.excerpt,
-      url: canonical,
+      url: absoluteUrl(canonical),
       images: [post.image],
       publishedTime: post.date,
+      authors: ["Robin Francis"],
+      tags: post.tags,
     },
     twitter: {
       card: "summary_large_image",
@@ -59,10 +71,10 @@ export default async function Page({ params }: BlogPostPageProps) {
   }
 
   const post = findStaticBlogPost(slug);
-  const canonicalUrl = post ? `https://www.robinfrancis.in/blog/${post.slug}/` : "";
+  const canonicalUrl = post ? absoluteUrl(`/blog/${post.slug}/`) : "";
   const imageUrl = post?.image
-    ? `https://www.robinfrancis.in${post.image}`
-    : "https://www.robinfrancis.in/images/card/robin-francis-primary.jpg";
+    ? absoluteUrl(post.image)
+    : absoluteUrl(defaultSeoImage);
   const articleJsonLd = post
     ? {
         "@context": "https://schema.org",
@@ -77,18 +89,20 @@ export default async function Page({ params }: BlogPostPageProps) {
         author: {
           "@type": "Person",
           name: "Robin Francis",
-          url: "https://www.robinfrancis.in/",
+          url: `${siteUrl}/`,
         },
         publisher: {
           "@type": "Organization",
           name: "Robin Francis",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.robinfrancis.in/images/favicon-r.png",
+            url: absoluteUrl("/images/favicon-r.png"),
           },
         },
         datePublished: post.date,
         dateModified: post.date,
+        keywords: post.tags.join(", "),
+        articleSection: post.category,
       }
     : null;
 

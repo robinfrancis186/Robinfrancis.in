@@ -1,18 +1,33 @@
 import type { Metadata } from "next";
 import "@/index.css";
 import ClientLayout from "./client-layout";
-
-const siteUrl = "https://www.robinfrancis.in";
-const defaultDescription =
-  "Robin Francis builds accessible AI products, scalable web systems, and community programs for people-centric technology.";
+import {
+  defaultSeoDescription,
+  defaultSeoImage,
+  defaultSeoKeywords,
+  siteName,
+  siteUrl,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: siteName,
   title: {
     default: "Robin Francis | AI Innovator & Community Leader",
     template: "%s",
   },
-  description: defaultDescription,
+  description: defaultSeoDescription,
+  keywords: defaultSeoKeywords,
+  authors: [{ name: "Robin Francis", url: siteUrl }],
+  creator: "Robin Francis",
+  publisher: "Robin Francis",
+  manifest: "/manifest.webmanifest",
+  category: "technology",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -31,14 +46,17 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     title: "Robin Francis | AI Innovator & Community Leader",
-    description: defaultDescription,
-    images: ["/images/card/robin-francis-primary.jpg"],
+    description: defaultSeoDescription,
+    siteName,
+    locale: "en_US",
+    images: [defaultSeoImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robin Francis | AI Innovator & Community Leader",
-    description: defaultDescription,
-    images: ["/images/card/robin-francis-primary.jpg"],
+    description: defaultSeoDescription,
+    creator: "@robinfrancis186",
+    images: [defaultSeoImage],
   },
   robots: {
     index: true,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GalleryRoute } from "../_components/route-clients";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
+import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const galleryDescription =
   "Explore a curated collection of moments, landscapes, and visual stories by Robin Francis.";
@@ -10,17 +11,17 @@ const galleryJsonLd = {
   "@type": "CollectionPage",
   name: "Robin Francis Gallery",
   description: galleryDescription,
-  url: "https://www.robinfrancis.in/gallery/",
+  url: absoluteUrl("/gallery/"),
   creator: {
     "@type": "Person",
     name: "Robin Francis",
-    url: "https://www.robinfrancis.in/",
+    url: `${siteUrl}/`,
   },
   hasPart: GALLERY_ITEMS.map((item) => ({
     "@type": "ImageObject",
     name: item.title,
     description: item.alt,
-    url: `https://www.robinfrancis.in${item.img}`,
+    url: absoluteUrl(item.img),
     author: {
       "@type": "Person",
       name: "Robin Francis",
@@ -31,6 +32,14 @@ const galleryJsonLd = {
 export const metadata: Metadata = {
   title: "Gallery | Robin Francis",
   description: galleryDescription,
+  keywords: [
+    ...defaultSeoKeywords,
+    "Robin Francis gallery",
+    "AI community events",
+    "technology leadership photos",
+    "IEEE award gallery",
+    "portfolio images",
+  ],
   alternates: {
     canonical: "/gallery/",
     languages: {
@@ -41,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gallery | Robin Francis",
     description: galleryDescription,
-    url: "/gallery/",
+    url: absoluteUrl("/gallery/"),
     images: ["/images/blog/ieee-award.webp"],
   },
   twitter: {

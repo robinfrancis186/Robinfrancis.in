@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CardRoute } from "../_components/route-clients";
+import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const cardDescription =
   "Robin Francis is an AI innovator and community leader available for meaningful AI, product, accessibility, and community collaborations.";
@@ -8,11 +9,11 @@ const cardJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
   name: "Robin Francis Profile Card",
-  url: "https://www.robinfrancis.in/card/",
+  url: absoluteUrl("/card/"),
   mainEntity: {
     "@type": "Person",
     name: "Robin Francis",
-    url: "https://www.robinfrancis.in/",
+    url: `${siteUrl}/`,
     jobTitle: "AI Innovator and Community Leader",
     sameAs: [
       "https://github.com/robinfrancis186",
@@ -26,6 +27,13 @@ const cardJsonLd = {
 export const metadata: Metadata = {
   title: "Robin Francis Card | AI Innovator & Community Leader",
   description: cardDescription,
+  keywords: [
+    ...defaultSeoKeywords,
+    "Robin Francis contact",
+    "Robin Francis business card",
+    "AI collaborator",
+    "technology mentor",
+  ],
   alternates: {
     canonical: "/card/",
     languages: {
@@ -36,14 +44,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Robin Francis Card | AI Innovator & Community Leader",
     description: cardDescription,
-    url: "/card/",
-    images: ["/images/card/robin-francis-primary.jpg"],
+    url: absoluteUrl("/card/"),
+    images: [defaultSeoImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robin Francis Card | AI Innovator & Community Leader",
     description: cardDescription,
-    images: ["/images/card/robin-francis-primary.jpg"],
+    images: [defaultSeoImage],
   },
 };
 

@@ -70,7 +70,7 @@ Local-first bulk certificate generator for creating professional certificates fr
 - Email: robinfrancis186@gmail.com
 - Phone: +918078256598
 - Location: Kerala, India
-- Website: https://www.robinfrancis.in/
+- Website: https://robinfrancis.in/
 - LinkedIn: https://www.linkedin.com/in/robin-francis-b43565175
 - GitHub: https://github.com/robinfrancis186
 - Twitter: @robinfrancis186
@@ -102,7 +102,7 @@ Secured 100%
 ## Website Implementation
 
 - Built with Next.js, React, TypeScript, and Tailwind CSS.
-- Hosted on Vercel at https://www.robinfrancis.in/.
+- Hosted on Vercel at https://robinfrancis.in/.
 - Contact form sends through a Resend-backed API route.
 - Includes sitemap, robots, structured data, canonical URLs, and AI discovery files.
 - Uses Vercel security headers including CSP, HSTS, X-Frame-Options, and nosniff.
@@ -115,8 +115,8 @@ Robin believes in building technology that solves real human problems while upli
 
 ## AI Discovery Files
 
-- Summary: https://www.robinfrancis.in/llms.txt
-- Full context: https://www.robinfrancis.in/llms-full.txt
-- Sitemap: https://www.robinfrancis.in/sitemap.xml
+- Summary: https://robinfrancis.in/llms.txt
+- Full context: https://robinfrancis.in/llms-full.txt
+- Sitemap: https://robinfrancis.in/sitemap.xml
 
 Last Updated: July 1, 2026

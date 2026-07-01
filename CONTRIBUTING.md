@@ -1,6 +1,6 @@
 # Contributing
 
-This repository powers [robinfrancis.in](https://www.robinfrancis.in/). It is a Next.js portfolio with interactive client views, static SEO metadata, Sanity Studio output, and a Resend-backed contact API.
+This repository powers [robinfrancis.in](https://robinfrancis.in/). It is a Next.js portfolio with interactive client views, static SEO metadata, Sanity Studio output, and a Resend-backed contact API.
 
 ## Setup
 

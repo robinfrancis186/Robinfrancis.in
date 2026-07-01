@@ -5,7 +5,7 @@ Current production setup is ready on Vercel.
 
 Live domains:
 - https://robinfrancis.in
-- https://www.robinfrancis.in
+- https://robinfrancis.in
 
 Current stack:
 - Next.js 16 App Router

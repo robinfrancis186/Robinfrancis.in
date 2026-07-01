@@ -6,12 +6,12 @@ Current status as of July 1, 2026: the site runs on Next.js and Vercel, not the 
 
 Canonical public URLs use trailing slashes:
 
-- `https://www.robinfrancis.in/`
-- `https://www.robinfrancis.in/projects/`
-- `https://www.robinfrancis.in/blog/`
-- `https://www.robinfrancis.in/gallery/`
-- `https://www.robinfrancis.in/card/`
-- `https://www.robinfrancis.in/blog/[slug]/`
+- `https://robinfrancis.in/`
+- `https://robinfrancis.in/projects/`
+- `https://robinfrancis.in/blog/`
+- `https://robinfrancis.in/gallery/`
+- `https://robinfrancis.in/card/`
+- `https://robinfrancis.in/blog/[slug]/`
 
 ## Where To Maintain This
 

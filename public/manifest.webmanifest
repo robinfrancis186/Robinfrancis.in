@@ -2,10 +2,12 @@
   "name": "Robin Francis - Portfolio",
   "short_name": "Robin Portfolio",
   "description": "Portfolio of Robin Francis, AI innovator and software engineer building accessible technology.",
+  "id": "https://robinfrancis.in/",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
+  "categories": ["portfolio", "technology", "productivity"],
   "icons": [
     {
       "src": "/images/favicon-r.png",

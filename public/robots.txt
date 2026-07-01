@@ -38,7 +38,7 @@ Allow: /
 Disallow: /cms/
 
 # Sitemaps
-Sitemap: https://www.robinfrancis.in/sitemap.xml
+Sitemap: https://robinfrancis.in/sitemap.xml
 
 # Host
-Host: https://www.robinfrancis.in
+Host: https://robinfrancis.in

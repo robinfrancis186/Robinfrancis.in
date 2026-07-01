@@ -52,7 +52,7 @@ vercel --prod --yes
 Production domains:
 
 - [https://robinfrancis.in](https://robinfrancis.in)
-- [https://www.robinfrancis.in](https://www.robinfrancis.in)
+- [https://robinfrancis.in](https://robinfrancis.in)
 
 ## 6. Post-Deploy Smoke Test
 

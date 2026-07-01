@@ -1,42 +1,75 @@
 import type { Metadata } from "next";
 import { HomeRoute } from "./_components/route-clients";
+import {
+  absoluteUrl,
+  defaultSeoDescription,
+  defaultSeoImage,
+  defaultSeoKeywords,
+  organizationJsonLd,
+  personJsonLd,
+  siteUrl,
+  websiteJsonLd,
+} from "@/lib/seo";
 
-const homeDescription =
-  "Robin Francis builds accessible AI products, scalable web systems, and community programs for people-centric technology.";
+const homeDescription = defaultSeoDescription;
 
 const homeJsonLd = [
+  personJsonLd,
+  organizationJsonLd,
+  websiteJsonLd,
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Robin Francis",
-    url: "https://www.robinfrancis.in/",
-    image: "https://www.robinfrancis.in/images/card/robin-francis-primary.jpg",
-    jobTitle: "AI Innovator and Software Engineer",
-    email: "mailto:robinfrancis186@gmail.com",
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Sahrdaya College of Engineering & Technology",
+    "@type": "ProfilePage",
+    "@id": `${siteUrl}/#profile`,
+    name: "Robin Francis portfolio",
+    url: `${siteUrl}/`,
+    description: homeDescription,
+    mainEntity: {
+      "@id": `${siteUrl}/#person`,
     },
-    knowsAbout: [
-      "Artificial intelligence",
-      "Accessible technology",
-      "Software engineering",
-      "Community leadership",
-      "Product strategy",
-    ],
-    sameAs: [
-      "https://github.com/robinfrancis186",
-      "https://www.linkedin.com/in/robin-francis-b43565175",
-      "https://www.instagram.com/robinfrancis186",
-      "https://medium.com/@robinfrancis186",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    name: ["Home", "About", "Projects", "Blog", "Gallery", "Contact"],
+    url: [
+      absoluteUrl("/"),
+      absoluteUrl("/#about"),
+      absoluteUrl("/projects/"),
+      absoluteUrl("/blog/"),
+      absoluteUrl("/gallery/"),
+      absoluteUrl("/#contact"),
     ],
   },
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Robin Francis",
-    url: "https://www.robinfrancis.in/",
-    description: homeDescription,
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Who is Robin Francis?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Robin Francis is an AI innovator, software engineer, and community leader focused on accessible, people-centric technology.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What does Robin Francis build?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Robin builds AI-powered products, accessible web platforms, local-first tools, and community programs for social impact.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I contact Robin Francis?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Use the contact form on robinfrancis.in or email robinfrancis186@gmail.com.",
+        },
+      },
+    ],
   },
 ];
 
@@ -52,6 +85,13 @@ const noScriptSummary = `
 export const metadata: Metadata = {
   title: "Robin Francis | AI Innovator & Community Leader",
   description: homeDescription,
+  keywords: [
+    ...defaultSeoKeywords,
+    "Robin Francis portfolio",
+    "AI product builder",
+    "accessible web systems",
+    "community technology leader",
+  ],
   alternates: {
     canonical: "/",
     languages: {
@@ -62,14 +102,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,
-    url: "https://www.robinfrancis.in/",
-    images: ["/images/card/robin-francis-primary.jpg"],
+    url: siteUrl,
+    images: [defaultSeoImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,
-    images: ["/images/card/robin-francis-primary.jpg"],
+    images: [defaultSeoImage],
   },
 };
 

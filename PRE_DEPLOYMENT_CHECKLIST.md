@@ -1,6 +1,6 @@
 # Pre-Deployment Checklist
 
-Use this before every production deployment to [robinfrancis.in](https://www.robinfrancis.in/).
+Use this before every production deployment to [robinfrancis.in](https://robinfrancis.in/).
 
 ## Code Quality
 
@@ -77,7 +77,7 @@ curl -L https://robinfrancis.in/sitemap.xml
 Expected:
 
 - Deployment is `READY` in Vercel.
-- `https://robinfrancis.in` and `https://www.robinfrancis.in` resolve.
+- `https://robinfrancis.in` and `https://robinfrancis.in` resolve.
 - Security headers are present.
 - Main pages return `200`.
 - Sitemap XML parses.

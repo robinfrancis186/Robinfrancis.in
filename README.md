@@ -2,12 +2,12 @@
 
 Personal portfolio for Robin Francis, built with Next.js, React, TypeScript, Tailwind CSS, Sanity Studio, and Vercel.
 
-[![Live Site](https://img.shields.io/badge/live-robinfrancis.in-blue)](https://www.robinfrancis.in/)
+[![Live Site](https://img.shields.io/badge/live-robinfrancis.in-blue)](https://robinfrancis.in/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-blue)](https://www.typescriptlang.org/)
 [![Vercel](https://img.shields.io/badge/deploy-Vercel-black)](https://vercel.com/)
 
-Live site: [www.robinfrancis.in](https://www.robinfrancis.in/)
+Live site: [robinfrancis.in](https://robinfrancis.in/)
 
 ## What This Site Includes
 
@@ -102,7 +102,7 @@ vercel --prod --yes
 Current production domains:
 
 - [https://robinfrancis.in](https://robinfrancis.in)
-- [https://www.robinfrancis.in](https://www.robinfrancis.in)
+- [https://www.robinfrancis.in](https://www.robinfrancis.in) redirects to the canonical apex domain.
 
 After deployment, verify:
 
@@ -138,6 +138,7 @@ When changing routes, update:
 - [Pre-Deployment Checklist](PRE_DEPLOYMENT_CHECKLIST.md)
 - [Post-Deployment Actions](POST_DEPLOYMENT_ACTIONS.md)
 - [SEO, AEO, and Security Plan](SEO_AEO_SECURITY_PLAN.md)
+- [SEO Ranking Guide 2026](SEO_RANKING_GUIDE_2026.md)
 - [Indexing Notes](INDEXING_ISSUES_FIX.md)
 - [Performance Notes](PERFORMANCE_OPTIMIZATION.md)
 
@@ -153,7 +154,7 @@ Older optimization reports are retained for historical context and now include c
 
 Robin Francis
 
-- Website: [www.robinfrancis.in](https://www.robinfrancis.in/)
+- Website: [robinfrancis.in](https://robinfrancis.in/)
 - GitHub: [@robinfrancis186](https://github.com/robinfrancis186)
 - LinkedIn: [Robin Francis](https://www.linkedin.com/in/robin-francis-b43565175)
 - Email: robinfrancis186@gmail.com
