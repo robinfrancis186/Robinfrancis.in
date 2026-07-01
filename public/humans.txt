@@ -5,6 +5,8 @@
   From: India
 
 /* SITE */
-  Standards: HTML5, CSS3, ES6, React, Next.js, Tailwind CSS
+  Standards: HTML5, CSS3, ES6, React, Next.js, TypeScript, Tailwind CSS
   Components: Framer Motion, Aceternity UI, Magic UI
+  Services: Vercel, Sanity, Resend
   Software: VS Code
+  Last update: 2026-07-01

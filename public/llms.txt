@@ -54,6 +54,17 @@ Co-led the first international virtual career fair with 31 global recruiters and
 Official website for STRIDE Kerala - Central digital hub for assistive technology innovation.
 - Technologies: Web Development, Accessibility, UI/UX
 
+### Argus
+Local-first autonomous QA browser agent that scouts a website, understands product flows, deploys synthetic users, and returns evidence-backed bug reports.
+- Repository: https://github.com/robinfrancis186/argus.git
+- Technologies: AI QA, browser automation, local-first testing
+
+### BulkyFi
+Local-first bulk certificate generator for creating professional certificates from templates and recipient spreadsheets, with browser storage and PDF/PNG export.
+- Live app: https://bulkyfi.vercel.app/
+- Repository: https://github.com/robinfrancis186/bulkyfi
+- Technologies: Web app, local-first storage, PDF/PNG export
+
 ## Contact
 
 - Email: robinfrancis186@gmail.com
@@ -88,6 +99,14 @@ Secured 100%
 - Full-stack web development
 - Technical mentorship and speaking
 
+## Website Implementation
+
+- Built with Next.js, React, TypeScript, and Tailwind CSS.
+- Hosted on Vercel at https://www.robinfrancis.in/.
+- Contact form sends through a Resend-backed API route.
+- Includes sitemap, robots, structured data, canonical URLs, and AI discovery files.
+- Uses Vercel security headers including CSP, HSTS, X-Frame-Options, and nosniff.
+
 ## Philosophy
 
 Robin believes in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity. His work focuses on accessible, people-centric technology that creates meaningful impact.
@@ -100,4 +119,4 @@ Robin believes in building technology that solves real human problems while upli
 - Full context: https://www.robinfrancis.in/llms-full.txt
 - Sitemap: https://www.robinfrancis.in/sitemap.xml
 
-Last Updated: April 2026
+Last Updated: July 1, 2026

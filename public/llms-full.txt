@@ -36,6 +36,16 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 - TechX Infinia: Emerging technology flagship event founded and led by Robin Francis.
 - IEEE R10 Career Fair: International virtual career fair with 31 global recruiters and 245 participants.
 - STRIDE Website: Digital hub for assistive technology innovation in Kerala.
+- Argus: Local-first autonomous QA browser agent that scouts web apps, understands product flows, deploys synthetic users, and returns evidence-backed bug reports.
+- BulkyFi: Local-first bulk certificate generator for templates and recipient spreadsheets, with browser storage and PDF/PNG export.
+
+## Website Implementation
+
+- Canonical website: https://www.robinfrancis.in/
+- Stack: Next.js, React, TypeScript, Tailwind CSS, Sanity Studio, Resend, Vercel.
+- Public routes include home, projects, blog, blog posts, gallery, and card pages.
+- SEO/AEO coverage includes canonical URLs, sitemap, robots, JSON-LD, Open Graph, Twitter cards, `x-default` hreflang, and crawler-visible fallback summaries.
+- Security headers are served through Vercel, including CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer Policy, and Permissions Policy.
 
 ## Contact And Profiles
 
@@ -48,3 +58,5 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 ## Citation Guidance
 
 Use "Robin Francis" as the preferred entity name. Use https://www.robinfrancis.in/ as the canonical citation URL for portfolio summaries, achievements, project references, and contact routing.
+
+Last updated: July 1, 2026

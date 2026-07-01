@@ -1,302 +1,95 @@
-# Post-Deployment Actions - Immediate Next Steps
+# Post-Deployment Actions
 
-**Deployment Status**: ✅ Complete  
-**Commit**: 4d5c5a4  
-**Time**: March 19, 2026  
-**Site**: https://www.robinfrancis.in/
+Use this after deploying production changes to Vercel.
 
----
-
-## ⏱️ Right Now (Next 5 Minutes)
-
-### 1. Verify Deployment
+## Immediate Verification
 
 ```bash
-# Check if site is live (wait 2-3 minutes after push)
+vercel inspect <deployment-url>
+curl -I https://robinfrancis.in/
 curl -I https://www.robinfrancis.in/
-
-# Should return: HTTP/2 200
 ```
 
-### 2. Quick Visual Test
+Confirm:
 
-Visit these URLs in your browser:
+- Deployment status is `READY`.
+- `robinfrancis.in` and `www.robinfrancis.in` are aliased to the latest deployment.
+- Response is `200`.
+- CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, Referrer Policy, and Permissions Policy are present.
 
-- ✅ https://www.robinfrancis.in/ (Homepage)
-- ✅ https://www.robinfrancis.in/projects (Projects page)
-- ✅ https://www.robinfrancis.in/blog (Blog page)
-- ✅ https://www.robinfrancis.in/gallery (Gallery page)
+## Route Smoke Test
 
-### 3. Check Console
+Open or curl:
 
-- Open browser DevTools (F12)
-- Check Console tab for errors
-- Check Network tab for failed requests
+- [https://robinfrancis.in/](https://robinfrancis.in/)
+- [https://robinfrancis.in/projects/](https://robinfrancis.in/projects/)
+- [https://robinfrancis.in/blog/](https://robinfrancis.in/blog/)
+- [https://robinfrancis.in/gallery/](https://robinfrancis.in/gallery/)
+- [https://robinfrancis.in/card/](https://robinfrancis.in/card/)
+- [https://robinfrancis.in/blog/ieee-r10-volunteer-award/](https://robinfrancis.in/blog/ieee-r10-volunteer-award/)
 
----
+## Crawl Checks
 
-## 📱 Today (Next 2 Hours)
-
-### 1. Mobile Testing
-
-Test on real devices:
-
-- iPhone/Android phone
-- Tablet
-- Different browsers (Chrome, Safari, Firefox)
-
-### 2. Performance Verification
+Run a quick page-source check when SEO files or route metadata changed:
 
 ```bash
-# Run Lighthouse (install if needed: npm install -g lighthouse)
-lighthouse https://www.robinfrancis.in/ --preset=mobile --view
-lighthouse https://www.robinfrancis.in/ --preset=desktop --view
+python3 - <<'PY'
+from html.parser import HTMLParser
+from urllib.request import urlopen
 
-# Expected scores:
-# Mobile: 75-80
-# Desktop: 99
+class Parser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.meta = []
+        self.h = []
+        self.cur = None
+        self.links = []
+        self.alts = []
+        self.jsonld = 0
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "meta" and attrs.get("name") == "description":
+            self.meta.append(attrs.get("content", ""))
+        if tag in ("h1", "h2"):
+            self.cur = [tag, ""]
+        if tag == "a" and attrs.get("href"):
+            self.links.append(attrs["href"])
+        if tag == "link" and attrs.get("rel") == "alternate":
+            self.alts.append((attrs.get("hreflang"), attrs.get("href")))
+        if tag == "script" and attrs.get("type") == "application/ld+json":
+            self.jsonld += 1
+
+    def handle_data(self, data):
+        if self.cur:
+            self.cur[1] += data
+
+    def handle_endtag(self, tag):
+        if self.cur and tag == self.cur[0]:
+            self.h.append((self.cur[0], " ".join(self.cur[1].split())))
+            self.cur = None
+
+for path in ["/", "/projects/", "/blog/", "/gallery/", "/card/"]:
+    html = urlopen("https://robinfrancis.in" + path, timeout=20).read().decode("utf-8", "replace")
+    p = Parser()
+    p.feed(html)
+    print(path, "meta", len(p.meta), "h1", [h for h in p.h if h[0] == "h1"], "jsonld", p.jsonld, "xdefault", any(a[0] == "x-default" for a in p.alts))
+PY
 ```
 
-### 3. Functionality Check
+## Search Console
 
-- [ ] Dark/light theme toggle works
-- [ ] All navigation links work
-- [ ] Contact form opens
-- [ ] Images load correctly
-- [ ] Blog posts display
-- [ ] Gallery loads
-- [ ] Resume downloads
+When routes, sitemap, or metadata change:
 
----
+- Submit [https://www.robinfrancis.in/sitemap.xml](https://www.robinfrancis.in/sitemap.xml).
+- Request indexing for changed canonical URLs.
+- Check indexing status after a few days.
 
-## 🔍 This Week (Next 7 Days)
+## Monitoring
 
-### 1. Google Search Console (Priority 1)
+- Review Vercel deployment logs.
+- Check browser console for frontend errors.
+- Review contact form submissions.
+- Re-run a crawl if metadata or structured data changed.
 
-**Time**: 15 minutes
-
-1. Go to https://search.google.com/search-console
-2. Add property: www.robinfrancis.in
-3. Verify ownership (HTML file already in place)
-4. Submit sitemap: https://www.robinfrancis.in/sitemap.xml
-5. Request indexing for key pages:
-   - https://www.robinfrancis.in/
-   - https://www.robinfrancis.in/projects/
-   - https://www.robinfrancis.in/blog/
-   - https://www.robinfrancis.in/gallery/
-
-### 2. Bing Webmaster Tools (Priority 2)
-
-**Time**: 10 minutes
-
-1. Go to https://www.bing.com/webmasters
-2. Add site: www.robinfrancis.in
-3. Verify ownership (BingSiteAuth.xml already in place)
-4. Submit sitemap
-5. Check crawl status
-
-### 3. Cloudflare Setup (Priority 3)
-
-**Time**: 30 minutes
-
-1. Sign up at https://www.cloudflare.com/ (free plan)
-2. Add site: www.robinfrancis.in
-3. Update nameservers at your domain registrar
-4. Configure security headers:
-   ```
-   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-   X-Content-Type-Options: nosniff
-   X-Frame-Options: DENY
-   Referrer-Policy: strict-origin-when-cross-origin
-   Permissions-Policy: geolocation=(), microphone=(), camera=()
-   ```
-5. Enable Auto Minify (HTML, CSS, JS)
-6. Enable Brotli compression
-
-### 4. Analytics Setup (Priority 4)
-
-**Time**: 20 minutes
-
-**Google Analytics 4**:
-
-- Already configured (GTM-KGFM5K9N)
-- Set up conversion goals:
-  - Contact form clicks
-  - Resume downloads
-  - External link clicks
-
-**Microsoft Clarity** (Optional):
-
-1. Sign up at https://clarity.microsoft.com/
-2. Add tracking code to index.html
-3. Monitor heatmaps and recordings
-
----
-
-## 📊 Monitoring (Ongoing)
-
-### Daily (First Week)
-
-- Check Google Analytics for traffic
-- Monitor for errors in browser console
-- Check Core Web Vitals in Search Console
-
-### Weekly
-
-- Review performance metrics
-- Check for broken links
-- Monitor search rankings for "Robin Francis"
-- Review analytics for user behavior
-
-### Monthly
-
-- Run full Lighthouse audit
-- Update content (blog posts)
-- Review and update resume
-- Check for dependency updates
-
----
-
-## 🐛 Troubleshooting
-
-### Site Not Loading
-
-```bash
-# Check DNS
-nslookup www.robinfrancis.in
-
-# Check deployment status
-# Go to: https://github.com/robinfrancis186/Robinfrancis.in/actions
-```
-
-### Performance Issues
-
-```bash
-# Re-run build
-npm run build
-
-# Check bundle sizes
-npm run audit:performance
-
-# Optimize remaining images
-npm run optimize:images
-```
-
-### Errors in Console
-
-1. Open browser DevTools (F12)
-2. Check Console tab
-3. Note the error message
-4. Check the file and line number
-5. Fix the issue in source code
-6. Rebuild and redeploy
-
----
-
-## 📞 Quick Commands Reference
-
-```bash
-# Development
-npm run dev                    # Start dev server
-
-# Production
-npm run build                  # Build for production
-npm run preview                # Preview production build
-
-# Optimization
-npm run optimize:images        # Convert images to WebP
-npm run audit:performance      # Analyze bundle sizes
-
-# Testing
-npm run lint                   # Lint code
-lighthouse [URL] --view        # Run Lighthouse
-
-# Deployment
-git add .
-git commit -m "your message"
-git push origin main           # Auto-deploys
-```
-
----
-
-## 📚 Documentation Quick Links
-
-- **Quick Start**: QUICK_START.md
-- **Full Checklist**: IMPLEMENTATION_CHECKLIST.md
-- **Performance Guide**: PERFORMANCE_OPTIMIZATION.md
-- **Pre-Deployment**: PRE_DEPLOYMENT_CHECKLIST.md
-- **Contributing**: CONTRIBUTING.md
-- **Complete Report**: IMPLEMENTATION_COMPLETE.md
-
----
-
-## ✅ Success Checklist
-
-### Immediate (Today)
-
-- [ ] Site loads at www.robinfrancis.in
-- [ ] All pages accessible
-- [ ] No console errors
-- [ ] Mobile responsive
-- [ ] Images load correctly
-
-### This Week
-
-- [ ] Google Search Console configured
-- [ ] Sitemap submitted
-- [ ] Bing Webmaster Tools configured
-- [ ] Cloudflare set up
-- [ ] Analytics goals configured
-
-### This Month
-
-- [ ] 2-3 new blog posts published
-- [ ] Testimonials section added
-- [ ] Project case studies created
-- [ ] Performance monitored and optimized
-
----
-
-## 🎯 Key Metrics to Track
-
-### Performance
-
-- Mobile Lighthouse: Target 75+
-- Desktop Lighthouse: Target 99+
-- LCP: < 2.5s
-- FID: < 100ms
-- CLS: < 0.1
-
-### SEO
-
-- "Robin Francis" ranking: Top 3 on Google
-- Organic traffic: 500+ monthly visitors
-- Indexed pages: All key pages
-- Backlinks: 20+ quality links
-
-### Engagement
-
-- Bounce rate: < 50%
-- Pages per session: 3+
-- Average session: 2+ minutes
-- Contact form submissions: 5+ per month
-
----
-
-## 🎉 Congratulations!
-
-Your portfolio is now:
-
-- ✅ Optimized for performance
-- ✅ SEO ready
-- ✅ Accessible
-- ✅ Well documented
-- ✅ Production ready
-
-**Next milestone**: Get your first 1,000 visitors! 🚀
-
----
-
-**Last Updated**: March 19, 2026  
-**Status**: Deployed & Live  
-**URL**: https://www.robinfrancis.in/
+Last updated: July 1, 2026

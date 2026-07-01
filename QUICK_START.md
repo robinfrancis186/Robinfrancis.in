@@ -1,242 +1,82 @@
-# Quick Start Guide - Post Optimization
+# Quick Start
 
-## 🚀 Immediate Actions
+Current stack: Next.js 16, React 19, TypeScript, Tailwind CSS, Sanity Studio, Resend, and Vercel.
 
-### 1. Build & Test (5 minutes)
+## 1. Install
+
 ```bash
-# Build production version
+git clone https://github.com/robinfrancis186/Robinfrancis.in.git
+cd Robinfrancis.in
+npm install
+```
+
+## 2. Run Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5174](http://localhost:5174).
+
+## 3. Validate
+
+```bash
+npm run typecheck
 npm run build
-
-# Preview locally
-npm run preview
-
-# Open http://localhost:4173 in browser
-# Test all pages: Home, Projects, Blog, Gallery
-# Verify Contact section loads Three.js shader
 ```
 
-### 2. Run Lighthouse (2 minutes)
+The build script:
+
+1. Optimizes images through `prebuild`.
+2. Builds the Sanity Studio in `portfolio-cms`.
+3. Copies the Studio output into `public/cms`.
+4. Builds the Next.js app.
+
+## 4. Preview Production Locally
+
 ```bash
-# Install Lighthouse CLI (if not installed)
-npm install -g lighthouse
-
-# Test mobile performance
-lighthouse http://localhost:4173 --preset=mobile --view
-
-# Test desktop performance
-lighthouse http://localhost:4173 --preset=desktop --view
-
-# Target: Mobile 75+, Desktop 99+
+npm start
 ```
 
-### 3. Deploy to Production (1 minute)
+Open [http://localhost:5174](http://localhost:5174).
+
+## 5. Deploy
+
 ```bash
-# Commit changes
 git add .
-git commit -m "feat: optimize mobile performance - lazy load Three.js, code splitting, WebP images"
-
-# Push to GitHub (auto-deploys via GitHub Actions)
+git commit -m "describe the change"
 git push origin main
-
-# Wait 2-3 minutes for deployment
-# Check https://www.robinfrancis.in/
+vercel --prod --yes
 ```
 
----
+Production domains:
 
-## 📋 Verification Checklist
+- [https://robinfrancis.in](https://robinfrancis.in)
+- [https://www.robinfrancis.in](https://www.robinfrancis.in)
 
-After deployment, verify:
-
-- [ ] Homepage loads correctly
-- [ ] Hero images display (light/dark theme)
-- [ ] All sections load progressively
-- [ ] Contact form works (mailto link)
-- [ ] Contact background shader loads smoothly
-- [ ] Projects page displays all projects
-- [ ] Blog page shows articles
-- [ ] Gallery loads images from Sanity
-- [ ] Dark/light theme toggle works
-- [ ] Mobile navigation works
-- [ ] All links work (resume, social media)
-- [ ] No console errors
-
----
-
-## 🔧 Common Issues & Fixes
-
-### Issue: Build fails
-```bash
-# Clear cache and rebuild
-rm -rf node_modules/.vite
-rm -rf docs
-npm run build
-```
-
-### Issue: Images not loading
-```bash
-# Verify images exist
-ls -la public/images/about/
-ls -la public/images/projects/
-
-# Re-optimize if needed
-npm run optimize:images
-```
-
-### Issue: Three.js shader not loading
-```bash
-# Check browser console for errors
-# Verify Contact.tsx has lazy import
-# Check network tab for chunk loading
-```
-
-### Issue: High mobile bundle size
-```bash
-# Analyze bundle
-npm install --save-dev rollup-plugin-visualizer
-
-# Add to vite.config.ts and rebuild
-# Check docs/stats.html
-```
-
----
-
-## 📊 Performance Targets
-
-### Core Web Vitals
-- **LCP** (Largest Contentful Paint): < 2.5s ✅
-- **FID** (First Input Delay): < 100ms ✅
-- **CLS** (Cumulative Layout Shift): < 0.1 ✅
-
-### Lighthouse Scores
-- **Desktop Performance**: 99+ ✅
-- **Mobile Performance**: 75+ 🎯
-- **SEO**: 100 ✅
-- **Accessibility**: 100 ✅
-- **Best Practices**: 100 ✅
-
-### Bundle Sizes
-- **Initial Bundle**: < 600KB ✅
-- **Contact Chunk**: < 350KB ✅
-- **Page Chunks**: < 150KB each ✅
-
----
-
-## 🎯 Next 24 Hours
-
-### Priority 1: SEO
-1. **Google Search Console**
-   - Go to https://search.google.com/search-console
-   - Add property: www.robinfrancis.in
-   - Submit sitemap: https://www.robinfrancis.in/sitemap.xml
-   - Request indexing for:
-     - https://www.robinfrancis.in/
-     - https://www.robinfrancis.in/projects/
-     - https://www.robinfrancis.in/blog/
-     - https://www.robinfrancis.in/gallery/
-
-2. **Bing Webmaster Tools**
-   - Go to https://www.bing.com/webmasters
-   - Verify ownership (BingSiteAuth.xml already in place)
-   - Submit sitemap
-
-### Priority 2: Security
-1. **Cloudflare Setup**
-   - Sign up at https://www.cloudflare.com/
-   - Add site: www.robinfrancis.in
-   - Update nameservers at domain registrar
-   - Configure security headers (see IMPLEMENTATION_CHECKLIST.md)
-
-### Priority 3: Monitoring
-1. **Set up Google Analytics goals**
-   - Contact form clicks
-   - Resume downloads
-   - External link clicks
-
-2. **Add Microsoft Clarity**
-   - Sign up at https://clarity.microsoft.com/
-   - Add tracking code to index.html
-   - Monitor heatmaps and recordings
-
----
-
-## 📝 Quick Commands
+## 6. Post-Deploy Smoke Test
 
 ```bash
-# Development
-npm run dev                    # Start dev server
-
-# Production
-npm run build                  # Build for production
-npm run preview                # Preview production build
-
-# Optimization
-npm run optimize:images        # Convert images to WebP
-
-# Testing
-npm run lint                   # Lint code
-lighthouse [URL] --view        # Run Lighthouse
-
-# Deployment
-git push origin main           # Auto-deploys to GitHub Pages
+curl -I https://robinfrancis.in/
+curl -L https://robinfrancis.in/sitemap.xml
 ```
 
----
+Check:
 
-## 📞 Need Help?
+- Home, projects, blog, gallery, card, and one blog post render.
+- Contact form submits through `/api/contact`.
+- Security headers are present.
+- `sitemap.xml`, `robots.txt`, `llms.txt`, and `humans.txt` load.
+- No browser console errors on the main user paths.
 
-### Documentation
-- `OPTIMIZATION_SUMMARY.md` - What was changed and why
-- `PERFORMANCE_OPTIMIZATION.md` - Technical deep dive
-- `IMPLEMENTATION_CHECKLIST.md` - Complete task list
-- `SEO_AEO_SECURITY_PLAN.md` - SEO strategy
+## Useful Commands
 
-### Resources
-- Vite Docs: https://vitejs.dev/
-- React Docs: https://react.dev/
-- Lighthouse: https://developer.chrome.com/docs/lighthouse/
-- Web.dev: https://web.dev/
+```bash
+npm run dev              # development server
+npm run typecheck        # TypeScript verification
+npm run build            # production build
+npm start                # local production server
+npm run optimize:images  # image optimization
+```
 
-### Troubleshooting
-1. Check browser console for errors
-2. Verify network tab for failed requests
-3. Test in incognito mode (no extensions)
-4. Clear browser cache
-5. Test on different devices/browsers
-
----
-
-## ✨ Success Metrics
-
-Track these weekly:
-
-### Traffic
-- Organic search traffic
-- Direct traffic
-- Referral traffic
-- Social media traffic
-
-### Engagement
-- Bounce rate (target: < 50%)
-- Pages per session (target: 3+)
-- Average session duration (target: 2+ min)
-- Contact form submissions
-
-### Performance
-- Mobile Lighthouse score
-- Desktop Lighthouse score
-- Core Web Vitals (from Search Console)
-- Page load time (from Analytics)
-
-### SEO
-- "Robin Francis" ranking on Google
-- Indexed pages count
-- Backlinks count
-- Domain authority
-
----
-
-**Last Updated**: March 19, 2026
-**Next Review**: March 26, 2026
-
-Good luck! 🚀
+Last updated: July 1, 2026
