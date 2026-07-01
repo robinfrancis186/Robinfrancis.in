@@ -16,6 +16,10 @@ const imageDirs = [
   'public/images/blog/blog2',
 ];
 
+const skipFiles = new Set([
+  'favicon-r.png',
+]);
+
 async function optimizeImages() {
   let converted = 0;
   let skipped = 0;
@@ -37,6 +41,11 @@ async function optimizeImages() {
     );
 
     for (const file of imageFiles) {
+      if (skipFiles.has(file)) {
+        skipped++;
+        continue;
+      }
+
       const inputPath = path.join(fullPath, file);
       const outputPath = inputPath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
       

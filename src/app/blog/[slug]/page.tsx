@@ -60,7 +60,9 @@ export default async function Page({ params }: BlogPostPageProps) {
 
   const post = findStaticBlogPost(slug);
   const canonicalUrl = post ? `https://www.robinfrancis.in/blog/${post.slug}/` : "";
-  const imageUrl = post?.image ? `https://www.robinfrancis.in${post.image}` : "https://www.robinfrancis.in/images/og-image.png";
+  const imageUrl = post?.image
+    ? `https://www.robinfrancis.in${post.image}`
+    : "https://www.robinfrancis.in/images/card/robin-francis-primary.jpg";
   const articleJsonLd = post
     ? {
         "@context": "https://schema.org",

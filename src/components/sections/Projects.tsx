@@ -77,7 +77,7 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-                        image="/images/projects/stride-website.png"
+                        image="/images/projects/stride-website.webp"
                         imageAlt="Official STRIDE Kerala website hero page"
                         title="STRIDE Website"
                         description="Developed the official STRIDE website from scratch, creating a modern and accessible platform for an inclusive innovation initiative focused on assistive technology and social impact."

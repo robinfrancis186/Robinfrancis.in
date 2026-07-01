@@ -19,7 +19,7 @@ const ProjectsPage = () => {
         title: 'Argus',
         category: 'AI QA • Browser Agent',
         summary: 'Argus is a local-first autonomous QA agent that scouts a website, understands the product, deploys synthetic user personas, and returns evidence-backed bug reports with screenshots, logs, and run summaries.',
-        image: '/images/projects/argus.png',
+        image: '/images/projects/argus.webp',
         imageAlt: 'Argus autonomous QA browser agent launch screen',
         repo: 'https://github.com/robinfrancis186/argus.git',
     };
@@ -28,13 +28,13 @@ const ProjectsPage = () => {
         title: 'BulkyFi',
         category: 'Certificates • Local-First Tool',
         summary: 'BulkyFi is a local-first bulk certificate generator for creating professional certificates from templates and recipient spreadsheets. It runs in the browser, stores projects locally, and exports high-quality PDF or PNG certificates without requiring a backend.',
-        image: '/images/projects/bulkyfi-landing-v2.png',
+        image: '/images/projects/bulkyfi-landing-v2.webp',
         imageAlt: 'BulkyFi landing page for instant bulk certificate generation',
         repo: 'https://github.com/robinfrancis186/bulkyfi',
         live: 'https://bulkyfi.vercel.app/',
         images: [
             {
-                src: '/images/projects/bulkyfi-dashboard-v2.png',
+                src: '/images/projects/bulkyfi-dashboard-v2.webp',
                 alt: 'BulkyFi certificate batch dashboard with template design and recipient preview',
             },
         ],
@@ -44,7 +44,7 @@ const ProjectsPage = () => {
         title: 'STRIDE Website',
         category: 'Accessibility • Social Impact',
         summary: 'Developed the official STRIDE website from scratch, creating a modern and accessible platform for an inclusive innovation initiative focused on assistive technology and social impact. The website showcases STRIDE’s mission, ecosystem, product catalog, community stories, news updates, and engagement opportunities, helping users understand and participate in Kerala’s inclusive innovation movement.',
-        image: '/images/projects/stride-website.png',
+        image: '/images/projects/stride-website.webp',
         imageAlt: 'Official STRIDE Kerala website hero page',
         live: 'https://stride.kerala.gov.in/',
     };

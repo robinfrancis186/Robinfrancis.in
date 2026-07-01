@@ -10,7 +10,7 @@ const homeJsonLd = [
     "@type": "Person",
     name: "Robin Francis",
     url: "https://www.robinfrancis.in/",
-    image: "https://www.robinfrancis.in/images/og-image.png",
+    image: "https://www.robinfrancis.in/images/card/robin-francis-primary.jpg",
     jobTitle: "AI Innovator and Software Engineer",
     email: "mailto:robinfrancis186@gmail.com",
     alumniOf: {
@@ -63,13 +63,13 @@ export const metadata: Metadata = {
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,
     url: "https://www.robinfrancis.in/",
-    images: ["/images/og-image.png"],
+    images: ["/images/card/robin-francis-primary.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,
-    images: ["/images/og-image.png"],
+    images: ["/images/card/robin-francis-primary.jpg"],
   },
 };
 

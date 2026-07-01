@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: "Robin Francis | AI Innovator & Community Leader",
     description: defaultDescription,
-    images: ["/images/og-image.png"],
+    images: ["/images/card/robin-francis-primary.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robin Francis | AI Innovator & Community Leader",
     description: defaultDescription,
-    images: ["/images/og-image.png"],
+    images: ["/images/card/robin-francis-primary.jpg"],
   },
   robots: {
     index: true,

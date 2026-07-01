@@ -20,10 +20,9 @@ Current social/profile links are used across the portfolio, profile card, struct
 
 ## Icon Assets
 
-Animated icon JSON/SVG assets live in:
+Footer animated icon JSON assets live in:
 
 ```text
-micro animation icons/
 src/assets/lottie/
 ```
 

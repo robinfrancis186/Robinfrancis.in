@@ -17,7 +17,7 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
         title: "SoulSync: Building AI for Emotional & Cognitive Wellness",
         category: "Wellness",
         tags: ["Wellness"],
-        image: "/images/blog/1720937570476.jpeg",
+        image: "/images/blog/1720937570476.webp",
         excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
         date: "2026-01-12",
         content:

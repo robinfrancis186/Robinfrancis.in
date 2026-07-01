@@ -75,13 +75,13 @@ export const metadata: Metadata = {
     title: "Projects | Robin Francis",
     description: projectDescription,
     url: "/projects/",
-    images: ["/images/projects/stride-website.png"],
+    images: ["/images/projects/stride-website.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects | Robin Francis",
     description: projectDescription,
-    images: ["/images/projects/stride-website.png"],
+    images: ["/images/projects/stride-website.webp"],
   },
 };
 
