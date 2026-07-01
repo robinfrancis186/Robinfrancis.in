@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { HelmetProvider } from "react-helmet-async";
 import Lenis from "lenis";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
@@ -51,16 +50,14 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
 
   return (
     <ErrorBoundary>
-      <HelmetProvider>
-        <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-          <div className="fixed right-4 top-4 z-[5001]">
-            <ThemeToggle />
-          </div>
-          <Navbar />
-          {children}
-          <Footer />
+      <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+        <div className="fixed right-4 top-4 z-[5001]">
+          <ThemeToggle />
         </div>
-      </HelmetProvider>
+        <Navbar />
+        {children}
+        <Footer />
+      </div>
     </ErrorBoundary>
   );
 }

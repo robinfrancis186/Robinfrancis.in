@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
 import { motion } from 'framer-motion';
-import PageSeo from '@/components/seo/PageSeo';
 
 const ProjectsPage = () => {
     const [selectedProject, setSelectedProject] = useState<null | {
@@ -50,24 +49,8 @@ const ProjectsPage = () => {
         live: 'https://stride.kerala.gov.in/',
     };
 
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Projects | Robin Francis",
-        "description": "Selected AI, product, and web engineering projects by Robin Francis.",
-        "url": "https://www.robinfrancis.in/projects/"
-    };
-
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
-            <PageSeo
-                title="Projects | Robin Francis"
-                description="Explore AI, accessibility, product, and engineering projects built by Robin Francis."
-                canonical="https://www.robinfrancis.in/projects/"
-                ogDescription="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
-                twitterDescription="Selected AI, accessibility, product, and web engineering projects by Robin Francis."
-                jsonLd={jsonLd}
-            />
             <motion.section
                 id="portfolio"
                 className="mt-10"
@@ -78,7 +61,7 @@ const ProjectsPage = () => {
                 <div className="flex sm:mb-8 mb-6 items-end justify-between">
                     <div className="">
                         <p className="text-[11px] sm:text-xs tracking-widest text-neutral-500 uppercase font-geist">how i spend my time</p>
-                        <h3 className="mt-2 text-2xl sm:text-3xl tracking-tight font-geist font-medium">A few projects I'm proud of.</h3>
+                        <h1 className="mt-2 text-2xl sm:text-3xl tracking-tight font-geist font-medium">A few projects I'm proud of.</h1>
                     </div>
                     <a href="/#projects" className="hidden sm:inline-flex items-center gap-2 ring-1 ring-neutral-200 hover:shadow text-sm text-neutral-700 font-geist bg-white rounded-full pt-2 pr-4 pb-2 pl-4 dark:bg-slate-900 dark:text-neutral-300 dark:ring-neutral-700 dark:hover:bg-slate-800 transition-colors">
                         View Portfolio

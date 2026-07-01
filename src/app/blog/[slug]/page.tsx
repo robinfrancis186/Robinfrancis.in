@@ -29,6 +29,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     description: post.excerpt,
     alternates: {
       canonical,
+      languages: {
+        en: canonical,
+        "x-default": canonical,
+      },
     },
     openGraph: {
       type: "article",
@@ -54,5 +58,73 @@ export default async function Page({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  return <BlogPostRoute post={findStaticBlogPost(slug)} slug={slug} />;
+  const post = findStaticBlogPost(slug);
+  const canonicalUrl = post ? `https://www.robinfrancis.in/blog/${post.slug}/` : "";
+  const imageUrl = post?.image ? `https://www.robinfrancis.in${post.image}` : "https://www.robinfrancis.in/images/og-image.png";
+  const articleJsonLd = post
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalUrl,
+        },
+        headline: post.title,
+        description: post.excerpt,
+        image: imageUrl,
+        author: {
+          "@type": "Person",
+          name: "Robin Francis",
+          url: "https://www.robinfrancis.in/",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Robin Francis",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.robinfrancis.in/images/favicon-r.png",
+          },
+        },
+        datePublished: post.date,
+        dateModified: post.date,
+      }
+    : null;
+
+  return (
+    <>
+      {articleJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+      )}
+      {post && (
+        <noscript>
+          <article>
+            <a href="/blog/">Back to Journal</a>
+            <h2>Article overview</h2>
+            <p>
+              <strong>{post.title}</strong>
+            </p>
+            <p>{post.excerpt}</p>
+            <p>
+              Published on{" "}
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            </p>
+            <img src={post.image} alt={`Cover image for ${post.title}`} />
+            {post.content.split("\n\n").map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </article>
+        </noscript>
+      )}
+      <BlogPostRoute post={post} slug={slug} />
+    </>
+  );
 }

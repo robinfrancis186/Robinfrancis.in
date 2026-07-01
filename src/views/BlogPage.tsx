@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import PageSeo from '@/components/seo/PageSeo';
 import { STATIC_BLOG_POSTS } from '@/data/blogPosts';
 
 const BlogPage = () => {
@@ -43,13 +42,6 @@ const BlogPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto bg-background text-foreground">
-            <PageSeo
-                title="Blog | Robin Francis"
-                description="Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis."
-                canonical="https://www.robinfrancis.in/blog/"
-                ogDescription="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
-                twitterDescription="Read Robin Francis's latest articles on AI, accessibility, systems, and community impact."
-            />
             <motion.section
                 id="blog-feed"
                 className="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24"
@@ -61,7 +53,7 @@ const BlogPage = () => {
                 <div className="flex flex-col h-full">
                     <div>
                         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
-                            Latest from<br />the Journal
+                            Latest from<br /> the Journal
                         </h1>
                         <p className="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed max-w-sm mb-12">
                             Articles on AI systems, accessibility, leadership, and practical lessons from building real products.

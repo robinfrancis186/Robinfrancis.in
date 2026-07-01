@@ -1,15 +1,78 @@
 import type { Metadata } from "next";
 import { BlogRoute } from "../_components/route-clients";
+import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
+
+const blogDescription =
+  "Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis.";
+
+const blogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: "Robin Francis Journal",
+  description: blogDescription,
+  url: "https://www.robinfrancis.in/blog/",
+  author: {
+    "@type": "Person",
+    name: "Robin Francis",
+    url: "https://www.robinfrancis.in/",
+  },
+  blogPost: STATIC_BLOG_POSTS.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: `https://www.robinfrancis.in/blog/${post.slug}/`,
+    datePublished: post.date,
+    image: `https://www.robinfrancis.in${post.image}`,
+  })),
+};
 
 export const metadata: Metadata = {
   title: "Blog | Robin Francis",
-  description:
-    "Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis.",
+  description: blogDescription,
   alternates: {
     canonical: "/blog/",
+    languages: {
+      en: "/blog/",
+      "x-default": "/blog/",
+    },
+  },
+  openGraph: {
+    title: "Blog | Robin Francis",
+    description: blogDescription,
+    url: "/blog/",
+    images: ["/images/blog/ieee-award.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Robin Francis",
+    description: blogDescription,
+    images: ["/images/blog/ieee-award.webp"],
   },
 };
 
 export default function Page() {
-  return <BlogRoute />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+      <noscript>
+        <section aria-labelledby="blog-fallback-heading">
+          <h2 id="blog-fallback-heading">Robin Francis Journal</h2>
+          <p>{blogDescription}</p>
+          <ul>
+            {STATIC_BLOG_POSTS.map((post) => (
+              <li key={post.slug}>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+                <a href={`/blog/${post.slug}/`}>Read {post.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </noscript>
+      <BlogRoute />
+    </>
+  );
 }

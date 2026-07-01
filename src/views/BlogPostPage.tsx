@@ -5,7 +5,6 @@ import { client, urlFor } from '../lib/sanity';
 import { PortableText } from '@portabletext/react';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import PageSeo from '@/components/seo/PageSeo';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
 
@@ -132,54 +131,14 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     const imageUrl = typeof post.image === 'string' ? post.image : post.image && post.image.asset ? urlFor(post.image).width(1200).url() : '';
     const mainImageAlt = post.image?.alt || `Cover image for ${post.title}`;
     const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
-    const isoDate = post.date ? new Date(post.date).toISOString() : '';
     const tag = post.tags && post.tags.length > 0 ? post.tags[0] : '';
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = `https://www.robinfrancis.in/blog/${resolvedSlug}/`;
     const articleText = portableTextToPlainText(post.content) || excerpt;
 
-    // Schema.org JSON-LD for Answer Engines (AEO) and Generative Engines (GEO)
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": canonicalUrl
-        },
-        "headline": post.title,
-        "description": excerpt,
-        "image": imageUrl || "https://www.robinfrancis.in/images/og-image.png",
-        "author": {
-            "@type": "Person",
-            "name": "Robin Francis",
-            "url": "https://www.robinfrancis.in/"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Robin Francis",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.robinfrancis.in/images/favicon-r.png"
-            }
-        },
-        "datePublished": isoDate,
-        "dateModified": isoDate
-    };
-
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground">
-            <PageSeo
-                title={`${post.title} | Robin Francis Journal`}
-                description={excerpt}
-                canonical={canonicalUrl}
-                ogType="article"
-                ogTitle={post.title}
-                twitterTitle={post.title}
-                image={imageUrl || undefined}
-                jsonLd={jsonLd}
-            />
-
             <motion.article
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
