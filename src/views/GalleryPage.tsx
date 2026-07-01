@@ -1,96 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import MasonryGallery, { MasonryItem } from '@/components/ui/MasonryGallery';
-
-const fallbackGalleryItems: MasonryItem[] = [
-    {
-        id: 'gallery-ieee-award',
-        img: '/images/blog/ieee-award.webp',
-        height: 520,
-        title: 'IEEE Awards Gala',
-        alt: 'Robin Francis at an IEEE awards gala',
-    },
-    {
-        id: 'gallery-watsonx',
-        img: '/images/project-techx.webp',
-        height: 460,
-        title: 'TechX Infinia',
-        alt: 'Emerging technology event visual for TechX Infinia',
-    },
-    {
-        id: 'gallery-community-tech',
-        img: '/images/blog/accessible-tech.webp',
-        height: 500,
-        title: 'Accessible Technology',
-        alt: 'Human-centered technology illustration',
-    },
-    {
-        id: 'gallery-foodloop',
-        img: '/images/project-foodloop.webp',
-        height: 360,
-        title: 'FoodLoop',
-        alt: 'FoodLoop project visual',
-    },
-    {
-        id: 'gallery-soulsync',
-        img: '/images/project-soulsync.webp',
-        height: 430,
-        title: 'SoulSync',
-        alt: 'SoulSync project visual',
-    },
-    {
-        id: 'gallery-scalable-systems',
-        img: '/images/blog/scalable-systems.webp',
-        height: 390,
-        title: 'Scalable Systems',
-        alt: 'Scalable software systems visual',
-    },
-    {
-        id: 'gallery-people-centric-ai',
-        img: '/images/blog/people-centric-ai.webp',
-        height: 470,
-        title: 'People-Centric AI',
-        alt: 'People-centric artificial intelligence visual',
-    },
-    {
-        id: 'gallery-cinque-terre',
-        img: '/images/blog/cinque_terre.webp',
-        height: 560,
-        title: 'Cinque Terre',
-        alt: 'Colorful coastal buildings in Cinque Terre',
-    },
-    {
-        id: 'gallery-lake-district',
-        img: '/images/blog/lake_district.webp',
-        height: 420,
-        title: 'Lake District',
-        alt: 'Landscape from the Lake District',
-    },
-    {
-        id: 'gallery-autumn-camping',
-        img: '/images/blog/autumn_camping.webp',
-        height: 340,
-        title: 'Autumn Camping',
-        alt: 'Autumn camping landscape',
-    },
-    {
-        id: 'gallery-moment-one',
-        img: '/images/blog/1720937571684.webp',
-        height: 500,
-        title: 'Visual Story',
-        alt: 'A curated visual story from Robin Francis gallery',
-    },
-    {
-        id: 'gallery-moment-two',
-        img: '/images/blog/1720937573469.webp',
-        height: 380,
-        title: 'Creative Moment',
-        alt: 'A creative moment from Robin Francis gallery',
-    },
-];
+import { GALLERY_ITEMS } from '@/data/galleryItems';
 
 const GalleryPage = () => {
-    const [items] = useState<MasonryItem[]>(fallbackGalleryItems);
+    const [items] = useState<MasonryItem[]>(GALLERY_ITEMS);
 
     return (
         <main className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -121,7 +35,7 @@ const GalleryPage = () => {
                             key="local-gallery"
                             items={items}
                             animateFrom="bottom"
-                            blurToFocus={true}
+                            blurToFocus={false}
                             stagger={0.08}
                             scaleOnHover={true}
                             hoverScale={0.96}

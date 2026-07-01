@@ -13,6 +13,7 @@ const imageDirs = [
   'public/images/about',
   'public/images/projects',
   'public/images/blog',
+  'public/images/blog/blog2',
 ];
 
 async function optimizeImages() {

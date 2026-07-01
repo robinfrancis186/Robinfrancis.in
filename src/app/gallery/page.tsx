@@ -1,41 +1,9 @@
 import type { Metadata } from "next";
 import { GalleryRoute } from "../_components/route-clients";
+import { GALLERY_ITEMS } from "@/data/galleryItems";
 
 const galleryDescription =
   "Explore a curated collection of moments, landscapes, and visual stories by Robin Francis.";
-
-const galleryItems = [
-  {
-    title: "IEEE Awards Gala",
-    image: "/images/blog/ieee-award.webp",
-    description: "Robin Francis at an IEEE awards gala.",
-  },
-  {
-    title: "TechX Infinia",
-    image: "/images/project-techx.webp",
-    description: "Emerging technology event visual for TechX Infinia.",
-  },
-  {
-    title: "Accessible Technology",
-    image: "/images/blog/accessible-tech.webp",
-    description: "Human-centered technology and accessibility visual.",
-  },
-  {
-    title: "FoodLoop",
-    image: "/images/project-foodloop.webp",
-    description: "FoodLoop project visual.",
-  },
-  {
-    title: "SoulSync",
-    image: "/images/project-soulsync.webp",
-    description: "SoulSync project visual.",
-  },
-  {
-    title: "People-Centric AI",
-    image: "/images/blog/people-centric-ai.webp",
-    description: "People-centric artificial intelligence visual.",
-  },
-];
 
 const galleryJsonLd = {
   "@context": "https://schema.org",
@@ -48,11 +16,11 @@ const galleryJsonLd = {
     name: "Robin Francis",
     url: "https://www.robinfrancis.in/",
   },
-  hasPart: galleryItems.map((item) => ({
+  hasPart: GALLERY_ITEMS.map((item) => ({
     "@type": "ImageObject",
     name: item.title,
-    description: item.description,
-    url: `https://www.robinfrancis.in${item.image}`,
+    description: item.alt,
+    url: `https://www.robinfrancis.in${item.img}`,
     author: {
       "@type": "Person",
       name: "Robin Francis",
@@ -96,11 +64,11 @@ export default function Page() {
           <h2 id="gallery-fallback-heading">Robin Francis Gallery</h2>
           <p>{galleryDescription}</p>
           <ul>
-            {galleryItems.map((item) => (
+            {GALLERY_ITEMS.map((item) => (
               <li key={item.title}>
                 <h2>{item.title}</h2>
-                <p>{item.description}</p>
-                <img src={item.image} alt={item.description} />
+                <p>{item.alt}</p>
+                <img src={item.img} alt={item.alt} />
               </li>
             ))}
           </ul>

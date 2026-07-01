@@ -113,7 +113,7 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
     itemClassName
 }) => {
     const columns = useMedia(
-        ['(min-width: 1500px)', '(min-width: 1000px)', '(min-width: 600px)', '(min-width: 400px)'],
+        ['(min-width: 1500px)', '(min-width: 1100px)', '(min-width: 760px)', '(min-width: 560px)'],
         [5, 4, 3, 2],
         1
     );
