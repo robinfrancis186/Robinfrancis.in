@@ -72,9 +72,9 @@ export default async function Page({ params }: BlogPostPageProps) {
 
   const post = findStaticBlogPost(slug);
   const canonicalUrl = post ? absoluteUrl(`/blog/${post.slug}/`) : "";
-  const imageUrl = post?.image
-    ? absoluteUrl(post.image)
-    : absoluteUrl(defaultSeoImage);
+  const articleImages = post?.image
+    ? [post.image, ...(post.gallery?.map((image) => image.src) ?? [])].map((image) => absoluteUrl(image))
+    : [absoluteUrl(defaultSeoImage)];
   const articleJsonLd = post
     ? {
         "@context": "https://schema.org",
@@ -85,7 +85,7 @@ export default async function Page({ params }: BlogPostPageProps) {
         },
         headline: post.title,
         description: post.excerpt,
-        image: imageUrl,
+        image: articleImages,
         author: {
           "@type": "Person",
           name: "Robin Francis",
@@ -133,9 +133,12 @@ export default async function Page({ params }: BlogPostPageProps) {
                 })}
               </time>
             </p>
-            <img src={post.image} alt={`Cover image for ${post.title}`} />
+            <img src={post.image} alt={post.imageAlt || `Cover image for ${post.title}`} />
             {post.content.split("\n\n").map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
+            ))}
+            {post.gallery?.map((image) => (
+              <img key={image.src} src={image.src} alt={image.alt} />
             ))}
           </article>
         </noscript>

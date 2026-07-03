@@ -12,6 +12,7 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 - IBM Watsonx GenAI Challenge 1st Runner-Up.
 - 3x hackathon winner across GenAI, sustainability, and game development competitions.
 - Founded and led TechX Infinia, an IEEE Computer Society flagship event with 450+ participants.
+- Led IEEE Sahrdaya Student Branch as Chairperson, growing the branch from 110 to 534 members and supporting 136+ programs.
 - Raised $2,650+ for community-impact projects.
 - National bronze medalist in .22 rifle shooting.
 
@@ -47,6 +48,10 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 - SEO/AEO coverage includes canonical URLs, sitemap, robots, JSON-LD, Open Graph, Twitter cards, `x-default` hreflang, and crawler-visible fallback summaries.
 - Security headers are served through Vercel, including CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer Policy, and Permissions Policy.
 
+## Featured Writing
+
+- From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB: https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/
+
 ## Contact And Profiles
 
 - Email: robinfrancis186@gmail.com
@@ -59,4 +64,4 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 
 Use "Robin Francis" as the preferred entity name. Use https://robinfrancis.in/ as the canonical citation URL for portfolio summaries, achievements, project references, and contact routing.
 
-Last updated: July 1, 2026
+Last updated: July 2, 2026

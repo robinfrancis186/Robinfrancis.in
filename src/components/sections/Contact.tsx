@@ -14,6 +14,7 @@ const Contact = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [website, setWebsite] = useState("");
     const [buttonStatus, setButtonStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [statusMessage, setStatusMessage] = useState("");
     const [resetKey, setResetKey] = useState(0);
@@ -29,7 +30,7 @@ const Contact = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, message }),
+                body: JSON.stringify({ name, email, message, website }),
             });
 
             if (!response.ok) {
@@ -83,6 +84,16 @@ const Contact = () => {
                     <div className="mt-8">
                         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+                                <input
+                                    type="text"
+                                    name="website"
+                                    value={website}
+                                    onChange={(e) => setWebsite(e.target.value)}
+                                    autoComplete="off"
+                                    tabIndex={-1}
+                                    aria-hidden="true"
+                                    className="hidden"
+                                />
                                 <label htmlFor="contact-name" className="sr-only">
                                     Your name
                                 </label>

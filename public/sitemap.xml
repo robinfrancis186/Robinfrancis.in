@@ -31,12 +31,12 @@
     </url>
     <url>
         <loc>https://robinfrancis.in/blog/</loc>
-        <lastmod>2026-07-01</lastmod>
+        <lastmod>2026-07-02</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <image:image>
-            <image:loc>https://robinfrancis.in/images/blog/ieee-award.webp</image:loc>
-            <image:title>Robin Francis blog and leadership stories</image:title>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp</image:loc>
+            <image:title>Robin Francis IEEE Sahrdaya leadership journey</image:title>
         </image:image>
     </url>
     <url>
@@ -68,6 +68,24 @@
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/</loc>
+        <lastmod>2026-07-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp</image:loc>
+            <image:title>Robin Francis addressing IEEE Sahrdaya students</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-techx-infinia-group.webp</image:loc>
+            <image:title>TechX Infinia group photo at Sahrdaya College</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://robinfrancis.in/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-recognition.webp</image:loc>
+            <image:title>Robin Francis recognition during IEEE Sahrdaya journey</image:title>
+        </image:image>
     </url>
     <url>
         <loc>https://robinfrancis.in/blog/soulsync-emotional-wellness/</loc>

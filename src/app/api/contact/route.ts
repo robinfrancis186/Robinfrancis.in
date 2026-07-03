@@ -5,8 +5,11 @@ const MAX_NAME_LENGTH = 80;
 const MAX_EMAIL_LENGTH = 120;
 const MAX_MESSAGE_LENGTH = 1500;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const MAX_SUBMISSIONS_PER_WINDOW = 3;
 
 let resendClient: Resend | null = null;
+const submissionAttempts = new Map<string, { count: number; resetAt: number }>();
 
 function getResend() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -29,6 +32,36 @@ const escapeHtml = (value: string) =>
 
 const readString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
+const getClientIp = (request: NextRequest) => {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0]?.trim() || "unknown";
+
+  return request.headers.get("x-real-ip") || "unknown";
+};
+
+const isRateLimited = (key: string) => {
+  const now = Date.now();
+
+  for (const [attemptKey, attempt] of submissionAttempts) {
+    if (attempt.resetAt <= now) {
+      submissionAttempts.delete(attemptKey);
+    }
+  }
+
+  const current = submissionAttempts.get(key);
+  if (!current || current.resetAt <= now) {
+    submissionAttempts.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (current.count >= MAX_SUBMISSIONS_PER_WINDOW) {
+    return true;
+  }
+
+  current.count += 1;
+  return false;
+};
+
 export async function POST(request: NextRequest) {
   let body: unknown;
 
@@ -42,6 +75,11 @@ export async function POST(request: NextRequest) {
   const name = readString(payload.name);
   const email = readString(payload.email).toLowerCase();
   const message = readString(payload.message);
+  const website = readString(payload.website);
+
+  if (website) {
+    return NextResponse.json({ error: "Message could not be sent right now." }, { status: 400 });
+  }
 
   if (!name || !email || !message) {
     return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
@@ -54,6 +92,14 @@ export async function POST(request: NextRequest) {
     !EMAIL_PATTERN.test(email)
   ) {
     return NextResponse.json({ error: "Please check the contact form details." }, { status: 400 });
+  }
+
+  const clientIp = getClientIp(request);
+  if (isRateLimited(`ip:${clientIp}`) || isRateLimited(`email:${email}`)) {
+    return NextResponse.json(
+      { error: "Too many messages sent. Please try again later." },
+      { status: 429 }
+    );
   }
 
   const resend = getResend();

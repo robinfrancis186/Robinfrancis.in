@@ -76,6 +76,19 @@ function portableTextToPlainText(value: unknown): string {
     return "";
 }
 
+const staticSectionHeadings = new Set([
+    "The Responsibility of Continuing a Legacy",
+    "Building Leaders, Not Just Events",
+    "Growth That Was Built Step by Step",
+    "TechX Infinia, ALTAIR 2.0, and the Spirit of Thinking Big",
+    "The Strength of Societies and Volunteers",
+    "The Challenges No One Sees",
+    "A Journey That Changed Me",
+    "Gratitude to the People Who Made It Possible",
+    "More Than a Tenure",
+    "The Legacy Continues",
+]);
+
 const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogPost | null; slugOverride?: string }) => {
     const params = useParams<{ slug?: string }>();
     const slug = slugOverride ?? params?.slug;
@@ -130,13 +143,16 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     }
 
     const imageUrl = typeof post.image === 'string' ? post.image : post.image && post.image.asset ? urlFor(post.image).width(1200).url() : '';
-    const mainImageAlt = post.image?.alt || `Cover image for ${post.title}`;
+    const mainImageAlt = post.imageAlt || post.image?.alt || `Cover image for ${post.title}`;
     const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
     const tag = post.tags && post.tags.length > 0 ? post.tags[0] : '';
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = absoluteUrl(`/blog/${resolvedSlug}/`);
     const articleText = portableTextToPlainText(post.content) || excerpt;
+    const staticParagraphs = typeof post.content === 'string'
+        ? post.content.split(/\n{2,}/).map((paragraph: string) => paragraph.trim()).filter(Boolean)
+        : [];
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground">
@@ -172,12 +188,43 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-geist prose-headings:font-geist">
                     {Array.isArray(post.content) ? (
                         <PortableText value={post.content} components={ptComponents} />
-                    ) : post.content ? (
-                        <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">{post.content}</p>
+                    ) : staticParagraphs.length > 0 ? (
+                        staticParagraphs.map((paragraph: string) => (
+                            staticSectionHeadings.has(paragraph) ? (
+                                <h2 key={paragraph} className="text-3xl font-bold mt-10 mb-5 font-geist text-neutral-950 dark:text-neutral-50">
+                                    {paragraph}
+                                </h2>
+                            ) : (
+                                <p key={paragraph} className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">
+                                    {paragraph}
+                                </p>
+                            )
+                        ))
                     ) : (
                         <p className="text-neutral-500 italic">This post has no content yet.</p>
                     )}
                 </div>
+
+                {Array.isArray(post.gallery) && post.gallery.length > 0 && (
+                    <section aria-label={`${post.title} photo gallery`} className="mt-14">
+                        <h2 className="text-3xl font-bold mb-6 font-geist">Moments from the journey</h2>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {post.gallery.map((image: { src: string; alt: string }, index: number) => (
+                                <figure
+                                    key={image.src}
+                                    className={index === 2 ? "sm:col-span-2 overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900" : "overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900"}
+                                >
+                                    <img
+                                        src={image.src}
+                                        alt={image.alt}
+                                        loading="lazy"
+                                        className="h-full max-h-[520px] w-full object-cover"
+                                    />
+                                </figure>
+                            ))}
+                        </div>
+                    </section>
+                )}
             </motion.article>
         </main>
     );

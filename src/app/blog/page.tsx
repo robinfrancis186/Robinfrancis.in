@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     title: "Blog | Robin Francis",
     description: blogDescription,
     url: absoluteUrl("/blog/"),
-    images: ["/images/blog/ieee-award.webp"],
+    images: ["/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Blog | Robin Francis",
     description: blogDescription,
-    images: ["/images/blog/ieee-award.webp"],
+    images: ["/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp"],
   },
 };
 

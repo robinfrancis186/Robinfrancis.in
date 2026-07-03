@@ -12,6 +12,7 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 - **IBM Watsonx GenAI Challenge**: 1st Runner-Up for building an intelligent GenAI-powered solution
 - **3× Hackathon Winner**: Wins include GenAI challenges, food sustainability platforms, and game development competitions
 - **Champion of Impact**: IEEE Computer Society recognition for founding & leading a flagship event with 450+ participants
+- **IEEE Sahrdaya SB Chairperson**: Led the Student Branch through growth from 110 to 534 members and 136+ programs
 - **Fundraising**: Raised $2,650+ for community-impact projects
 - **National Bronze Medalist**: .22 Rifle Shooting competition in Delhi
 
@@ -111,6 +112,10 @@ Secured 100%
 
 Robin believes in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity. His work focuses on accessible, people-centric technology that creates meaningful impact.
 
+## Latest Writing
+
+- From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB: https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/
+
 ---
 
 ## AI Discovery Files
@@ -119,4 +124,4 @@ Robin believes in building technology that solves real human problems while upli
 - Full context: https://robinfrancis.in/llms-full.txt
 - Sitemap: https://robinfrancis.in/sitemap.xml
 
-Last Updated: July 1, 2026
+Last Updated: July 2, 2026
