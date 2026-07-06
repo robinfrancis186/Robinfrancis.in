@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+.git
+.next
+.next-build
+.playwright-cli
+.vercel
+coverage
+dist
+node_modules
+portfolio-cms/node_modules
+public/cms
+tmp
+*.log
+*.report.html
+lighthouse-report*.html
