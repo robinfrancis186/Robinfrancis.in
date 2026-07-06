@@ -1,5 +1,5 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, User, Briefcase, FileText, ImageIcon } from "lucide-react";
+import { Home, User, Briefcase, FileText, ImageIcon, Trophy } from "lucide-react";
 
 const Navbar = () => {
     const navItems = [
@@ -22,6 +22,11 @@ const Navbar = () => {
             name: "Blog",
             link: "/blog",
             icon: <FileText className="h-4 w-4 text-neutral-500 dark:text-white" />,
+        },
+        {
+            name: "Achievements",
+            link: "/achievements",
+            icon: <Trophy className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
             name: "Gallery",

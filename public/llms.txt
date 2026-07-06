@@ -1,127 +1,48 @@
-# Robin Francis - AI Innovator & Community Leader
+# Robin Francis
 
-> Portfolio of Robin Francis — AI innovator, community leader, and 3× hackathon winner building accessible, people-centric technology and scalable digital solutions.
+Robin Francis is an AI product builder, software engineer, and community leader from Kerala, India. His work focuses on accessible AI products, local-first web tools, assistive technology, civic innovation, and student-community leadership.
 
-## About
+## Official Site
 
-Robin Francis is an AI innovator, community leader, and software engineer from Kerala, India. He holds a B.Tech in Computer Science from Sahrdaya College of Engineering & Technology (2021-2025, CGPA: 7.17).
+- [Homepage](https://robinfrancis.in/)
+- [Projects](https://robinfrancis.in/projects/)
+- [Achievements](https://robinfrancis.in/achievements/)
+- [Press kit](https://robinfrancis.in/press-kit/)
+- [Blog](https://robinfrancis.in/blog/)
+- [Gallery](https://robinfrancis.in/gallery/)
+- [Sitemap](https://robinfrancis.in/sitemap.xml)
 
-## Key Achievements
+## Key Claims
 
-- **IEEE R10 Outstanding Volunteer Award 2024**: First student from the Asia-Pacific Region to receive this honor
-- **IBM Watsonx GenAI Challenge**: 1st Runner-Up for building an intelligent GenAI-powered solution
-- **3× Hackathon Winner**: Wins include GenAI challenges, food sustainability platforms, and game development competitions
-- **Champion of Impact**: IEEE Computer Society recognition for founding & leading a flagship event with 450+ participants
-- **IEEE Sahrdaya SB Chairperson**: Led the Student Branch through growth from 110 to 534 members and 136+ programs
-- **Fundraising**: Raised $2,650+ for community-impact projects
-- **National Bronze Medalist**: .22 Rifle Shooting competition in Delhi
+- IEEE Region 10 Outstanding Volunteer Award 2024 recipient, listed by IEEE Region 10.
+- IBM watsonx GenAI Challenge second-prize team member for SoulSync, covered by The Week.
+- Chairperson of IEEE Sahrdaya Student Branch, helping grow the branch from 110 to 534 members and supporting 136+ programs.
+- Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
 
-## Technical Skills
+## Proof Links
 
-### AI & Machine Learning
-- Python, TensorFlow, PyTorch, Scikit-Learn
-- Computer Vision, Generative AI
-- Machine Learning model development and deployment
+- [The Week: Team Bits & Bytes second prize at the IBM watsonx student hackathon](https://www.theweek.in/education/latest/2024/07/13/amal-jyothi-college-aces-hackathon-at-genai-conclave.html)
+- [IBM watsonx Challenge video coverage](https://www.youtube.com/watch?v=B0OYd-Bit2Y)
+- [IEEE Region 10 Awards past recipients](https://www.ieeer10.org/past-recipients-of-ieee-region-10-awards/)
+- [IEEE Kerala Section Region 10 Report 2026](https://www.ieeer10.org/wp-content/uploads/2026/02/2026-IEEE-Kerala-Section-Region-10-Report-Nandan-S.pdf)
+- [IEEE IES Faculty Development Programme article](https://iten.ieee-ies.org/featured-news/2026/hubs-nodes-initiative-faculty-development-programme-on-activity-based-pedagogy-in-kochi-india/)
+- [K-DISC Social Enterprises and Inclusion](https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/)
+- [STRIDE Kerala live website](https://stride.kerala.gov.in/)
+- [INSPIRA: The IEEE Sahrdaya SB Magazine 2024](https://cdnc.heyzine.com/files/uploaded/97d868213fc130fa21bf351552f7747c05e9778f.pdf)
+- [Argus GitHub repository](https://github.com/robinfrancis186/argus.git)
+- [BulkyFi live app](https://bulkyfi.vercel.app/)
+- [BulkyFi GitHub repository](https://github.com/robinfrancis186/bulkyfi)
 
-### Backend & Data
-- Node.js, C++
-- PostgreSQL, MongoDB, Firebase
-- REST APIs, Database design
+## Profiles
 
-### Frontend & Tools
-- React, Next.js, TypeScript
-- Tailwind CSS, Three.js
-- Git/GitHub, Figma
-
-## Featured Projects
-
-### SoulSync
-AI Companion for Cognitive Wellness featuring facial recognition, emotion tracking, and memory recall for elders and caregivers.
-- Technologies: AI, Facial Recognition, Wellness Tech
-
-### FoodLoop
-AI Platform for Responsible Food Redistribution using ML surplus prediction to reduce food waste.
-- Technologies: Machine Learning, Sustainability, React
-
-### TechX Infinia
-Emerging Tech Flagship Event - Founded and led a large-scale tech festival with 450+ participants.
-- Role: Leadership, Event Management, Strategy
-
-### IEEE R10 Career Fair
-Co-led the first international virtual career fair with 31 global recruiters and 245 participants.
-- Role: Global Community, Networking
-
-### STRIDE Website
-Official website for STRIDE Kerala - Central digital hub for assistive technology innovation.
-- Technologies: Web Development, Accessibility, UI/UX
-
-### Argus
-Local-first autonomous QA browser agent that scouts a website, understands product flows, deploys synthetic users, and returns evidence-backed bug reports.
-- Repository: https://github.com/robinfrancis186/argus.git
-- Technologies: AI QA, browser automation, local-first testing
-
-### BulkyFi
-Local-first bulk certificate generator for creating professional certificates from templates and recipient spreadsheets, with browser storage and PDF/PNG export.
-- Live app: https://bulkyfi.vercel.app/
-- Repository: https://github.com/robinfrancis186/bulkyfi
-- Technologies: Web app, local-first storage, PDF/PNG export
+- [GitHub](https://github.com/robinfrancis186)
+- [LinkedIn](https://www.linkedin.com/in/robin-francis-b43565175)
+- [Instagram](https://www.instagram.com/robinfrancis186)
+- [Medium](https://medium.com/@robinfrancis186)
 
 ## Contact
 
-- Email: robinfrancis186@gmail.com
-- Phone: +918078256598
-- Location: Kerala, India
-- Website: https://robinfrancis.in/
-- LinkedIn: https://www.linkedin.com/in/robin-francis-b43565175
-- GitHub: https://github.com/robinfrancis186
-- Twitter: @robinfrancis186
+- [Email Robin Francis](mailto:robinfrancis186@gmail.com)
+- [Press kit](https://robinfrancis.in/press-kit/)
 
-## Education
-
-**B.Tech in Computer Science & Engineering** (2021-2025)
-Sahrdaya College of Engineering & Technology
-First Class | CGPA: 7.17
-Focus: AI systems, software engineering, and product development
-
-**Higher Secondary - Computer Science** (2019-2021)
-National Higher Secondary School
-Secured 96%
-
-**Secondary School Certificate** (2019)
-Don Bosco High School
-Secured 100%
-
-## Services Offered
-
-- AI-driven product development for accessibility
-- Community engineering initiatives and leadership
-- Scalable digital solutions for startups and social impact organizations
-- AI/ML consulting and implementation
-- Full-stack web development
-- Technical mentorship and speaking
-
-## Website Implementation
-
-- Built with Next.js, React, TypeScript, and Tailwind CSS.
-- Hosted on Vercel at https://robinfrancis.in/.
-- Contact form sends through a Resend-backed API route.
-- Includes sitemap, robots, structured data, canonical URLs, and AI discovery files.
-- Uses Vercel security headers including CSP, HSTS, X-Frame-Options, and nosniff.
-
-## Philosophy
-
-Robin believes in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity. His work focuses on accessible, people-centric technology that creates meaningful impact.
-
-## Latest Writing
-
-- From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB: https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/
-
----
-
-## AI Discovery Files
-
-- Summary: https://robinfrancis.in/llms.txt
-- Full context: https://robinfrancis.in/llms-full.txt
-- Sitemap: https://robinfrancis.in/sitemap.xml
-
-Last Updated: July 2, 2026
+Last updated: July 6, 2026

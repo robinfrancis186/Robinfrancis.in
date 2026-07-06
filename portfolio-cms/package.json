@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
-    "build": "sanity build",
+    "build": "node scripts/build-or-use-bundle.cjs",
+    "build:sanity": "BUILD_CMS_FROM_SANITY=1 node scripts/build-or-use-bundle.cjs",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy"
   },

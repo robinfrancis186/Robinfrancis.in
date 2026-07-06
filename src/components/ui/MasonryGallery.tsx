@@ -76,6 +76,11 @@ export interface MasonryItem {
     height: number;
     title?: string;
     alt?: string;
+    description?: string;
+    category?: string;
+    date?: string;
+    imageWidth?: number;
+    imageHeight?: number;
 }
 
 interface GridItem extends MasonryItem {
@@ -146,7 +151,15 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
     };
 
     useEffect(() => {
-        preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
+        let active = true;
+        setImagesReady(false);
+        const initialImages = items.slice(0, 12).map(i => i.img);
+        preloadImages(initialImages).then(() => {
+            if (active) setImagesReady(true);
+        });
+        return () => {
+            active = false;
+        };
     }, [items]);
 
     const { grid, containerHeight } = useMemo(() => {
@@ -258,8 +271,8 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                         <img 
                             src={item.img} 
                             alt={item.alt || item.title || "Gallery image"} 
-                            width={500}
-                            height={500}
+                            width={item.imageWidth || 500}
+                            height={item.imageHeight || 500}
                             className="w-full h-full object-cover" 
                             loading="lazy" 
                         />
@@ -270,6 +283,11 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                     {item.title && (
                         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
                             <p className="text-white text-xs font-medium uppercase tracking-wider">{item.title}</p>
+                            {item.category && (
+                                <p className="mt-1 text-white/75 text-[10px] font-medium uppercase tracking-wider">
+                                    {item.category}
+                                </p>
+                            )}
                         </div>
                     )}
                 </div>

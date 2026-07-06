@@ -4,7 +4,7 @@ import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const galleryDescription =
-  "Explore a curated collection of moments, landscapes, and visual stories by Robin Francis.";
+  "Explore Robin Francis's gallery of AI community events, IEEE leadership, STRIDE inclusive innovation work, speaking sessions, awards, and student mentorship moments.";
 
 const galleryJsonLd = {
   "@context": "https://schema.org",
@@ -20,8 +20,14 @@ const galleryJsonLd = {
   hasPart: GALLERY_ITEMS.map((item) => ({
     "@type": "ImageObject",
     name: item.title,
-    description: item.alt,
+    description: item.description,
+    caption: item.alt,
+    contentUrl: absoluteUrl(item.img),
     url: absoluteUrl(item.img),
+    dateCreated: item.date,
+    keywords: [item.category, "Robin Francis", "AI community", "IEEE", "inclusive innovation"],
+    width: item.imageWidth,
+    height: item.imageHeight,
     author: {
       "@type": "Person",
       name: "Robin Francis",
@@ -38,6 +44,9 @@ export const metadata: Metadata = {
     "AI community events",
     "technology leadership photos",
     "IEEE award gallery",
+    "Robin Francis speaking photos",
+    "STRIDE inclusive innovation photos",
+    "student mentorship gallery",
     "portfolio images",
   ],
   alternates: {
@@ -51,13 +60,13 @@ export const metadata: Metadata = {
     title: "Gallery | Robin Francis",
     description: galleryDescription,
     url: absoluteUrl("/gallery/"),
-    images: ["/images/blog/ieee-award.webp"],
+    images: ["/images/gallery/gallery-ieee-kerala-public-awards-2025.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Gallery | Robin Francis",
     description: galleryDescription,
-    images: ["/images/blog/ieee-award.webp"],
+    images: ["/images/gallery/gallery-ieee-kerala-public-awards-2025.webp"],
   },
 };
 
@@ -76,8 +85,18 @@ export default function Page() {
             {GALLERY_ITEMS.map((item) => (
               <li key={item.title}>
                 <h2>{item.title}</h2>
-                <p>{item.alt}</p>
-                <img src={item.img} alt={item.alt} />
+                <p>{item.description}</p>
+                <figure>
+                  <img
+                    src={item.img}
+                    alt={item.alt}
+                    width={item.imageWidth}
+                    height={item.imageHeight}
+                  />
+                  <figcaption>
+                    {item.category} - {item.date}
+                  </figcaption>
+                </figure>
               </li>
             ))}
           </ul>

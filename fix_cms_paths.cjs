@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const indexPath = path.join(__dirname, 'public', 'cms', 'index.html');
+const nestedCmsPath = path.join(__dirname, 'public', 'cms', 'cms');
+
 if (fs.existsSync(indexPath)) {
     let content = fs.readFileSync(indexPath, 'utf-8');
     content = content.replace(/href="\/static/g, 'href="/cms/static');
@@ -10,6 +12,11 @@ if (fs.existsSync(indexPath)) {
     content = content.replace(/"\/vendor\//g, '"/cms/vendor/');
     fs.writeFileSync(indexPath, content);
     console.log('Successfully patched CMS absolute asset paths.');
+
+    if (fs.existsSync(nestedCmsPath)) {
+        fs.rmSync(nestedCmsPath, { recursive: true, force: true });
+        console.log('Removed duplicate nested CMS output.');
+    }
 } else {
     console.error('Could not find public/cms/index.html to patch.');
     process.exit(1);

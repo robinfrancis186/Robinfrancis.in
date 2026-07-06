@@ -44,6 +44,12 @@ const Footer = () => {
                         </p>
                     </div>
 
+                    <nav className="mb-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground md:mb-0">
+                        <a href="/achievements/" className="hover:text-primary transition-colors">Achievements</a>
+                        <a href="/press-kit/" className="hover:text-primary transition-colors">Press Kit</a>
+                        <a href="/llms.txt" className="hover:text-primary transition-colors">llms.txt</a>
+                    </nav>
+
                     <div className="flex items-center space-x-6">
                         <a href="mailto:robinfrancis186@gmail.com" className="transition-transform hover:scale-110 duration-300" aria-label="Email Robin Francis">
                             {shouldLoadIcons ? <LottieIcon animationName="mail" size={20} /> : iconFallback}

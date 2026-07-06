@@ -11,14 +11,15 @@ Live site: [robinfrancis.in](https://robinfrancis.in/)
 
 ## What This Site Includes
 
-- Server-rendered Next.js routes for home, projects, blog, gallery, card, and blog posts.
+- Server-rendered Next.js routes for home, projects, achievements, press kit, blog, gallery, card, and blog posts.
 - Interactive portfolio sections with Framer Motion, Three.js, Lottie, and custom UI components.
 - Static blog content with article audio/share controls.
-- Sanity Studio bundled into `public/cms` during production builds.
+- Sanity Studio bundled into `public/cms` from the committed static studio assets during production builds.
 - Contact API at `/api/contact` using Resend.
-- SEO/AEO foundations: canonical URLs, sitemap, robots, llms files, JSON-LD, Open Graph, Twitter cards, and `x-default` hreflang.
+- SEO/AEO foundations: canonical URLs, generated sitemap, robots, Markdown-linked llms files, JSON-LD, Open Graph, Twitter cards, and `x-default` hreflang.
 - Security headers through `vercel.json`, including CSP, HSTS, `X-Frame-Options`, `nosniff`, Referrer Policy, and Permissions Policy.
 - Image optimization workflow for WebP assets.
+- Next.js build output is written to `.next-build` to avoid stale local `.next` cache issues.
 
 ## Tech Stack
 
@@ -38,9 +39,9 @@ Live site: [robinfrancis.in](https://robinfrancis.in/)
 src/app/                  Next.js App Router routes and API endpoints
 src/views/                Client route views
 src/components/           Reusable UI and page sections
-src/data/                 Static blog data
+src/data/                 Static blog, profile proof, and media kit data
 src/lib/                  Sanity and utility helpers
-public/                   Static assets, SEO files, sitemap, manifest
+public/                   Static assets, AI discovery files, robots, manifest
 portfolio-cms/            Sanity Studio source
 scripts/                  Image optimization and maintenance scripts
 vercel.json               Production headers and Vercel config
@@ -71,7 +72,7 @@ npm run dev              # Next.js dev server on port 5174
 npm run typecheck        # TypeScript check
 npm run lint             # Alias for TypeScript check
 npm run optimize:images  # Convert supported images to WebP
-npm run build            # Build Sanity Studio, copy CMS output, then build Next
+npm run build            # Prepare CMS assets, then build Next
 npm start                # Run production Next server on port 5174
 npm run preview          # Alias for production Next server
 ```
@@ -86,7 +87,7 @@ CONTACT_TO_EMAIL=robinfrancis186@gmail.com
 CONTACT_FROM_EMAIL=Portfolio <onboarding@resend.dev>
 ```
 
-Sanity Studio uses the project configuration in `portfolio-cms/`. Vercel build logs may warn when the local Sanity package version differs from the hosted Studio runtime; that is non-blocking but should be reviewed during dependency updates.
+Sanity Studio uses the project configuration in `portfolio-cms/`. The default production build copies the committed static Studio bundle from `portfolio-cms/public/cms` to `public/cms` so local builds do not hang on the Sanity CLI. To intentionally rebuild the Studio bundle, run `BUILD_CMS_FROM_SANITY=1 npm run build` after verifying the local Sanity CLI is healthy.
 
 ## Deployment
 
@@ -120,13 +121,13 @@ The site includes:
 - One meta description per route.
 - Canonical URLs with trailing slash route normalization.
 - `x-default` alternate links.
-- JSON-LD for home, projects, blog index, blog posts, gallery, and card routes.
+- JSON-LD for home, projects, achievements, press kit, blog index, blog posts, gallery, and card routes.
 - Server-visible fallback summaries for key routes so crawlers can understand content without executing all client JavaScript.
-- `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, `humans.txt`, and `manifest.webmanifest`.
+- `robots.txt`, generated `sitemap.xml`, `llms.txt`, `llms-full.txt`, `humans.txt`, and `manifest.webmanifest`.
 
 When changing routes, update:
 
-- `public/sitemap.xml`
+- `src/app/sitemap.ts`
 - route `metadata` in `src/app/**/page.tsx`
 - route JSON-LD if the page represents structured content
 - `public/llms.txt` / `public/llms-full.txt` for major content changes
@@ -146,7 +147,8 @@ Older optimization reports are retained for historical context and now include c
 
 ## Known Maintenance Items
 
-- `npm audit` currently reports dependency warnings, mostly from the CMS dependency tree. Avoid `npm audit fix --force` without testing because it can introduce breaking upgrades.
+- `npm audit --omit=dev` may report moderate advisories through Next's bundled PostCSS. Avoid `npm audit fix --force` because npm can suggest unrelated major downgrades.
+- Sanity CLI builds should be treated as opt-in until the local CLI hang is resolved upstream or through a clean Sanity upgrade pass.
 - Browserslist/caniuse-lite warnings may appear during build and should be refreshed periodically.
 - Sanity Studio version warnings should be reviewed during Sanity upgrades.
 
@@ -159,4 +161,4 @@ Robin Francis
 - LinkedIn: [Robin Francis](https://www.linkedin.com/in/robin-francis-b43565175)
 - Email: robinfrancis186@gmail.com
 
-Last updated: July 1, 2026
+Last updated: July 6, 2026

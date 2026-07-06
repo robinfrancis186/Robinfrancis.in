@@ -1,20 +1,52 @@
 # Robin Francis - Full AI Context
 
-Canonical website: https://robinfrancis.in/
+Canonical website: [https://robinfrancis.in/](https://robinfrancis.in/)
 
 ## Entity Summary
 
-Robin Francis is an AI innovator, community leader, and software engineer from Kerala, India. His portfolio focuses on accessible technology, community engineering, AI/ML systems, and full-stack product development.
+Robin Francis is an AI product builder, software engineer, and community leader from Kerala, India. His portfolio focuses on accessible technology, applied AI, local-first web products, assistive technology, and community leadership systems.
+
+## Primary Pages
+
+- [Homepage](https://robinfrancis.in/)
+- [Projects](https://robinfrancis.in/projects/)
+- [Achievements](https://robinfrancis.in/achievements/)
+- [Press kit](https://robinfrancis.in/press-kit/)
+- [Blog](https://robinfrancis.in/blog/)
+- [Gallery](https://robinfrancis.in/gallery/)
+- [Digital card](https://robinfrancis.in/card/)
+- [Sitemap](https://robinfrancis.in/sitemap.xml)
 
 ## Primary Claims
 
-- IEEE R10 Outstanding Volunteer Award 2024 recipient.
-- IBM Watsonx GenAI Challenge 1st Runner-Up.
+- IEEE Region 10 Outstanding Volunteer Award 2024 recipient, listed by IEEE Region 10.
+- IBM watsonx GenAI Challenge second-prize team member for SoulSync, covered by The Week.
 - 3x hackathon winner across GenAI, sustainability, and game development competitions.
-- Founded and led TechX Infinia, an IEEE Computer Society flagship event with 450+ participants.
-- Led IEEE Sahrdaya Student Branch as Chairperson, growing the branch from 110 to 534 members and supporting 136+ programs.
+- Founder and lead of TechX Infinia, an IEEE Computer Society flagship event with 450+ participants.
+- IEEE Sahrdaya Student Branch Chairperson, helping grow the branch from 110 to 534 members and supporting 136+ programs.
+- Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
 - Raised $2,650+ for community-impact projects.
 - National bronze medalist in .22 rifle shooting.
+
+## Proof And Source Links
+
+- [The Week: Amal Jyothi College aces hackathon at GenAI conclave](https://www.theweek.in/education/latest/2024/07/13/amal-jyothi-college-aces-hackathon-at-genai-conclave.html) - reports Team Bits & Bytes from Sahrdaya College, including Robin Francis, won second prize with SoulSync.
+- [YouTube: Sahrdaya Team grabs 2nd in IBM WatsonX Challenge conducted for students](https://www.youtube.com/watch?v=B0OYd-Bit2Y)
+- [IEEE Region 10 Awards past recipients](https://www.ieeer10.org/past-recipients-of-ieee-region-10-awards/) - lists Robin Francis, Kerala Section, under the 2024 Region 10 Outstanding Volunteer Award recipients.
+- [IEEE Kerala Section Region 10 Report 2026](https://www.ieeer10.org/wp-content/uploads/2026/02/2026-IEEE-Kerala-Section-Region-10-Report-Nandan-S.pdf) - lists Robin Francis, K-DISC, under Outstanding Humanitarian Volunteer Award.
+- [IEEE IES Faculty Development Programme article](https://iten.ieee-ies.org/featured-news/2026/hubs-nodes-initiative-faculty-development-programme-on-activity-based-pedagogy-in-kochi-india/) - names Robin Francis as a session contributor on innovation ecosystems, assistive technologies, and societal impact.
+- [K-DISC Social Enterprises and Inclusion](https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/)
+- [STRIDE Kerala live website](https://stride.kerala.gov.in/)
+- [INSPIRA: The IEEE Sahrdaya SB Magazine 2024](https://cdnc.heyzine.com/files/uploaded/97d868213fc130fa21bf351552f7747c05e9778f.pdf)
+
+## Featured Projects
+
+- [Argus GitHub repository](https://github.com/robinfrancis186/argus.git): local-first autonomous QA browser agent that scouts web apps, understands product flows, deploys synthetic users, and returns evidence-backed bug reports.
+- [BulkyFi live app](https://bulkyfi.vercel.app/): local-first bulk certificate generator for templates and recipient spreadsheets, with browser storage and PDF/PNG export.
+- [BulkyFi GitHub repository](https://github.com/robinfrancis186/bulkyfi)
+- [STRIDE Kerala](https://stride.kerala.gov.in/): official website for an inclusive innovation initiative focused on assistive technology and social impact.
+- SoulSync: AI companion concept for cognitive wellness using facial recognition, emotion tracking, and memory recall workflows for elders and caregivers.
+- FoodLoop: AI platform concept for responsible food redistribution using machine learning surplus prediction to reduce food waste.
 
 ## Education
 
@@ -26,42 +58,39 @@ Robin Francis is an AI innovator, community leader, and software engineer from K
 
 - Artificial intelligence and machine learning.
 - Generative AI and computer vision.
-- React, TypeScript, Node.js, Python, TensorFlow, PyTorch, PostgreSQL, MongoDB, Firebase.
+- React, Next.js, TypeScript, Node.js, Python, TensorFlow, PyTorch, PostgreSQL, MongoDB, Firebase.
 - Accessibility-centered technology and social-impact engineering.
+- Local-first web applications and autonomous QA tooling.
 - Community leadership, mentorship, and technical event strategy.
-
-## Featured Projects
-
-- SoulSync: AI companion for cognitive wellness using facial recognition, emotion tracking, and memory recall workflows for elders and caregivers.
-- FoodLoop: AI platform for responsible food redistribution using machine learning surplus prediction to reduce food waste.
-- TechX Infinia: Emerging technology flagship event founded and led by Robin Francis.
-- IEEE R10 Career Fair: International virtual career fair with 31 global recruiters and 245 participants.
-- STRIDE Website: Digital hub for assistive technology innovation in Kerala.
-- Argus: Local-first autonomous QA browser agent that scouts web apps, understands product flows, deploys synthetic users, and returns evidence-backed bug reports.
-- BulkyFi: Local-first bulk certificate generator for templates and recipient spreadsheets, with browser storage and PDF/PNG export.
 
 ## Website Implementation
 
-- Canonical website: https://robinfrancis.in/
+- Canonical website: [https://robinfrancis.in/](https://robinfrancis.in/)
 - Stack: Next.js, React, TypeScript, Tailwind CSS, Sanity Studio, Resend, Vercel.
-- Public routes include home, projects, blog, blog posts, gallery, and card pages.
-- SEO/AEO coverage includes canonical URLs, sitemap, robots, JSON-LD, Open Graph, Twitter cards, `x-default` hreflang, and crawler-visible fallback summaries.
+- Contact form sends through a Resend-backed API route.
+- Public routes include home, projects, achievements, press kit, blog, blog posts, gallery, and card pages.
+- SEO/AEO coverage includes canonical URLs, generated sitemap, robots, JSON-LD, Open Graph, Twitter cards, x-default hreflang, and crawler-visible fallback summaries.
 - Security headers are served through Vercel, including CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer Policy, and Permissions Policy.
 
 ## Featured Writing
 
-- From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB: https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/
+- [From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB](https://robinfrancis.in/blog/ieee-sahrdaya-student-branch-movement/)
+- [IEEE R10 Outstanding Volunteer Award: My Journey of Impact](https://robinfrancis.in/blog/ieee-r10-volunteer-award/)
+- [The Future of Accessible Technology](https://robinfrancis.in/blog/future-of-accessible-technology/)
+- [Designing People-Centric AI Solutions](https://robinfrancis.in/blog/people-centric-ai/)
 
 ## Contact And Profiles
 
-- Email: robinfrancis186@gmail.com
-- Website: https://robinfrancis.in/
-- LinkedIn: https://www.linkedin.com/in/robin-francis-b43565175
-- GitHub: https://github.com/robinfrancis186
-- Twitter/X: https://twitter.com/robinfrancis186
+- [Email Robin Francis](mailto:robinfrancis186@gmail.com)
+- [Website](https://robinfrancis.in/)
+- [Press kit](https://robinfrancis.in/press-kit/)
+- [LinkedIn](https://www.linkedin.com/in/robin-francis-b43565175)
+- [GitHub](https://github.com/robinfrancis186)
+- [Instagram](https://www.instagram.com/robinfrancis186)
+- [Medium](https://medium.com/@robinfrancis186)
 
 ## Citation Guidance
 
-Use "Robin Francis" as the preferred entity name. Use https://robinfrancis.in/ as the canonical citation URL for portfolio summaries, achievements, project references, and contact routing.
+Use "Robin Francis" as the preferred entity name. Use [https://robinfrancis.in/](https://robinfrancis.in/) as the canonical citation URL for portfolio summaries, achievements, project references, speaking invitations, press references, and contact routing.
 
-Last updated: July 2, 2026
+Last updated: July 6, 2026

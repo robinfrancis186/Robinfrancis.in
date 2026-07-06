@@ -31,13 +31,15 @@ const homeJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
-    name: ["Home", "About", "Projects", "Blog", "Gallery", "Contact"],
+    name: ["Home", "About", "Projects", "Blog", "Achievements", "Gallery", "Press Kit", "Contact"],
     url: [
       absoluteUrl("/"),
       absoluteUrl("/#about"),
       absoluteUrl("/projects/"),
       absoluteUrl("/blog/"),
+      absoluteUrl("/achievements/"),
       absoluteUrl("/gallery/"),
+      absoluteUrl("/press-kit/"),
       absoluteUrl("/#contact"),
     ],
   },
@@ -78,7 +80,7 @@ const noScriptSummary = `
     <h2 id="portfolio-summary-heading">AI innovator and software engineer building accessible technology</h2>
     <p>Robin Francis designs and builds AI-powered products, scalable web systems, and community programs focused on accessibility, social impact, and people-centric technology.</p>
     <p>Featured work includes SoulSync for cognitive wellness, FoodLoop for responsible food redistribution, BulkyFi for local-first certificate generation, Argus for autonomous browser QA, and the official STRIDE Kerala website.</p>
-    <p>Explore the portfolio through <a href="/projects/">projects</a>, <a href="/blog/">blog stories</a>, <a href="/gallery/">gallery moments</a>, or <a href="/#contact">contact</a>.</p>
+    <p>Explore the portfolio through <a href="/projects/">projects</a>, <a href="/achievements/">achievements</a>, <a href="/press-kit/">press kit</a>, <a href="/blog/">blog stories</a>, <a href="/gallery/">gallery moments</a>, or <a href="/#contact">contact</a>.</p>
   </section>
 `;
 

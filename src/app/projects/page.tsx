@@ -11,6 +11,10 @@ const projects = [
     description:
       "A local-first autonomous QA agent that scouts websites, deploys synthetic user personas, and returns evidence-backed bug reports.",
     url: "https://github.com/robinfrancis186/argus.git",
+    image: absoluteUrl("/images/projects/argus.webp"),
+    type: "SoftwareApplication",
+    applicationCategory: "DeveloperApplication",
+    codeRepository: "https://github.com/robinfrancis186/argus.git",
   },
   {
     name: "BulkyFi",
@@ -18,6 +22,11 @@ const projects = [
     description:
       "A browser-based tool for generating professional certificates from templates and recipient spreadsheets, with PDF and PNG export.",
     url: "https://bulkyfi.vercel.app/",
+    image: absoluteUrl("/images/projects/bulkyfi-landing-v2.webp"),
+    type: "SoftwareApplication",
+    applicationCategory: "BusinessApplication",
+    codeRepository: "https://github.com/robinfrancis186/bulkyfi",
+    sameAs: ["https://github.com/robinfrancis186/bulkyfi"],
   },
   {
     name: "STRIDE Website",
@@ -25,6 +34,9 @@ const projects = [
     description:
       "The official STRIDE Kerala website, built as a modern platform for assistive technology, social impact, ecosystem stories, and engagement.",
     url: "https://stride.kerala.gov.in/",
+    image: absoluteUrl("/images/projects/stride-website.webp"),
+    type: "WebSite",
+    sameAs: ["https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/"],
   },
   {
     name: "SoulSync",
@@ -32,6 +44,9 @@ const projects = [
     description:
       "An AI companion concept for cognitive wellness with emotion tracking, memory recall, and privacy-conscious caregiver support.",
     url: absoluteUrl("/projects/"),
+    image: absoluteUrl("/images/project-soulsync.webp"),
+    type: "SoftwareApplication",
+    applicationCategory: "HealthApplication",
   },
   {
     name: "FoodLoop",
@@ -39,6 +54,9 @@ const projects = [
     description:
       "A sustainability platform concept using surplus prediction to reduce food waste and improve redistribution workflows.",
     url: absoluteUrl("/projects/"),
+    image: absoluteUrl("/images/project-foodloop.webp"),
+    type: "SoftwareApplication",
+    applicationCategory: "BusinessApplication",
   },
 ];
 
@@ -49,11 +67,15 @@ const projectsJsonLd = {
   description: projectDescription,
   url: absoluteUrl("/projects/"),
   hasPart: projects.map((project) => ({
-    "@type": "CreativeWork",
+    "@type": project.type,
     name: project.name,
     description: project.description,
     genre: project.category,
     url: project.url,
+    image: project.image,
+    applicationCategory: project.applicationCategory,
+    codeRepository: project.codeRepository,
+    sameAs: project.sameAs,
     creator: {
       "@type": "Person",
       name: "Robin Francis",

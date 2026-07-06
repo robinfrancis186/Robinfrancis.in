@@ -20,7 +20,7 @@ const GalleryPage = () => {
                         Gallery
                     </h1>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
-                        A curated collection of moments, landscapes, and visual stories
+                        A curated collection of awards, speaking sessions, IEEE leadership, STRIDE work, and student mentorship moments.
                     </p>
                 </motion.div>
 

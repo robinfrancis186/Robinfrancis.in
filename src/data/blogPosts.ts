@@ -166,7 +166,7 @@ It taught me how to lead with patience. It taught me how to listen before decidi
 
 It also taught me that recognition is meaningful, but responsibility is greater.
 
-Receiving the IEEE Region 10 Outstanding Student Volunteer Award was one of the proudest moments of my journey. But even that recognition belonged to the ecosystem that shaped me - my team, mentors, faculty advisors, volunteers, seniors, juniors, and everyone who believed in me.
+Receiving the IEEE Region 10 Outstanding Volunteer Award was one of the proudest moments of my journey. But even that recognition belonged to the ecosystem that shaped me - my team, mentors, faculty advisors, volunteers, seniors, juniors, and everyone who believed in me.
 
 I was only one person in a much larger story.
 

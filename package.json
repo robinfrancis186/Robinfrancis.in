@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -p 5174",
-    "build": "npm run build --prefix portfolio-cms && rm -rf public/cms && cp -r portfolio-cms/dist public/cms && node fix_cms_paths.cjs && next build",
+    "build": "node scripts/prepare-cms.cjs && node fix_cms_paths.cjs && next build",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "start": "next start -p 5174",
