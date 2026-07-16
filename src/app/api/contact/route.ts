@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createHash } from "crypto";
 import { Resend } from "resend";
 
 const MAX_NAME_LENGTH = 80;
@@ -10,6 +11,7 @@ const MAX_SUBMISSIONS_PER_WINDOW = 3;
 
 let resendClient: Resend | null = null;
 const submissionAttempts = new Map<string, { count: number; resetAt: number }>();
+const isProduction = process.env.NODE_ENV === "production";
 
 function getResend() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -39,7 +41,10 @@ const getClientIp = (request: NextRequest) => {
   return request.headers.get("x-real-ip") || "unknown";
 };
 
-const isRateLimited = (key: string) => {
+const getRateLimitKey = (value: string) =>
+  `contact:${createHash("sha256").update(value).digest("hex").slice(0, 24)}`;
+
+const isMemoryRateLimited = (key: string) => {
   const now = Date.now();
 
   for (const [attemptKey, attempt] of submissionAttempts) {
@@ -60,6 +65,74 @@ const isRateLimited = (key: string) => {
 
   current.count += 1;
   return false;
+};
+
+const runRedisCommand = async <T>(command: unknown[]) => {
+  const redisUrl = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (!redisUrl || !redisToken) {
+    if (isProduction) {
+      throw new Error("Redis contact rate limiting is not configured.");
+    }
+
+    return null;
+  }
+
+  const headers = {
+    Authorization: `Bearer ${redisToken}`,
+    "Content-Type": "application/json",
+  };
+
+  const normalizedUrl = redisUrl.replace(/\/$/, "");
+  const response = await fetch(normalizedUrl, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Redis rate-limit command failed with ${response.status}`);
+  }
+
+  return (await response.json()) as { result?: T };
+};
+
+const isRedisRateLimited = async (key: string) => {
+  const increment = await runRedisCommand<number>(["INCR", key]);
+
+  if (!increment) {
+    return null;
+  }
+
+  const payload = increment;
+  const count = Number(payload.result);
+
+  if (count === 1) {
+    await runRedisCommand<number>(["EXPIRE", key, Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)]);
+  }
+
+  return count > MAX_SUBMISSIONS_PER_WINDOW;
+};
+
+const isRateLimited = async (value: string) => {
+  const key = getRateLimitKey(value);
+
+  try {
+    const redisResult = await isRedisRateLimited(key);
+    if (redisResult !== null) {
+      return redisResult;
+    }
+  } catch (error) {
+    if (isProduction) {
+      throw error;
+    }
+
+    console.warn("Redis contact rate limit unavailable; falling back to memory.", error);
+  }
+
+  return isMemoryRateLimited(key);
 };
 
 export async function POST(request: NextRequest) {
@@ -95,7 +168,20 @@ export async function POST(request: NextRequest) {
   }
 
   const clientIp = getClientIp(request);
-  if (isRateLimited(`ip:${clientIp}`) || isRateLimited(`email:${email}`)) {
+  let ipLimited = false;
+  let emailLimited = false;
+
+  try {
+    [ipLimited, emailLimited] = await Promise.all([
+      isRateLimited(`ip:${clientIp}`),
+      isRateLimited(`email:${email}`),
+    ]);
+  } catch (error) {
+    console.error("Contact rate limit unavailable", error);
+    return NextResponse.json({ error: "Contact form is temporarily unavailable." }, { status: 503 });
+  }
+
+  if (ipLimited || emailLimited) {
     return NextResponse.json(
       { error: "Too many messages sent. Please try again later." },
       { status: 429 }

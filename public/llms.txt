@@ -10,7 +10,9 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [Press kit](https://robinfrancis.in/press-kit/)
 - [Blog](https://robinfrancis.in/blog/)
 - [Gallery](https://robinfrancis.in/gallery/)
+- [Digital card](https://robinfrancis.in/card/)
 - [Sitemap](https://robinfrancis.in/sitemap.xml)
+- [Resume PDF](https://robinfrancis.in/resume.pdf)
 
 ## Key Claims
 

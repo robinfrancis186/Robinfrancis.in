@@ -1,6 +1,7 @@
 import { SlideButton } from "@/components/ui/slide-button";
 import { useRef, useState, lazy, Suspense, type FormEvent } from "react";
 import GitHubActivity from "./GitHubActivity";
+import { trackEvent } from "@/lib/analytics";
 
 // Lazy load the heavy Three.js shader background (saves ~300KB on initial load)
 const DotScreenShader = lazy(() => 
@@ -40,6 +41,9 @@ const Contact = () => {
 
             setButtonStatus("success");
             setStatusMessage("Message sent. I will get back to you soon.");
+            trackEvent("contact_submit_success", {
+                form_location: "home_contact",
+            });
             setName("");
             setEmail("");
             setMessage("");
@@ -145,6 +149,13 @@ const Contact = () => {
                                 resetKey={resetKey}
                                 onSlideComplete={handleSlideComplete}
                             />
+                            <button
+                                type="submit"
+                                disabled={buttonStatus === "loading"}
+                                className="w-full rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary transition hover:bg-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-60"
+                            >
+                                {buttonStatus === "loading" ? "Sending..." : "Send message"}
+                            </button>
                             {statusMessage && (
                                 <p
                                     role="status"

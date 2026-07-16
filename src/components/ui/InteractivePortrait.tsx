@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface InteractivePortraitProps {
@@ -23,21 +24,23 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             style={{ isolation: 'isolate' }}
         >
             {/* Light mode image */}
-            <img
+            <Image
                 src={baseImage}
                 alt={alt}
                 width={800}
                 height={1067}
+                sizes="(min-width: 1024px) 420px, (min-width: 768px) 33vw, 90vw"
                 className="w-full h-auto object-cover block dark:hidden"
                 draggable={false}
             />
 
             {/* Dark mode image (fallbacks to same as light if not provided) */}
-            <img
+            <Image
                 src={darkImage || baseImage}
                 alt={alt}
                 width={800}
                 height={1067}
+                sizes="(min-width: 1024px) 420px, (min-width: 768px) 33vw, 90vw"
                 className="w-full h-auto object-cover hidden dark:block"
                 draggable={false}
             />

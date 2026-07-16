@@ -40,7 +40,6 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -50,6 +49,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+    ],
+  },
+  outputFileTracingExcludes: {
+    "*": [
+      "./.next-build/**/*",
+      "./.next/dev/**/*",
+      "./portfolio-cms/node_modules/**/*",
     ],
   },
 };

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactElement } from "react";
+import { SiteSearch } from "@/components/search/SiteSearch";
 
 
 export const FloatingNav = ({
@@ -96,6 +97,8 @@ export const FloatingNav = ({
                             </Link>
                         )
                     })}
+
+                    <SiteSearch />
 
                     {isHomePage ? (
                         <a

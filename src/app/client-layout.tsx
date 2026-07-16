@@ -16,11 +16,16 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     root.style.colorScheme = isDark ? "dark" : "light";
   }, []);
 
-  useEffect(() => {
-    let lenis: Lenis | null = null;
-    let animationFrameId = 0;
+    useEffect(() => {
+      let lenis: Lenis | null = null;
+      let animationFrameId = 0;
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const initTimer = window.setTimeout(() => {
+      if (reducedMotionQuery.matches) {
+        return undefined;
+      }
+
+      const initTimer = window.setTimeout(() => {
       lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link2, Pause, Play, RotateCcw, RotateCw, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 type ListenState = "idle" | "playing" | "paused";
 type PlaybackRate = 0.85 | 1 | 1.25 | 1.5;
@@ -8,6 +9,7 @@ type PlaybackRate = 0.85 | 1 | 1.25 | 1.5;
 type ArticleActionsProps = {
     title: string;
     text: string;
+    articleSlug?: string;
     shareUrl?: string;
     className?: string;
 };
@@ -89,7 +91,7 @@ function selectBestVoice() {
         .sort((a, b) => b.score - a.score)[0]?.voice;
 }
 
-const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProps) => {
+const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: ArticleActionsProps) => {
     const [listenState, setListenState] = useState<ListenState>("idle");
     const [shareStatus, setShareStatus] = useState("");
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
@@ -209,6 +211,11 @@ const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProp
             return;
         }
 
+        trackEvent("article_audio_play", {
+            article_title: title,
+            article_slug: articleSlug,
+            playback_rate: playbackRate,
+        });
         speakFrom(elapsedRef.current);
     };
 
@@ -240,10 +247,22 @@ const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProp
 
             if (browserNavigator.share) {
                 await browserNavigator.share(payload);
+                trackEvent("article_share_click", {
+                    article_title: title,
+                    article_slug: articleSlug,
+                    share_method: "native",
+                    share_status: "success",
+                });
                 return;
             }
 
             await copyText(url);
+            trackEvent("article_share_click", {
+                article_title: title,
+                article_slug: articleSlug,
+                share_method: "copy_link",
+                share_status: "success",
+            });
             setShareStatus("Link copied");
             window.setTimeout(() => {
                 if (mountedRef.current) {
@@ -251,6 +270,12 @@ const ArticleActions = ({ title, text, shareUrl, className }: ArticleActionsProp
                 }
             }, 2000);
         } catch {
+            trackEvent("article_share_click", {
+                article_title: title,
+                article_slug: articleSlug,
+                share_method: supportsNativeShare ? "native" : "copy_link",
+                share_status: "cancelled_or_failed",
+            });
             setShareStatus("Share was cancelled.");
             window.setTimeout(() => {
                 if (mountedRef.current) {

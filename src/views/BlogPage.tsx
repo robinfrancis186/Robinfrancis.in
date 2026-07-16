@@ -1,23 +1,35 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { STATIC_BLOG_POSTS } from '@/data/blogPosts';
 
 const BlogPage = () => {
-    const renderPost = (post: (typeof STATIC_BLOG_POSTS)[number]) => {
+    const renderPost = (post: (typeof STATIC_BLOG_POSTS)[number], index: number) => {
         const imageUrl = post.image;
         const title = post.title || 'Untitled Post';
         const excerpt = post.excerpt || '';
         const date = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
         const tag = post.tags.length > 0 ? post.tags[0] : post.category;
         const slug = post.slug;
-        const imageAlt = `Cover image for ${title}`;
+        const imageAlt = post.imageAlt || `Cover image for ${title}`;
 
         return (
             <div key={post.id}>
-                <Link href={`/blog/${slug}`} className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                <Link href={`/blog/${slug}/`} className="group flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                     <div className="w-full sm:w-[280px] shrink-0 overflow-hidden rounded-lg bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-800 shadow-sm">
-                        {imageUrl ? <img src={imageUrl} alt={imageAlt} className="w-full h-48 sm:h-36 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" /> : <div className="w-full h-48 sm:h-36 bg-neutral-100 dark:bg-neutral-800" />}
+                        {imageUrl ? (
+                            <div className="relative h-48 w-full sm:h-36">
+                                <Image
+                                    src={imageUrl}
+                                    alt={imageAlt}
+                                    fill
+                                    priority={index === 0}
+                                    sizes="(min-width: 640px) 280px, 100vw"
+                                    className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100"
+                                />
+                            </div>
+                        ) : <div className="w-full h-48 sm:h-36 bg-neutral-100 dark:bg-neutral-800" />}
                     </div>
                     <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
                         <div className="flex items-center gap-4 mb-3">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Carousel3D, CarouselItem } from "@/components/ui/carousel-3d";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -86,10 +87,13 @@ const Blog = () => {
                 {selectedPost && (
                     <div className="relative max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden mt-12">
                         <div className="relative">
-                            <img
+                            <Image
                                 src={selectedPost.image}
                                 alt={selectedPost.title}
-                                className="w-full h-[320px] md:h-[420px] object-cover"
+                                width={1200}
+                                height={640}
+                                sizes="(min-width: 1024px) 1024px, 100vw"
+                                className="h-[320px] w-full object-cover md:h-[420px]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                             <div className="absolute bottom-4 left-4 right-4 text-white">

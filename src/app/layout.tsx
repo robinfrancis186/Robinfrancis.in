@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/index.css";
 import ClientLayout from "./client-layout";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import {
   defaultSeoDescription,
   defaultSeoImage,
@@ -71,11 +72,14 @@ export const metadata: Metadata = {
   },
 };
 
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body>
         <ClientLayout>{children}</ClientLayout>
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );

@@ -6,16 +6,19 @@ Current production stack: Next.js on Vercel with route-level metadata, JSON-LD, 
 
 - Canonical site:
   - [https://robinfrancis.in](https://robinfrancis.in)
-  - [https://robinfrancis.in](https://robinfrancis.in)
+  - [https://www.robinfrancis.in](https://www.robinfrancis.in) redirects to the canonical apex domain.
 - Public routes:
   - `/`
   - `/projects/`
+  - `/achievements/`
+  - `/press-kit/`
   - `/blog/`
   - `/blog/[slug]/`
   - `/gallery/`
   - `/card/`
 - Sitemap:
-  - `public/sitemap.xml`
+  - source: `src/app/sitemap.ts`
+  - served URL: `https://robinfrancis.in/sitemap.xml`
 - AI/search helper files:
   - `public/robots.txt`
   - `public/llms.txt`
@@ -42,7 +45,9 @@ Current sampled live pages verify those properties for `/`, `/projects/`, `/blog
 JSON-LD is used for:
 
 - Home: `Person` and `WebSite`.
-- Projects: `CollectionPage` with `CreativeWork` entries.
+- Projects: `CollectionPage` with software, website, and product evidence entries.
+- Achievements: award and recognition proof, plus `BreadcrumbList`.
+- Press kit: reusable bio, headshot, contact links, and proof references.
 - Blog index: `Blog` with `BlogPosting` entries.
 - Blog posts: `BlogPosting`.
 - Gallery: `CollectionPage` with `ImageObject` entries.

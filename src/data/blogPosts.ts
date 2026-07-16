@@ -13,6 +13,12 @@ export type StaticBlogPost = {
     excerpt: string;
     content: string;
     date: string;
+    updatedAt?: string;
+    internalLinks?: {
+        label: string;
+        href: string;
+        description: string;
+    }[];
 };
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
@@ -27,6 +33,29 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
         excerpt:
             "How IEEE Sahrdaya Student Branch grew from a campus organization into a movement of leadership, confidence, service, and community.",
         date: "2026-07-02",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "See the shipped and concept projects that connect Robin's leadership work to product execution.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Source-backed recognitions connected to IEEE leadership and community impact.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Verified bio, achievements, headshot, and links for event organizers and media.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Photos from IEEE Sahrdaya, TechX Infinia, awards, and student mentorship moments.",
+            },
+        ],
         gallery: [
             {
                 src: "/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-2.webp",
@@ -234,6 +263,29 @@ We built a movement.`,
         image: "/images/blog/1720937570476.webp",
         excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
         date: "2026-01-12",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "See SoulSync beside Robin's other AI, accessibility, and product builds.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Review the public proof for the IBM watsonx GenAI Challenge recognition.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Use Robin's verified bio, achievements, contact details, and proof links for media or events.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "See visual evidence from inclusive innovation, mentoring, and AI community work.",
+            },
+        ],
         content:
             "SoulSync explores multimodal AI that monitors tone, pacing, and contextual cues to support elders and caregivers. We built lightweight models that run fully on-device to preserve privacy, and tuned them for low-light and low-bandwidth environments where typical cloud assistants fail.\n\nWe added adaptive prompts for different cognitive states, offered optional journaling summaries that can be shared with clinicians, and designed escalation paths that notify family when risk signals like sentiment drift, agitation, or prolonged silence appear. The system emphasizes consent, transparency, and clinician-in-the-loop review before deployment, so that automation augments human care rather than replacing it.\n\nA key learning: usability beats model novelty. Care teams preferred predictable, explainable actions, like asking a grounding question every few minutes, over complex opaque behaviors. This shaped our evaluation rubric for safety, comfort, and trust.",
     },
@@ -243,9 +295,32 @@ We built a movement.`,
         title: "IEEE R10 Outstanding Volunteer Award: My Journey of Impact",
         category: "Leadership",
         tags: ["Leadership"],
-        image: "/images/blog/ieee-award.webp",
+        image: "/images/blog/blog2/1731994207232.webp",
         excerpt: "Reflections on leadership, community-building, and global recognition.",
         date: "2025-12-18",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "Explore the product and platform work that sits beside the IEEE leadership journey.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Verify the IEEE Region 10 recognition and related public proof links.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Use the official short bio, long bio, achievements, and contact links.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Browse visual evidence from awards, IEEE events, and community programs.",
+            },
+        ],
         content:
             "This write-up covers the leadership principles that scaled our student branches to more than 100 events per year. We formalized handover playbooks, paired every lead with a shadow, and ran quarterly retros so new teams inherited context instead of chaos.\n\nWe also built mentorship tracks with clear checkpoints: speaker sourcing, sponsorship decks, logistics checklists, and post-event surveys. That reduced failure points and improved member retention, industry partnerships, and funded innovation programs that kept running even after founders graduated.\n\nThe biggest unlock was data visibility. Simple dashboards for attendance, NPS, and volunteer load helped us rotate responsibilities before burnout and double down on formats that worked. Workshops and office hours outperformed large one-off summits.",
     },
@@ -258,6 +333,29 @@ We built a movement.`,
         image: "/images/blog/accessible-tech.webp",
         excerpt: "How AI, multimodal interfaces, and affordable computing can empower millions.",
         date: "2025-11-26",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "Explore STRIDE Kerala, SoulSync, and other accessibility-centered product work.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Review recognitions connected to inclusive innovation, AI, and humanitarian technology.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Use Robin's official bio and proof links for accessibility talks or media references.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "See STRIDE and inclusive innovation moments from the wider work.",
+            },
+        ],
         content:
             "Accessible tech requires multimodal inputs like voice, gesture, eye-tracking, and low-latency edge compute. We prototyped adaptive layouts that increase target sizes and contrast based on motor ability and vision needs, and we leaned on on-device speech models that tolerate dialectal variety without round-trips to the cloud.\n\nWe tested haptic cues as a redundant channel for critical alerts, added offline fallbacks for intermittent connectivity, and built a settings wizard that asks about comfort preferences up front instead of burying them in menus.\n\nThe takeaway: accessibility is not a bolt-on. It is a product foundation that improves UX for everyone, with faster surfaces for power users, clearer affordances for new users, and resilient behavior when networks are unreliable.",
     },
@@ -270,6 +368,29 @@ We built a movement.`,
         image: "/images/blog/scalable-systems.webp",
         excerpt: "Lessons from leading 100+ programs and growing organizations.",
         date: "2025-10-14",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "Connect the community systems thinking to Robin's project and product work.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Connect the leadership systems to source-backed awards and recognitions.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Find verified achievements, role descriptions, and contact details for collaborations.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "View event, mentorship, and student-community moments from the ecosystem.",
+            },
+        ],
         content:
             "We scaled student communities by standardizing playbooks for event operations, creating modular starter kits for hackathons, and setting up OKR-based tracking for chapter health. Kits included sponsor email templates, venue checklists, slide decks, and risk logs so new chapters could launch in days, not months.\n\nData dashboards surfaced burnout signals like volunteer hours and last-minute cancellations, then helped us rotate leads before bottlenecks formed. We also paired each technical program with a delivery partner, often an NGO, so prototypes had a path to real users after demo day.\n\nThe result was more consistent events, higher volunteer retention, and projects that survived beyond judging. The system favored repeatable processes over heroics, which made leadership sustainable.",
     },
@@ -282,6 +403,29 @@ We built a movement.`,
         image: "/images/blog/people-centric-ai.webp",
         excerpt: "Balancing tech innovation with empathy and social awareness.",
         date: "2025-09-08",
+        updatedAt: "2026-07-07",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "Review people-centric AI projects including SoulSync, FoodLoop, and STRIDE.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "See source-backed recognition for Robin's AI, accessibility, and community work.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Use official bio and proof links when referencing Robin's people-centric AI work.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Browse the community and inclusive innovation contexts behind the writing.",
+            },
+        ],
         content:
             "People-centric AI starts with interviewing across ability, age, and bandwidth profiles. We tailored UX for intermittent connectivity, added offline fallbacks for critical actions, and kept error states explicit: here is what failed, and here is what we will try next.\n\nWe used progressive disclosure for model decisions: concise plain-language reasons first, deeper evidence on demand, and opt-out controls for data retention. Every release ran through fairness checks, explainability reviews, and trust surveys.\n\nThe main lesson is transparency without overwhelm. Users responded best when we gave just enough reasoning to build trust, plus a clear escape hatch to disable automation if it felt wrong.",
     },

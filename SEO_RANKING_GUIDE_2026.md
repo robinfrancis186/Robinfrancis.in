@@ -16,7 +16,7 @@ This project is already configured with route metadata, canonical URLs, structur
 - Canonical domain is `https://robinfrancis.in`.
 - `www.robinfrancis.in` redirects to the apex domain.
 - HTTPS is enabled.
-- Public routes are listed in `public/sitemap.xml`.
+- Public routes are generated from `src/app/sitemap.ts` and served at `https://robinfrancis.in/sitemap.xml`.
 - `public/robots.txt` points to the sitemap and blocks `/cms/`.
 - Main pages use Next.js route metadata.
 - Pages include Open Graph and Twitter card metadata.
@@ -33,7 +33,7 @@ This project is already configured with route metadata, canonical URLs, structur
 - Keep meta descriptions concise and factual.
 - Avoid generic AI-generated copy.
 - Add useful examples, outcomes, metrics, and project evidence.
-- Update `public/sitemap.xml` whenever a public page or blog URL changes.
+- Update `src/app/sitemap.ts` whenever a public page or blog URL changes.
 
 ## Image SEO Checklist
 

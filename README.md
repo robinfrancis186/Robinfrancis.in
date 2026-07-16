@@ -19,7 +19,7 @@ Live site: [robinfrancis.in](https://robinfrancis.in/)
 - SEO/AEO foundations: canonical URLs, generated sitemap, robots, Markdown-linked llms files, JSON-LD, Open Graph, Twitter cards, and `x-default` hreflang.
 - Security headers through `vercel.json`, including CSP, HSTS, `X-Frame-Options`, `nosniff`, Referrer Policy, and Permissions Policy.
 - Image optimization workflow for WebP assets.
-- Next.js build output is written to `.next-build` to avoid stale local `.next` cache issues.
+- Production builds use Next.js default `.next` output; stale generated folders such as `.next-build` are ignored by tracing and can be removed locally when debugging slow builds.
 
 ## Tech Stack
 
@@ -87,6 +87,30 @@ CONTACT_TO_EMAIL=robinfrancis186@gmail.com
 CONTACT_FROM_EMAIL=Portfolio <onboarding@resend.dev>
 ```
 
+Configure an Upstash Redis REST database for production contact form rate limiting.
+Without these values, local development falls back to an in-memory limiter, but
+production returns `503` instead of accepting contact form traffic without a durable
+serverless rate limit.
+
+```bash
+KV_REST_API_URL=...
+KV_REST_API_TOKEN=...
+```
+
+The endpoint also accepts the legacy `UPSTASH_REDIS_REST_URL` and
+`UPSTASH_REDIS_REST_TOKEN` aliases.
+
+Analytics is optional and environment-gated. After creating the GA4 web data stream
+for `https://robinfrancis.in`, add the measurement ID in Vercel and local `.env`
+files:
+
+```bash
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+Do not load both the raw GA4 tag and a Google Tag Manager container that also sends
+page views unless duplicate page views are intentionally configured and tested.
+
 Sanity Studio uses the project configuration in `portfolio-cms/`. The default production build copies the committed static Studio bundle from `portfolio-cms/public/cms` to `public/cms` so local builds do not hang on the Sanity CLI. To intentionally rebuild the Studio bundle, run `BUILD_CMS_FROM_SANITY=1 npm run build` after verifying the local Sanity CLI is healthy.
 
 ## Deployment
@@ -140,6 +164,7 @@ When changing routes, update:
 - [Post-Deployment Actions](POST_DEPLOYMENT_ACTIONS.md)
 - [SEO, AEO, and Security Plan](SEO_AEO_SECURITY_PLAN.md)
 - [SEO Ranking Guide 2026](SEO_RANKING_GUIDE_2026.md)
+- [Monthly Visibility Dashboard Spec](docs/monthly-visibility-dashboard.md)
 - [Indexing Notes](INDEXING_ISSUES_FIX.md)
 - [Performance Notes](PERFORMANCE_OPTIMIZATION.md)
 

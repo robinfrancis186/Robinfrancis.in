@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeRoute } from "./_components/route-clients";
+import { HomeRoute } from "./_components/home-route";
 import {
   absoluteUrl,
   defaultSeoDescription,
@@ -31,7 +31,7 @@ const homeJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
-    name: ["Home", "About", "Projects", "Blog", "Achievements", "Gallery", "Press Kit", "Contact"],
+    name: ["Home", "About", "Projects", "Blog", "Achievements", "Gallery", "Press Kit", "Search", "Contact"],
     url: [
       absoluteUrl("/"),
       absoluteUrl("/#about"),
@@ -40,6 +40,7 @@ const homeJsonLd = [
       absoluteUrl("/achievements/"),
       absoluteUrl("/gallery/"),
       absoluteUrl("/press-kit/"),
+      absoluteUrl("/search/"),
       absoluteUrl("/#contact"),
     ],
   },
@@ -84,6 +85,58 @@ const noScriptSummary = `
   </section>
 `;
 
+const homeProofHighlights = [
+  {
+    label: "Achievements",
+    title: "IEEE and IBM watsonx recognition",
+    description:
+      "Source-backed record covering IEEE Region 10 recognition, IBM watsonx GenAI Challenge work, and humanitarian technology awards.",
+    href: "/achievements/",
+  },
+  {
+    label: "Projects",
+    title: "AI, accessibility, and local-first products",
+    description:
+      "Explore Argus, BulkyFi, STRIDE Kerala, SoulSync, FoodLoop, and product evidence with live links and repositories where available.",
+    href: "/projects/",
+  },
+  {
+    label: "Press Kit",
+    title: "Bio, headshot, proof links, and contact",
+    description:
+      "A reusable media kit for organizers, collaborators, and press with official bios, downloadable headshot, and verification links.",
+    href: "/press-kit/",
+  },
+];
+
+const homeEvidenceLinks = [
+  {
+    title: "Source-backed achievements",
+    href: "/achievements/",
+    description: "IEEE Region 10, IBM watsonx, STRIDE, and humanitarian technology recognition.",
+  },
+  {
+    title: "Project portfolio",
+    href: "/projects/",
+    description: "Argus, BulkyFi, STRIDE Kerala, SoulSync, FoodLoop, and accessibility/product work.",
+  },
+  {
+    title: "Blog and leadership notes",
+    href: "/blog/",
+    description: "Writing on IEEE leadership, accessible technology, people-centric AI, and community systems.",
+  },
+  {
+    title: "Gallery evidence",
+    href: "/gallery/",
+    description: "Real event, award, speaking, education, and inclusive innovation moments.",
+  },
+  {
+    title: "Media and collaboration kit",
+    href: "/press-kit/",
+    description: "Official bio, headshot, proof links, achievements, and contact details.",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Robin Francis | AI Innovator & Community Leader",
   description: homeDescription,
@@ -124,6 +177,67 @@ export default function Page() {
       />
       <noscript dangerouslySetInnerHTML={{ __html: noScriptSummary }} />
       <HomeRoute />
+      <section
+        className="mx-auto max-w-7xl px-4 pb-20 pt-4 md:px-8"
+        aria-labelledby="home-proof-heading"
+      >
+        <div className="rounded-lg border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-slate-950">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+            Verified portfolio paths
+          </p>
+          <h2
+            id="home-proof-heading"
+            className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-neutral-950 dark:text-white"
+          >
+            Start with the pages that prove Robin Francis&apos;s work.
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-neutral-600 dark:text-neutral-300">
+            The portfolio is organized around verifiable achievements, shipped products,
+            public-interest platforms, and reusable media details for collaborators and event
+            organizers.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {homeProofHighlights.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="rounded-lg border border-neutral-200 p-5 transition hover:border-primary hover:bg-primary/5 dark:border-neutral-800"
+              >
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  {item.label}
+                </span>
+                <h3 className="mt-3 text-xl font-bold text-neutral-950 dark:text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                  {item.description}
+                </p>
+              </a>
+            ))}
+          </div>
+          <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+            <h3 className="text-lg font-bold text-neutral-950 dark:text-white">
+              Crawlable evidence map
+            </h3>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {homeEvidenceLinks.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-md border border-neutral-200 p-4 transition hover:border-primary hover:bg-primary/5 dark:border-neutral-800"
+                >
+                  <span className="text-sm font-semibold text-neutral-950 dark:text-white">
+                    {item.title}
+                  </span>
+                  <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                    {item.description}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

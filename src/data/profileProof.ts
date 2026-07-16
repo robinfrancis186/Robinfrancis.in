@@ -122,9 +122,9 @@ export const awards: Award[] = [
     year: "2024",
     summary:
       "IEEE Region 10's public past recipients page lists Robin Francis from Kerala Section among the 2024 Region 10 Outstanding Volunteer Award recipients.",
-    image: "/images/blog/ieee-award.webp",
+    image: "/images/blog/blog2/1731994207232.webp",
     imageAlt:
-      "Representative IEEE award visual for Robin Francis's 2024 IEEE Region 10 Outstanding Volunteer Award recognition",
+      "IEEE Region 10 feature recognizing Robin Francis for 2024 volunteer leadership",
     proofTitles: ["IEEE Region 10 Outstanding Volunteer Award recipients"],
   },
   {
@@ -133,9 +133,9 @@ export const awards: Award[] = [
     year: "2024",
     summary:
       "The Week reports that Team Bits & Bytes from Sahrdaya College, including Robin Francis, won second prize with SoulSync, a digital companion app for seniors.",
-    image: "/images/project-soulsync.webp",
+    image: "/images/blog/1720937580394.webp",
     imageAlt:
-      "SoulSync AI companion project visual connected to the IBM watsonx GenAI Challenge second prize",
+      "Robin Francis and teammates receiving recognition on stage at a watsonx event",
     proofTitles: [
       "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
       "IBM watsonx Challenge video coverage",

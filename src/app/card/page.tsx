@@ -1,28 +1,32 @@
 import type { Metadata } from "next";
-import { CardRoute } from "../_components/route-clients";
+import { CardRoute } from "../_components/card-route";
+import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const cardDescription =
   "Robin Francis is an AI innovator and community leader available for meaningful AI, product, accessibility, and community collaborations.";
 
-const cardJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  name: "Robin Francis Profile Card",
-  url: absoluteUrl("/card/"),
-  mainEntity: {
-    "@type": "Person",
-    name: "Robin Francis",
-    url: `${siteUrl}/`,
-    jobTitle: "AI Innovator and Community Leader",
-    sameAs: [
-      "https://github.com/robinfrancis186",
-      "https://www.linkedin.com/in/robin-francis-b43565175",
-      "https://www.instagram.com/robinfrancis186",
-      "https://medium.com/@robinfrancis186",
-    ],
+const cardJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: "Robin Francis Profile Card",
+    url: absoluteUrl("/card/"),
+    mainEntity: {
+      "@type": "Person",
+      name: "Robin Francis",
+      url: `${siteUrl}/`,
+      jobTitle: "AI Innovator and Community Leader",
+      sameAs: [
+        "https://github.com/robinfrancis186",
+        "https://www.linkedin.com/in/robin-francis-b43565175",
+        "https://www.instagram.com/robinfrancis186",
+        "https://medium.com/@robinfrancis186",
+      ],
+    },
   },
-};
+  breadcrumbJsonLd([homeBreadcrumb, { name: "Card", path: "/card/" }]),
+];
 
 export const metadata: Metadata = {
   title: "Robin Francis Card | AI Innovator & Community Leader",

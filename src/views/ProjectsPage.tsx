@@ -1,19 +1,57 @@
 import { useState } from 'react';
 
+import Image from 'next/image';
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { trackEvent } from '@/lib/analytics';
+
+type ProjectDetail = {
+    title: string;
+    category: string;
+    summary: string;
+    image: string;
+    imageAlt: string;
+    repo?: string;
+    live?: string;
+    images?: { src: string; alt: string; }[];
+};
+
+function ProjectImage({ src, alt, className, priority = false }: { src: string; alt: string; className: string; priority?: boolean }) {
+    return (
+        <Image
+            src={src}
+            alt={alt}
+            width={900}
+            height={560}
+            priority={priority}
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className={className}
+        />
+    );
+}
 
 const ProjectsPage = () => {
-    const [selectedProject, setSelectedProject] = useState<null | {
-        title: string;
-        category: string;
-        summary: string;
-        image: string;
-        imageAlt: string;
-        repo?: string;
-        live?: string;
-        images?: { src: string; alt: string; }[];
-    }>(null);
+    const [selectedProject, setSelectedProject] = useState<null | ProjectDetail>(null);
+
+    const openProject = (project: ProjectDetail) => {
+        trackEvent('project_summary_open', {
+            project_name: project.title,
+            project_category: project.category,
+        });
+        setSelectedProject(project);
+    };
+
+    const trackProjectOutbound = (project: ProjectDetail, destination: 'live' | 'github') => {
+        const linkUrl = destination === 'live' ? project.live : project.repo;
+
+        trackEvent('project_outbound_click', {
+            project_name: project.title,
+            destination_type: destination === 'live' ? 'live_demo' : 'repository',
+            link_text: destination === 'live' ? 'Live App' : 'GitHub Repository',
+            link_location: 'projects_modal',
+            link_url: linkUrl,
+        });
+    };
 
     const argusProject = {
         title: 'Argus',
@@ -73,8 +111,8 @@ const ProjectsPage = () => {
                     <>
                         {/* Column 1 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <button type="button" onClick={() => setSelectedProject(argusProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
-                                    <img src={argusProject.image} alt={argusProject.imageAlt} className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
+                                <button type="button" onClick={() => openProject(argusProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400">
+                                    <ProjectImage src={argusProject.image} alt={argusProject.imageAlt} priority className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{argusProject.category}</p>
@@ -97,8 +135,8 @@ const ProjectsPage = () => {
                                     </div>
                                 </button>
 
-                                <button type="button" onClick={() => setSelectedProject(bulkyFiProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
-                                    <img src={bulkyFiProject.image} alt={bulkyFiProject.imageAlt} className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
+                                <button type="button" onClick={() => openProject(bulkyFiProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+                                    <ProjectImage src={bulkyFiProject.image} alt={bulkyFiProject.imageAlt} priority className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{bulkyFiProject.category}</p>
@@ -122,7 +160,7 @@ const ProjectsPage = () => {
                                 </button>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/creative_hub.webp" alt="Floating glass interface cards on an iridescent gradient, representing a creative portfolio hub" className="h-48 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                    <ProjectImage src="/images/projects/creative_hub.webp" alt="Floating glass interface cards on an iridescent gradient, representing a creative portfolio hub" className="h-48 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Portfolio • Website</p>
@@ -149,7 +187,7 @@ const ProjectsPage = () => {
                             {/* Column 2 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/boltshift.webp" alt="Futuristic product launch webpage mockup with neon motion trails and glowing UI frame" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    <ProjectImage src="/images/projects/boltshift.webp" alt="Futuristic product launch webpage mockup with neon motion trails and glowing UI frame" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Platform • Website</p>
@@ -173,7 +211,7 @@ const ProjectsPage = () => {
                                 </a>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/fit_tracker.webp" alt="Stacked mobile fitness app screens with activity charts, heart metrics, and progress rings" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                    <ProjectImage src="/images/projects/fit_tracker.webp" alt="Stacked mobile fitness app screens with activity charts, heart metrics, and progress rings" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Mobile • App</p>
@@ -197,7 +235,7 @@ const ProjectsPage = () => {
                                 </a>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/dataflow.webp" alt="Isometric analytics dashboard with multi-panel charts, live data streams, and connected network nodes" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                    <ProjectImage src="/images/projects/dataflow.webp" alt="Isometric analytics dashboard with multi-panel charts, live data streams, and connected network nodes" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Data • Visualization</p>
@@ -223,8 +261,8 @@ const ProjectsPage = () => {
 
                             {/* Column 3 */}
                             <div className="flex flex-col gap-4 sm:gap-5">
-                                <button type="button" onClick={() => setSelectedProject(strideProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400">
-                                    <img src={strideProject.image} alt={strideProject.imageAlt} className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
+                                <button type="button" onClick={() => openProject(strideProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400">
+                                    <ProjectImage src={strideProject.image} alt={strideProject.imageAlt} className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{strideProject.category}</p>
@@ -248,7 +286,7 @@ const ProjectsPage = () => {
                                 </button>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/quotient_rebrand.webp" alt="Brand identity and campaign visuals" className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                    <ProjectImage src="/images/projects/quotient_rebrand.webp" alt="Brand identity and campaign visuals" className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Identity • Campaign</p>
@@ -272,7 +310,7 @@ const ProjectsPage = () => {
                                 </a>
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
-                                    <img src="/images/projects/taskflow_pro.webp" alt="Neon task management dashboard with columns for to-do, in-progress, and completed work" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
+                                    <ProjectImage src="/images/projects/taskflow_pro.webp" alt="Neon task management dashboard with columns for to-do, in-progress, and completed work" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">Web • Application</p>
@@ -304,7 +342,7 @@ const ProjectsPage = () => {
                             <button type="button" aria-label="Close project summary" onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black dark:bg-white/10 dark:hover:bg-white/20">
                                 <X className="h-5 w-5" />
                             </button>
-                            <img src={selectedProject.image} alt={selectedProject.imageAlt} className="h-64 w-full object-cover object-top sm:h-80" />
+                            <ProjectImage src={selectedProject.image} alt={selectedProject.imageAlt} className="h-64 w-full object-cover object-top sm:h-80" />
                             <div className="p-6 sm:p-8">
                                 <p className="text-xs uppercase tracking-[0.24em] text-lime-600 dark:text-lime-400 font-geist">{selectedProject.category}</p>
                                 <h2 id="project-detail-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{selectedProject.title}</h2>
@@ -312,19 +350,19 @@ const ProjectsPage = () => {
                                 {selectedProject.images && selectedProject.images.length > 0 && (
                                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
                                         {selectedProject.images.map((image) => (
-                                            <img key={image.src} src={image.src} alt={image.alt} className="h-56 w-full rounded-xl object-cover object-top ring-1 ring-neutral-200 dark:ring-neutral-800" />
+                                            <ProjectImage key={image.src} src={image.src} alt={image.alt} className="h-56 w-full rounded-xl object-cover object-top ring-1 ring-neutral-200 dark:ring-neutral-800" />
                                         ))}
                                     </div>
                                 )}
                                 <div className="mt-6 flex flex-wrap gap-3">
                                     {selectedProject.live && (
-                                        <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-500">
+                                        <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" onClick={() => trackProjectOutbound(selectedProject, 'live')} className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-500">
                                             <ExternalLink className="h-4 w-4" />
                                             Live App
                                         </a>
                                     )}
                                     {selectedProject.repo && (
-                                        <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200">
+                                        <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer" onClick={() => trackProjectOutbound(selectedProject, 'github')} className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200">
                                             <Github className="h-4 w-4" />
                                             GitHub Repository
                                         </a>

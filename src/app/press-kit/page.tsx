@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Download, ExternalLink, Mail } from "lucide-react";
+import { TrackPageEvent, TrackedLink } from "@/components/analytics/AnalyticsEvents";
 import { awards, mediaKit, proofLinks } from "@/data/profileProof";
+import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
 
 const pressKitDescription =
@@ -28,6 +31,7 @@ const pressKitJsonLd = [
       "@id": `${siteUrl}/#person`,
     },
   },
+  breadcrumbJsonLd([homeBreadcrumb, { name: "Press Kit", path: "/press-kit/" }]),
 ];
 
 export const metadata: Metadata = {
@@ -69,6 +73,12 @@ export default function PressKitPage() {
 
   return (
     <main className="min-h-screen bg-background px-4 pb-20 pt-32 text-foreground md:px-8">
+      <TrackPageEvent
+        eventName="press_kit_view"
+        eventParams={{
+          page_path: "/press-kit/",
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pressKitJsonLd) }}
@@ -80,19 +90,30 @@ export default function PressKitPage() {
         </p>
         <div className="mt-5 grid gap-8 lg:grid-cols-[380px_1fr] lg:items-start">
           <div className="rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-slate-950">
-            <img
+            <Image
               src={mediaKit.headshot}
               alt={mediaKit.headshotAlt}
+              width={760}
+              height={950}
+              priority
+              sizes="(min-width: 1024px) 380px, 100vw"
               className="aspect-[4/5] w-full rounded-lg object-cover object-center"
             />
-            <a
+            <TrackedLink
               href={mediaKit.headshot}
               download
+              eventName="press_kit_download"
+              eventParams={{
+                asset_type: "headshot",
+                file_name: mediaKit.headshot.split("/").at(-1),
+                file_extension: "webp",
+                link_text: "Download headshot",
+              }}
               className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-200 px-5 py-3 text-sm font-semibold text-neutral-800 transition hover:border-primary hover:text-primary dark:border-neutral-700 dark:text-neutral-200"
             >
               <Download className="h-4 w-4" aria-hidden="true" />
               Download headshot
-            </a>
+            </TrackedLink>
           </div>
 
           <div>
@@ -150,25 +171,34 @@ export default function PressKitPage() {
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
             Official links
           </h2>
-          <a
+          <TrackedLink
             href={`mailto:${mediaKit.contactEmail}`}
+            eventName="press_kit_contact_click"
+            eventParams={{
+              contact_method: "email",
+            }}
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
           >
             <Mail className="h-4 w-4" aria-hidden="true" />
             {mediaKit.contactEmail}
-          </a>
+          </TrackedLink>
           <div className="mt-6 grid gap-3">
             {mediaKit.links.map((link) => (
-              <a
+              <TrackedLink
                 key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                eventName="press_kit_outbound_click"
+                eventParams={{
+                  link_label: link.label,
+                  link_area: "official_links",
+                }}
                 className="inline-flex items-center justify-between rounded-lg border border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-800 transition hover:border-primary hover:text-primary dark:border-neutral-700 dark:text-neutral-200"
               >
                 {link.label}
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </TrackedLink>
             ))}
           </div>
         </aside>
@@ -186,11 +216,17 @@ export default function PressKitPage() {
         </h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {featuredProof.map((proof) => (
-            <a
+            <TrackedLink
               key={proof.href}
               href={proof.href}
               target="_blank"
               rel="noopener noreferrer"
+              eventName="press_kit_proof_click"
+              eventParams={{
+                proof_title: proof.title,
+                proof_category: proof.category,
+                link_label: proof.label,
+              }}
               className="rounded-lg border border-neutral-200 bg-white p-5 transition hover:border-primary dark:border-neutral-800 dark:bg-slate-950"
             >
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -202,7 +238,7 @@ export default function PressKitPage() {
               <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
                 {proof.description}
               </p>
-            </a>
+            </TrackedLink>
           ))}
         </div>
       </section>

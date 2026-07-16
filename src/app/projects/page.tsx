@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { ProjectsRoute } from "../_components/route-clients";
+import { ProjectsRoute } from "../_components/projects-route";
+import { TrackedLink } from "@/components/analytics/AnalyticsEvents";
+import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const projectDescription = "Explore AI, accessibility, product, and engineering projects built by Robin Francis.";
@@ -60,29 +62,32 @@ const projects = [
   },
 ];
 
-const projectsJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: "Projects | Robin Francis",
-  description: projectDescription,
-  url: absoluteUrl("/projects/"),
-  hasPart: projects.map((project) => ({
-    "@type": project.type,
-    name: project.name,
-    description: project.description,
-    genre: project.category,
-    url: project.url,
-    image: project.image,
-    applicationCategory: project.applicationCategory,
-    codeRepository: project.codeRepository,
-    sameAs: project.sameAs,
-    creator: {
-      "@type": "Person",
-      name: "Robin Francis",
-      url: `${siteUrl}/`,
-    },
-  })),
-};
+const projectsJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Projects | Robin Francis",
+    description: projectDescription,
+    url: absoluteUrl("/projects/"),
+    hasPart: projects.map((project) => ({
+      "@type": project.type,
+      name: project.name,
+      description: project.description,
+      genre: project.category,
+      url: project.url,
+      image: project.image,
+      applicationCategory: project.applicationCategory,
+      codeRepository: project.codeRepository,
+      sameAs: project.sameAs,
+      creator: {
+        "@type": "Person",
+        name: "Robin Francis",
+        url: `${siteUrl}/`,
+      },
+    })),
+  },
+  breadcrumbJsonLd([homeBreadcrumb, { name: "Projects", path: "/projects/" }]),
+];
 
 export const metadata: Metadata = {
   title: "Projects | Robin Francis",
@@ -142,6 +147,42 @@ export default function Page() {
         </section>
       </noscript>
       <ProjectsRoute />
+      <section className="mx-auto max-w-7xl px-4 pb-20 md:px-8" aria-labelledby="projects-seo-heading">
+        <div className="rounded-lg border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-slate-950">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+            Project evidence
+          </p>
+          <h2 id="projects-seo-heading" className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
+            AI, accessibility, and local-first products by Robin Francis
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project) => (
+              <article key={project.name} className="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
+                <h3 className="text-xl font-bold text-neutral-950 dark:text-white">{project.name}</h3>
+                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                  {project.category}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                  {project.description}
+                </p>
+                <TrackedLink
+                  className="mt-4 inline-flex text-sm font-semibold text-primary hover:text-primary/80"
+                  href={project.url}
+                  eventName="project_outbound_click"
+                  eventParams={{
+                    project_name: project.name,
+                    destination_type: project.codeRepository ? "repository_or_demo" : "proof_link",
+                    link_text: "Open proof link",
+                    link_location: "projects_server_evidence",
+                  }}
+                >
+                  Open proof link
+                </TrackedLink>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

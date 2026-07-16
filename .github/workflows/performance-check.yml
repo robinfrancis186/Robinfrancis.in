@@ -8,6 +8,7 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       
@@ -21,13 +22,14 @@ jobs:
         run: npm ci
       
       - name: Build
+        timeout-minutes: 10
         run: npm run build
 
       - name: Start preview server
         run: |
-          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          npm run preview > /tmp/portfolio-preview.log 2>&1 &
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:4173/ > /dev/null; then
+            if curl -fsS http://127.0.0.1:5174/ > /dev/null; then
               exit 0
             fi
             sleep 1
@@ -39,8 +41,14 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            http://127.0.0.1:4173/
-            http://127.0.0.1:4173/projects/
-            http://127.0.0.1:4173/blog/
+            http://127.0.0.1:5174/
+            http://127.0.0.1:5174/projects/
+            http://127.0.0.1:5174/blog/
+            http://127.0.0.1:5174/blog/ieee-r10-volunteer-award/
+            http://127.0.0.1:5174/achievements/
+            http://127.0.0.1:5174/press-kit/
+            http://127.0.0.1:5174/gallery/
+            http://127.0.0.1:5174/card/
+          configPath: ./.lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true

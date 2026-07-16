@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { trackEvent } from "@/lib/analytics";
 
 import { motion } from "framer-motion";
 
@@ -67,8 +69,8 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-                        image="/images/blog/ieee-award.webp"
-                        imageAlt="IEEE R10 international virtual career fair with 31 global recruiters"
+                        image="/images/gallery/gallery-ieee-kerala-section-kochi-team.webp"
+                        imageAlt="IEEE Kerala Section Kochi community team connected to Robin Francis's IEEE leadership work"
                         title="IEEE R10 Career Fair"
                         description="Co-led the first international virtual career fair with 31 global recruiters and 245 participants."
                         tags={["Global Community", "Networking"]}
@@ -115,7 +117,13 @@ const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, v
                 <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-white dark:bg-neutral-950">
                     {image && (
                         <div className="relative h-36 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900 sm:h-40 xl:h-44">
-                            <img src={image} loading="lazy" alt={imageAlt || title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                            <Image
+                                src={image}
+                                alt={imageAlt || title}
+                                fill
+                                sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                className="object-cover transition-transform duration-500 hover:scale-105"
+                            />
                         </div>
                     )}
                     <div className="flex flex-col flex-1 p-4 md:p-5 justify-between gap-3">
@@ -144,6 +152,15 @@ const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, v
                                     href={demoLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={() =>
+                                        trackEvent("project_outbound_click", {
+                                            project_name: title,
+                                            destination_type: "live_demo",
+                                            link_text: "Live Demo",
+                                            link_url: demoLink,
+                                            link_location: "home_projects",
+                                        })
+                                    }
                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors"
                                 >
                                     <ExternalLink className="w-3.5 h-3.5" />

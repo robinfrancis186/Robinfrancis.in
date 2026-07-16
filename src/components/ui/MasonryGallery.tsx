@@ -1,73 +1,10 @@
-/**
- * MasonryGallery - A high-performance, GSAP-powered Masonry layout component.
- * Features:
- * - Responsive column mapping
- * - GSAP animations for entry and updates
- * - Blur-to-focus and directional entrance effects
- * - Interactive hover states (scale, color shift)
- * - Automatic image preloading for smooth layout calculations
- */
-
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import NextImage from 'next/image';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-/** Utility for Tailwind class merging */
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
-
-/** Hook to handle media queries for responsive columns */
-const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
-    const get = () => {
-        if (typeof window === 'undefined') return defaultValue;
-        const match = queries.findIndex(q => window.matchMedia(q).matches);
-        return values[match] !== undefined ? values[match] : defaultValue;
-    };
-
-    const [value, setValue] = useState<number>(get);
-
-    useEffect(() => {
-        const handler = () => setValue(get);
-        queries.forEach(q => window.matchMedia(q).addEventListener('change', handler));
-        return () => queries.forEach(q => window.matchMedia(q).removeEventListener('change', handler));
-    }, [queries]);
-
-    return value;
-};
-
-/** Hook to measure element size via ResizeObserver */
-const useMeasure = <T extends HTMLElement>() => {
-    const ref = useRef<T | null>(null);
-    const [size, setSize] = useState({ width: 0, height: 0 });
-
-    useLayoutEffect(() => {
-        if (!ref.current) return;
-        const ro = new ResizeObserver(([entry]) => {
-            const { width, height } = entry.contentRect;
-            setSize({ width, height });
-        });
-        ro.observe(ref.current);
-        return () => ro.disconnect();
-    }, []);
-
-    return [ref, size] as const;
-};
-
-/** Utility to ensure images are loaded before layout/animation */
-const preloadImages = async (urls: string[]): Promise<void> => {
-    await Promise.all(
-        urls.map(
-            src =>
-                new Promise<void>(resolve => {
-                    const img = new Image();
-                    img.src = src;
-                    img.onload = img.onerror = () => resolve();
-                })
-        )
-    );
-};
 
 export interface MasonryItem {
     id: string;
@@ -81,13 +18,6 @@ export interface MasonryItem {
     date?: string;
     imageWidth?: number;
     imageHeight?: number;
-}
-
-interface GridItem extends MasonryItem {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
 }
 
 export interface MasonryGalleryProps {
@@ -104,194 +34,93 @@ export interface MasonryGalleryProps {
     itemClassName?: string;
 }
 
+function getAspectRatio(item: MasonryItem) {
+    if (item.imageWidth && item.imageHeight) {
+        return `${item.imageWidth} / ${item.imageHeight}`;
+    }
+
+    return `400 / ${item.height || 400}`;
+}
+
 export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
     items,
-    ease = 'power3.out',
-    duration = 0.6,
-    stagger = 0.05,
-    animateFrom = 'bottom',
     scaleOnHover = true,
-    hoverScale = 0.95,
-    blurToFocus = true,
     colorShiftOnHover = false,
     className,
     itemClassName
 }) => {
-    const columns = useMedia(
-        ['(min-width: 1500px)', '(min-width: 1100px)', '(min-width: 760px)', '(min-width: 560px)'],
-        [5, 4, 3, 2],
-        1
-    );
-
-    const [containerRef, { width }] = useMeasure<HTMLDivElement>();
-    const [imagesReady, setImagesReady] = useState(false);
-    const hasMounted = useRef(false);
-
-    const getInitialPosition = (item: GridItem) => {
-        const containerRect = containerRef.current?.getBoundingClientRect();
-        if (!containerRect) return { x: item.x, y: item.y };
-
-        let direction = animateFrom;
-        if (animateFrom === 'random') {
-            const dirs = ['top', 'bottom', 'left', 'right'] as const;
-            direction = dirs[Math.floor(Math.random() * dirs.length)];
-        }
-
-        switch (direction) {
-            case 'top': return { x: item.x, y: -200 };
-            case 'bottom': return { x: item.x, y: window.innerHeight + 200 };
-            case 'left': return { x: -200, y: item.y };
-            case 'right': return { x: window.innerWidth + 200, y: item.y };
-            case 'center': return {
-                x: containerRect.width / 2 - item.w / 2,
-                y: containerRect.height / 2 - item.h / 2
-            };
-            default: return { x: item.x, y: item.y + 100 };
-        }
-    };
-
-    useEffect(() => {
-        let active = true;
-        setImagesReady(false);
-        const initialImages = items.slice(0, 12).map(i => i.img);
-        preloadImages(initialImages).then(() => {
-            if (active) setImagesReady(true);
-        });
-        return () => {
-            active = false;
-        };
-    }, [items]);
-
-    const { grid, containerHeight } = useMemo(() => {
-        if (!width) return { grid: [] as GridItem[], containerHeight: 0 };
-
-        const colHeights = new Array(columns).fill(0);
-        const gap = 24;
-        const totalGaps = (columns - 1) * gap;
-        const columnWidth = (width - totalGaps) / columns;
-
-        const gridItems = items.map(child => {
-            const col = colHeights.indexOf(Math.min(...colHeights));
-            const x = col * (columnWidth + gap);
-            const height = (child.height / 400) * columnWidth;
-            const y = colHeights[col];
-            colHeights[col] += height + gap;
-            return { ...child, x, y, w: columnWidth, h: height };
-        });
-
-        return { grid: gridItems, containerHeight: Math.max(...colHeights) };
-    }, [columns, items, width]);
-
-    useLayoutEffect(() => {
-        if (!imagesReady || !grid.length) return;
-
-        grid.forEach((item, index) => {
-            const element = document.querySelector(`[data-key="${item.id}"]`);
-            if (!element) return;
-
-            const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-
-            if (!hasMounted.current) {
-                const start = getInitialPosition(item);
-                gsap.fromTo(
-                    element,
-                    {
-                        opacity: 0,
-                        x: start.x,
-                        y: start.y,
-                        width: item.w,
-                        height: item.h,
-                        ...(blurToFocus && { filter: 'blur(20px)' })
-                    },
-                    {
-                        opacity: 1,
-                        ...animProps,
-                        ...(blurToFocus && { filter: 'blur(0px)' }),
-                        duration: 1.2,
-                        ease: 'power3.out',
-                        delay: index * stagger
-                    }
-                );
-            } else {
-                gsap.to(element, {
-                    ...animProps,
-                    duration,
-                    ease,
-                    overwrite: 'auto'
-                });
-            }
-        });
-
-        if (grid.length > 0) hasMounted.current = true;
-    }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
-
-    const handleMouseEnter = (_id: string, element: HTMLElement) => {
-        if (scaleOnHover) {
-            gsap.to(element, { scale: hoverScale, duration: 0.4, ease: 'power2.out' });
-        }
-        if (colorShiftOnHover) {
-            const overlay = element.querySelector('.color-overlay');
-            if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.4 });
-        }
-    };
-
-    const handleMouseLeave = (_id: string, element: HTMLElement) => {
-        if (scaleOnHover) {
-            gsap.to(element, { scale: 1, duration: 0.4, ease: 'power2.out' });
-        }
-        if (colorShiftOnHover) {
-            const overlay = element.querySelector('.color-overlay');
-            if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.4 });
-        }
-    };
-
     return (
         <div
-            ref={containerRef}
-            className={cn('relative w-full', className)}
-            style={{ height: containerHeight, minHeight: '400px' }}
+            className={cn(
+                'columns-1 gap-6 sm:columns-2 md:columns-3 xl:columns-4 2xl:columns-5',
+                className
+            )}
         >
-            {grid.map(item => (
-                <div
-                    key={item.id}
-                    data-key={item.id}
-                    className={cn(
-                        'absolute overflow-hidden cursor-pointer rounded-xl transition-shadow hover:shadow-2xl',
-                        itemClassName
-                    )}
-                    style={{
-                        willChange: 'transform, width, height, opacity, filter',
-                        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.1)'
-                    }}
-                    onClick={() => item.url && window.open(item.url, '_blank', 'noopener')}
-                    onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
-                    onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
-                >
-                    <div className="w-full h-full relative">
-                        <img 
-                            src={item.img} 
-                            alt={item.alt || item.title || "Gallery image"} 
-                            width={item.imageWidth || 500}
-                            height={item.imageHeight || 500}
-                            className="w-full h-full object-cover" 
-                            loading="lazy" 
-                        />
-                        {colorShiftOnHover && (
-                            <div className="color-overlay absolute inset-0 bg-gradient-to-tr from-primary/40 to-accent/40 opacity-0 pointer-events-none transition-opacity" />
+            {items.map((item, index) => {
+                const content = (
+                    <figure
+                        className={cn(
+                            'group mb-6 break-inside-avoid overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition-shadow hover:shadow-2xl dark:border-neutral-800 dark:bg-slate-950',
+                            item.url && 'focus-within:ring-2 focus-within:ring-primary',
+                            itemClassName
                         )}
-                    </div>
-                    {item.title && (
-                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
-                            <p className="text-white text-xs font-medium uppercase tracking-wider">{item.title}</p>
-                            {item.category && (
-                                <p className="mt-1 text-white/75 text-[10px] font-medium uppercase tracking-wider">
-                                    {item.category}
-                                </p>
+                    >
+                        <div
+                            className="relative w-full overflow-hidden bg-neutral-100 dark:bg-slate-900"
+                            style={{ aspectRatio: getAspectRatio(item) }}
+                        >
+                            <NextImage
+                                src={item.img}
+                                alt={item.alt || item.title || 'Gallery image'}
+                                fill
+                                sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                className={cn(
+                                    'object-cover transition duration-500',
+                                    scaleOnHover && 'group-hover:scale-[0.98] group-focus-within:scale-[0.98]'
+                                )}
+                                priority={index < 2}
+                            />
+                            {colorShiftOnHover && (
+                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />
                             )}
                         </div>
-                    )}
-                </div>
-            ))}
+                        <figcaption className="p-4">
+                            {item.title && (
+                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-900 dark:text-white">
+                                    {item.title}
+                                </p>
+                            )}
+                            {item.description && (
+                                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                                    {item.description}
+                                </p>
+                            )}
+                            {(item.category || item.date) && (
+                                <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                                    {[item.category, item.date].filter(Boolean).join(' · ')}
+                                </p>
+                            )}
+                        </figcaption>
+                    </figure>
+                );
+
+                if (item.url) {
+                    return (
+                        <a
+                            key={item.id}
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block rounded-xl outline-none"
+                            aria-label={item.title ? `${item.title}: ${item.description || item.alt || 'Open gallery item'}` : item.alt}
+                        >
+                            {content}
+                        </a>
+                    );
+                }
+
+                return <div key={item.id}>{content}</div>;
+            })}
         </div>
     );
 };

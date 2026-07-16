@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import MasonryGallery, { MasonryItem } from '@/components/ui/MasonryGallery';
+import MasonryGallery from '@/components/ui/MasonryGallery';
 import { GALLERY_ITEMS } from '@/data/galleryItems';
 
 const GalleryPage = () => {
-    const [items] = useState<MasonryItem[]>(GALLERY_ITEMS);
-
     return (
         <main className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
@@ -30,10 +27,10 @@ const GalleryPage = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
                 >
-                    {items.length > 0 ? (
+                    {GALLERY_ITEMS.length > 0 ? (
                         <MasonryGallery
                             key="local-gallery"
-                            items={items}
+                            items={GALLERY_ITEMS}
                             animateFrom="bottom"
                             blurToFocus={false}
                             stagger={0.08}

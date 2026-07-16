@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -136,10 +137,13 @@ export const Carousel3D = ({
                                 style={style}
                             onClick={() => onSelect?.(item)}
                             >
-                                <img
+                                <Image
                                     src={item.image}
                                     alt={item.title}
+                                    width={640}
+                                    height={640}
                                     loading="lazy"
+                                    sizes="(min-width: 768px) 384px, 80vw"
                                     className="h-full w-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>

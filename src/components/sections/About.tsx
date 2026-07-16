@@ -1,9 +1,11 @@
+import Image from "next/image";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import InteractivePortrait from "@/components/ui/InteractivePortrait";
 import { useDomTheme } from "@/hooks/use-dom-theme";
+import { trackEvent } from "@/lib/analytics";
 
 const About = () => {
     const isDarkTheme = useDomTheme();
@@ -33,8 +35,8 @@ const About = () => {
         {
             value: "IEEE R10",
             title: "Outstanding Volunteer Award",
-            description: "First student from the Asia-Pacific Region to receive the 2024 honor.",
-            image: "/images/blog/ieee-award.webp",
+            description: "Listed by IEEE Region 10 among the 2024 Outstanding Volunteer Award recipients.",
+            image: "/images/blog/blog2/1731994207232.webp",
         },
         {
             value: "1st Runner-Up",
@@ -93,7 +95,19 @@ const About = () => {
                                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                                     I am a passionate AI developer, program strategist, and community builder with a strong track record in leading high-impact technical initiatives. My work spans accessible technology, GenAI solutions, student empowerment, and large-scale program execution. I believe in building technology that solves real human problems while uplifting communities through collaboration, mentorship, and creativity.
                                 </p>
-                                <a href="/images/robin-francis-resume.pdf" download="Robin_Francis_Resume.pdf">
+                                <a
+                                    href="/images/robin-francis-resume.pdf"
+                                    download="Robin_Francis_Resume.pdf"
+                                    onClick={() =>
+                                        trackEvent("resume_download", {
+                                            file_name: "Robin_Francis_Resume.pdf",
+                                            file_extension: "pdf",
+                                            link_text: "Download CV",
+                                            link_url: "/images/robin-francis-resume.pdf",
+                                            link_location: "home_about",
+                                        })
+                                    }
+                                >
                                     <MovingBorderButton
                                         as="div"
                                         borderRadius="1.75rem"
@@ -162,11 +176,12 @@ const About = () => {
                                     style={{ background: "radial-gradient(400px circle at 50% 30%, hsl(var(--primary) / 0.08), transparent)" }}
                                 />
                                 <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                                    <img
+                                    <Image
                                         src={achievement.image}
                                         alt={achievement.title}
+                                        fill
+                                        sizes="(min-width: 768px) 320px, 280px"
                                         className="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40 dark:opacity-20 dark:group-hover:opacity-30"
-                                        loading="lazy"
                                     />
                                 </div>
                                 <span className="relative text-[clamp(1.4rem,3vw,2rem)] font-bold leading-none text-white transition-colors duration-500 group-hover:text-primary">

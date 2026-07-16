@@ -1,13 +1,33 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { client, urlFor } from '../lib/sanity';
+import { urlFor } from '../lib/sanity';
 import { PortableText } from '@portabletext/react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
 import { absoluteUrl } from '@/lib/seo';
+
+function getSafePortableTextHref(href: unknown) {
+    const value = typeof href === "string" ? href.trim() : "";
+
+    if (!value) {
+        return null;
+    }
+
+    if (value.startsWith("/") && !value.startsWith("//")) {
+        return value;
+    }
+
+    try {
+        const url = new URL(value);
+        return ["https:", "mailto:", "tel:"].includes(url.protocol) ? value : null;
+    } catch {
+        return null;
+    }
+}
 
 const ptComponents = {
     types: {
@@ -16,10 +36,12 @@ const ptComponents = {
                 return null;
             }
             return (
-                <img
+                <Image
                     alt={value.alt || 'Blog content image'}
-                    loading="lazy"
                     src={urlFor(value).width(800).fit('max').auto('format').url()}
+                    width={800}
+                    height={520}
+                    sizes="(min-width: 768px) 768px, 100vw"
                     className="rounded-lg my-8 w-full max-w-3xl mx-auto"
                 />
             );
@@ -27,9 +49,16 @@ const ptComponents = {
     },
     marks: {
         link: ({ children, value }: any) => {
-            const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
+            const href = getSafePortableTextHref(value?.href);
+            if (!href) {
+                return <span>{children}</span>;
+            }
+
+            const isInternal = href.startsWith('/');
+            const rel = !isInternal ? 'noreferrer noopener' : undefined;
+            const target = !isInternal ? '_blank' : undefined;
             return (
-                <a href={value.href} rel={rel} className="text-primary hover:underline font-medium">
+                <a href={href} rel={rel} target={target} className="text-primary hover:underline font-medium">
                     {children}
                 </a>
             );
@@ -113,14 +142,8 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
             return;
         }
 
-        const query = `*[_type == "blogPost" && (slug.current == $slug || _id == $slug)][0]`;
-        client.fetch(query, { slug }).then((data) => {
-            setPost(data);
-            setLoading(false);
-        }).catch((err) => {
-            console.error(err);
-            setLoading(false);
-        });
+        setPost(null);
+        setLoading(false);
     }, [initialPost, slug]);
 
     if (loading) {
@@ -150,6 +173,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = absoluteUrl(`/blog/${resolvedSlug}/`);
     const articleText = portableTextToPlainText(post.content) || excerpt;
+    const relatedLinks = Array.isArray(post.internalLinks) ? post.internalLinks : [];
     const staticParagraphs = typeof post.content === 'string'
         ? post.content.split(/\n{2,}/).map((paragraph: string) => paragraph.trim()).filter(Boolean)
         : [];
@@ -162,7 +186,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                 transition={{ duration: 0.5 }}
             >
                 <div className="mb-10">
-                    <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-primary transition-colors mb-8">
+                <Link href="/blog/" className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-primary transition-colors mb-8">
                         <ArrowLeft className="w-4 h-4" />
                         Back to Journal
                     </Link>
@@ -179,11 +203,19 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
 
                 {imageUrl && (
                     <div className="w-full rounded-2xl overflow-hidden mb-12 shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-800">
-                        <img src={imageUrl} alt={mainImageAlt} className="w-full h-auto max-h-[600px] object-cover" />
+                        <Image
+                            src={imageUrl}
+                            alt={mainImageAlt}
+                            width={1200}
+                            height={720}
+                            priority
+                            sizes="(min-width: 768px) 768px, 100vw"
+                            className="w-full h-auto max-h-[600px] object-cover"
+                        />
                     </div>
                 )}
 
-                <ArticleActions title={post.title} text={articleText} shareUrl={canonicalUrl} />
+                <ArticleActions title={post.title} text={articleText} articleSlug={resolvedSlug} shareUrl={canonicalUrl} />
 
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-geist prose-headings:font-geist">
                     {Array.isArray(post.content) ? (
@@ -214,13 +246,41 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                                     key={image.src}
                                     className={index === 2 ? "sm:col-span-2 overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900" : "overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900"}
                                 >
-                                    <img
+                                    <Image
                                         src={image.src}
                                         alt={image.alt}
-                                        loading="lazy"
+                                        width={900}
+                                        height={560}
+                                        sizes="(min-width: 768px) 384px, 100vw"
                                         className="h-full max-h-[520px] w-full object-cover"
                                     />
                                 </figure>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {relatedLinks.length > 0 && (
+                    <section aria-label="Related evidence and next steps" className="mt-14 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-800 dark:bg-slate-950 sm:p-6">
+                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Related evidence</p>
+                        <h2 className="mt-3 text-2xl font-bold tracking-tight text-neutral-950 dark:text-white">
+                            Continue with source-backed context
+                        </h2>
+                        <div className="mt-5 grid gap-3">
+                            {relatedLinks.map((related: { href: string; label: string; description: string }) => (
+                                <Link
+                                    key={related.href}
+                                    href={related.href}
+                                    className="group rounded-xl border border-neutral-200 bg-white p-4 transition hover:border-primary hover:bg-primary/5 dark:border-neutral-800 dark:bg-slate-900"
+                                >
+                                    <span className="flex items-center justify-between gap-3 text-base font-semibold text-neutral-950 dark:text-white">
+                                        {related.label}
+                                        <ArrowUpRight className="h-4 w-4 shrink-0 text-primary transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                                    </span>
+                                    <span className="mt-2 block text-sm leading-6 text-neutral-600 dark:text-neutral-300">
+                                        {related.description}
+                                    </span>
+                                </Link>
                             ))}
                         </div>
                     </section>
