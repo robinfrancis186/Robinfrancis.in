@@ -5,10 +5,16 @@ type GoogleAnalyticsProps = {
 };
 
 export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
+  const normalizedGaId = gaId.replace(/\\[rn]/g, "").trim();
+
+  if (!/^G-[A-Z0-9]+$/i.test(normalizedGaId)) {
+    return null;
+  }
+
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(normalizedGaId)}`}
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
@@ -16,7 +22,7 @@ export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${gaId}');
+          gtag('config', ${JSON.stringify(normalizedGaId)});
         `}
       </Script>
     </>
