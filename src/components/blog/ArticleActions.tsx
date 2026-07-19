@@ -22,6 +22,24 @@ type ShareCapableNavigator = Navigator & {
 const WORDS_PER_MINUTE = 150;
 const PLAYBACK_RATES: PlaybackRate[] = [1, 1.25, 1.5, 0.85];
 const SEEK_SECONDS = 15;
+const PREFERRED_MALE_VOICE_NAMES = [
+    "microsoft guy online",
+    "microsoft ryan online",
+    "microsoft christopher online",
+    "microsoft eric online",
+    "microsoft andrew online",
+    "google uk english male",
+    "google us english male",
+    "aman",
+    "evan",
+    "aaron",
+    "reed",
+    "daniel",
+    "rishi",
+    "arthur",
+    "alex",
+];
+const FEMALE_VOICE_NAMES = ["samantha", "aria", "victoria", "karen", "moira", "tessa", "zira"];
 
 function tokenize(text: string) {
     return text.trim().split(/\s+/).filter(Boolean);
@@ -72,18 +90,17 @@ function selectBestVoice() {
     return englishVoices
         .map((voice) => {
             const name = voice.name.toLowerCase();
+            const preferredIndex = PREFERRED_MALE_VOICE_NAMES.findIndex((preferredName) => name.includes(preferredName));
             let score = 0;
 
-            if (voice.lang === "en-US") score += 12;
-            if (voice.lang === "en-GB") score += 10;
-            if (name.includes("samantha")) score += 30;
-            if (name.includes("alex")) score += 24;
-            if (name.includes("aria")) score += 22;
-            if (name.includes("google us english")) score += 20;
-            if (name.includes("google uk english")) score += 18;
-            if (name.includes("natural")) score += 16;
-            if (name.includes("premium")) score += 12;
-            if (name.includes("enhanced")) score += 10;
+            if (voice.lang.toLowerCase() === "en-us") score += 14;
+            if (voice.lang.toLowerCase() === "en-gb") score += 12;
+            if (preferredIndex >= 0) score += 240 - preferredIndex * 10;
+            if (name.includes("male")) score += 160;
+            if (name.includes("natural")) score += 48;
+            if (name.includes("premium")) score += 36;
+            if (name.includes("enhanced")) score += 32;
+            if (FEMALE_VOICE_NAMES.some((femaleName) => name.includes(femaleName))) score -= 240;
             if (voice.localService) score += 4;
 
             return { voice, score };
@@ -173,7 +190,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
             utterance.voice = bestVoice;
         }
         utterance.rate = rate;
-        utterance.pitch = 1.02;
+        utterance.pitch = 0.92;
         utterance.volume = 1;
         utterance.onend = () => {
             if (mountedRef.current) {

@@ -57,15 +57,13 @@ export const Carousel3D = ({
         let zIndex = 1;
         let ringClass = "ring-1 ring-white/10";
         let shadow = "";
-        let bgClass = "";
 
         if (relativePos === 0) {
             transform = "translateX(0) scale(1) rotateY(0deg)";
             opacity = 1;
             zIndex = 10;
-            ringClass = "ring-2 ring-blue-500/40";
-            shadow = "0 20px 60px rgba(59, 130, 246, 0.3)";
-            bgClass = "bg-blue-500/10";
+            ringClass = "ring-1 ring-white/20";
+            shadow = "0 20px 50px rgba(0, 0, 0, 0.22)";
         } else if (relativePos === 1 || relativePos === -total + 1) {
             transform = "translateX(180px) scale(0.9) rotateY(-10deg)";
             opacity = 0.6;
@@ -105,8 +103,7 @@ export const Carousel3D = ({
             },
             className: cn(
                 "carousel-card absolute w-80 h-[460px] rounded-2xl overflow-hidden transition-all duration-500 ease-out",
-                ringClass,
-                bgClass
+                ringClass
             ),
         };
     };

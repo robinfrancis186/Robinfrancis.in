@@ -7,7 +7,6 @@ import {
   ExternalLink,
   FileText,
   Mail,
-  ShieldCheck,
   Trophy,
 } from "lucide-react";
 import { awards, findProofLinks, proofLinks } from "@/data/profileProof";
@@ -206,13 +205,9 @@ export default function AchievementsPage() {
           </ol>
         </nav>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.86fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.86fr] lg:items-start">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-              Recognition and proof
-            </p>
-            <h1 className="mt-6 max-w-4xl text-3xl font-bold tracking-tight text-neutral-950 dark:text-white sm:text-6xl">
+            <h1 className="max-w-4xl text-3xl font-bold tracking-tight text-neutral-950 dark:text-white sm:text-6xl">
               Robin Francis achievements, awards, and public proof.
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">

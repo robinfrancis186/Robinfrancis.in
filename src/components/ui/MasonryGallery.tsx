@@ -84,23 +84,20 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />
                             )}
                         </div>
-                        <figcaption className="p-4">
-                            {item.title && (
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-900 dark:text-white">
-                                    {item.title}
-                                </p>
-                            )}
-                            {item.description && (
-                                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                                    {item.description}
-                                </p>
-                            )}
-                            {(item.category || item.date) && (
-                                <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                                    {[item.category, item.date].filter(Boolean).join(' · ')}
-                                </p>
-                            )}
-                        </figcaption>
+                        {(item.title || item.date) && (
+                            <figcaption className="flex items-start justify-between gap-4 p-4">
+                                {item.title && (
+                                    <span className="min-w-0 text-xs font-semibold uppercase leading-5 tracking-[0.16em] text-neutral-900 dark:text-white">
+                                        {item.title}
+                                    </span>
+                                )}
+                                {item.date && (
+                                    <time className="shrink-0 text-xs font-semibold leading-5 text-primary">
+                                        {item.date}
+                                    </time>
+                                )}
+                            </figcaption>
+                        )}
                     </figure>
                 );
 

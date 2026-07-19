@@ -14,6 +14,7 @@ export type StaticBlogPost = {
     content: string;
     date: string;
     updatedAt?: string;
+    proofTitles?: string[];
     internalLinks?: {
         label: string;
         href: string;
@@ -34,6 +35,10 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
             "How IEEE Sahrdaya Student Branch grew from a campus organization into a movement of leadership, confidence, service, and community.",
         date: "2026-07-02",
         updatedAt: "2026-07-07",
+        proofTitles: [
+            "INSPIRA IEEE Sahrdaya SB Magazine 2024",
+            "IEEE Region 10 Outstanding Volunteer Award recipients",
+        ],
         internalLinks: [
             {
                 label: "Projects",
@@ -264,6 +269,10 @@ We built a movement.`,
         excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
         date: "2026-01-12",
         updatedAt: "2026-07-07",
+        proofTitles: [
+            "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
+            "IBM watsonx Challenge video coverage",
+        ],
         internalLinks: [
             {
                 label: "Projects",
@@ -299,6 +308,10 @@ We built a movement.`,
         excerpt: "Reflections on leadership, community-building, and global recognition.",
         date: "2025-12-18",
         updatedAt: "2026-07-07",
+        proofTitles: [
+            "IEEE Region 10 Outstanding Volunteer Award recipients",
+            "INSPIRA IEEE Sahrdaya SB Magazine 2024",
+        ],
         internalLinks: [
             {
                 label: "Projects",
@@ -334,6 +347,11 @@ We built a movement.`,
         excerpt: "How AI, multimodal interfaces, and affordable computing can empower millions.",
         date: "2025-11-26",
         updatedAt: "2026-07-07",
+        proofTitles: [
+            "K-DISC Social Enterprises and Inclusion listing",
+            "STRIDE Kerala live website",
+            "IEEE IES Faculty Development Programme article",
+        ],
         internalLinks: [
             {
                 label: "Projects",
@@ -369,6 +387,7 @@ We built a movement.`,
         excerpt: "Lessons from leading 100+ programs and growing organizations.",
         date: "2025-10-14",
         updatedAt: "2026-07-07",
+        proofTitles: ["INSPIRA IEEE Sahrdaya SB Magazine 2024"],
         internalLinks: [
             {
                 label: "Projects",
@@ -404,6 +423,12 @@ We built a movement.`,
         excerpt: "Balancing tech innovation with empathy and social awareness.",
         date: "2025-09-08",
         updatedAt: "2026-07-07",
+        proofTitles: [
+            "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
+            "K-DISC Social Enterprises and Inclusion listing",
+            "STRIDE Kerala live website",
+            "IEEE IES Faculty Development Programme article",
+        ],
         internalLinks: [
             {
                 label: "Projects",

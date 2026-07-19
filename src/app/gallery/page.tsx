@@ -87,9 +87,7 @@ export default function Page() {
           <p>{galleryDescription}</p>
           <ul>
             {GALLERY_ITEMS.map((item) => (
-              <li key={item.title}>
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
+              <li key={item.id}>
                 <figure>
                   <img
                     src={item.img}
@@ -98,7 +96,7 @@ export default function Page() {
                     height={item.imageHeight}
                   />
                   <figcaption>
-                    {item.category} - {item.date}
+                    {item.title} - {item.date}
                   </figcaption>
                 </figure>
               </li>
@@ -107,29 +105,6 @@ export default function Page() {
         </section>
       </noscript>
       <GalleryRoute />
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:px-8" aria-labelledby="gallery-seo-heading">
-        <div className="rounded-lg border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-slate-950">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
-            Visual proof
-          </p>
-          <h2 id="gallery-seo-heading" className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
-            Public moments across IEEE, STRIDE, awards, and mentoring
-          </h2>
-          <ul className="mt-6 grid gap-4 md:grid-cols-3">
-            {GALLERY_ITEMS.slice(0, 6).map((item) => (
-              <li key={item.id} className="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
-                <h3 className="text-lg font-bold text-neutral-950 dark:text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                  {item.description}
-                </p>
-                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                  {item.category} · {item.date}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </>
   );
 }

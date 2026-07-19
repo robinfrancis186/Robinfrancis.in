@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogPostRoute } from "@/app/_components/blog-post-route";
 import { findStaticBlogPost, STATIC_BLOG_POSTS } from "@/data/blogPosts";
+import { findProofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoImage, siteUrl } from "@/lib/seo";
 
@@ -87,6 +88,7 @@ export default async function Page({ params }: BlogPostPageProps) {
   const articleImages = post?.image
     ? [post.image, ...(post.gallery?.map((image) => image.src) ?? [])].map((image) => absoluteUrl(image))
     : [absoluteUrl(defaultSeoImage)];
+  const articleSources = post?.proofTitles ? findProofLinks(post.proofTitles) : [];
   const articleJsonLd = post
     ? [
         {
@@ -116,6 +118,7 @@ export default async function Page({ params }: BlogPostPageProps) {
         dateModified: post.updatedAt ?? post.date,
         keywords: post.tags.join(", "),
         articleSection: post.category,
+        citation: articleSources.map((source) => source.href),
         },
         blogPostBreadcrumbJsonLd,
       ]
@@ -150,21 +153,22 @@ export default async function Page({ params }: BlogPostPageProps) {
             {post.content.split("\n\n").map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            {post.internalLinks && post.internalLinks.length > 0 ? (
-              <section aria-label="Related evidence">
-                <h2>Related evidence</h2>
+            {post.gallery?.map((image) => (
+              <img key={image.src} src={image.src} alt={image.alt} />
+            ))}
+            {articleSources.length > 0 && (
+              <section aria-labelledby="noscript-article-sources-heading">
+                <h2 id="noscript-article-sources-heading">Sources and further reading</h2>
                 <ul>
-                  {post.internalLinks.map((link) => (
-                    <li key={link.href}>
-                      <a href={link.href}>{link.label}</a>: {link.description}
+                  {articleSources.map((source) => (
+                    <li key={source.href}>
+                      <a href={source.href}>{source.title}</a>
+                      <p>{source.description}</p>
                     </li>
                   ))}
                 </ul>
               </section>
-            ) : null}
-            {post.gallery?.map((image) => (
-              <img key={image.src} src={image.src} alt={image.alt} />
-            ))}
+            )}
           </article>
         </noscript>
       )}

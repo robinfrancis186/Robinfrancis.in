@@ -3,7 +3,6 @@ import Hero from '@/components/sections/Hero'
 
 // Lazy load heavy sections
 const About = lazy(() => import('@/components/sections/About'))
-const Skills = lazy(() => import('@/components/sections/Skills'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
 const Blog = lazy(() => import('@/components/sections/Blog'))
 const FAQ = lazy(() => import('@/components/sections/FAQ'))
@@ -65,9 +64,6 @@ const Home = () => {
             <Hero />
             <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="300px 0px">
                 <About />
-            </DeferredSection>
-            <DeferredSection placeholderClassName="min-h-[32vh]">
-                <Skills />
             </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[44vh]">
                 <Projects />

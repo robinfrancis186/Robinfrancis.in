@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { urlFor } from '../lib/sanity';
 import { PortableText } from '@portabletext/react';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
+import { findProofLinks } from '@/data/profileProof';
 import { absoluteUrl } from '@/lib/seo';
 
 function getSafePortableTextHref(href: unknown) {
@@ -173,10 +174,10 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = absoluteUrl(`/blog/${resolvedSlug}/`);
     const articleText = portableTextToPlainText(post.content) || excerpt;
-    const relatedLinks = Array.isArray(post.internalLinks) ? post.internalLinks : [];
     const staticParagraphs = typeof post.content === 'string'
         ? post.content.split(/\n{2,}/).map((paragraph: string) => paragraph.trim()).filter(Boolean)
         : [];
+    const articleSources = Array.isArray(post.proofTitles) ? findProofLinks(post.proofTitles) : [];
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground">
@@ -260,31 +261,32 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     </section>
                 )}
 
-                {relatedLinks.length > 0 && (
-                    <section aria-label="Related evidence and next steps" className="mt-14 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-800 dark:bg-slate-950 sm:p-6">
-                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Related evidence</p>
-                        <h2 className="mt-3 text-2xl font-bold tracking-tight text-neutral-950 dark:text-white">
-                            Continue with source-backed context
+                {articleSources.length > 0 && (
+                    <section aria-labelledby="article-sources-heading" className="mt-14 border-t border-neutral-200 pt-8 dark:border-neutral-800">
+                        <h2 id="article-sources-heading" className="text-2xl font-bold font-geist text-neutral-950 dark:text-neutral-50">
+                            Sources and further reading
                         </h2>
-                        <div className="mt-5 grid gap-3">
-                            {relatedLinks.map((related: { href: string; label: string; description: string }) => (
-                                <Link
-                                    key={related.href}
-                                    href={related.href}
-                                    className="group rounded-xl border border-neutral-200 bg-white p-4 transition hover:border-primary hover:bg-primary/5 dark:border-neutral-800 dark:bg-slate-900"
-                                >
-                                    <span className="flex items-center justify-between gap-3 text-base font-semibold text-neutral-950 dark:text-white">
-                                        {related.label}
-                                        <ArrowUpRight className="h-4 w-4 shrink-0 text-primary transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-                                    </span>
-                                    <span className="mt-2 block text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                                        {related.description}
-                                    </span>
-                                </Link>
+                        <ul className="mt-6 divide-y divide-neutral-200 dark:divide-neutral-800">
+                            {articleSources.map((source) => (
+                                <li key={source.href} className="py-5 first:pt-0 last:pb-0">
+                                    <a
+                                        href={source.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group inline-flex items-center gap-2 font-semibold text-neutral-900 transition-colors hover:text-primary dark:text-neutral-100"
+                                    >
+                                        {source.title}
+                                        <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                                    </a>
+                                    <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                                        {source.description}
+                                    </p>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </section>
                 )}
+
             </motion.article>
         </main>
     );

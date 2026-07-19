@@ -87,28 +87,6 @@ export default function Page() {
         </section>
       </noscript>
       <BlogRoute />
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:px-8" aria-labelledby="journal-seo-heading">
-        <div className="rounded-lg border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-slate-950">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
-            Journal index
-          </p>
-          <h2 id="journal-seo-heading" className="mt-3 text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
-            Writing on AI products, accessibility, and community leadership
-          </h2>
-          <ul className="mt-6 grid gap-4 md:grid-cols-2">
-            {STATIC_BLOG_POSTS.slice(0, 4).map((post) => (
-              <li key={post.slug} className="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800">
-                <a href={`/blog/${post.slug}/`} className="text-lg font-bold text-neutral-950 hover:text-primary dark:text-white">
-                  {post.title}
-                </a>
-                <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                  {post.excerpt}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </>
   );
 }
