@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Download, ExternalLink, Mail } from "lucide-react";
 import { TrackPageEvent, TrackedLink } from "@/components/analytics/AnalyticsEvents";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, mediaKit, proofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
@@ -85,6 +86,10 @@ export default function PressKitPage() {
       />
 
       <section className="mx-auto max-w-6xl">
+        <Breadcrumbs
+          items={[homeBreadcrumb, { name: "Press Kit", path: "/press-kit/" }]}
+          className="mb-8"
+        />
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
           Media Kit
         </p>

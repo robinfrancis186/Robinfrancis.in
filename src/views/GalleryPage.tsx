@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import MasonryGallery from '@/components/ui/MasonryGallery';
 import { GALLERY_ITEMS } from '@/data/galleryItems';
+import { homeBreadcrumb } from '@/lib/breadcrumbs';
 
 const GalleryPage = () => {
     return (
         <main className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
+                <Breadcrumbs
+                    items={[homeBreadcrumb, { name: 'Gallery', path: '/gallery/' }]}
+                    className="mb-8"
+                />
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

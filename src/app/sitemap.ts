@@ -3,18 +3,22 @@ import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { mediaKit } from "@/data/profileProof";
 import { absoluteUrl } from "@/lib/seo";
 
-const defaultLastModified = "2026-07-07";
+const defaultLastModified = "2026-07-19";
+const blogTemplateLastModified = "2026-07-19";
 
 const routeLastModified = {
   home: "2026-07-07",
-  projects: "2026-07-07",
-  achievements: "2026-07-07",
-  pressKit: "2026-07-07",
-  search: "2026-07-16",
-  gallery: "2026-07-07",
-  card: "2026-07-06",
+  projects: "2026-07-19",
+  achievements: "2026-07-19",
+  pressKit: "2026-07-19",
+  gallery: "2026-07-19",
+  card: "2026-07-19",
   resume: "2026-07-06",
 } as const;
+
+function latestDate(...dates: string[]) {
+  return dates.sort().at(-1) ?? defaultLastModified;
+}
 
 function sitemapEntry(
   path: string,
@@ -33,8 +37,10 @@ function sitemapEntry(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const latestBlogDate =
-    STATIC_BLOG_POSTS.map((post) => post.updatedAt ?? post.date).sort().at(-1) ?? defaultLastModified;
+  const latestBlogDate = latestDate(
+    blogTemplateLastModified,
+    ...STATIC_BLOG_POSTS.map((post) => post.updatedAt ?? post.date),
+  );
 
   const coreRoutes: MetadataRoute.Sitemap = [
     sitemapEntry("/", 1, "weekly", [mediaKit.headshot], routeLastModified.home),
@@ -49,7 +55,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       "/images/gallery/gallery-ieee-kerala-public-awards-2025.webp",
     ], routeLastModified.achievements),
     sitemapEntry("/press-kit/", 0.8, "monthly", [mediaKit.headshot], routeLastModified.pressKit),
-    sitemapEntry("/search/", 0.5, "monthly", [], routeLastModified.search),
     sitemapEntry("/blog/", 0.8, "weekly", [
       "/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp",
     ], latestBlogDate),
@@ -67,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     sitemapEntry(`/blog/${post.slug}/`, 0.7, "monthly", [
       post.image,
       ...(post.gallery?.slice(0, 2).map((image) => image.src) ?? []),
-    ], post.updatedAt ?? post.date),
+    ], latestDate(blogTemplateLastModified, post.updatedAt ?? post.date)),
   );
 
   return [...coreRoutes, ...blogRoutes];

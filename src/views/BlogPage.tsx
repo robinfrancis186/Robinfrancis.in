@@ -2,7 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { STATIC_BLOG_POSTS } from '@/data/blogPosts';
+import { homeBreadcrumb } from '@/lib/breadcrumbs';
 
 const BlogPage = () => {
     const renderPost = (post: (typeof STATIC_BLOG_POSTS)[number], index: number) => {
@@ -54,6 +56,10 @@ const BlogPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto bg-background text-foreground">
+            <Breadcrumbs
+                items={[homeBreadcrumb, { name: 'Blog', path: '/blog/' }]}
+                className="mb-8"
+            />
             <motion.section
                 id="blog-feed"
                 className="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24"

@@ -27,6 +27,10 @@ export const metadata: Metadata = {
     title: "Search | Robin Francis",
     description: searchDescription,
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const searchJsonLd = [

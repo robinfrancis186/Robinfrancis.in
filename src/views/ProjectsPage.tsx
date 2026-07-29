@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { trackEvent } from '@/lib/analytics';
 
 type ProjectDetail = {
@@ -89,6 +91,10 @@ const ProjectsPage = () => {
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <Breadcrumbs
+                items={[homeBreadcrumb, { name: 'Projects', path: '/projects/' }]}
+                className="mb-8"
+            />
             <motion.section
                 id="portfolio"
                 className="mt-10"

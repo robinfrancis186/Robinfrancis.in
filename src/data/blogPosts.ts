@@ -2,6 +2,7 @@ export type StaticBlogPost = {
     id: string;
     slug: string;
     title: string;
+    seoTitle?: string;
     category: string;
     tags: string[];
     image: string;
@@ -11,6 +12,7 @@ export type StaticBlogPost = {
         alt: string;
     }[];
     excerpt: string;
+    metaDescription?: string;
     content: string;
     date: string;
     updatedAt?: string;
@@ -24,9 +26,203 @@ export type StaticBlogPost = {
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
     {
+        id: "static-7",
+        slug: "inclucode-2026-inclusive-software-innovation-buildathon",
+        title: "INCLUCODE 2026: Building Technology That Includes Everyone",
+        seoTitle: "INCLUCODE 2026 Inclusive Software Buildathon",
+        category: "Accessibility",
+        tags: ["Accessibility", "Inclusive Innovation", "INCLUCODE", "Community", "OpenAI Codex"],
+        image: "/images/blog/inclucode-2026/inclucode-2026-builders-group.webp",
+        imageAlt:
+            "INCLUCODE 2026 builders, mentors, volunteers, and organizers gathered in the Sahrdaya College auditorium",
+        excerpt:
+            "INCLUCODE 2026 brought together 571 registrations, 170 teams, mentors, academicians, government representatives, and technology communities to develop practical digital solutions for accessibility, inclusion, and independence.",
+        metaDescription:
+            "How INCLUCODE 2026 united 571 participants and 170 teams to build practical accessibility solutions through mentorship and inclusive innovation.",
+        date: "2026-07-29",
+        updatedAt: "2026-07-29",
+        gallery: [
+            {
+                src: "/images/blog/inclucode-2026/inclucode-2026-outdoor-community.webp",
+                alt: "INCLUCODE 2026 participants, mentors, and organizers gathered outdoors with the event banner",
+            },
+            {
+                src: "/images/blog/inclucode-2026/inclucode-2026-organizing-team.webp",
+                alt: "Robin Francis with three members of the INCLUCODE 2026 organizing team on stage",
+            },
+            {
+                src: "/images/blog/inclucode-2026/robin-francis-inclucode-2026-opening-talk.webp",
+                alt: "Robin Francis delivering an opening address at the INCLUCODE 2026 buildathon",
+            },
+            {
+                src: "/images/blog/inclucode-2026/robin-francis-inclucode-2026-mentoring.webp",
+                alt: "Robin Francis reviewing a participant's work during INCLUCODE 2026",
+            },
+            {
+                src: "/images/blog/inclucode-2026/inclucode-2026-appreciation-awards.webp",
+                alt: "INCLUCODE 2026 mentor, speaker, and host appreciation awards displayed with handmade gifts",
+            },
+            {
+                src: "/images/blog/inclucode-2026/inclucode-2026-builder-certificates-and-merchandise.webp",
+                alt: "INCLUCODE 2026 certificates, USB drives, pens, keychains, and participant name tags",
+            },
+        ],
+        content:
+            `Accessibility is often considered only after a product has already been designed and developed. INCLUCODE 2026 began with a different belief: inclusion must be part of the problem definition, the design process, the technology, and the final solution from the very beginning.
+
+Powered by Codex, INCLUCODE was created as an inclusive software innovation buildathon where students, developers, designers, and innovators could build practical and scalable digital solutions for persons with disabilities and neurodivergent individuals.
+
+What started as an idea gradually became a collaborative journey involving participants, mentors, academicians, volunteers, technology communities, government representatives, and accessibility advocates.
+
+From an Idea to a Growing Community
+
+The response to INCLUCODE exceeded our expectations.
+
+The event received 571 individual registrations from 170 teams representing 39 institutions. Participants came with different technical backgrounds, experiences, and perspectives, but they were united by one purpose: using technology to address real accessibility challenges.
+
+The event was supported by 10 industry mentors and 10 academicians, who contributed their experience throughout the development and evaluation process. The offline finale also welcomed six representatives from government departments, adding an important public-sector perspective to the solutions presented.
+
+INCLUCODE was built around five broad challenge areas:
+
+- Accessibility Software
+- Audio Games for Blind Users
+- Malayalam TTS/STT and Inclusive Communication Technologies
+- Cognitive and Assistive Tools
+- Inclusive Education Tools
+
+These categories were intentionally broad. Teams were encouraged not to simply reproduce the example ideas shared with them, but to understand the underlying problem, identify a genuine user need, and develop a solution with practical community value.
+
+Selecting the Finalist Teams
+
+Every submission was evaluated based on the relevance of the problem, the proposed solution, feasibility, inclusiveness, and potential impact.
+
+From the 170 registered teams, 30 teams were initially shortlisted for the final development phase. However, we also wanted to ensure that a promising idea was not permanently excluded because of an early-stage submission.
+
+This led to the introduction of the Wild Card Entry.
+
+Teams that were not part of the initial shortlist were invited to develop and submit a working demonstration of their idea. These submissions were evaluated again, and two additional teams were selected through the Wild Card route.
+
+This brought the final number to 32 teams comprising 120 builders.
+
+The Wild Card Entry reflected an important principle of INCLUCODE: good ideas sometimes need another opportunity to prove their value.
+
+A Structured Mentoring Journey
+
+Selection was only the beginning.
+
+Each finalist team was assigned a mentor and a dedicated volunteer POC. The POC coordinated communication, scheduled meetings, followed up with the team, and ensured that both the mentor and participants remained connected throughout the development period.
+
+Every team received three structured online mentoring sessions.
+
+The first meeting focused on understanding the problem statement, intended beneficiaries, proposed concept, and overall direction of the project. During this stage, mentors helped teams narrow broad ideas into achievable and community-relevant solutions.
+
+The second meeting reviewed development progress. Teams demonstrated completed modules, discussed technical challenges, and received guidance on usability, accessibility, architecture, and implementation.
+
+The third meeting concentrated on final preparation. Mentors reviewed the product, live demo, presentation, pitch, and readiness for the offline evaluation.
+
+This continuous mentoring model helped the teams move beyond assumptions. Many participants refined their end goals, simplified overly complex concepts, and focused on building solutions that could realistically be used by communities.
+
+The mentors who guided the teams included Anil Antony, Anna Ann Mathew, Jibin Jose, Dr. Manishankar S, Mrudul John Mathews, Robin Francis, Dr. Sreeraj R, Ujwel C, Vaishakh Suresh, and Viswanatha Kartha V.
+
+Their contribution was central to the quality of the final solutions.
+
+Supporting Teams Beyond Mentorship
+
+The teams were also provided with access to Codex and OpenAI API credits, helping them experiment, build, debug, document, and improve their products during the development phase.
+
+To make the journey more engaging, we introduced the E-Points System.
+
+Teams could earn E-Points through mentor evaluations, active participation in the official group, responsiveness, and optional bonus activities. These activities were not mandatory, but they encouraged teams to stay engaged throughout the event timeline.
+
+The accumulated E-Points could be redeemed during the offline event for additional prizes and limited-edition goodies.
+
+This created a continuous engagement model rather than limiting the event to a single final-day evaluation.
+
+The Offline Finale
+
+The offline finale was held on 25 July 2026 at Sahrdaya College of Engineering & Technology (Autonomous), Thrissur.
+
+The day brought together the 32 finalist teams, mentors, judges, volunteers, academicians, government representatives, and partner organisations.
+
+The programme began with registration, inauguration, and a welcome session, followed by an IEEE IES Connect Session by Dr. Tripura Pidikiti, SMIEEE. Her involvement was instrumental in making the event possible and in strengthening the connection between the buildathon and the IEEE Industrial Electronics Society community.
+
+Robin Tommy also joined the programme and shared valuable perspectives with the participants, helping them think beyond the immediate technical implementation of their projects.
+
+The event was further strengthened by the presence and encouragement of Prof. Juan Jose Rodriguez-Andina, President of the IEEE Industrial Electronics Society. His support highlighted the importance of creating technology that delivers measurable social value.
+
+Following the expert sessions, the teams interacted with mentors, refined their demonstrations, and prepared for evaluation.
+
+Evaluation That Prioritised Working Solutions
+
+With 32 teams and a limited evaluation window, it was important to maintain a fair and consistent process.
+
+Each team received approximately five minutes with the judges. The evaluation rubric gave the highest importance to the live demonstration and functional performance of the solution.
+
+The effectiveness of the solution and the quality of the concept were evaluated next, followed by usability, accessibility, technical feasibility, sustainability, presentation quality, and the team's ability to respond to questions.
+
+This structure ensured that teams were not rewarded merely for having polished slides. A working solution that addressed a genuine need carried greater value.
+
+After the first valuation, the strongest teams advanced to the final presentation and judging round. The day concluded with the closing ceremony, award distribution, and a collective photo session celebrating everyone who had contributed to the journey.
+
+The Impact of INCLUCODE
+
+The impact of INCLUCODE cannot be measured only through registration numbers or shortlisted teams.
+
+Its real value was in the transformation that happened during the process.
+
+Ideas became prototypes. Broad concepts became focused solutions. Participants who initially approached accessibility as a feature began to understand it as a fundamental design responsibility.
+
+The event created a space where participants could:
+
+- Work on challenges grounded in real community needs
+- Receive guidance from industry professionals and academicians
+- Develop and demonstrate functional prototypes
+- Learn to consider accessibility, usability, and feasibility together
+- Build connections with mentors, institutions, communities, and government representatives
+- Explore possibilities for deployment and future development
+
+Several projects demonstrated the potential to continue beyond the event, especially where real beneficiaries and community requirements had already been identified.
+
+More than a competition, INCLUCODE became a platform for building solutions that could contribute to education, communication, independent living, digital accessibility, and social participation.
+
+A Collective Effort
+
+An initiative of this scale is never the work of one person or one organisation.
+
+I am deeply grateful to Sahrdaya College of Engineering & Technology (Autonomous) for hosting and supporting the offline event.
+
+My sincere thanks to the IEEE Industrial Electronics Society Hubs & Nodes initiative, the IEEE Assistive Technology & Inclusive Innovation Group, IEEE Sahrdaya Student Branch, IEEE IA/IE/PELS Joint Chapter Kerala, FOSS United, STRIDE, the judges, mentors, academicians, volunteers, POCs, organising team, and every partner who contributed to making the event possible.
+
+A special note of gratitude goes to Dr. Tripura Pidikiti, SMIEEE, for her leadership and support; Robin Tommy for sharing his insights; and Prof. Juan Jose Rodriguez-Andina for his encouragement and involvement.
+
+I would also like to thank Pauline P. Narvas, Chirag Oswal, and Gabriel Chua for their support through OpenAI Codex, which gave our builders the tools and confidence to experiment, create, and improve their solutions.
+
+Most importantly, thank you to every participant who chose to work on a real accessibility challenge and remained committed throughout the mentoring, development, and evaluation process.
+
+A Personal Reflection
+
+As an organiser and mentor, one of the most meaningful parts of INCLUCODE was watching teams rethink their ideas.
+
+Some began with solutions that were technically ambitious but disconnected from practical use. Through discussions with mentors, they started asking better questions:
+
+Who will use this?
+What exact barrier are we removing?
+Can the intended beneficiary use it independently?
+Can this solution be implemented and maintained outside a demonstration environment?
+
+That shift - from building what is technically impressive to building what is genuinely useful - was one of the most important outcomes of the event.
+
+INCLUCODE 2026 reaffirmed that inclusive innovation is not simply about adding accessibility to technology. It is about listening, co-creating, testing assumptions, and designing with dignity and independence at the centre.
+
+571 registrations. 170 teams. 39 institutions. 32 finalist teams. 120 builders. One shared mission.
+
+Code Inclusive. Build Accessible. Empower Independence.`,
+    },
+    {
         id: "static-6",
         slug: "ieee-sahrdaya-student-branch-movement",
         title: "From a Student Branch to a Movement: My Journey as Chairperson of IEEE Sahrdaya SB",
+        seoTitle: "My IEEE Sahrdaya Student Branch Leadership Journey",
         category: "Leadership",
         tags: ["Leadership", "IEEE", "Community", "Student Branch"],
         image: "/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp",

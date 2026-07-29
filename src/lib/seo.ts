@@ -103,10 +103,6 @@ export const personJsonLd = {
     "https://www.linkedin.com/in/robin-francis-b43565175",
     "https://www.instagram.com/robinfrancis186",
     "https://medium.com/@robinfrancis186",
-    "https://stride.kerala.gov.in/",
-    "https://github.com/robinfrancis186/argus.git",
-    "https://github.com/robinfrancis186/bulkyfi",
-    "https://bulkyfi.vercel.app/",
   ],
 };
 

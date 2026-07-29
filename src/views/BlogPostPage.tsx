@@ -7,8 +7,10 @@ import { PortableText } from '@portabletext/react';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
 import { findProofLinks } from '@/data/profileProof';
+import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { absoluteUrl } from '@/lib/seo';
 
 function getSafePortableTextHref(href: unknown) {
@@ -66,7 +68,7 @@ const ptComponents = {
         },
     },
     block: {
-        h1: ({ children }: any) => <h1 className="text-4xl font-bold mt-12 mb-6 font-geist">{children}</h1>,
+        h1: ({ children }: any) => <h2 className="text-3xl font-bold mt-10 mb-5 font-geist">{children}</h2>,
         h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-10 mb-5 font-geist">{children}</h2>,
         h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4 font-geist">{children}</h3>,
         normal: ({ children }: any) => <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg">{children}</p>,
@@ -117,7 +119,27 @@ const staticSectionHeadings = new Set([
     "Gratitude to the People Who Made It Possible",
     "More Than a Tenure",
     "The Legacy Continues",
+    "From an Idea to a Growing Community",
+    "Selecting the Finalist Teams",
+    "A Structured Mentoring Journey",
+    "Supporting Teams Beyond Mentorship",
+    "The Offline Finale",
+    "Evaluation That Prioritised Working Solutions",
+    "The Impact of INCLUCODE",
+    "A Collective Effort",
+    "A Personal Reflection",
 ]);
+
+function getStaticListItems(paragraph: string) {
+    const lines = paragraph
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    return lines.length > 0 && lines.every((line) => line.startsWith("- "))
+        ? lines.map((line) => line.slice(2))
+        : null;
+}
 
 const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogPost | null; slugOverride?: string }) => {
     const params = useParams<{ slug?: string }>();
@@ -181,6 +203,14 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
 
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground">
+            <Breadcrumbs
+                items={[
+                    homeBreadcrumb,
+                    { name: 'Blog', path: '/blog/' },
+                    { name: post.title, path: `/blog/${resolvedSlug}/` },
+                ]}
+                className="mb-8"
+            />
             <motion.article
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -222,17 +252,33 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     {Array.isArray(post.content) ? (
                         <PortableText value={post.content} components={ptComponents} />
                     ) : staticParagraphs.length > 0 ? (
-                        staticParagraphs.map((paragraph: string) => (
-                            staticSectionHeadings.has(paragraph) ? (
-                                <h2 key={paragraph} className="text-3xl font-bold mt-10 mb-5 font-geist text-neutral-950 dark:text-neutral-50">
-                                    {paragraph}
-                                </h2>
-                            ) : (
-                                <p key={paragraph} className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">
+                        staticParagraphs.map((paragraph: string, index: number) => {
+                            if (staticSectionHeadings.has(paragraph)) {
+                                return (
+                                    <h2 key={`heading-${index}`} className="text-3xl font-bold mt-10 mb-5 font-geist text-neutral-950 dark:text-neutral-50">
+                                        {paragraph}
+                                    </h2>
+                                );
+                            }
+
+                            const listItems = getStaticListItems(paragraph);
+
+                            if (listItems) {
+                                return (
+                                    <ul key={`list-${index}`} className="mb-6 list-disc space-y-2 pl-6 text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
+                                        {listItems.map((item) => (
+                                            <li key={item}>{item}</li>
+                                        ))}
+                                    </ul>
+                                );
+                            }
+
+                            return (
+                                <p key={`paragraph-${index}`} className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">
                                     {paragraph}
                                 </p>
-                            )
-                        ))
+                            );
+                        })
                     ) : (
                         <p className="text-neutral-500 italic">This post has no content yet.</p>
                     )}

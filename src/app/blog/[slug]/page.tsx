@@ -25,10 +25,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const canonical = `/blog/${post.slug}/`;
+  const description = post.metaDescription ?? post.excerpt;
+  const metadataTitle = post.seoTitle ?? post.title;
 
   return {
-    title: `${post.title} | Robin Francis Journal`,
-    description: post.excerpt,
+    title: metadataTitle,
+    description,
     keywords: [
       "Robin Francis",
       post.title,
@@ -48,7 +50,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     openGraph: {
       type: "article",
       title: post.title,
-      description: post.excerpt,
+      description,
       url: absoluteUrl(canonical),
       images: [post.image],
       publishedTime: post.date,
@@ -59,7 +61,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description,
       images: [post.image],
     },
   };
@@ -99,7 +101,7 @@ export default async function Page({ params }: BlogPostPageProps) {
           "@id": canonicalUrl,
         },
         headline: post.title,
-        description: post.excerpt,
+        description: post.metaDescription ?? post.excerpt,
         image: articleImages,
         author: {
           "@type": "Person",

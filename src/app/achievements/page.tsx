@@ -9,11 +9,13 @@ import {
   Mail,
   Trophy,
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, findProofLinks, proofLinks } from "@/data/profileProof";
+import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
 
 const awardsDescription =
-  "Achievements, awards, public recognitions, and source-backed proof links for Robin Francis across IEEE leadership, IBM watsonx GenAI work, and inclusive innovation.";
+  "Robin Francis's achievements across IEEE leadership, IBM watsonx GenAI, humanitarian technology, accessibility, and inclusive innovation.";
 const primaryAwardImage = awards[0]?.image ?? "/images/blog/blog2/1731994207232.webp";
 const awardImages = awards.map((award) => award.image);
 const proofSourceTitles = new Set(awards.flatMap((award) => award.proofTitles));
@@ -122,24 +124,7 @@ const awardsJsonLd = [
       })),
     },
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: absoluteUrl("/"),
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Achievements",
-        item: absoluteUrl("/achievements/"),
-      },
-    ],
-  },
+  breadcrumbJsonLd([homeBreadcrumb, { name: "Achievements", path: "/achievements/" }]),
 ];
 
 export const metadata: Metadata = {
@@ -193,17 +178,10 @@ export default function AchievementsPage() {
       />
 
       <section className="mx-auto max-w-7xl px-4 md:px-8">
-        <nav aria-label="Breadcrumb" className="mb-8 text-sm text-neutral-500 dark:text-neutral-400">
-          <ol className="flex flex-wrap items-center gap-2">
-            <li>
-              <Link href="/" className="transition hover:text-primary">
-                Home
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li className="font-medium text-neutral-800 dark:text-neutral-200">Achievements</li>
-          </ol>
-        </nav>
+        <Breadcrumbs
+          items={[homeBreadcrumb, { name: "Achievements", path: "/achievements/" }]}
+          className="mb-8"
+        />
 
         <div className="grid gap-8 lg:grid-cols-[1fr_0.86fr] lg:items-start">
           <div>

@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const galleryDescription =
-  "Explore Robin Francis's gallery of AI community events, IEEE leadership, STRIDE inclusive innovation work, speaking sessions, awards, and student mentorship moments.";
+  "Explore Robin Francis's gallery of IEEE leadership, STRIDE inclusive innovation, speaking, awards, AI community events, and student mentorship.";
 
 const galleryJsonLd = [
   {

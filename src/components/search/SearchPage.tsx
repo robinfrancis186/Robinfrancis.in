@@ -3,9 +3,11 @@
 import { useDeferredValue, useMemo, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SearchResultItem } from "@/components/search/SearchResultItem";
 import { SEARCH_DOCUMENTS } from "@/data/searchDocuments";
 import { trackEvent } from "@/lib/analytics";
+import { homeBreadcrumb } from "@/lib/breadcrumbs";
 import {
   SEARCH_DOCUMENT_TYPES,
   searchDocuments,
@@ -56,6 +58,10 @@ export function SearchPage({ initialQuery }: { initialQuery: string }) {
   return (
     <main className="min-h-screen bg-background px-4 pb-24 pt-32 text-foreground md:px-8">
       <section className="mx-auto max-w-5xl" aria-labelledby="search-page-heading">
+        <Breadcrumbs
+          items={[homeBreadcrumb, { name: "Search", path: "/search/" }]}
+          className="mb-8"
+        />
         <p className="text-sm font-medium text-primary">Site search</p>
         <h1 id="search-page-heading" className="mt-3 text-4xl font-bold sm:text-6xl">
           Find Robin&apos;s work

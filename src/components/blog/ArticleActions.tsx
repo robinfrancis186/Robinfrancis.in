@@ -22,24 +22,60 @@ type ShareCapableNavigator = Navigator & {
 const WORDS_PER_MINUTE = 150;
 const PLAYBACK_RATES: PlaybackRate[] = [1, 1.25, 1.5, 0.85];
 const SEEK_SECONDS = 15;
+const NATURAL_SPEECH_RATE = 0.94;
+const NATURAL_SPEECH_PITCH = 0.98;
+const VOICE_LOAD_TIMEOUT_MS = 800;
 const PREFERRED_MALE_VOICE_NAMES = [
-    "microsoft guy online",
+    "microsoft prabhat online",
+    "prabhat",
+    "aman",
+    "rishi",
     "microsoft ryan online",
+    "microsoft guy online",
     "microsoft christopher online",
     "microsoft eric online",
     "microsoft andrew online",
     "google uk english male",
     "google us english male",
-    "aman",
-    "evan",
-    "aaron",
-    "reed",
     "daniel",
-    "rishi",
     "arthur",
+    "oliver",
+    "jamie",
+    "eddy",
+    "reed",
+    "aaron",
+    "evan",
     "alex",
 ];
-const FEMALE_VOICE_NAMES = ["samantha", "aria", "victoria", "karen", "moira", "tessa", "zira"];
+const FEMALE_VOICE_NAMES = [
+    "aria",
+    "ava",
+    "hazel",
+    "heera",
+    "jenny",
+    "karen",
+    "libby",
+    "maisie",
+    "moira",
+    "natasha",
+    "samantha",
+    "serena",
+    "sonia",
+    "susan",
+    "tessa",
+    "veena",
+    "victoria",
+    "zira",
+];
+const LOW_QUALITY_VOICE_NAMES = ["compact", "espeak", "festival", "novelty", "robot"];
+
+function voiceNameMatches(name: string, candidate: string) {
+    if (candidate.includes(" ")) {
+        return name.includes(candidate);
+    }
+
+    return name.split(/[^a-z]+/).includes(candidate);
+}
 
 function tokenize(text: string) {
     return text.trim().split(/\s+/).filter(Boolean);
@@ -53,7 +89,7 @@ function formatTime(seconds: number) {
 }
 
 function estimateAudioSeconds(wordCount: number, rate: PlaybackRate) {
-    return Math.max(30, Math.ceil((wordCount / (WORDS_PER_MINUTE * rate)) * 60));
+    return Math.max(30, Math.ceil((wordCount / (WORDS_PER_MINUTE * rate * NATURAL_SPEECH_RATE)) * 60));
 }
 
 function getShareUrl(shareUrl?: string) {
@@ -83,29 +119,81 @@ async function copyText(value: string) {
     document.body.removeChild(textArea);
 }
 
-function selectBestVoice() {
-    const voices = window.speechSynthesis.getVoices();
+function selectBestVoice(voices: SpeechSynthesisVoice[]) {
     const englishVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("en"));
 
     return englishVoices
         .map((voice) => {
             const name = voice.name.toLowerCase();
-            const preferredIndex = PREFERRED_MALE_VOICE_NAMES.findIndex((preferredName) => name.includes(preferredName));
+            const language = voice.lang.toLowerCase();
+            const preferredIndex = PREFERRED_MALE_VOICE_NAMES.findIndex((preferredName) =>
+                voiceNameMatches(name, preferredName)
+            );
             let score = 0;
 
-            if (voice.lang.toLowerCase() === "en-us") score += 14;
-            if (voice.lang.toLowerCase() === "en-gb") score += 12;
-            if (preferredIndex >= 0) score += 240 - preferredIndex * 10;
-            if (name.includes("male")) score += 160;
-            if (name.includes("natural")) score += 48;
-            if (name.includes("premium")) score += 36;
-            if (name.includes("enhanced")) score += 32;
-            if (FEMALE_VOICE_NAMES.some((femaleName) => name.includes(femaleName))) score -= 240;
-            if (voice.localService) score += 4;
+            if (language === "en-in") score += 220;
+            if (language === "en-gb") score += 100;
+            if (language === "en-au") score += 85;
+            if (language === "en-ie") score += 80;
+            if (language === "en-us") score += 70;
+            if (preferredIndex >= 0) score += 520 - preferredIndex * 16;
+            if (name.includes("male")) score += 320;
+            if (name.includes("natural")) score += 150;
+            if (name.includes("neural")) score += 140;
+            if (name.includes("premium")) score += 110;
+            if (name.includes("enhanced")) score += 100;
+            if (name.includes("online")) score += 70;
+            if (FEMALE_VOICE_NAMES.some((femaleName) => voiceNameMatches(name, femaleName))) score -= 700;
+            if (name.includes("female")) score -= 700;
+            if (LOW_QUALITY_VOICE_NAMES.some((lowQualityName) => voiceNameMatches(name, lowQualityName))) {
+                score -= 250;
+            }
+            if (voice.default) score += 10;
 
             return { voice, score };
         })
         .sort((a, b) => b.score - a.score)[0]?.voice;
+}
+
+function waitForPreferredVoice(speechSynthesis: SpeechSynthesis, signal: AbortSignal) {
+    const immediateVoice = selectBestVoice(speechSynthesis.getVoices());
+
+    if (immediateVoice || signal.aborted) {
+        return Promise.resolve(immediateVoice);
+    }
+
+    return new Promise<SpeechSynthesisVoice | undefined>((resolve) => {
+        let timeoutId: number | undefined;
+
+        const cleanup = () => {
+            speechSynthesis.removeEventListener("voiceschanged", handleVoicesChanged);
+            signal.removeEventListener("abort", handleAbort);
+            if (timeoutId) {
+                window.clearTimeout(timeoutId);
+            }
+        };
+
+        const finish = (voice?: SpeechSynthesisVoice) => {
+            cleanup();
+            resolve(voice);
+        };
+
+        const handleVoicesChanged = () => {
+            const voice = selectBestVoice(speechSynthesis.getVoices());
+            if (voice) {
+                finish(voice);
+            }
+        };
+
+        const handleAbort = () => finish();
+
+        speechSynthesis.addEventListener("voiceschanged", handleVoicesChanged);
+        signal.addEventListener("abort", handleAbort, { once: true });
+        timeoutId = window.setTimeout(
+            () => finish(selectBestVoice(speechSynthesis.getVoices())),
+            VOICE_LOAD_TIMEOUT_MS
+        );
+    });
 }
 
 const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: ArticleActionsProps) => {
@@ -116,6 +204,9 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     const [supportsNativeShare, setSupportsNativeShare] = useState(false);
     const mountedRef = useRef(true);
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+    const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
+    const voiceRequestAbortRef = useRef<AbortController | null>(null);
+    const speechRequestRef = useRef(0);
     const elapsedRef = useRef(0);
     const timerRef = useRef<number | null>(null);
     const articleWords = useMemo(() => tokenize(`${title}. ${text}`), [title, text]);
@@ -127,10 +218,13 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     }, [elapsedSeconds]);
 
     useEffect(() => {
+        mountedRef.current = true;
         setSupportsNativeShare(typeof (navigator as ShareCapableNavigator).share === "function");
 
         return () => {
             mountedRef.current = false;
+            speechRequestRef.current += 1;
+            voiceRequestAbortRef.current?.abort();
             if (timerRef.current) {
                 window.clearInterval(timerRef.current);
             }
@@ -139,16 +233,18 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     }, []);
 
     useEffect(() => {
+        if (typeof window.speechSynthesis?.getVoices !== "function") {
+            return;
+        }
+
         const loadVoice = () => {
-            selectBestVoice();
+            selectedVoiceRef.current = selectBestVoice(window.speechSynthesis.getVoices()) ?? null;
         };
 
         loadVoice();
-        window.speechSynthesis?.addEventListener("voiceschanged", loadVoice);
+        window.speechSynthesis.addEventListener("voiceschanged", loadVoice);
 
-        return () => {
-            window.speechSynthesis?.removeEventListener("voiceschanged", loadVoice);
-        };
+        return () => window.speechSynthesis.removeEventListener("voiceschanged", loadVoice);
     }, []);
 
     const clearTimer = () => {
@@ -169,14 +265,32 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
         }, 1000);
     };
 
-    const speakFrom = (seconds: number, rate: PlaybackRate = playbackRate) => {
-        if (!("speechSynthesis" in window)) {
+    const speakFrom = async (seconds: number, rate: PlaybackRate = playbackRate) => {
+        if (
+            typeof window.speechSynthesis?.speak !== "function" ||
+            typeof window.SpeechSynthesisUtterance !== "function"
+        ) {
             setShareStatus("Audio playback is not supported in this browser.");
             return;
         }
 
+        const requestId = speechRequestRef.current + 1;
+        speechRequestRef.current = requestId;
+        voiceRequestAbortRef.current?.abort();
+        const voiceRequestAbort = new AbortController();
+        voiceRequestAbortRef.current = voiceRequestAbort;
+        const bestVoice =
+            selectedVoiceRef.current ??
+            await waitForPreferredVoice(window.speechSynthesis, voiceRequestAbort.signal);
+
+        if (!mountedRef.current || requestId !== speechRequestRef.current || voiceRequestAbort.signal.aborted) {
+            return;
+        }
+
+        selectedVoiceRef.current = bestVoice ?? null;
+        voiceRequestAbortRef.current = null;
         const safeSeconds = Math.min(Math.max(seconds, 0), totalSeconds);
-        const wordsPerSecond = (WORDS_PER_MINUTE * rate) / 60;
+        const wordsPerSecond = (WORDS_PER_MINUTE * rate * NATURAL_SPEECH_RATE) / 60;
         const startWord = Math.min(articleWords.length - 1, Math.floor(safeSeconds * wordsPerSecond));
         const spokenText = articleWords.slice(Math.max(0, startWord)).join(" ");
 
@@ -184,13 +298,13 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
         clearTimer();
         setElapsedSeconds(safeSeconds);
 
-        const utterance = new SpeechSynthesisUtterance(spokenText || `${title}. ${text}`);
-        const bestVoice = selectBestVoice();
+        const utterance = new window.SpeechSynthesisUtterance(spokenText || `${title}. ${text}`);
         if (bestVoice) {
             utterance.voice = bestVoice;
         }
-        utterance.rate = rate;
-        utterance.pitch = 0.92;
+        utterance.lang = bestVoice?.lang ?? "en-IN";
+        utterance.rate = rate * NATURAL_SPEECH_RATE;
+        utterance.pitch = NATURAL_SPEECH_PITCH;
         utterance.volume = 1;
         utterance.onend = () => {
             if (mountedRef.current) {
@@ -233,12 +347,12 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
             article_slug: articleSlug,
             playback_rate: playbackRate,
         });
-        speakFrom(elapsedRef.current);
+        void speakFrom(elapsedRef.current);
     };
 
     const handleSeek = (direction: -1 | 1) => {
         const nextElapsed = elapsedRef.current + direction * SEEK_SECONDS;
-        speakFrom(nextElapsed);
+        void speakFrom(nextElapsed);
     };
 
     const handleSpeedChange = () => {
@@ -247,7 +361,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
         setPlaybackRate(nextRate);
 
         if (listenState === "playing") {
-            speakFrom(elapsedRef.current, nextRate);
+            void speakFrom(elapsedRef.current, nextRate);
         }
     };
 
