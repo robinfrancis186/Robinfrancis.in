@@ -16,6 +16,23 @@ const nextConfig: NextConfig = {
         destination: "/achievements/",
         permanent: true,
       },
+      // Retired blog posts — keep the indexed URLs pointing at the Journal index.
+      ...[
+        "future-of-accessible-technology",
+        "scalable-systems-with-communities",
+        "people-centric-ai",
+      ].flatMap((slug) => [
+        {
+          source: `/blog/${slug}/`,
+          destination: "/blog/",
+          permanent: true,
+        },
+        {
+          source: `/blog/${slug}`,
+          destination: "/blog/",
+          permanent: true,
+        },
+      ]),
       {
         source: "/speaking/",
         destination: "/achievements/",

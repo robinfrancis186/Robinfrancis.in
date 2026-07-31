@@ -1,6 +1,7 @@
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { awards, mediaKit, proofLinks, speakingItems } from "@/data/profileProof";
+import { stripInlineMarkup } from "@/lib/inlineText";
 import type { SearchDocument } from "@/lib/search";
 
 const projects = [
@@ -112,7 +113,7 @@ const articleDocuments: SearchDocument[] = STATIC_BLOG_POSTS.map((post) => ({
   type: "Article",
   section: post.category,
   description: post.excerpt,
-  content: post.content,
+  content: stripInlineMarkup(post.content),
   keywords: post.tags,
   date: post.updatedAt ?? post.date,
 }));

@@ -26,6 +26,322 @@ export type StaticBlogPost = {
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
     {
+        id: "static-9",
+        slug: "ieee-region-10-international-virtual-career-fair-2025",
+        title: "Connecting Talent Across Borders: Co-Leading IEEE Region 10's First International Virtual Career Fair",
+        seoTitle: "Co-Leading IEEE Region 10 Virtual Career Fair 2025",
+        category: "Leadership",
+        tags: ["IEEE", "Leadership", "Career Development", "Young Professionals", "Community Building", "Global Collaboration"],
+        image: "/images/gallery/gallery-ieee-kerala-section-kochi-team.webp",
+        imageAlt: "IEEE Kerala Section Kochi community team connected to Robin Francis's IEEE leadership work",
+        excerpt:
+            "How an international IEEE volunteer team transformed an ambitious idea into a virtual career platform connecting emerging talent with recruiters across borders.",
+        metaDescription:
+            "A reflection on co-leading IEEE Region 10's 2025 international Virtual Career Fair, which generated 245 registrations, 2,578 booth visits, and 310 applications.",
+        date: "2026-07-31",
+        updatedAt: "2026-07-31",
+        proofTitles: [
+            "IEEE Spectrum coverage of the global Virtual Career Fairs",
+            "IEEE Career Fair official platform",
+        ],
+        internalLinks: [
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Source-backed recognition connected to Robin's IEEE leadership and volunteer work.",
+            },
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "See the product and platform work that runs alongside Robin's community leadership.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Verified bio, achievements, headshot, and links for event organizers and media.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Photos from IEEE programs, community teams, and student mentorship moments.",
+            },
+        ],
+        gallery: [
+            {
+                src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-banner.webp",
+                alt: "IEEE Career Fair identity powered by IEEE Young Professionals and IEEE Region 10",
+            },
+            {
+                src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-recruiters.webp",
+                alt: "The 31 recruiters from India, Malaysia, Sri Lanka, and UAE who joined the IEEE Region 10 Virtual Career Fair",
+            },
+            {
+                src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-virtual-exhibit-hall.webp",
+                alt: "The virtual exhibit hall layout showing company booths, auditorium, lounge, and info desk",
+            },
+            {
+                src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp",
+                alt: "Participation and outcomes: 245 registrations, 31 recruiters, 2,578 booth visits, and 310 job applications",
+            },
+        ],
+        content:
+            `Some milestones are remembered because they were the first. Others are remembered because of the opportunities they created.
+
+On **15 August 2025**, we successfully hosted IEEE's first international Virtual Career Fair, powered by **IEEE Region 10 Young Professionals** in collaboration with the **IEEE Industry Engagement Committee** and **IEEE Students**.
+
+Designed for students, recent graduates, and young professionals, the event created a space where emerging talent could interact directly with recruiters, understand current industry requirements, explore career opportunities, and identify roles aligned with their skills and aspirations.
+
+It was more than a virtual event. It was an attempt to make opportunity accessible across borders.
+
+A Milestone Measured in Opportunities
+
+The results reflected the engagement and trust built around the initiative:
+
+**245 registrations | 31 recruiters | 2,578 booth visits | 310 applications**
+
+These numbers tell an important story.
+
+A registration represented someone choosing to take the next step in their career. A booth visit represented curiosity, exploration, and a potential professional connection. An application represented the confidence to move from interest to action.
+
+For recruiters, the event provided access to a diverse pool of emerging technical talent. For participants, it created an opportunity to discover companies and career paths that might otherwise have remained beyond their immediate professional networks.
+
+Behind every metric was a person looking for an opportunity, a recruiter searching for the right talent, and a volunteer working to connect the two.
+
+Why the Virtual Format Mattered
+
+Talent exists everywhere, but access to opportunity is not always equally distributed.
+
+Travel costs, geographic distance, limited professional networks, and a lack of exposure to recruiters can prevent capable students and young professionals from accessing the opportunities they deserve. A virtual career fair helps reduce many of these barriers by bringing recruiters and candidates into the same digital environment.
+
+The broader IEEE Virtual Career Fair model uses interactive company booths, direct recruiter conversations, video interactions, and downloadable career resources to make recruitment more accessible and engaging. IEEE Spectrum later highlighted how this model could reduce geographic barriers while strengthening the connection between technical talent and industry. [Read IEEE Spectrum's coverage of the global Virtual Career Fair initiative.](https://spectrum.ieee.org/ieee-global-virtual-career-fairs)
+
+For a participant, entering a virtual booth could become the beginning of a professional relationship. For a recruiter, a conversation could reveal talent that might never have appeared through a conventional hiring channel.
+
+That possibility gave the initiative its real purpose.
+
+My Role as Co-Lead
+
+I had the privilege of serving as **Co-Lead** for the event, contributing primarily through strategy, coordination, and engagement.
+
+Strategy helped us maintain a clear direction. Coordination helped align the different people, responsibilities, and timelines involved. Engagement helped ensure that the event remained more than a technical platform - it had to become a meaningful experience for both participants and recruiters.
+
+Co-leading an international initiative also reminded me that leadership is often found in the work people do not immediately see.
+
+It is present in the follow-ups, discussions, revisions, handovers, difficult decisions, and countless small actions required to move an idea forward. It is about ensuring that people remain connected to the purpose of the initiative, even when the process becomes demanding.
+
+My role was only one part of a much larger collective effort. The event became possible because people from different backgrounds came together with a shared belief: career opportunities should not be restricted by geography.
+
+The Trust Behind the Responsibility
+
+A special note of gratitude goes to **Shone Jose** for trusting me with this responsibility.
+
+Being given an important role is meaningful, but being genuinely trusted to carry it forward means even more. His confidence gave me the motivation to continue contributing through every stage of the journey.
+
+Trust creates ownership. It encourages people to take initiative, accept responsibility, solve problems, and give their best to a shared mission.
+
+This experience reinforced something I continue to believe strongly: the best leaders do not simply assign responsibilities. They give people the confidence to grow into them.
+
+OneIEEE in Action
+
+The Virtual Career Fair was a strong example of what becomes possible through the spirit of **OneIEEE**.
+
+IEEE Region 10 Young Professionals, the IEEE Industry Engagement Committee, IEEE Students, recruiters, volunteers, and other contributors brought different strengths to the initiative. IEEE's official Career Fair platform describes this wider collaboration as an expression of OneIEEE, where multiple organizational units work together to strengthen industry connections and empower emerging talent. [Explore the official IEEE Virtual Career Fair platform.](https://careerfair.ieee.org/)
+
+No single person or organizational unit could have produced this outcome alone.
+
+The success belonged to the people who communicated, coordinated, invited recruiters, supported participants, managed responsibilities, solved unexpected challenges, and remained committed until the event became a reality.
+
+I am particularly grateful to:
+
+**Chamika Sudusinghe, Subodha Charles, Saaveethya Sivakumar, Aishwarya Bandla, Seif El Hajjem, Chamod Dilruk, Katelyn Serpe, and Joel John Kandathil.**
+
+Their commitment, collaboration, and teamwork helped turn an ambitious vision into a measurable achievement.
+
+Recruiters Who Believed in the Initiative
+
+A career fair only creates value when organizations are willing to participate and engage meaningfully with talent.
+
+The 31 recruiters who joined the event gave participants the opportunity to understand companies, explore available roles, ask questions, and submit applications. Their presence transformed the platform from an event concept into a genuine opportunity space.
+
+I am deeply grateful to every participating company and recruiter who believed in the initiative. By giving their time, attention, and opportunities, they helped make this milestone possible.
+
+Their involvement also demonstrated the importance of building stronger connections between professional communities and industry. When industry representatives actively engage with students and young professionals, participants gain more than information about job openings. They gain insight into expectations, skills, workplace cultures, and possible career pathways.
+
+Impact Beyond a Single Day
+
+A career fair may take place on one particular date, but its impact can continue long after the platform closes.
+
+The **310 applications** submitted during the event showed that participants were not merely observing - they were actively pursuing opportunities.
+
+The **2,578 booth visits** reflected a willingness to explore different organizations and career possibilities.
+
+The involvement of **31 recruiters** showed that companies were willing to invest their time in discovering and supporting emerging technical talent.
+
+Even when a conversation does not immediately lead to a job offer, it can help a participant understand an industry, improve an application, build confidence, discover a new role, or establish a valuable professional connection.
+
+That is why the real impact of a career initiative cannot be measured only through immediate placements. It must also be measured through the confidence, exposure, networks, and future possibilities it creates.
+
+Part of a Growing Global Movement
+
+The Region 10 event was part of a larger movement within IEEE to strengthen workforce development and connect technical professionals with meaningful career opportunities.
+
+The [official IEEE Virtual Career Fair portal](https://careerfair.ieee.org/) now presents regional fairs as part of a wider international series. IEEE Spectrum has also documented how the initiative expanded across IEEE regions, using virtual platforms to connect companies, universities, students, and professionals.
+
+The model later continued through other regional editions. The [IEEE Career Fair USA overview](https://careerfair.ieee.org/wp-content/uploads/2025/09/IEEE-Career-Fair-USA.pdf) offers another perspective on how the initiative was adapted to connect employers with talent across IEEE Regions 1-6.
+
+Seeing the concept grow beyond a single event made our Region 10 milestone even more meaningful. It showed that a well-executed idea could contribute to a much wider ecosystem of career development and industry engagement.
+
+What the Experience Taught Me
+
+Co-leading this initiative gave me several lessons that continue to influence how I approach community programs and international collaborations.
+
+The first is that scale is built through clarity. A large team can only move together when everyone understands the purpose, responsibilities, and expected outcome.
+
+The second is that coordination is ultimately about people. Tools, schedules, documents, and platforms are important, but genuine progress depends on communication, trust, and mutual respect.
+
+The third is that leadership does not mean being at the centre of everything. It means creating the conditions in which different people can contribute their strengths and move towards a common goal.
+
+Most importantly, the experience reminded me that successful initiatives should not only appear impressive. They should create genuine value for the people they are intended to serve.
+
+A Collective Achievement
+
+I first shared a shorter reflection about this milestone through my [original LinkedIn post](https://www.linkedin.com/posts/robinfrancis186_ieee-youngprofessionals-careerfair-activity-7367819125634555904-plH1). Looking back, the numbers still make me proud, but the people behind them make the experience truly memorable.
+
+My heartfelt gratitude goes to every company, recruiter, mentor, colleague, volunteer, participant, and IEEE organizational unit that contributed to the event.
+
+Thank you to **IEEE Region 10 Young Professionals**, the **IEEE Industry Engagement Committee**, **IEEE Students**, and everyone who worked behind the scenes.
+
+And once again, special thanks to **Shone Jose** for the trust, encouragement, and responsibility.
+
+**245 registrations. 31 recruiters. 2,578 booth visits. 310 applications. One international team united by a shared purpose.**
+
+We did not simply host a virtual career fair.
+
+We helped opportunity travel beyond borders.`,
+    },
+    {
+        id: "static-8",
+        slug: "codex-nightline-ai-hackathon-moving-kochi-metro",
+        title: "History in Motion: Organizing the World's First AI Hackathon on a Moving Metro",
+        seoTitle: "Codex Nightline: AI Hackathon on a Moving Metro",
+        category: "Community",
+        tags: ["AI Hackathon", "Codex Nightline", "OpenAI Codex", "Kochi Metro", "Community"],
+        image: "/images/blog/codex-nightline/codex-nightline-builders-inside-metro.webp",
+        imageAlt: "Builders coding inside a moving Kochi Metro train during Codex Nightline 2026",
+        excerpt:
+            "One hundred builders boarded an after-hours Kochi Metro train for Codex Nightline, a two-hour AI build sprint where the route itself became the deadline.",
+        metaDescription:
+            "My experience organizing and mentoring at Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro train.",
+        date: "2026-07-31",
+        updatedAt: "2026-07-31",
+        proofTitles: [
+            "The Hindu BusinessLine coverage of Codex Nightline",
+            "Codex Nightline official event site",
+        ],
+        gallery: [
+            {
+                src: "/images/blog/codex-nightline/codex-nightline-builders-kochi-metro-platform.webp",
+                alt: "Codex Nightline builders gathered on the Kochi Metro platform beside the after-hours train",
+            },
+            {
+                src: "/images/blog/codex-nightline/robin-francis-codex-nightline-metro-doorway.webp",
+                alt: "Robin Francis standing in the doorway of a Kochi Metro train during Codex Nightline",
+            },
+            {
+                src: "/images/blog/codex-nightline/codex-nightline-community-hackathon-group.webp",
+                alt: "Codex Community Hackathon participants, mentors, and organizers at the Kochi venue",
+            },
+            {
+                src: "/images/blog/codex-nightline/robin-francis-codex-nightline-organizers.webp",
+                alt: "Robin Francis with a fellow organizer beside the Codex Community Hackathon Kochi banner",
+            },
+            {
+                src: "/images/blog/codex-nightline/codex-nightline-thank-you-poster.webp",
+                alt: "Codex Nightline after-event poster thanking participants for making history in motion",
+            },
+        ],
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "See the AI products and prototypes behind Robin's build-sprint mentoring.",
+            },
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Source-backed recognition connected to Robin's AI and community work.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Verified bio, headshot, and links for event organizers and media.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Photos from Codex community meetups, hackathons, and mentoring sessions.",
+            },
+        ],
+        content:
+            `Was organizing a hackathon on a moving metro ever on my bucket list?
+
+Honestly, no. But now that it has happened, I think my bucket list needs an upgrade.
+
+On 18 July 2026, I had the incredible opportunity to contribute as an organizer and mentor at [Codex Nightline](https://www.codexnightline.in/) - an event presented as the world's first AI build sprint inside a moving metro system.
+
+One hundred selected builders boarded an exclusive after-hours Kochi Metro train and transformed it into a moving space for experimentation, problem-solving, and innovation. Even before the event began, the unusual concept attracted attention, including a feature by [The Hindu BusinessLine](https://www.thehindubusinessline.com/info-tech/kochi-to-host-codex-nightline-ai-build-sprint-in-moving-metro-system-on-july-18/article71192353.ece).
+
+100 Builders. 100 Projects. One Moving Metro.
+
+At 11:00 PM, the builders began their journey from Vyttila. As the metro travelled towards Aluva, Thrippunithura, and back, the route itself became the timer.
+
+For two continuous hours, participants worked onboard using AI and Codex to turn their ideas into functional solutions. The build tracks covered urban mobility, civic and community tools, everyday productivity, and solutions for local businesses and creators.
+
+It was a solo build sprint, meaning every participant was responsible for taking an idea from concept to implementation within the limited time available. The complete event format and tracks can also be explored through the [Codex Nightline listing on Hackathons.space](https://www.hackathons.space/hackathons/codex-nightline).
+
+When the Journey Becomes the Deadline
+
+A conventional hackathon gives participants time to settle into a venue, arrange their workspace, and gradually find their rhythm.
+
+Codex Nightline was different.
+
+The train kept moving. Stations passed by. The clock never stopped.
+
+That movement created an entirely different kind of energy. Every carriage became a temporary innovation lab, filled with builders testing ideas, solving problems, and racing to create something meaningful before the metro completed its journey.
+
+The venue was not merely a backdrop to the hackathon. It became part of the challenge itself.
+
+My Experience as an Organizer and Mentor
+
+What made the night especially meaningful for me was the opportunity to contribute as both an organizer and mentor.
+
+I interacted with participants, listened to their ideas, helped them think through challenges, and watched their projects evolve as the train moved through the city. Seeing people remain focused, creative, and determined in such an unconventional environment was incredibly inspiring.
+
+Experiences like this remind me why I enjoy building technology communities. Innovation becomes more powerful when people are given the right environment, encouragement, and opportunity to transform ideas into something real.
+
+A Community Effort
+
+An event of this scale and originality could only happen through collaboration.
+
+A huge thank you to **Vaishakh Suresh** for imagining something this bold and successfully bringing it to life. I am also grateful to **OpenAI**, **Kochi Metro Rail Limited**, Codex Community Kochi, and everyone who supported the initiative.
+
+Congratulations to the entire organizing, mentoring, and volunteering teams, as well as every builder who came forward to participate in this first-of-its-kind experience. The event was organized through the OpenAI Codex Ambassador programme, with Kochi Metro supporting the after-hours metro experience.
+
+A [visual recap of Codex Nightline on Instagram](https://www.instagram.com/p/DbXuSx4jyRC/) captures how the Kochi Metro was transformed into a live coding environment for the night. I also shared a shorter reflection, along with photographs from the experience, in [my LinkedIn post about Codex Nightline](https://www.linkedin.com/posts/robinfrancis186_aihackathon-openai-kochimetro-activity-7485295743944294400-iGu9).
+
+Beyond the Final Station
+
+The metro eventually returned to Vyttila, but the journey of the ideas created during the night does not have to end there.
+
+I am excited to see how the builders continue refining their projects, applying what they learned, and turning their prototypes into solutions that can create a larger impact.
+
+Codex Nightline showed that innovation does not always need a conventional venue. Sometimes, all it takes is a bold idea, a committed community, and the courage to build while everything around you is moving.
+
+**We didn't just build on the move.**
+
+**We made history in motion.**`,
+    },
+    {
         id: "static-7",
         slug: "inclucode-2026-inclusive-software-innovation-buildathon",
         title: "INCLUCODE 2026: Building Technology That Includes Everyone",
@@ -532,123 +848,6 @@ We built a movement.`,
         ],
         content:
             "This write-up covers the leadership principles that scaled our student branches to more than 100 events per year. We formalized handover playbooks, paired every lead with a shadow, and ran quarterly retros so new teams inherited context instead of chaos.\n\nWe also built mentorship tracks with clear checkpoints: speaker sourcing, sponsorship decks, logistics checklists, and post-event surveys. That reduced failure points and improved member retention, industry partnerships, and funded innovation programs that kept running even after founders graduated.\n\nThe biggest unlock was data visibility. Simple dashboards for attendance, NPS, and volunteer load helped us rotate responsibilities before burnout and double down on formats that worked. Workshops and office hours outperformed large one-off summits.",
-    },
-    {
-        id: "static-3",
-        slug: "future-of-accessible-technology",
-        title: "The Future of Accessible Technology",
-        category: "Tech",
-        tags: ["Tech"],
-        image: "/images/blog/accessible-tech.webp",
-        excerpt: "How AI, multimodal interfaces, and affordable computing can empower millions.",
-        date: "2025-11-26",
-        updatedAt: "2026-07-07",
-        proofTitles: [
-            "K-DISC Social Enterprises and Inclusion listing",
-            "STRIDE Kerala live website",
-            "IEEE IES Faculty Development Programme article",
-        ],
-        internalLinks: [
-            {
-                label: "Projects",
-                href: "/projects/",
-                description: "Explore STRIDE Kerala, SoulSync, and other accessibility-centered product work.",
-            },
-            {
-                label: "Achievements",
-                href: "/achievements/",
-                description: "Review recognitions connected to inclusive innovation, AI, and humanitarian technology.",
-            },
-            {
-                label: "Press kit",
-                href: "/press-kit/",
-                description: "Use Robin's official bio and proof links for accessibility talks or media references.",
-            },
-            {
-                label: "Gallery",
-                href: "/gallery/",
-                description: "See STRIDE and inclusive innovation moments from the wider work.",
-            },
-        ],
-        content:
-            "Accessible tech requires multimodal inputs like voice, gesture, eye-tracking, and low-latency edge compute. We prototyped adaptive layouts that increase target sizes and contrast based on motor ability and vision needs, and we leaned on on-device speech models that tolerate dialectal variety without round-trips to the cloud.\n\nWe tested haptic cues as a redundant channel for critical alerts, added offline fallbacks for intermittent connectivity, and built a settings wizard that asks about comfort preferences up front instead of burying them in menus.\n\nThe takeaway: accessibility is not a bolt-on. It is a product foundation that improves UX for everyone, with faster surfaces for power users, clearer affordances for new users, and resilient behavior when networks are unreliable.",
-    },
-    {
-        id: "static-4",
-        slug: "scalable-systems-with-communities",
-        title: "Building Scalable Systems with Student Communities",
-        category: "Community",
-        tags: ["Community"],
-        image: "/images/blog/scalable-systems.webp",
-        excerpt: "Lessons from leading 100+ programs and growing organizations.",
-        date: "2025-10-14",
-        updatedAt: "2026-07-07",
-        proofTitles: ["INSPIRA IEEE Sahrdaya SB Magazine 2024"],
-        internalLinks: [
-            {
-                label: "Projects",
-                href: "/projects/",
-                description: "Connect the community systems thinking to Robin's project and product work.",
-            },
-            {
-                label: "Achievements",
-                href: "/achievements/",
-                description: "Connect the leadership systems to source-backed awards and recognitions.",
-            },
-            {
-                label: "Press kit",
-                href: "/press-kit/",
-                description: "Find verified achievements, role descriptions, and contact details for collaborations.",
-            },
-            {
-                label: "Gallery",
-                href: "/gallery/",
-                description: "View event, mentorship, and student-community moments from the ecosystem.",
-            },
-        ],
-        content:
-            "We scaled student communities by standardizing playbooks for event operations, creating modular starter kits for hackathons, and setting up OKR-based tracking for chapter health. Kits included sponsor email templates, venue checklists, slide decks, and risk logs so new chapters could launch in days, not months.\n\nData dashboards surfaced burnout signals like volunteer hours and last-minute cancellations, then helped us rotate leads before bottlenecks formed. We also paired each technical program with a delivery partner, often an NGO, so prototypes had a path to real users after demo day.\n\nThe result was more consistent events, higher volunteer retention, and projects that survived beyond judging. The system favored repeatable processes over heroics, which made leadership sustainable.",
-    },
-    {
-        id: "static-5",
-        slug: "people-centric-ai",
-        title: "Designing People-Centric AI Solutions",
-        category: "Design",
-        tags: ["Design"],
-        image: "/images/blog/people-centric-ai.webp",
-        excerpt: "Balancing tech innovation with empathy and social awareness.",
-        date: "2025-09-08",
-        updatedAt: "2026-07-07",
-        proofTitles: [
-            "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
-            "K-DISC Social Enterprises and Inclusion listing",
-            "STRIDE Kerala live website",
-            "IEEE IES Faculty Development Programme article",
-        ],
-        internalLinks: [
-            {
-                label: "Projects",
-                href: "/projects/",
-                description: "Review people-centric AI projects including SoulSync, FoodLoop, and STRIDE.",
-            },
-            {
-                label: "Achievements",
-                href: "/achievements/",
-                description: "See source-backed recognition for Robin's AI, accessibility, and community work.",
-            },
-            {
-                label: "Press kit",
-                href: "/press-kit/",
-                description: "Use official bio and proof links when referencing Robin's people-centric AI work.",
-            },
-            {
-                label: "Gallery",
-                href: "/gallery/",
-                description: "Browse the community and inclusive innovation contexts behind the writing.",
-            },
-        ],
-        content:
-            "People-centric AI starts with interviewing across ability, age, and bandwidth profiles. We tailored UX for intermittent connectivity, added offline fallbacks for critical actions, and kept error states explicit: here is what failed, and here is what we will try next.\n\nWe used progressive disclosure for model decisions: concise plain-language reasons first, deeper evidence on demand, and opt-out controls for data retention. Every release ran through fairness checks, explainability reviews, and trust surveys.\n\nThe main lesson is transparency without overwhelm. Users responded best when we gave just enough reasoning to build trust, plus a clear escape hatch to disable automation if it felt wrong.",
     },
 ];
 

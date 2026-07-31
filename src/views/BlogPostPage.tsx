@@ -11,26 +11,8 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
 import { findProofLinks } from '@/data/profileProof';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
+import { getSafeLinkHref, renderInlineMarkup, stripInlineMarkup } from '@/lib/inlineText';
 import { absoluteUrl } from '@/lib/seo';
-
-function getSafePortableTextHref(href: unknown) {
-    const value = typeof href === "string" ? href.trim() : "";
-
-    if (!value) {
-        return null;
-    }
-
-    if (value.startsWith("/") && !value.startsWith("//")) {
-        return value;
-    }
-
-    try {
-        const url = new URL(value);
-        return ["https:", "mailto:", "tel:"].includes(url.protocol) ? value : null;
-    } catch {
-        return null;
-    }
-}
 
 const ptComponents = {
     types: {
@@ -52,7 +34,7 @@ const ptComponents = {
     },
     marks: {
         link: ({ children, value }: any) => {
-            const href = getSafePortableTextHref(value?.href);
+            const href = getSafeLinkHref(value?.href);
             if (!href) {
                 return <span>{children}</span>;
             }
@@ -128,6 +110,21 @@ const staticSectionHeadings = new Set([
     "The Impact of INCLUCODE",
     "A Collective Effort",
     "A Personal Reflection",
+    "100 Builders. 100 Projects. One Moving Metro.",
+    "When the Journey Becomes the Deadline",
+    "My Experience as an Organizer and Mentor",
+    "A Community Effort",
+    "Beyond the Final Station",
+    "A Milestone Measured in Opportunities",
+    "Why the Virtual Format Mattered",
+    "My Role as Co-Lead",
+    "The Trust Behind the Responsibility",
+    "OneIEEE in Action",
+    "Recruiters Who Believed in the Initiative",
+    "Impact Beyond a Single Day",
+    "Part of a Growing Global Movement",
+    "What the Experience Taught Me",
+    "A Collective Achievement",
 ]);
 
 function getStaticListItems(paragraph: string) {
@@ -195,7 +192,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
     const excerpt = post.excerpt || `Read the full article ${post.title} on Robin Francis's Journal.`;
     const resolvedSlug = post.slug?.current || slug || post._id;
     const canonicalUrl = absoluteUrl(`/blog/${resolvedSlug}/`);
-    const articleText = portableTextToPlainText(post.content) || excerpt;
+    const articleText = stripInlineMarkup(portableTextToPlainText(post.content)) || excerpt;
     const staticParagraphs = typeof post.content === 'string'
         ? post.content.split(/\n{2,}/).map((paragraph: string) => paragraph.trim()).filter(Boolean)
         : [];
@@ -266,8 +263,8 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                             if (listItems) {
                                 return (
                                     <ul key={`list-${index}`} className="mb-6 list-disc space-y-2 pl-6 text-lg leading-relaxed text-neutral-700 dark:text-neutral-300">
-                                        {listItems.map((item) => (
-                                            <li key={item}>{item}</li>
+                                        {listItems.map((item, itemIndex) => (
+                                            <li key={item}>{renderInlineMarkup(item, `list-${index}-${itemIndex}`)}</li>
                                         ))}
                                     </ul>
                                 );
@@ -275,7 +272,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
 
                             return (
                                 <p key={`paragraph-${index}`} className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6 text-lg whitespace-pre-line">
-                                    {paragraph}
+                                    {renderInlineMarkup(paragraph, `paragraph-${index}`)}
                                 </p>
                             );
                         })

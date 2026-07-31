@@ -58,6 +58,38 @@ export const proofLinks: ProofLink[] = [
     category: "project",
   },
   {
+    title: "IEEE Spectrum coverage of the global Virtual Career Fairs",
+    label: "IEEE Spectrum",
+    href: "https://spectrum.ieee.org/ieee-global-virtual-career-fairs",
+    description:
+      "IEEE Spectrum reports on IEEE's global Virtual Career Fair initiative, describing how the virtual format reduces geographic barriers between technical talent and industry.",
+    category: "press",
+  },
+  {
+    title: "IEEE Career Fair official platform",
+    label: "IEEE Career Fair",
+    href: "https://careerfair.ieee.org/",
+    description:
+      "The official IEEE Career Fair platform presenting the regional virtual fairs as a OneIEEE collaboration between Young Professionals, the Industry Engagement Committee, and IEEE Students.",
+    category: "speaking",
+  },
+  {
+    title: "The Hindu BusinessLine coverage of Codex Nightline",
+    label: "The Hindu BusinessLine",
+    href: "https://www.thehindubusinessline.com/info-tech/kochi-to-host-codex-nightline-ai-build-sprint-in-moving-metro-system-on-july-18/article71192353.ece",
+    description:
+      "The Hindu BusinessLine reports that Kochi will host Codex Nightline, an AI build sprint held inside a moving metro system on 18 July.",
+    category: "press",
+  },
+  {
+    title: "Codex Nightline official event site",
+    label: "Codex Nightline",
+    href: "https://www.codexnightline.in/",
+    description:
+      "Official Codex Nightline site describing the after-hours Kochi Metro AI build sprint, its solo-build format, build tracks, and organising partners.",
+    category: "speaking",
+  },
+  {
     title: "INSPIRA IEEE Sahrdaya SB Magazine 2024",
     label: "IEEE Sahrdaya",
     href: "https://cdnc.heyzine.com/files/uploaded/97d868213fc130fa21bf351552f7747c05e9778f.pdf",

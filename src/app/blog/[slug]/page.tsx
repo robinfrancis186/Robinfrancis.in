@@ -4,6 +4,7 @@ import { BlogPostRoute } from "@/app/_components/blog-post-route";
 import { findStaticBlogPost, STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { findProofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
+import { stripInlineMarkup } from "@/lib/inlineText";
 import { absoluteUrl, defaultSeoImage, siteUrl } from "@/lib/seo";
 
 type BlogPostPageProps = {
@@ -152,9 +153,11 @@ export default async function Page({ params }: BlogPostPageProps) {
               </time>
             </p>
             <img src={post.image} alt={post.imageAlt || `Cover image for ${post.title}`} />
-            {post.content.split("\n\n").map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            {stripInlineMarkup(post.content)
+              .split("\n\n")
+              .map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             {post.gallery?.map((image) => (
               <img key={image.src} src={image.src} alt={image.alt} />
             ))}
