@@ -16,15 +16,12 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           const isCurrent = index === items.length - 1;
 
           return (
-            <li key={`${item.path}-${item.name}`} className="flex min-w-0 items-center gap-2">
+            <li key={`${item.path}-${item.name}`} className="flex min-w-0 items-start gap-2">
               {index > 0 ? (
-                <ChevronRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <ChevronRight className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
               ) : null}
               {isCurrent ? (
-                <span
-                  aria-current="page"
-                  className="max-w-[18rem] truncate font-medium text-foreground sm:max-w-[32rem]"
-                >
+                <span aria-current="page" className="min-w-0 font-medium text-foreground">
                   {item.name}
                 </span>
               ) : (

@@ -12,6 +12,11 @@ type ArticleActionsProps = {
     articleSlug?: string;
     shareUrl?: string;
     className?: string;
+    /**
+     * Pre-generated narration (see scripts/generate-blog-audio.mjs). When present the
+     * player streams this file; otherwise it falls back to browser speech synthesis.
+     */
+    audioSrc?: string;
 };
 
 type ShareCapableNavigator = Navigator & {
@@ -196,12 +201,15 @@ function waitForPreferredVoice(speechSynthesis: SpeechSynthesis, signal: AbortSi
     });
 }
 
-const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: ArticleActionsProps) => {
+const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSrc }: ArticleActionsProps) => {
     const [listenState, setListenState] = useState<ListenState>("idle");
     const [shareStatus, setShareStatus] = useState("");
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
     const [playbackRate, setPlaybackRate] = useState<PlaybackRate>(1);
     const [supportsNativeShare, setSupportsNativeShare] = useState(false);
+    const [narrationSeconds, setNarrationSeconds] = useState(0);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const hasNarration = Boolean(audioSrc);
     const mountedRef = useRef(true);
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
     const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
@@ -210,7 +218,10 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     const elapsedRef = useRef(0);
     const timerRef = useRef<number | null>(null);
     const articleWords = useMemo(() => tokenize(`${title}. ${text}`), [title, text]);
-    const totalSeconds = useMemo(() => estimateAudioSeconds(articleWords.length, playbackRate), [articleWords.length, playbackRate]);
+    const estimatedSeconds = useMemo(() => estimateAudioSeconds(articleWords.length, playbackRate), [articleWords.length, playbackRate]);
+    // Real narration reports its own duration once metadata loads; until then the
+    // word-count estimate keeps the label from flashing 0:00.
+    const totalSeconds = hasNarration && narrationSeconds > 0 ? Math.round(narrationSeconds / playbackRate) : estimatedSeconds;
     const isActive = listenState !== "idle";
 
     useEffect(() => {
@@ -328,6 +339,34 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     };
 
     const handleListen = () => {
+        if (hasNarration) {
+            const audio = audioRef.current;
+            if (!audio) {
+                return;
+            }
+
+            if (listenState === "playing") {
+                audio.pause();
+                setListenState("paused");
+                return;
+            }
+
+            if (listenState === "idle") {
+                trackEvent("article_audio_play", {
+                    article_title: title,
+                    article_slug: articleSlug,
+                    playback_rate: playbackRate,
+                });
+            }
+
+            audio.playbackRate = playbackRate;
+            void audio.play().then(
+                () => setListenState("playing"),
+                () => setShareStatus("Unable to play this article right now.")
+            );
+            return;
+        }
+
         if (listenState === "playing") {
             window.speechSynthesis.pause();
             clearTimer();
@@ -351,6 +390,15 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
     };
 
     const handleSeek = (direction: -1 | 1) => {
+        if (hasNarration) {
+            const audio = audioRef.current;
+            if (audio) {
+                const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+                audio.currentTime = Math.min(Math.max(audio.currentTime + direction * SEEK_SECONDS, 0), duration);
+            }
+            return;
+        }
+
         const nextElapsed = elapsedRef.current + direction * SEEK_SECONDS;
         void speakFrom(nextElapsed);
     };
@@ -359,6 +407,13 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
         const currentIndex = PLAYBACK_RATES.indexOf(playbackRate);
         const nextRate = PLAYBACK_RATES[(currentIndex + 1) % PLAYBACK_RATES.length];
         setPlaybackRate(nextRate);
+
+        if (hasNarration) {
+            if (audioRef.current) {
+                audioRef.current.playbackRate = nextRate;
+            }
+            return;
+        }
 
         if (listenState === "playing") {
             void speakFrom(elapsedRef.current, nextRate);
@@ -427,6 +482,23 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className }: Artic
                 className
             )}
         >
+            {audioSrc && (
+                <audio
+                    ref={audioRef}
+                    src={audioSrc}
+                    preload="metadata"
+                    onLoadedMetadata={(event) => setNarrationSeconds(event.currentTarget.duration || 0)}
+                    onTimeUpdate={(event) => setElapsedSeconds(Math.floor(event.currentTarget.currentTime))}
+                    onPlay={() => setListenState("playing")}
+                    onPause={() => setListenState((current) => (current === "playing" ? "paused" : current))}
+                    onEnded={() => {
+                        setListenState("idle");
+                        setElapsedSeconds(0);
+                    }}
+                    onError={() => setShareStatus("Unable to play this article right now.")}
+                    className="hidden"
+                />
+            )}
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-wrap items-center gap-4">
                     <button

@@ -32,8 +32,8 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
         seoTitle: "Co-Leading IEEE Region 10 Virtual Career Fair 2025",
         category: "Leadership",
         tags: ["IEEE", "Leadership", "Career Development", "Young Professionals", "Community Building", "Global Collaboration"],
-        image: "/images/gallery/gallery-ieee-kerala-section-kochi-team.webp",
-        imageAlt: "IEEE Kerala Section Kochi community team connected to Robin Francis's IEEE leadership work",
+        image: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-banner.webp",
+        imageAlt: "IEEE Career Fair identity powered by IEEE Young Professionals and IEEE Region 10",
         excerpt:
             "How an international IEEE volunteer team transformed an ambitious idea into a virtual career platform connecting emerging talent with recruiters across borders.",
         metaDescription:
@@ -67,10 +67,6 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
             },
         ],
         gallery: [
-            {
-                src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-banner.webp",
-                alt: "IEEE Career Fair identity powered by IEEE Young Professionals and IEEE Region 10",
-            },
             {
                 src: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-recruiters.webp",
                 alt: "The 31 recruiters from India, Malaysia, Sri Lanka, and UAE who joined the IEEE Region 10 Virtual Career Fair",

@@ -8,6 +8,7 @@ import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { findBlogAudio } from '@/data/blogAudio';
 import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
 import { findProofLinks } from '@/data/profileProof';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
@@ -243,7 +244,13 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     </div>
                 )}
 
-                <ArticleActions title={post.title} text={articleText} articleSlug={resolvedSlug} shareUrl={canonicalUrl} />
+                <ArticleActions
+                    title={post.title}
+                    text={articleText}
+                    articleSlug={resolvedSlug}
+                    shareUrl={canonicalUrl}
+                    audioSrc={findBlogAudio(resolvedSlug)?.src}
+                />
 
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-geist prose-headings:font-geist">
                     {Array.isArray(post.content) ? (
