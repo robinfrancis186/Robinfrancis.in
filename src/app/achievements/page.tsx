@@ -69,6 +69,12 @@ const recognitionDetails: Record<
     role: "K-DISC and IEEE volunteer working across inclusive innovation.",
     proof: "Verified in IEEE Kerala Section's Region 10 report.",
   },
+  "NCC Thal Sainik Camp national bronze medal": {
+    impact:
+      "Placed third nationally in the Junior Division firing events after more than ten selection camps.",
+    role: "Junior Division cadet representing Kerala in the Grouping and Snap Shooting practices.",
+    proof: "Documented in Robin's first-person account of the camp.",
+  },
 };
 
 const availability = [
