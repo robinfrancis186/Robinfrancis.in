@@ -1,5 +1,4 @@
-import { SlideButton } from "@/components/ui/slide-button";
-import { useRef, useState, lazy, Suspense, type FormEvent } from "react";
+import { useState, lazy, Suspense, type FormEvent } from "react";
 import GitHubActivity from "./GitHubActivity";
 import { trackEvent } from "@/lib/analytics";
 
@@ -11,14 +10,12 @@ const DotScreenShader = lazy(() =>
 );
 
 const Contact = () => {
-    const formRef = useRef<HTMLFormElement | null>(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [website, setWebsite] = useState("");
     const [buttonStatus, setButtonStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [statusMessage, setStatusMessage] = useState("");
-    const [resetKey, setResetKey] = useState(0);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -51,28 +48,11 @@ const Contact = () => {
             window.setTimeout(() => {
                 setButtonStatus("idle");
                 setStatusMessage("");
-                setResetKey((value) => value + 1);
             }, 3500);
         } catch (error) {
             setButtonStatus("error");
             setStatusMessage(error instanceof Error ? error.message : "Message could not be sent right now.");
-            setResetKey((value) => value + 1);
         }
-    };
-
-    const handleSlideComplete = () => {
-        const form = formRef.current;
-        if (!form) return false;
-
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            setResetKey((value) => value + 1);
-            return false;
-        }
-
-        setButtonStatus("loading");
-        form.requestSubmit();
-        return true;
     };
 
     return (
@@ -86,7 +66,7 @@ const Contact = () => {
                         I'm always open to collaborations, mentorship, community projects, or opportunities to build meaningful technology.
                     </p>
                     <div className="mt-8">
-                        <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                                 <input
                                     type="text"
@@ -142,12 +122,6 @@ const Contact = () => {
                                 maxLength={1500}
                                 required
                                 className="mt-4 w-full resize-none rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
-                            />
-                            <SlideButton
-                                label="Slide to send"
-                                status={buttonStatus}
-                                resetKey={resetKey}
-                                onSlideComplete={handleSlideComplete}
                             />
                             <button
                                 type="submit"

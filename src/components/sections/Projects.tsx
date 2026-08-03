@@ -69,8 +69,8 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-                        image="/images/gallery/gallery-ieee-kerala-section-kochi-team.webp"
-                        imageAlt="IEEE Kerala Section Kochi community team connected to Robin Francis's IEEE leadership work"
+                        image="/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp"
+                        imageAlt="IEEE Region 10 Virtual Career Fair 2025 results: 245 registrations, 31 recruiters, 2,578 booth visits, and 310 job applications"
                         title="IEEE R10 Career Fair"
                         description="Co-led the first international virtual career fair with 31 global recruiters and 245 participants."
                         tags={["Global Community", "Networking"]}
