@@ -623,4 +623,43 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     imageWidth: 1800,
     imageHeight: 1200,
   },
+  {
+    id: "gallery-techx-infinia-audience",
+    img: "/images/gallery/gallery-techx-infinia-audience.webp",
+    height: 380,
+    title: "TechX Infinia Audience",
+    alt: "TechX Infinia audience holding up lit phone torches during the flagship event",
+    description:
+      "Participants lighting up the hall during TechX Infinia, the emerging technology flagship event founded and led by Robin Francis.",
+    category: "TechX Infinia",
+    date: "2025",
+    imageWidth: 1800,
+    imageHeight: 1200,
+  },
+  {
+    id: "gallery-techx-infinia-drone-expo",
+    img: "/images/gallery/gallery-techx-infinia-drone-expo.webp",
+    height: 380,
+    title: "TechX Infinia Drone Expo",
+    alt: "School students examining drones and controllers at the TechX Infinia technology expo",
+    description:
+      "School students exploring drone hardware at the TechX Infinia expo, part of the outreach that opened the event to younger learners.",
+    category: "TechX Infinia",
+    date: "2025",
+    imageWidth: 1800,
+    imageHeight: 1200,
+  },
+  {
+    id: "gallery-techx-infinia-letters",
+    img: "/images/gallery/gallery-techx-infinia-letters.webp",
+    height: 380,
+    title: "TechX Infinia Installation",
+    alt: "Hand-painted INFINIA letter installation on the lawn at Sahrdaya College",
+    description:
+      "The hand-painted INFINIA installation built for TechX Infinia on the Sahrdaya College campus.",
+    category: "TechX Infinia",
+    date: "2025",
+    imageWidth: 1800,
+    imageHeight: 1350,
+  },
 ];

@@ -59,8 +59,8 @@ export default function Projects() {
                     <GridItem
                         variants={item}
                         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-                        image="/images/project-techx.webp"
-                        imageAlt="TechX Infinia tech festival: 450+ participants flagship event banner"
+                        image="/images/gallery/gallery-techx-infinia-audience.webp"
+                        imageAlt="TechX Infinia audience holding up lit phone torches during the flagship event"
                         title="TechX Infinia"
                         description="Emerging Tech Flagship Event. Founded and led a large-scale tech festival with 450+ participants."
                         tags={["Leadership", "Event Management", "Strategy"]}
