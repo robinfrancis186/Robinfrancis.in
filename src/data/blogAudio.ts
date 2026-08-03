@@ -4,6 +4,7 @@ export type BlogAudio = {
     bytes: number;
     characters: number;
     voice: string;
+    provider: string;
 };
 
 export const BLOG_AUDIO: Record<string, BlogAudio> = {
@@ -12,36 +13,49 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         bytes: 4864512,
         characters: 4252,
         voice: "aditya",
+        provider: "sarvam",
     },
     "ieee-r10-volunteer-award": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-r10-volunteer-award.mp3",
         bytes: 1014144,
         characters: 868,
         voice: "aditya",
+        provider: "sarvam",
     },
     "ieee-region-10-international-virtual-career-fair-2025": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-region-10-international-virtual-career-fair-2025.mp3",
         bytes: 12401280,
         characters: 10497,
         voice: "aditya",
+        provider: "sarvam",
     },
     "ieee-sahrdaya-student-branch-movement": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-sahrdaya-student-branch-movement.mp3",
         bytes: 12598656,
         characters: 10288,
         voice: "aditya",
+        provider: "sarvam",
     },
     "inclucode-2026-inclusive-software-innovation-buildathon": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/inclucode-2026-inclusive-software-innovation-buildathon.mp3",
         bytes: 12743424,
         characters: 10773,
         voice: "aditya",
+        provider: "sarvam",
+    },
+    "ncc-thal-sainik-camp-national-bronze-medal-journey": {
+        src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ncc-thal-sainik-camp-national-bronze-medal-journey.mp3",
+        bytes: 17455872,
+        characters: 14200,
+        voice: "ash",
+        provider: "openai",
     },
     "soulsync-emotional-wellness": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/soulsync-emotional-wellness.mp3",
         bytes: 1238400,
         characters: 1019,
         voice: "aditya",
+        provider: "sarvam",
     },
 };
 

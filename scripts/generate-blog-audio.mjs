@@ -1,11 +1,15 @@
 #!/usr/bin/env node
-// Narrates blog posts with Sarvam AI (bulbul:v3) and writes MP3s to public/audio/blog/.
+// Narrates blog posts and writes MP3s to public/audio/blog/.
 //
 //   node --experimental-strip-types scripts/generate-blog-audio.mjs --slug=<slug>
 //   node --experimental-strip-types scripts/generate-blog-audio.mjs --all
+//   node --experimental-strip-types scripts/generate-blog-audio.mjs --provider=openai --slug=<slug>
 //
-// Reads SARVAM_API_KEY from .env.local. Posts already having an MP3 are skipped
-// unless --force is passed, so re-runs never spend credit twice on the same text.
+// Two providers are supported: sarvam (bulbul:v3, voice "aditya") and openai
+// (gpt-4o-mini-tts, voice "ash" at speed 1.07, tuned to match aditya's pace).
+// Reads SARVAM_API_KEY or OPENAI_API_KEY from .env.local. Posts already having an
+// MP3 from the same provider and voice are skipped unless --force is passed, so
+// re-runs never spend credit twice on the same text.
 //
 // The MP3s are gitignored and served from Vercel Blob, so after generating:
 //
@@ -25,9 +29,30 @@ const rootDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const audioDir = path.join(rootDir, 'public/audio/blog');
 const manifestPath = path.join(rootDir, 'src/data/blogAudio.ts');
 
-const ENDPOINT = 'https://api.sarvam.ai/text-to-speech';
-const MODEL = 'bulbul:v3';
-const MAX_CHARS = 2500; // hard API limit per request
+// Two providers so a post can be narrated with whichever account has credit.
+// The OpenAI defaults are tuned to match Sarvam's "aditya": measured on the same
+// sentence, aditya runs 135 wpm and ash at speed 1.07 runs 134 wpm.
+const PROVIDERS = {
+  sarvam: {
+    endpoint: 'https://api.sarvam.ai/text-to-speech',
+    model: 'bulbul:v3',
+    maxChars: 2500, // hard API limit per request
+    defaultVoice: 'aditya',
+    keyEnv: 'SARVAM_API_KEY',
+  },
+  openai: {
+    endpoint: 'https://api.openai.com/v1/audio/speech',
+    model: 'gpt-4o-mini-tts',
+    maxChars: 4000, // API limit is 4096
+    defaultVoice: 'ash',
+    defaultSpeed: 1.07,
+    keyEnv: 'OPENAI_API_KEY',
+    instructions:
+      'Speak in Indian English with a warm, measured, reflective tone. Steady pace, calm and sincere, ' +
+      'like someone narrating a personal memoir. Do not sound theatrical or newsy.',
+  },
+};
+
 const SAMPLE_RATE = 24000;
 
 const args = process.argv.slice(2);
@@ -35,7 +60,13 @@ const flag = (name, fallback) => {
   const hit = args.find((a) => a.startsWith(`--${name}=`));
   return hit ? hit.slice(name.length + 3) : fallback;
 };
-const speaker = flag('speaker', 'aditya');
+const providerName = flag('provider', 'sarvam');
+const provider = PROVIDERS[providerName];
+if (!provider) throw new Error(`Unknown provider "${providerName}". Use sarvam or openai.`);
+
+const MAX_CHARS = provider.maxChars;
+const speaker = flag('speaker', provider.defaultVoice);
+const speed = Number(flag('speed', provider.defaultSpeed ?? 1));
 const language = flag('language', 'en-IN');
 const only = flag('slug', null);
 const charBudget = Number(flag('max-chars', Infinity));
@@ -48,11 +79,12 @@ const baseUrl = flag('base-url', process.env.BLOG_AUDIO_BASE_URL ?? '').replace(
 const audioUrl = (slug) => `${baseUrl}/audio/blog/${slug}.mp3`;
 
 function readApiKey() {
-  if (process.env.SARVAM_API_KEY) return process.env.SARVAM_API_KEY;
+  const name = provider.keyEnv;
+  if (process.env[name]) return process.env[name];
   const envFile = path.join(rootDir, '.env.local');
-  if (!fs.existsSync(envFile)) throw new Error('SARVAM_API_KEY not set and .env.local is missing');
-  const match = fs.readFileSync(envFile, 'utf8').match(/^SARVAM_API_KEY=(.+)$/m);
-  if (!match) throw new Error('SARVAM_API_KEY not found in .env.local');
+  if (!fs.existsSync(envFile)) throw new Error(`${name} not set and .env.local is missing`);
+  const match = fs.readFileSync(envFile, 'utf8').match(new RegExp(`^${name}=(.+)$`, 'm'));
+  if (!match) throw new Error(`${name} not found in .env.local`);
   return match[1].trim();
 }
 
@@ -104,30 +136,56 @@ function chunkText(text) {
 
 class QuotaError extends Error {}
 
-async function synthesize(apiKey, text, attempt = 1) {
-  const response = await fetch(ENDPOINT, {
-    method: 'POST',
+function requestFor(apiKey, text) {
+  if (providerName === 'openai') {
+    return {
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: {
+        model: provider.model,
+        voice: speaker,
+        input: text,
+        instructions: provider.instructions,
+        response_format: 'mp3',
+        speed,
+      },
+    };
+  }
+
+  return {
     headers: { 'api-subscription-key': apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+    body: {
       text,
       target_language_code: language,
-      model: MODEL,
+      model: provider.model,
       speaker,
       output_audio_codec: 'mp3',
       speech_sample_rate: SAMPLE_RATE,
-    }),
+    },
+  };
+}
+
+async function synthesize(apiKey, text, attempt = 1) {
+  const { headers, body } = requestFor(apiKey, text);
+  const response = await fetch(provider.endpoint, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
   });
 
   if (response.ok) {
+    // OpenAI streams raw audio; Sarvam returns base64 chunks in JSON.
+    if (providerName === 'openai') {
+      return Buffer.from(await response.arrayBuffer());
+    }
     const payload = await response.json();
     return Buffer.concat(payload.audios.map((audio) => Buffer.from(audio, 'base64')));
   }
 
-  const body = await response.text();
+  const errorText = await response.text();
 
-  // 402/403 here means the credit ran out — stop rather than burn retries.
-  if (response.status === 402 || /quota|credit|insufficient|exhaust/i.test(body)) {
-    throw new QuotaError(`credit exhausted (${response.status}): ${body.slice(0, 200)}`);
+  // 402/403 here means the credit ran out, so stop rather than burn retries.
+  if (response.status === 402 || /quota|credit|insufficient|exhaust/i.test(errorText)) {
+    throw new QuotaError(`credit exhausted (${response.status}): ${errorText.slice(0, 200)}`);
   }
 
   if ((response.status === 429 || response.status >= 500) && attempt < 4) {
@@ -137,7 +195,7 @@ async function synthesize(apiKey, text, attempt = 1) {
     return synthesize(apiKey, text, attempt + 1);
   }
 
-  throw new Error(`${response.status}: ${body.slice(0, 300)}`);
+  throw new Error(`${response.status}: ${errorText.slice(0, 300)}`);
 }
 
 function writeManifest(entries) {
@@ -145,14 +203,14 @@ function writeManifest(entries) {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
       ([slug, meta]) =>
-        `    "${slug}": {\n        src: "${meta.src}",\n        bytes: ${meta.bytes},\n        characters: ${meta.characters},\n        voice: "${meta.voice}",\n    },`
+        `    "${slug}": {\n        src: "${meta.src}",\n        bytes: ${meta.bytes},\n        characters: ${meta.characters},\n        voice: "${meta.voice}",\n        provider: "${meta.provider ?? 'sarvam'}",\n    },`
     )
     .join('\n');
 
   fs.writeFileSync(
     manifestPath,
     `// Generated by scripts/generate-blog-audio.mjs. Do not edit by hand.\n` +
-      `export type BlogAudio = {\n    src: string;\n    bytes: number;\n    characters: number;\n    voice: string;\n};\n\n` +
+      `export type BlogAudio = {\n    src: string;\n    bytes: number;\n    characters: number;\n    voice: string;\n    provider: string;\n};\n\n` +
       `export const BLOG_AUDIO: Record<string, BlogAudio> = {\n${rows}\n};\n\n` +
       `export function findBlogAudio(slug?: string) {\n    return slug ? BLOG_AUDIO[slug] ?? null : null;\n}\n`
   );
@@ -163,13 +221,14 @@ function loadManifest() {
   const source = fs.readFileSync(manifestPath, 'utf8');
   const entries = {};
   for (const match of source.matchAll(
-    /"([^"]+)":\s*\{\s*src:\s*"([^"]+)",\s*bytes:\s*(\d+),\s*characters:\s*(\d+),\s*voice:\s*"([^"]+)",/g
+    /"([^"]+)":\s*\{\s*src:\s*"([^"]+)",\s*bytes:\s*(\d+),\s*characters:\s*(\d+),\s*voice:\s*"([^"]+)",(?:\s*provider:\s*"([^"]+)",)?/g
   )) {
     entries[match[1]] = {
       src: match[2],
       bytes: Number(match[3]),
       characters: Number(match[4]),
       voice: match[5],
+      provider: match[6] ?? 'sarvam',
     };
   }
   return entries;
@@ -195,6 +254,7 @@ async function main() {
         bytes: fs.statSync(localPath).size,
         characters: narrationText(post).length,
         voice: manifest[post.slug]?.voice ?? speaker,
+        provider: manifest[post.slug]?.provider ?? providerName,
       };
       repointed += 1;
     }
@@ -206,12 +266,13 @@ async function main() {
   let spent = 0;
   let stopped = null;
 
-  console.log(`\n🎙  ${MODEL} · voice "${speaker}" · ${language}\n`);
+  console.log(`\n🎙  ${providerName} ${provider.model} · voice "${speaker}" · speed ${speed}\n`);
 
   for (const post of queue) {
     const outPath = path.join(audioDir, `${post.slug}.mp3`);
 
-    if (!force && fs.existsSync(outPath) && manifest[post.slug]?.voice === speaker) {
+    const existing = manifest[post.slug];
+    if (!force && fs.existsSync(outPath) && existing?.voice === speaker && existing?.provider === providerName) {
       console.log(`⏭  ${post.slug} — already generated, skipping`);
       continue;
     }
@@ -251,6 +312,7 @@ async function main() {
       bytes: mp3.length,
       characters: text.length,
       voice: speaker,
+      provider: providerName,
     };
     writeManifest(manifest);
     console.log(`✅ ${outPath.replace(rootDir + '/', '')} — ${(mp3.length / 1024 / 1024).toFixed(2)}MB\n`);
