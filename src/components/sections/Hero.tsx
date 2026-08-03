@@ -159,7 +159,7 @@ const Hero = () => {
                 <div className="w-full md:w-1/3 flex justify-center order-1 md:order-2 z-20 relative pointer-events-none mt-4 md:mt-0">
                     <Image
                         src="/images/about/robin-light.webp" 
-                        alt="Robin Francis — AI Innovator and Software Engineer, professional headshot in formal black shirt" 
+                        alt="Robin Francis, AI Innovator and Software Engineer, professional headshot in formal black shirt" 
                         width={420}
                         height={550}
                         priority
@@ -168,7 +168,7 @@ const Hero = () => {
                     />
                     <Image
                         src="/images/about/robin-dark.webp" 
-                        alt="Robin Francis — professional portrait with dark background theme" 
+                        alt="Robin Francis, professional portrait with dark background theme" 
                         width={420}
                         height={550}
                         sizes="(min-width: 768px) 420px, (min-width: 640px) 320px, 280px"

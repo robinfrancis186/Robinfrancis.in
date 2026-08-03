@@ -126,6 +126,19 @@ const staticSectionHeadings = new Set([
     "Part of a Growing Global Movement",
     "What the Experience Taught Me",
     "A Collective Achievement",
+    "It Began at Don Bosco",
+    "RDC Was the Dream. TSC Became the Journey.",
+    "Camp After Camp, Selection After Selection",
+    "The .22 Rifle and the Discipline of Stillness",
+    "Grouping",
+    "Snap Shooting",
+    "Representing Kerala on the National Stage",
+    "The Medal Belonged to More Than the Shooters",
+    "Learning From Officers and Their Experiences",
+    "What NCC Changed in Me",
+    "Becoming an Example for Those Who Followed",
+    "Gratitude",
+    "The Medal Was Bronze. The Memory Is Priceless.",
 ]);
 
 function getStaticListItems(paragraph: string) {

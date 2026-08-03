@@ -26,6 +26,371 @@ export type StaticBlogPost = {
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
     {
+        id: "static-10",
+        slug: "ncc-thal-sainik-camp-national-bronze-medal-journey",
+        title: "From an RDC Dream to a TSC Bronze: The NCC Journey That Built Me",
+        seoTitle: "My NCC Journey to a TSC National Bronze Medal",
+        category: "Leadership",
+        tags: ["NCC", "Leadership", "Discipline", "Thal Sainik Camp", "Kerala"],
+        image: "/images/blog/ncc-thal-sainik-camp/ncc-kerala-contingent-trophies.webp",
+        imageAlt: "The Kerala NCC contingent with their trophies and medals after the Thal Sainik Camp national competition",
+        excerpt:
+            "I joined NCC as a ninth-standard student at Don Bosco High School, Irinjalakuda. What followed was a journey through more than ten camps, two demanding firing events and a national bronze medal at the Thal Sainik Camp in Delhi.",
+        metaDescription:
+            "How more than ten NCC camps, a .22 rifle and two firing events led a ninth-standard cadet from Irinjalakuda to a national bronze medal at the Thal Sainik Camp in Delhi.",
+        date: "2026-08-03",
+        updatedAt: "2026-08-03",
+        internalLinks: [
+            {
+                label: "Achievements",
+                href: "/achievements/",
+                description: "Source-backed recognition across Robin's leadership and community work.",
+            },
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "See the products and platforms built on the discipline this journey taught.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Verified bio, achievements, headshot, and links for event organizers and media.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Photos from camps, community programs, and student mentorship moments.",
+            },
+        ],
+        gallery: [
+            {
+                src: "/images/blog/ncc-thal-sainik-camp/ncc-firing-practice.webp",
+                alt: "Robin Francis in the kneeling firing position with a .22 rifle during NCC training",
+            },
+            {
+                src: "/images/blog/ncc-thal-sainik-camp/ncc-firing-target-sheet.webp",
+                alt: "A .22 rifle target sheet showing the grouping of fired rounds around the centre",
+            },
+            {
+                src: "/images/blog/ncc-thal-sainik-camp/ncc-directorate-camp-delhi.webp",
+                alt: "The Thal Sainik Camp grounds in Delhi with NCC Directorate pavilions from across India",
+            },
+            {
+                src: "/images/blog/ncc-thal-sainik-camp/ncc-cadet-armoured-vehicle.webp",
+                alt: "Robin Francis standing in front of an armoured personnel carrier at the national camp",
+            },
+            {
+                src: "/images/blog/ncc-thal-sainik-camp/ncc-cadets-with-officers.webp",
+                alt: "Medal-winning NCC cadets with their officers and instructors after the competition",
+            },
+        ],
+        content:
+            `Most people see the bronze medal.
+
+I remember everything that came before it.
+
+I remember the camps, the selections, the physical training, the long days, the pressure to perform, the people who stood beside me, and the sound of the command before raising my rifle.
+
+I remember being a ninth-standard student who had entered NCC without knowing how deeply it would influence the person I would become.
+
+The medal was certainly special. But the journey towards it gave me something even more valuable: discipline, courage, confidence, friendships, and the strength to stand up for what I believe is right.
+
+It Began at Don Bosco
+
+My NCC journey began at Don Bosco High School, Irinjalakuda, where I joined the Army Wing under the Junior Division, commonly known as JD.
+
+In NCC, the Junior Division is the school-level division for boys, while the corresponding category for girls is the Junior Wing. The Senior Division and Senior Wing generally consist of college-level cadets.
+
+At that time, I was only in ninth standard.
+
+I did not have a detailed plan for where NCC would take me. I was attracted to the uniform, the discipline, the training and the opportunity to do something beyond the regular school routine.
+
+Gradually, NCC became much more than an extracurricular activity.
+
+It became a way of life.
+
+It taught me to respect time, follow instructions, work as part of a team and take responsibility for my own performance. It showed me that discipline was not about being controlled by someone else. It was about learning to control yourself, especially when circumstances became difficult.
+
+RDC Was the Dream. TSC Became the Journey.
+
+The interesting part of this story is that I was initially preparing for the Republic Day Camp, or RDC.
+
+RDC is one of NCC's most prestigious national camps. It is conducted in Delhi and represents the culmination of a year of NCC training, bringing together specially selected cadets from across India for competitions, cultural activities, national integration programmes and ceremonial events.
+
+That was the direction in which I thought I was moving.
+
+But life had a different plan.
+
+Instead of RDC, an opportunity opened for me through the Thal Sainik Camp, or TSC.
+
+At first, it felt like an unexpected turn. Today, I see it as one of those moments when life takes you away from the path you planned and places you exactly where you are supposed to be.
+
+TSC is an All India Army Wing camp intended to expose cadets to important elements of Army training while encouraging healthy competition among NCC Directorates. Its events include weapon firing, map reading, judging distance, field signals, health and hygiene, and other activities that challenge both physical and mental ability. The national camp is conducted in Delhi and brings together cadets representing NCC Directorates from across the country.
+
+I was preparing for one dream.
+
+But I was being led towards another achievement.
+
+And I am grateful that everything came together at the right time.
+
+Camp After Camp, Selection After Selection
+
+Reaching the national camp was not a direct journey.
+
+It involved more than ten different camps, many of them lasting around ten days. Each camp was a training period, but it was also part of the selection process.
+
+We began as a large group of cadets.
+
+Then the number started coming down.
+
+Every camp demanded something more from us. It was not enough to perform well once. We had to prove ourselves repeatedly.
+
+There were drills, physical activities, firing practices, inspections and disciplined routines. We were constantly observed, not only for our technical ability, but also for our behaviour, consistency, teamwork and willingness to learn.
+
+Some days tested the body.
+
+Some tested the mind.
+
+Others tested whether we could continue giving our best even when we were tired, uncertain about the next selection, or under pressure to perform.
+
+At every stage, someone would be eliminated from the process. That reality remained with us throughout the journey. A single poor performance could change everything.
+
+From the large number that began the selection process, I eventually became one of the final three JD cadets selected through our firing stream for the competition.
+
+That moment itself felt like an achievement.
+
+But selection was not the destination.
+
+It only meant that the real responsibility was beginning.
+
+The .22 Rifle and the Discipline of Stillness
+
+One of the most memorable parts of my NCC journey was getting the opportunity to train with different rifles.
+
+The rifle that became central to my national competition journey was the .22 rifle.
+
+Holding a rifle teaches you a different kind of discipline.
+
+From the outside, shooting may appear to be mainly about aim. But when you experience it, you understand that accuracy depends on many small things working together.
+
+Your breathing matters.
+Your posture matters.
+Your grip matters.
+Your concentration matters.
+Even your state of mind matters.
+
+A slight movement or a moment of distraction can change where the round lands.
+
+The 2017 NCC rules for Junior Division shooting specified the use of .22 rifles at a distance of 25 metres. There were two practices for JD cadets: Grouping and Snap Shooting, with three cadets firing in each practice.
+
+Grouping
+
+What we often called group firing was officially known as Grouping.
+
+The aim was to fire five rounds and place them as closely together as possible. It was not simply about hitting somewhere near the centre. The closeness of the shots to one another showed the firer's consistency and control.
+
+The official practice was conducted in a lying position with support. The scoring depended on the size of the group formed by the five shots. The tighter the group, the higher the score.
+
+Grouping taught me patience.
+
+It taught me not to rush.
+
+It showed me that one good shot was not enough. What mattered was the ability to repeat that performance with consistency.
+
+Snap Shooting
+
+The second practice was Snap Shooting.
+
+This was completely different.
+
+In snap shooting, the target was exposed only for a short period. The 2017 rules provided five target exposures of seven seconds each. The rifle had to remain below the aiming position until the signal was given, after which the cadet had to raise it, identify the target, aim and fire within the limited exposure.
+
+Snap shooting tested our reaction, confidence and ability to remain composed under time pressure.
+
+There was no space for panic.
+
+There was no time to overthink.
+
+We had to trust our training.
+
+In many ways, these two rounds represented two different lessons in life.
+
+Grouping taught me consistency.
+
+Snap shooting taught me decisiveness.
+
+One required patience and control. The other demanded courage and immediate action.
+
+Both lessons have remained useful far beyond the firing range.
+
+Representing Kerala on the National Stage
+
+After camp after camp, selection after selection and countless hours of practice, we finally reached the national competition in Delhi.
+
+Standing there as a ninth-standard student and representing Kerala, my school and everyone who had supported me was a feeling that is difficult to put into words.
+
+Until then, the competition had been something we were preparing for.
+
+In Delhi, it became real.
+
+Cadets had arrived from different parts of India. Everyone carried the pride of their Directorate. Every team had passed through its own selection process. Every cadet standing there had worked hard to earn that opportunity.
+
+The pressure was certainly there.
+
+But so was the pride.
+
+Our Kerala firing team performed strongly across both Grouping and Snap Shooting. All the effort we had put into the selection camps, physical preparation and repeated firing practice finally came together.
+
+And we secured the national-level bronze medal.
+
+For us, the medal carried an additional emotion. It brought Kerala a national recognition in the competition after a long gap.
+
+That made the moment even more meaningful.
+
+I was grateful to God for the opportunity, for the timing and for giving me the strength to complete the journey.
+
+I had started by preparing for RDC.
+
+I returned from TSC as a national-level bronze medallist.
+
+Sometimes, the opportunity we receive may not be the one we originally imagined. But it can still become exactly the opportunity we needed.
+
+The Medal Belonged to More Than the Shooters
+
+Although we competed in different categories, the Kerala contingent functioned as one team.
+
+We supported every category representing our state.
+
+There were cadets from:
+
+- SD, the Senior Division
+- SW, the Senior Wing
+- JD, the Junior Division
+- JW, the Junior Wing
+
+The care and affection I received from the senior cadets remain among the most beautiful parts of this memory.
+
+As a JD cadet, I was one of the younger members of the contingent. The seniors guided us, encouraged us and helped us adjust to the demands of the camp. They did not treat us simply as junior participants. They made us feel like an important part of the team.
+
+My fellow JD cadets were going through the same pressure, hopes and uncertainty as I was. We trained together, waited for results together, supported each other and finally celebrated together.
+
+When someone from Kerala competed, the rest of us stood behind them.
+
+When someone succeeded, it felt like a success for the entire contingent.
+
+That unity made the medal much bigger than an individual achievement.
+
+It belonged to our instructors, officers, seniors, teammates, school and everyone who had invested their time and belief in us.
+
+Learning From Officers and Their Experiences
+
+Another valuable part of the journey was the opportunity to meet and interact with many officers.
+
+Their lessons were not limited to drills or firing techniques.
+
+They spoke from experience.
+
+They shared what they had learned through their service, both on the field and away from it. Listening to them helped me understand that discipline was not only about maintaining a uniform or following a command.
+
+It was about character.
+
+It was about doing the right thing even when no one was watching.
+
+It was about remaining responsible when situations became difficult.
+
+It was about placing the team and the duty above individual comfort.
+
+At that age, I may not have fully understood the depth of every lesson. But many of those words stayed with me. As I grew older and began leading teams, organizing programmes and taking responsibility for larger initiatives, I started recognizing how deeply those early experiences had influenced me.
+
+What NCC Changed in Me
+
+NCC did not change me through one event.
+
+It changed me gradually.
+
+Every camp added something.
+Every selection taught me to handle uncertainty.
+Every physical activity strengthened my ability to continue when things became uncomfortable.
+Every firing practice improved my focus.
+Every officer and senior taught me something about responsibility.
+Every teammate showed me the value of standing together.
+
+The experience gave me the discipline to begin something and remain committed to it.
+
+It gave me the courage to take up challenges even when the outcome was uncertain.
+
+It taught me to stand up for what is right, even when doing so is not easy.
+
+It gave me the confidence to represent a team and accept responsibility for more than just my own performance.
+
+Long before I began leading communities, coordinating large events or working with teams from different backgrounds, NCC was teaching me the foundations of leadership.
+
+Show up on time.
+Prepare properly.
+Respect everyone.
+Stay calm under pressure.
+Support the team.
+Complete the responsibility entrusted to you.
+
+And never allow difficult circumstances to decide the limits of what you can achieve.
+
+Becoming an Example for Those Who Followed
+
+The bronze medal was an achievement for me, but I am equally happy that the journey became an example for cadets who came after me.
+
+When someone from your school or unit reaches a national platform, it makes the opportunity feel possible for others.
+
+It tells the next cadet: someone from here has done it, so maybe I can do it too.
+
+Being able to represent Don Bosco and Kerala, and later inspire younger cadets to aim higher, is something I continue to value.
+
+A medal celebrates one performance.
+
+An example can influence many journeys.
+
+Gratitude
+
+I remain deeply thankful to Don Bosco High School, Irinjalakuda, for giving me the opportunity to join NCC and for supporting me throughout the journey.
+
+The school did much more than allow me to participate. It created the environment in which a ninth-standard student could dream, train, travel, compete and represent Kerala at the national level.
+
+I am grateful to every NCC officer, instructor and teacher who trained me, corrected me and continued to believe in my potential.
+
+I am thankful to the Senior Division and Senior Wing cadets who cared for us like younger brothers and sisters, to the Junior Wing cadets who stood alongside us, and to my fellow Junior Division cadets who shared every stage of the journey.
+
+I am thankful to everyone who supported the Kerala contingent across the different categories.
+
+And above all, I am grateful to God.
+
+I believe everything happened at the right time.
+
+I may have been preparing for RDC, but TSC became the journey meant for me.
+
+The Medal Was Bronze. The Memory Is Priceless.
+
+Years have passed since that national competition.
+
+The uniform is no longer part of my everyday life. The camps have ended. The firing range has become a memory. The medal now represents a chapter from my school days.
+
+But the values have never left me.
+
+The discipline remains.
+The courage remains.
+The ability to work with a team remains.
+The confidence to take responsibility remains.
+And the strength to defend what is right remains.
+
+When I look back, I do not only see a ninth-standard boy holding a .22 rifle or standing with a national bronze medal.
+
+I see the beginning of the person I was slowly becoming.
+
+The bronze medal was a beautiful outcome.
+
+But the person NCC helped me become will always be the greater achievement.
+
+Jai Hind!`,
+    },
+    {
         id: "static-9",
         slug: "ieee-region-10-international-virtual-career-fair-2025",
         title: "Connecting Talent Across Borders: Co-Leading IEEE Region 10's First International Virtual Career Fair",

@@ -87,7 +87,7 @@ const About = () => {
                                 <InteractivePortrait
                                     baseImage="/images/about/robin-light.webp"
                                     darkImage="/images/about/robin-dark.webp"
-                                    alt="Robin Francis — AI developer and community leader, professional portrait"
+                                    alt="Robin Francis, AI developer and community leader, professional portrait"
                                     className="w-full max-w-sm lg:max-w-md mx-auto aspect-[3/4] object-cover"
                                 />
                             </div>
