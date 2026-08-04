@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { trackEvent } from '@/lib/analytics';
+import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 type ProjectDetail = {
     title: string;
@@ -22,7 +23,7 @@ function ProjectImage({ src, alt, className, priority = false }: { src: string; 
     return (
         <Image
             src={src}
-            alt={alt}
+            alt={ensureRobinFrancisAlt(alt, 'project')}
             width={900}
             height={560}
             priority={priority}

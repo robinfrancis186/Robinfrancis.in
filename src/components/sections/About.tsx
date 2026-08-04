@@ -6,6 +6,7 @@ import { MovingBorderButton } from "@/components/ui/moving-border";
 import InteractivePortrait from "@/components/ui/InteractivePortrait";
 import { useDomTheme } from "@/hooks/use-dom-theme";
 import { trackEvent } from "@/lib/analytics";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 const About = () => {
     const isDarkTheme = useDomTheme();
@@ -184,7 +185,7 @@ const About = () => {
                                 <div className="absolute inset-0 overflow-hidden rounded-3xl">
                                     <Image
                                         src={achievement.image}
-                                        alt={achievement.title}
+                                        alt={ensureRobinFrancisAlt(achievement.title, "achievement")}
                                         fill
                                         sizes="(min-width: 768px) 320px, 280px"
                                         className="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40 dark:opacity-20 dark:group-hover:opacity-30"

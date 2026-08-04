@@ -14,6 +14,7 @@ import { findProofLinks } from '@/data/profileProof';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { getSafeLinkHref, renderInlineMarkup, stripInlineMarkup } from '@/lib/inlineText';
 import { absoluteUrl } from '@/lib/seo';
+import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 const ptComponents = {
     types: {
@@ -23,7 +24,7 @@ const ptComponents = {
             }
             return (
                 <Image
-                    alt={value.alt || 'Blog content image'}
+                    alt={ensureRobinFrancisAlt(value.alt || 'Blog content image', 'article')}
                     src={urlFor(value).width(800).fit('max').auto('format').url()}
                     width={800}
                     height={520}
@@ -192,7 +193,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
         return (
             <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground text-center">
                 <h1 className="text-3xl font-bold mb-4">Post not found</h1>
-                <Link href="/blog" className="text-primary hover:underline inline-flex items-center gap-2">
+                <Link href="/blog/" className="text-primary hover:underline inline-flex items-center gap-2">
                     <ArrowLeft className="w-4 h-4" /> Back to Journal
                 </Link>
             </main>
@@ -247,7 +248,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     <div className="w-full rounded-2xl overflow-hidden mb-12 shadow-lg ring-1 ring-neutral-200 dark:ring-neutral-800">
                         <Image
                             src={imageUrl}
-                            alt={mainImageAlt}
+                            alt={ensureRobinFrancisAlt(mainImageAlt, 'article')}
                             width={1200}
                             height={720}
                             priority
@@ -312,7 +313,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                                 >
                                     <Image
                                         src={image.src}
-                                        alt={image.alt}
+                                        alt={ensureRobinFrancisAlt(image.alt, 'article')}
                                         width={900}
                                         height={560}
                                         sizes="(min-width: 768px) 384px, 100vw"

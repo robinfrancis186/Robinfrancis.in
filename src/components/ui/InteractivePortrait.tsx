@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 interface InteractivePortraitProps {
     baseImage: string;       // light-mode image
@@ -26,7 +27,7 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             {/* Light mode image */}
             <Image
                 src={baseImage}
-                alt={alt}
+                alt={ensureRobinFrancisAlt(alt, 'portrait')}
                 width={800}
                 height={1067}
                 sizes="(min-width: 1024px) 420px, (min-width: 768px) 33vw, 90vw"
@@ -37,7 +38,7 @@ const InteractivePortrait: React.FC<InteractivePortraitProps> = ({
             {/* Dark mode image (fallbacks to same as light if not provided) */}
             <Image
                 src={darkImage || baseImage}
-                alt={alt}
+                alt={ensureRobinFrancisAlt(alt, 'portrait')}
                 width={800}
                 height={1067}
                 sizes="(min-width: 1024px) 420px, (min-width: 768px) 33vw, 90vw"

@@ -1,6 +1,7 @@
 import NextImage from 'next/image';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -71,7 +72,7 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                         >
                             <NextImage
                                 src={item.img}
-                                alt={item.alt || item.title || 'Gallery image'}
+                                alt={ensureRobinFrancisAlt(item.alt || item.title || 'Gallery image', 'portfolio')}
                                 fill
                                 sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
                                 className={cn(

@@ -15,22 +15,22 @@ const Navbar = () => {
         },
         {
             name: "Projects",
-            link: "/projects",
+            link: "/projects/",
             icon: <Briefcase className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
             name: "Blog",
-            link: "/blog",
+            link: "/blog/",
             icon: <FileText className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
             name: "Achievements",
-            link: "/achievements",
+            link: "/achievements/",
             icon: <Trophy className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
         {
             name: "Gallery",
-            link: "/gallery",
+            link: "/gallery/",
             icon: <ImageIcon className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
     ];

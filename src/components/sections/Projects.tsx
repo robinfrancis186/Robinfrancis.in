@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { trackEvent } from "@/lib/analytics";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 import { motion } from "framer-motion";
 
@@ -119,7 +120,7 @@ const GridItem = ({ area, image, imageAlt, title, description, tags, demoLink, v
                         <div className="relative h-36 w-full overflow-hidden shrink-0 border-b border-neutral-100 dark:border-neutral-900 sm:h-40 xl:h-44">
                             <Image
                                 src={image}
-                                alt={imageAlt || title}
+                                alt={ensureRobinFrancisAlt(imageAlt || title, "project")}
                                 fill
                                 sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                                 className="object-cover transition-transform duration-500 hover:scale-105"
