@@ -6,6 +6,7 @@ import { MovingBorderButton } from "@/components/ui/moving-border";
 import InteractivePortrait from "@/components/ui/InteractivePortrait";
 import { useDomTheme } from "@/hooks/use-dom-theme";
 import { trackEvent } from "@/lib/analytics";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 const About = () => {
     const isDarkTheme = useDomTheme();
@@ -48,25 +49,31 @@ const About = () => {
             value: "3x",
             title: "Hackathon Winner",
             description: "Wins across GenAI, food sustainability, and game development competitions.",
-            image: "/images/project-techx.webp",
+            image: "/images/gallery/gallery-sdg-hackathon-recognition.webp",
         },
         {
             value: "450+",
             title: "Participants Led",
             description: "Founded and led a flagship IEEE Computer Society impact event.",
-            image: "/images/blog/1720937571684.webp",
+            image: "/images/gallery/gallery-techx-infinia-audience.webp",
         },
         {
             value: "$2.65K+",
             title: "Community Funding",
             description: "Raised for social initiatives, student programs, and community events.",
-            image: "/images/blog/people-centric-ai.webp",
+            image: "/images/gallery/gallery-stride-inclusive-innovation-summit-2025.webp",
         },
         {
             value: "Bronze",
             title: "National Rifle Shooting",
             description: "Medalist in .22 rifle shooting at a national competition in Delhi.",
-            image: "/images/blog/scalable-systems.webp",
+            image: "/images/blog/ncc-thal-sainik-camp/ncc-kerala-contingent-trophies.webp",
+        },
+        {
+            value: "IEEE Kerala",
+            title: "Outstanding Humanitarian Volunteer",
+            description: "Listed by IEEE Kerala Section for humanitarian technology and public-interest work.",
+            image: "/images/gallery/gallery-ieee-kerala-public-awards-2025.webp",
         }
     ];
     const achievementLoop = [...achievements, ...achievements];
@@ -178,7 +185,7 @@ const About = () => {
                                 <div className="absolute inset-0 overflow-hidden rounded-3xl">
                                     <Image
                                         src={achievement.image}
-                                        alt={achievement.title}
+                                        alt={ensureRobinFrancisAlt(achievement.title, "achievement")}
                                         fill
                                         sizes="(min-width: 768px) 320px, 280px"
                                         className="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40 dark:opacity-20 dark:group-hover:opacity-30"

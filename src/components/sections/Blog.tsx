@@ -7,6 +7,7 @@ import { Carousel3D, CarouselItem } from "@/components/ui/carousel-3d";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ArticleActions from "@/components/blog/ArticleActions";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 const INITIAL_STATIC_POSTS: CarouselItem[] = STATIC_BLOG_POSTS;
 
@@ -69,7 +70,7 @@ const Blog = () => {
                             </p>
                             
                             <Link
-                                href="/blog"
+                                href="/blog/"
                                 onClick={() => window.scrollTo(0, 0)}
                                 className="inline-flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase hover:text-primary/80 transition-colors"
                             >
@@ -89,7 +90,7 @@ const Blog = () => {
                         <div className="relative">
                             <Image
                                 src={selectedPost.image}
-                                alt={selectedPost.title}
+                                alt={ensureRobinFrancisAlt(selectedPost.imageAlt || selectedPost.title, "article")}
                                 width={1200}
                                 height={640}
                                 sizes="(min-width: 1024px) 1024px, 100vw"

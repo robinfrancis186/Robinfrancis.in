@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { STATIC_BLOG_POSTS } from '@/data/blogPosts';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
+import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 const BlogPage = () => {
     const renderPost = (post: (typeof STATIC_BLOG_POSTS)[number], index: number) => {
@@ -24,7 +25,7 @@ const BlogPage = () => {
                             <div className="relative h-48 w-full sm:h-36">
                                 <Image
                                     src={imageUrl}
-                                    alt={imageAlt}
+                                    alt={ensureRobinFrancisAlt(imageAlt, 'article')}
                                     fill
                                     priority={index === 0}
                                     sizes="(min-width: 640px) 280px, 100vw"

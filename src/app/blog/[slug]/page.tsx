@@ -5,6 +5,7 @@ import { findStaticBlogPost, STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { findProofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { stripInlineMarkup } from "@/lib/inlineText";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoImage, siteUrl } from "@/lib/seo";
 
 type BlogPostPageProps = {
@@ -152,14 +153,21 @@ export default async function Page({ params }: BlogPostPageProps) {
                 })}
               </time>
             </p>
-            <img src={post.image} alt={post.imageAlt || `Cover image for ${post.title}`} />
+            <img
+              src={post.image}
+              alt={ensureRobinFrancisAlt(post.imageAlt || `Cover image for ${post.title}`, "article")}
+            />
             {stripInlineMarkup(post.content)
               .split("\n\n")
               .map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             {post.gallery?.map((image) => (
-              <img key={image.src} src={image.src} alt={image.alt} />
+              <img
+                key={image.src}
+                src={image.src}
+                alt={ensureRobinFrancisAlt(image.alt, "article")}
+              />
             ))}
             {articleSources.length > 0 && (
               <section aria-labelledby="noscript-article-sources-heading">

@@ -36,13 +36,6 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  alternates: {
-    canonical: "/",
-    languages: {
-      en: "/",
-      "x-default": "/",
-    },
-  },
   openGraph: {
     type: "website",
     url: siteUrl,

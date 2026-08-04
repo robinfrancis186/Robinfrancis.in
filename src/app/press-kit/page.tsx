@@ -5,6 +5,7 @@ import { TrackPageEvent, TrackedLink } from "@/components/analytics/AnalyticsEve
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, mediaKit, proofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
 
 const pressKitDescription =
@@ -97,7 +98,7 @@ export default function PressKitPage() {
           <div className="rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-slate-950">
             <Image
               src={mediaKit.headshot}
-              alt={mediaKit.headshotAlt}
+              alt={ensureRobinFrancisAlt(mediaKit.headshotAlt, "press headshot")}
               width={760}
               height={950}
               priority

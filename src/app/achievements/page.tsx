@@ -12,6 +12,7 @@ import {
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, findProofLinks, proofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
 
 const awardsDescription =
@@ -68,6 +69,12 @@ const recognitionDetails: Record<
       "Recognition connected to humanitarian technology, accessibility, and public-interest work.",
     role: "K-DISC and IEEE volunteer working across inclusive innovation.",
     proof: "Verified in IEEE Kerala Section's Region 10 report.",
+  },
+  "NCC Thal Sainik Camp national bronze medal": {
+    impact:
+      "Placed third nationally in the Junior Division firing events after more than ten selection camps.",
+    role: "Junior Division cadet representing Kerala in the Grouping and Snap Shooting practices.",
+    proof: "Documented in Robin's first-person account of the camp.",
   },
 };
 
@@ -214,7 +221,7 @@ export default function AchievementsPage() {
             <div className="relative aspect-[4/3] min-h-[340px] bg-neutral-100 dark:bg-slate-900">
               <Image
                 src={featuredAward.image}
-                alt={featuredAward.imageAlt}
+                alt={ensureRobinFrancisAlt(featuredAward.imageAlt, "achievement")}
                 fill
                 priority
                 sizes="(min-width: 1024px) 42vw, 100vw"
@@ -367,7 +374,7 @@ export default function AchievementsPage() {
           <div className="relative min-h-[320px] border-b border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-slate-900 lg:border-b-0 lg:border-r">
             <Image
               src={featuredAward.image}
-              alt={featuredAward.imageAlt}
+              alt={ensureRobinFrancisAlt(featuredAward.imageAlt, "achievement")}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
@@ -438,7 +445,7 @@ export default function AchievementsPage() {
               <div className="relative aspect-[16/9] w-full border-b border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-slate-900">
                 <Image
                   src={award.image}
-                  alt={award.imageAlt}
+                  alt={ensureRobinFrancisAlt(award.imageAlt, "achievement")}
                   fill
                   sizes="(min-width: 1024px) 560px, (min-width: 768px) 50vw, 100vw"
                   className="object-cover"

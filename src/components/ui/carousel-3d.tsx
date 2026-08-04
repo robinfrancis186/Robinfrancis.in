@@ -4,12 +4,14 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 export interface CarouselItem {
     id: string | number;
     title: string;
     category: string;
     image: string;
+    imageAlt?: string;
     excerpt?: string;
     slug?: string;
     content?: string;
@@ -136,7 +138,7 @@ export const Carousel3D = ({
                             >
                                 <Image
                                     src={item.image}
-                                    alt={item.title}
+                                    alt={ensureRobinFrancisAlt(item.imageAlt || item.title, "article")}
                                     width={640}
                                     height={640}
                                     loading="lazy"

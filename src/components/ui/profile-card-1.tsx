@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 type SocialLink = {
     id: string;
@@ -210,7 +211,7 @@ const ProfileImage = ({
 }) => (
     <img
         src={slide.src}
-        alt={slide.alt}
+        alt={ensureRobinFrancisAlt(slide.alt, "profile")}
         className={`size-full rounded-full bg-white ${slide.fit === "contain" ? "object-contain" : "object-cover"}`}
         style={{ objectPosition: slide.position ?? "50% 50%" }}
         onError={(event) => {

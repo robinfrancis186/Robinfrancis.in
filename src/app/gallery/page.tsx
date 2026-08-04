@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GalleryRoute } from "../_components/gallery-route";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
 
 const galleryDescription =
@@ -91,7 +92,7 @@ export default function Page() {
                 <figure>
                   <img
                     src={item.img}
-                    alt={item.alt}
+                    alt={ensureRobinFrancisAlt(item.alt, "portfolio")}
                     width={item.imageWidth}
                     height={item.imageHeight}
                   />

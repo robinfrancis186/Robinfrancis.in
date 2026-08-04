@@ -47,6 +47,7 @@ const Footer = () => {
                     <nav className="mb-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground md:mb-0">
                         <a href="/achievements/" className="hover:text-primary transition-colors">Achievements</a>
                         <a href="/press-kit/" className="hover:text-primary transition-colors">Press Kit</a>
+                        <a href="/card/" className="hover:text-primary transition-colors">Profile Card</a>
                     </nav>
 
                     <div className="flex items-center space-x-6">

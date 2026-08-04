@@ -58,6 +58,14 @@ export const proofLinks: ProofLink[] = [
     category: "project",
   },
   {
+    title: "Robin Francis first-person account of the NCC Thal Sainik Camp",
+    label: "Journal",
+    href: "https://robinfrancis.in/blog/ncc-thal-sainik-camp-national-bronze-medal-journey/",
+    description:
+      "Robin's own detailed account of the NCC selection camps, the Grouping and Snap Shooting practices, and the national bronze medal won with the Kerala contingent in Delhi.",
+    category: "publication",
+  },
+  {
     title: "IEEE Spectrum coverage of the global Virtual Career Fairs",
     label: "IEEE Spectrum",
     href: "https://spectrum.ieee.org/ieee-global-virtual-career-fairs",
@@ -183,6 +191,17 @@ export const awards: Award[] = [
     imageAlt:
       "Robin Francis at the IEEE Kerala Section Public Awards Ceremony 2025",
     proofTitles: ["IEEE Kerala Section Region 10 Report 2026"],
+  },
+  {
+    title: "NCC Thal Sainik Camp national bronze medal",
+    issuer: "National Cadet Corps",
+    year: "2017",
+    summary:
+      "Robin Francis represented Kerala as a Junior Division cadet in the firing events at the NCC Thal Sainik Camp national competition in Delhi, where the Kerala team placed third across the Grouping and Snap Shooting practices.",
+    image: "/images/blog/ncc-thal-sainik-camp/ncc-kerala-contingent-trophies.webp",
+    imageAlt:
+      "The Kerala NCC contingent with their trophies and medals after the Thal Sainik Camp national competition",
+    proofTitles: ["Robin Francis first-person account of the NCC Thal Sainik Camp"],
   },
 ];
 
