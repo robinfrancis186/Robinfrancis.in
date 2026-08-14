@@ -32,6 +32,28 @@ const GREETING: Turn = {
 const GAZE_INPUT = { x: 0, y: 0.85 };
 const GAZE_ANSWER = { x: 0, y: -0.35 };
 
+/**
+ * A stable per-browser id so the server can apply a per-visitor daily cap.
+ * Clearing storage resets it, which is fine: the IP and global caps are the
+ * ones that actually bound spend, and this keeps no personal data.
+ */
+const VISITOR_KEY = "rf-assistant-visitor";
+
+const getVisitorId = () => {
+    try {
+        const existing = window.localStorage.getItem(VISITOR_KEY);
+        if (existing) return existing;
+        const created =
+            typeof crypto !== "undefined" && crypto.randomUUID
+                ? crypto.randomUUID()
+                : `v${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+        window.localStorage.setItem(VISITOR_KEY, created);
+        return created;
+    } catch {
+        return "";
+    }
+};
+
 const MascotAssistant = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [turns, setTurns] = useState<Turn[]>([GREETING]);
@@ -112,7 +134,11 @@ const MascotAssistant = () => {
                 const response = await fetch("/api/ask/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ question: trimmed, history }),
+                    body: JSON.stringify({
+                        question: trimmed,
+                        history,
+                        visitorId: getVisitorId(),
+                    }),
                 });
 
                 const payload = await response.json().catch(() => null);
@@ -283,7 +309,7 @@ const MascotAssistant = () => {
                                     onChange={(event) => setDraft(event.target.value)}
                                     onFocus={() => setIsTyping(true)}
                                     onBlur={() => setIsTyping(false)}
-                                    maxLength={400}
+                                    maxLength={300}
                                     autoComplete="off"
                                     placeholder="Ask a question…"
                                     className="w-full rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50"
