@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MascotAssistant from "@/components/ui/MascotAssistant";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
@@ -21,7 +22,12 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       let animationFrameId = 0;
       const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-      if (reducedMotionQuery.matches) {
+      // ?nolenis=1 hands scrolling back to the browser, because smooth scroll swallows
+      // programmatic and keyboard scrolling, which blocks automated checks.
+      const smoothScrollDisabled =
+        new URLSearchParams(window.location.search).get("nolenis") === "1";
+
+      if (reducedMotionQuery.matches || smoothScrollDisabled) {
         return undefined;
       }
 
@@ -62,6 +68,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         <Navbar />
         {children}
         <Footer />
+        <MascotAssistant />
       </div>
     </ErrorBoundary>
   );

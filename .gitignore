@@ -20,7 +20,7 @@ public/cms/
 .vercel
 .env*.local
 
-# Generated narration — hosted on Vercel Blob, not committed (see scripts/generate-blog-audio.mjs)
+# Generated narration, hosted on Vercel Blob, not committed (see scripts/generate-blog-audio.mjs)
 public/audio/
 
 # Graphify analysis output (tooling scratch)

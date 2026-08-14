@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
         destination: "/achievements/",
         permanent: true,
       },
-      // Retired blog posts — keep the indexed URLs pointing at the Journal index.
+      // Retired blog posts. Keep the indexed URLs pointing at the Journal index.
       ...[
         "future-of-accessible-technology",
         "scalable-systems-with-communities",

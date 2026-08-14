@@ -15,6 +15,7 @@
     "prebuild": "npm run optimize:images"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.117.1",
     "@portabletext/react": "^6.0.2",
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^10.7.7",

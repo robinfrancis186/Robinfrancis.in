@@ -251,7 +251,7 @@ const GitHubActivity = () => {
                 <GitHubMetric value={(activity.profile?.public_repos ?? 0).toLocaleString()} label="Repos" />
                 <GitHubMetric value={(activity.profile?.followers ?? 0).toLocaleString()} label="Followers" />
             </div>
-            <div className="mt-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-muted-foreground dark:text-white/45">
+            <div className="mt-4 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.22em] text-muted-foreground dark:text-white/65">
                 <span>{activity.status === "fallback" ? `${activity.recentEvents} recent events` : "Live"}</span>
                 <a
                     href={profileUrl}
@@ -276,7 +276,7 @@ const GitHubActivity = () => {
 const GitHubMetric = ({ value, label }: { value: string; label: string }) => (
     <div className="rounded-xl border border-border/70 bg-background/70 px-2 py-3 dark:border-white/10 dark:bg-white/[0.03]">
         <div className="text-lg font-black leading-none text-foreground dark:text-white">{value}</div>
-        <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground dark:text-white/35">
+        <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground dark:text-white/60">
             {label}
         </div>
     </div>
@@ -369,7 +369,7 @@ const GitHubRadialChart = ({
                             y={point.y}
                             textAnchor="middle"
                             dominantBaseline="middle"
-                            className="fill-muted-foreground font-sans text-[7px] dark:fill-white/35"
+                            className="fill-muted-foreground font-sans text-[7px] dark:fill-white/60"
                         >
                             {label}
                         </text>
@@ -422,7 +422,7 @@ const GitHubRadialChart = ({
                     x={center}
                     y={178}
                     textAnchor="middle"
-                    className="fill-muted-foreground font-sans dark:fill-white/45"
+                    className="fill-muted-foreground font-sans dark:fill-white/65"
                     style={{ fontSize: "7px", letterSpacing: "0.1em", textTransform: "uppercase" }}
                 >
                     contributions
@@ -454,9 +454,9 @@ const GitHubRadialChart = ({
             >
                 <Github className="h-5 w-5" />
                 <span>@{profileName}</span>
-                <ExternalLink className="h-4 w-4 -rotate-45 text-muted-foreground transition-all duration-300 group-hover:rotate-0 group-hover:text-primary dark:text-white/35" />
+                <ExternalLink className="h-4 w-4 -rotate-45 text-muted-foreground transition-all duration-300 group-hover:rotate-0 group-hover:text-primary dark:text-white/60" />
             </a>
-            <div className="flex items-center gap-1.5 text-sm text-muted-foreground dark:text-white/35">
+            <div className="flex items-center gap-1.5 text-sm text-muted-foreground dark:text-white/60">
                 <span>Less</span>
                 {legendLevels.map((level) => (
                     <svg key={level} width="14" height="14" aria-hidden="true">

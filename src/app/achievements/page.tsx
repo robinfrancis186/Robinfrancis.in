@@ -241,7 +241,7 @@ export default function AchievementsPage() {
               </div>
             </div>
             <div className="p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500 dark:text-muted-foreground">
                 Verification path
               </p>
               <div className="mt-4 grid gap-3">
@@ -261,7 +261,7 @@ export default function AchievementsPage() {
                         {proof.title}
                       </span>
                     </span>
-                    <ExternalLink className="h-4 w-4 shrink-0 text-neutral-400 group-hover:text-primary" aria-hidden="true" />
+                    <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary" aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -275,7 +275,7 @@ export default function AchievementsPage() {
               key={metric.label}
               className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm dark:border-neutral-800 dark:bg-slate-950"
             >
-              <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+              <p className="text-sm font-medium text-neutral-500 dark:text-muted-foreground">
                 {metric.label}
               </p>
               <p className="mt-2 text-3xl font-bold text-neutral-950 dark:text-white">
@@ -342,7 +342,7 @@ export default function AchievementsPage() {
 
       <section className="mx-auto mt-10 max-w-7xl px-4 md:px-8" aria-label="Public verification sources">
         <div className="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-slate-950">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-neutral-500 dark:text-muted-foreground">
             Verified by public sources
           </p>
           <div className="grid gap-3 md:grid-cols-4">
@@ -360,7 +360,7 @@ export default function AchievementsPage() {
                 <span className="mt-3 text-sm font-semibold leading-6 text-neutral-900 group-hover:text-primary dark:text-white">
                   {proof.title}
                 </span>
-                <span className="mt-2 line-clamp-2 text-xs leading-5 text-neutral-600 dark:text-neutral-400">
+                <span className="mt-2 line-clamp-2 text-xs leading-5 text-neutral-600 dark:text-muted-foreground">
                   {proof.description}
                 </span>
               </a>

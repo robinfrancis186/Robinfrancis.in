@@ -5,6 +5,7 @@ import Hero from '@/components/sections/Hero'
 const About = lazy(() => import('@/components/sections/About'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
 const Blog = lazy(() => import('@/components/sections/Blog'))
+const ProofPuzzle = lazy(() => import('@/components/sections/ProofPuzzle'))
 const FAQ = lazy(() => import('@/components/sections/FAQ'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 
@@ -70,6 +71,9 @@ const Home = () => {
             </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[44vh]">
                 <Blog />
+            </DeferredSection>
+            <DeferredSection placeholderClassName="min-h-[60vh]">
+                <ProofPuzzle />
             </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[28vh]">
                 <FAQ />

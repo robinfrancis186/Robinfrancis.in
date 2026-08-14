@@ -37,7 +37,7 @@ const BlogPage = () => {
                     <div className="flex-1 flex flex-col justify-center min-w-0 pr-4 relative">
                         <div className="flex items-center gap-4 mb-3">
                             <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">{tag.toUpperCase()}</span>
-                            <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase">{date}</span>
+                            <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">{date}</span>
                         </div>
                         <h3 className="text-2xl font-bold mb-2 group-hover:text-primary text-neutral-900 dark:text-neutral-100 transition-colors">
                             {title}
@@ -89,7 +89,7 @@ const BlogPage = () => {
 
                     {/* Bottom aligned text on desktop */}
                     <div className="mt-24 lg:mt-auto pt-6 border-t border-neutral-200 dark:border-neutral-800">
-                        <p className="text-neutral-500 text-xs tracking-widest uppercase font-mono">
+                        <p className="text-muted-foreground text-xs tracking-widest uppercase font-mono">
                             Updated Daily
                         </p>
                     </div>

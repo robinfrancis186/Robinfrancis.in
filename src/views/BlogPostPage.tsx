@@ -229,14 +229,14 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                 transition={{ duration: 0.5 }}
             >
                 <div className="mb-10">
-                <Link href="/blog/" className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 hover:text-primary transition-colors mb-8">
+                <Link href="/blog/" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8">
                         <ArrowLeft className="w-4 h-4" />
                         Back to Journal
                     </Link>
 
                     <div className="flex items-center gap-4 mb-6">
                         {tag && <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">{tag.toUpperCase()}</span>}
-                        {date && <span className="text-xs font-mono text-neutral-500 tracking-widest uppercase">{date}</span>}
+                        {date && <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">{date}</span>}
                     </div>
 
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1] font-geist">
@@ -298,7 +298,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                             );
                         })
                     ) : (
-                        <p className="text-neutral-500 italic">This post has no content yet.</p>
+                        <p className="text-muted-foreground italic">This post has no content yet.</p>
                     )}
                 </div>
 

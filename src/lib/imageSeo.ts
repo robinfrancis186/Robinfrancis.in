@@ -18,7 +18,8 @@ export function ensureRobinFrancisAlt(
     return normalized;
   }
 
-  return `${normalized} — Robin Francis ${context}`;
+  // Drop any trailing stop so the appended attribution reads as its own clause.
+  return `${normalized.replace(/[.,;:]+$/, "")}. Robin Francis ${context}`;
 }
 
 export function seoImage(url: string, description: string, context?: string) {

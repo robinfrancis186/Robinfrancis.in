@@ -273,7 +273,7 @@ async function main() {
 
     const existing = manifest[post.slug];
     if (!force && fs.existsSync(outPath) && existing?.voice === speaker && existing?.provider === providerName) {
-      console.log(`⏭  ${post.slug} — already generated, skipping`);
+      console.log(`⏭  ${post.slug}: already generated, skipping`);
       continue;
     }
 
@@ -315,13 +315,13 @@ async function main() {
       provider: providerName,
     };
     writeManifest(manifest);
-    console.log(`✅ ${outPath.replace(rootDir + '/', '')} — ${(mp3.length / 1024 / 1024).toFixed(2)}MB\n`);
+    console.log(`✅ ${outPath.replace(rootDir + '/', '')}: ${(mp3.length / 1024 / 1024).toFixed(2)}MB\n`);
   }
 
   writeManifest(manifest);
   console.log(`\n📊 characters sent this run: ${spent.toLocaleString()}`);
   console.log(`   posts with audio: ${Object.keys(manifest).length}/${STATIC_BLOG_POSTS.length}`);
-  if (stopped) console.log(`   stopped early — ${stopped}`);
+  if (stopped) console.log(`   stopped early: ${stopped}`);
 }
 
 main().catch((error) => {

@@ -13,7 +13,13 @@
         --popover: 0 0% 100%;
         --popover-foreground: 222.2 84% 4.9%;
 
-        --primary: 210 100% 50%;
+        /*
+         * Slightly deeper than the dark-theme blue: at 50% lightness this hue
+         * only reaches 3.8:1 on white, so small primary-coloured labels missed
+         * the 4.5:1 AA floor. 42% lands at 5.1:1 and also lifts white-on-primary
+         * buttons. The dark theme keeps 50%, which clears AA there already.
+         */
+        --primary: 210 100% 42%;
         --primary-foreground: 210 40% 98%;
 
         --secondary: 210 40% 96.1%;
@@ -109,6 +115,22 @@
         to {
             transform: translateX(calc(-50% - 1.25rem));
         }
+    }
+
+    /*
+     * Mascot body ramp. Near-black on light backgrounds like the reference;
+     * lifted to teal in dark mode so the blob stays readable against the page.
+     */
+    .mascot-body {
+        --mascot-core: #0f4250;
+        --mascot-mid: #04141b;
+        --mascot-edge: #000000;
+    }
+
+    .dark .mascot-body {
+        --mascot-core: #43aec6;
+        --mascot-mid: #12505f;
+        --mascot-edge: #05222b;
     }
 
     @media (prefers-reduced-motion: reduce) {
