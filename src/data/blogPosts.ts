@@ -37,7 +37,7 @@ export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
         excerpt:
             "I joined NCC as a ninth-standard student at Don Bosco High School, Irinjalakuda. What followed was a journey through more than ten camps, two demanding firing events and a national bronze medal at the Thal Sainik Camp in Delhi.",
         metaDescription:
-            "How more than ten NCC camps, a .22 rifle and two firing events led a ninth-standard cadet from Irinjalakuda to a national bronze medal at the Thal Sainik Camp in Delhi.",
+            "How ten NCC camps and two .22 rifle firing events took a ninth-standard cadet from Irinjalakuda to a national bronze at the Thal Sainik Camp in Delhi.",
         date: "2026-08-03",
         updatedAt: "2026-08-03",
         internalLinks: [
@@ -1140,6 +1140,8 @@ We built a movement.`,
         tags: ["Wellness"],
         image: "/images/blog/1720937570476.webp",
         excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
+        metaDescription:
+            "How SoulSync approaches cognitive wellness for elders: emotion tracking, memory recall, and caregiver support designed around dignity and privacy.",
         date: "2026-01-12",
         updatedAt: "2026-07-07",
         proofTitles: [
@@ -1179,6 +1181,8 @@ We built a movement.`,
         tags: ["Leadership"],
         image: "/images/blog/blog2/1731994207232.webp",
         excerpt: "Reflections on leadership, community-building, and global recognition.",
+        metaDescription:
+            "What the IEEE Region 10 Outstanding Volunteer Award 2024 recognised: years of student-branch leadership, volunteer systems, and community programmes.",
         date: "2025-12-18",
         updatedAt: "2026-07-07",
         proofTitles: [

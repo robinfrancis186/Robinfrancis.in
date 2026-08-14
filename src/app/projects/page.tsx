@@ -59,6 +59,24 @@ const projects = [
     type: "SoftwareApplication",
     applicationCategory: "BusinessApplication",
   },
+  {
+    name: "TechX Infinia",
+    category: "Emerging technology flagship event",
+    description:
+      "An emerging technology festival founded and led for more than 450 participants, spanning talks, an expo, and school outreach.",
+    url: absoluteUrl("/gallery/"),
+    image: absoluteUrl("/images/gallery/gallery-techx-infinia-audience.webp"),
+    type: "CreativeWork",
+  },
+  {
+    name: "IEEE R10 Career Fair",
+    category: "International virtual career fair",
+    description:
+      "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
+    url: absoluteUrl("/blog/ieee-region-10-international-virtual-career-fair-2025/"),
+    image: absoluteUrl("/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp"),
+    type: "CreativeWork",
+  },
 ];
 
 const projectsJsonLd = [

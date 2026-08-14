@@ -87,6 +87,10 @@ export const FloatingNav = ({
                             <Link
                                 key={`link=${idx}`}
                                 href={navItem.link}
+                                // The navbar remounts on every scroll-direction change, and each
+                                // remount re-fires prefetch for the same routes. These are small
+                                // static pages, so skip prefetch rather than refetch them on loop.
+                                prefetch={false}
                                 aria-label={navItem.name}
                                 className={cn(
                                     "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
@@ -111,6 +115,7 @@ export const FloatingNav = ({
                     ) : (
                         <Link
                             href="/#contact"
+                            prefetch={false}
                             className="relative inline-flex items-center justify-center text-sm font-medium px-4 py-2 rounded-full bg-white text-slate-900 border border-slate-300 shadow-sm hover:bg-slate-50 hover:shadow-md transition dark:bg-slate-900 dark:text-white dark:border-slate-600 dark:hover:bg-slate-800"
                         >
                             <span>Contact</span>
