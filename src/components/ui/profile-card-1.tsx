@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText, type LucideIcon } from "lucide-react";
+import { useState, type ComponentType } from "react";
+import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText } from "lucide-react";
+import { XIcon } from "@/components/ui/icons/XIcon";
 import { cn } from "@/lib/utils";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 type SocialLink = {
     id: string;
-    icon: LucideIcon;
+    /** Any icon that takes a size, not just lucide's forwardRef components. */
+    icon: ComponentType<{ size?: number; className?: string }>;
     label: string;
     href: string;
 };
@@ -54,6 +56,7 @@ const ProfileCardDemo = () => {
             { id: "github", icon: Github, label: "GitHub", href: "https://github.com/robinfrancis186" },
             { id: "linkedin", icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/robin-francis-b43565175" },
             { id: "instagram", icon: Instagram, label: "instagram", href: "https://www.instagram.com/robinfrancis186" },
+            { id: "x", icon: XIcon, label: "X", href: "https://x.com/robinfrancis186" },
             { id: "medium", icon: BookOpenText, label: "Medium", href: "https://medium.com/@robinfrancis186" },
         ],
         actionButton: {

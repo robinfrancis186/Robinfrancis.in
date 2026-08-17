@@ -1,5 +1,6 @@
 import { GlassmorphismProfileCard } from '@/components/ui/profile-card-1';
 import { Github, Instagram, Linkedin, BookOpenText } from 'lucide-react';
+import { XIcon } from '@/components/ui/icons/XIcon';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
 
@@ -24,6 +25,7 @@ const CardPage = () => {
                     { id: 'github', icon: Github, label: 'GitHub', href: 'https://github.com/robinfrancis186' },
                     { id: 'linkedin', icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/robin-francis-b43565175' },
                     { id: 'instagram', icon: Instagram, label: 'instagram', href: 'https://www.instagram.com/robinfrancis186' },
+                    { id: 'x', icon: XIcon, label: 'X', href: 'https://x.com/robinfrancis186' },
                     { id: 'medium', icon: BookOpenText, label: 'Medium', href: 'https://medium.com/@robinfrancis186' },
                 ]}
                 actionButton={{ text: 'Contact Me', href: '/#contact' }}

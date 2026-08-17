@@ -272,6 +272,10 @@ export const mediaKit = {
       href: "https://www.instagram.com/robinfrancis186",
     },
     {
+      label: "X",
+      href: "https://x.com/robinfrancis186",
+    },
+    {
       label: "Medium",
       href: "https://medium.com/@robinfrancis186",
     },

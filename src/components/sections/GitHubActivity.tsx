@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+    type PointerEvent as ReactPointerEvent,
+} from "react";
 
 const GITHUB_USERNAME = "robinfrancis186";
 const CONTRIBUTIONS_URL = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`;
@@ -299,6 +306,7 @@ const GitHubRadialChart = ({
 }) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [tooltip, setTooltip] = useState<ContributionTooltip | null>(null);
+    const dismissTimer = useRef<number | null>(null);
     const center = 170;
     const innerRadius = 40;
     const ringGap = 1.5;
@@ -330,22 +338,45 @@ const GitHubRadialChart = ({
 
     const ringWidth = weeks.length > 0 ? (115 - (weeks.length - 1) * ringGap) / weeks.length : 5;
 
-    const handleArcMove = useCallback((event: MouseEvent<SVGPathElement>, day: ContributionDay) => {
-        const rect = containerRef.current?.getBoundingClientRect();
-        if (!rect) return;
+    /*
+     * Pointer events rather than mouse events: a phone has no mouse, so the
+     * mouse-only version left this chart completely inert on touch. Pointer
+     * events cover mouse, touch and pen from one handler.
+     */
+    const handleArcPoint = useCallback(
+        (event: ReactPointerEvent<SVGPathElement>, day: ContributionDay) => {
+            const rect = containerRef.current?.getBoundingClientRect();
+            if (!rect) return;
 
-        const count = day.count;
-        const formattedDate = new Date(`${day.date}T00:00:00`).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-        });
+            const count = day.count;
+            const formattedDate = new Date(`${day.date}T00:00:00`).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+            });
 
-        setTooltip({
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top,
-            text: `${count} contribution${count === 1 ? "" : "s"} on ${formattedDate}`,
-        });
+            setTooltip({
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top,
+                text: `${count} contribution${count === 1 ? "" : "s"} on ${formattedDate}`,
+            });
+
+            // Touch has no pointerleave to close on, so a tapped tooltip times out.
+            if (dismissTimer.current) window.clearTimeout(dismissTimer.current);
+            if (event.pointerType !== "mouse") {
+                dismissTimer.current = window.setTimeout(() => setTooltip(null), 2600);
+            }
+        },
+        []
+    );
+
+    const clearTooltip = useCallback(() => {
+        if (dismissTimer.current) window.clearTimeout(dismissTimer.current);
+        setTooltip(null);
+    }, []);
+
+    useEffect(() => () => {
+        if (dismissTimer.current) window.clearTimeout(dismissTimer.current);
     }, []);
 
     return (
@@ -401,8 +432,16 @@ const GitHubRadialChart = ({
                                     ease: "backOut",
                                 }}
                                 style={{ transformOrigin: "170px 170px" }}
-                                onMouseMove={(event) => handleArcMove(event, day)}
-                                onMouseLeave={() => setTooltip(null)}
+                                onPointerDown={(event) => handleArcPoint(event, day)}
+                                onPointerMove={(event) => {
+                                    // Mouse hovers freely; a touch only tracks while held down.
+                                    if (event.pointerType === "mouse" || event.buttons > 0) {
+                                        handleArcPoint(event, day);
+                                    }
+                                }}
+                                onPointerLeave={(event) => {
+                                    if (event.pointerType === "mouse") clearTooltip();
+                                }}
                             >
                                 <title>{`${day.date}: ${day.count} contribution${day.count === 1 ? "" : "s"}`}</title>
                             </motion.path>

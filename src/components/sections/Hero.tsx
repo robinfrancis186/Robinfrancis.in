@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Mail, Linkedin, Github, Instagram } from "lucide-react";
+import { XIcon } from "@/components/ui/icons/XIcon";
 
 const Hero = () => {
     return (
@@ -88,6 +89,21 @@ const Hero = () => {
                         Instagram
                     </span>
                 </a>
+
+                <a 
+                    href="https://x.com/robinfrancis186" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative"
+                    aria-label="X Profile"
+                >
+                    <div className="p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+                        <XIcon className="w-5 h-5 text-foreground/70 group-hover:text-primary transition-colors" />
+                    </div>
+                    <span className="absolute left-full ml-4 px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        X
+                    </span>
+                </a>
             </div>
 
             {/* Main Content Container */}
@@ -150,6 +166,18 @@ const Hero = () => {
                         >
                             <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
                                 <Instagram className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
+                            </div>
+                        </a>
+
+                        <a 
+                            href="https://x.com/robinfrancis186" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group"
+                            aria-label="X Profile"
+                        >
+                            <div className="p-2.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 hover:scale-110">
+                                <XIcon className="w-4 h-4 text-foreground/70 group-hover:text-primary transition-colors" />
                             </div>
                         </a>
                     </div>

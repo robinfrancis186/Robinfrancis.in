@@ -72,14 +72,21 @@ const PIECES: ProofPiece[] = [
     },
 ];
 
-/** Where each piece waits before it snaps home, as a % of the piece's own size. */
+/**
+ * Where each piece waits before it snaps home, in pixels.
+ *
+ * Pixels rather than percentages on purpose: a percentage transform has to be
+ * resolved against the element's measured size, and at mount that measurement
+ * is not available yet, so the animation starts from NaN% and snaps instead of
+ * springing. Pixel offsets need no measurement.
+ */
 const SCATTER = [
-    { x: -28, y: 34, rotate: -8 },
-    { x: 16, y: -22, rotate: 6 },
-    { x: 34, y: 30, rotate: 10 },
-    { x: -34, y: -18, rotate: 5 },
-    { x: 9, y: 38, rotate: -11 },
-    { x: 38, y: -20, rotate: 7 },
+    { x: -95, y: 118, rotate: -8 },
+    { x: 55, y: -76, rotate: 6 },
+    { x: 116, y: 104, rotate: 10 },
+    { x: -116, y: -62, rotate: 5 },
+    { x: 31, y: 132, rotate: -11 },
+    { x: 129, y: -69, rotate: 7 },
 ];
 
 /**
@@ -238,7 +245,7 @@ const ProofPuzzle = () => {
                         const base = SCATTER[index % SCATTER.length];
                         const scatter = {
                             x: base.x * geometry.spread,
-                            y: base.y,
+                            y: base.y * geometry.spread,
                             rotate: base.rotate * geometry.spread,
                         };
                         const clip = `url(#${clipId}-${layoutKey}-${index})`;
@@ -252,8 +259,8 @@ const ProofPuzzle = () => {
                                     reduceMotion
                                         ? { opacity: 0 }
                                         : {
-                                              x: `${scatter.x}%`,
-                                              y: `${scatter.y}%`,
+                                              x: scatter.x,
+                                              y: scatter.y,
                                               rotate: scatter.rotate,
                                               scale: 0.94,
                                           }
@@ -262,10 +269,10 @@ const ProofPuzzle = () => {
                                     reduceMotion
                                         ? { opacity: inView ? 1 : 0 }
                                         : inView
-                                          ? { x: "0%", y: "0%", rotate: 0, scale: 1 }
+                                          ? { x: 0, y: 0, rotate: 0, scale: 1 }
                                           : {
-                                                x: `${scatter.x}%`,
-                                                y: `${scatter.y}%`,
+                                                x: scatter.x,
+                                                y: scatter.y,
                                                 rotate: scatter.rotate,
                                                 scale: 0.94,
                                             }

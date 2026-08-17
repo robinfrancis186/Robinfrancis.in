@@ -102,6 +102,7 @@ export const personJsonLd = {
     "https://github.com/robinfrancis186",
     "https://www.linkedin.com/in/robin-francis-b43565175",
     "https://www.instagram.com/robinfrancis186",
+    "https://x.com/robinfrancis186",
     "https://medium.com/@robinfrancis186",
   ],
 };
