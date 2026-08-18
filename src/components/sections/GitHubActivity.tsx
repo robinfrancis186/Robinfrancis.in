@@ -237,10 +237,10 @@ const GitHubActivity = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="relative z-10 overflow-hidden rounded-[2rem] border border-border/70 bg-card/95 p-5 text-foreground shadow-2xl shadow-primary/10 backdrop-blur-xl dark:border-white/10 dark:bg-[#070707]/95 dark:text-white md:p-6"
+            className="liquid-glass relative z-10 overflow-hidden rounded-[2rem] p-5 text-foreground md:p-6"
         >
             <div className="mb-4 flex items-center gap-4">
-                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-primary">
+                <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-primary dark:text-[hsl(210_100%_70%)]">
                     GitHub Activity
                 </span>
                 <span className="h-px flex-1 bg-primary/20" />
@@ -281,7 +281,7 @@ const GitHubActivity = () => {
 };
 
 const GitHubMetric = ({ value, label }: { value: string; label: string }) => (
-    <div className="rounded-xl border border-border/70 bg-background/70 px-2 py-3 dark:border-white/10 dark:bg-white/[0.03]">
+    <div className="liquid-glass rounded-xl px-2 py-3">
         <div className="text-lg font-black leading-none text-foreground dark:text-white">{value}</div>
         <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground dark:text-white/60">
             {label}
