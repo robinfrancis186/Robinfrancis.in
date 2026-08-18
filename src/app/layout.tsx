@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   publisher: "Robin Francis",
   manifest: "/manifest.webmanifest",
   category: "technology",
+  other: {
+    "msapplication-TileColor": "#2563eb",
+    "msapplication-TileImage": "/images/mstile-150x150.png",
+    "msapplication-config": "/browserconfig.xml",
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -32,9 +37,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/images/favicon-r.png", type: "image/png", sizes: "512x512" },
+      { url: "/images/favicon-192x192.png", type: "image/png", sizes: "192x192" },
+      { url: "/images/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/images/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/favicon-16x16.png", type: "image/png", sizes: "16x16" },
       { url: "/favicon.ico", sizes: "any" },
     ],
-    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     type: "website",

@@ -10,7 +10,7 @@
   "categories": ["portfolio", "technology", "productivity"],
   "icons": [
     {
-      "src": "/images/favicon-r.png",
+      "src": "/images/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
