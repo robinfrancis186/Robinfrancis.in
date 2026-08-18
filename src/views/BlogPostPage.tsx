@@ -93,6 +93,17 @@ function portableTextToPlainText(value: unknown): string {
 }
 
 const staticSectionHeadings = new Set([
+    "A Different Kind of Tech Gathering",
+    "From Clay to Code",
+    "Pottery Is Therapy",
+    "Then Came the Building",
+    "The Power of Better Surroundings",
+    "More Than Just Building",
+    "A New Kind of Builder Community in Kochi",
+    "Reconnecting, Reinventing, Creating",
+    "The Beginning, Not the End",
+    "Event at a Glance",
+    "A Note of Gratitude",
     "The Responsibility of Continuing a Legacy",
     "Building Leaders, Not Just Events",
     "Growth That Was Built Step by Step",
@@ -288,6 +299,16 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                                             <li key={item}>{renderInlineMarkup(item, `list-${index}-${itemIndex}`)}</li>
                                         ))}
                                     </ul>
+                                );
+                            }
+
+                            const blockquoteMatch = paragraph.match(/^>\s*(.+)$/s);
+
+                            if (blockquoteMatch) {
+                                return (
+                                    <blockquote key={`quote-${index}`} className="border-l-4 border-primary pl-4 italic my-8 text-xl text-neutral-600 dark:text-neutral-400">
+                                        {renderInlineMarkup(blockquoteMatch[1], `quote-${index}`)}
+                                    </blockquote>
                                 );
                             }
 

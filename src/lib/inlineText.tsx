@@ -11,7 +11,7 @@ export function renderInlineMarkup(text: string, keyPrefix: string): ReactNode {
     INLINE_MARKUP_PATTERN.lastIndex = 0;
 
     while ((match = INLINE_MARKUP_PATTERN.exec(text)) !== null) {
-        const [raw, linkLabel, rawHref, boldText] = match;
+        const [raw, linkLabel, rawHref, boldText, italicText] = match;
 
         if (match.index > lastIndex) {
             nodes.push(text.slice(lastIndex, match.index));
@@ -22,6 +22,12 @@ export function renderInlineMarkup(text: string, keyPrefix: string): ReactNode {
                 <strong key={`${keyPrefix}-strong-${match.index}`} className="font-semibold text-neutral-900 dark:text-neutral-100">
                     {boldText}
                 </strong>
+            );
+        } else if (italicText) {
+            nodes.push(
+                <em key={`${keyPrefix}-italic-${match.index}`}>
+                    {italicText}
+                </em>
             );
         } else {
             const href = getSafeLinkHref(rawHref);

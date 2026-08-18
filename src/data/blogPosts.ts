@@ -26,6 +26,336 @@ export type StaticBlogPost = {
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
     {
+        id: "static-11",
+        slug: "devin-clay-pottery-met-code-kochi",
+        title: "Devin & Clay: When Pottery Met Code in Kochi",
+        seoTitle: "Devin & Clay in Kochi: When Pottery Met Code | Robin Francis",
+        category: "Community",
+        tags: ["Community", "Devin", "Kochi", "Pottery", "AI"],
+        image: "/images/blog/devin-clay/devin-clay-kochi-builder-community.webp",
+        imageAlt: "Robin Francis with the Devin & Clay builder community at The MudBrew Cafe in Kochi",
+        excerpt:
+            "At The MudBrew Cafe in Kochi, pottery, Devin, and builder community came together for a day of making, experimenting, and thinking differently about creativity.",
+        metaDescription:
+            "Robin Francis reflects on Devin & Clay in Kochi, where pottery, AI-assisted building with Devin, and a warm builder community made creativity feel tangible again.",
+        date: "2026-08-15",
+        updatedAt: "2026-08-18",
+        internalLinks: [
+            {
+                label: "Projects",
+                href: "/projects/",
+                description: "Explore the AI, accessibility, and product work that grows out of this builder mindset.",
+            },
+            {
+                label: "Gallery",
+                href: "/gallery/",
+                description: "Browse more visual moments from Robin's community, learning, and creative work.",
+            },
+            {
+                label: "About Robin",
+                href: "/#about",
+                description: "Read more about Robin's work across AI engineering, accessible technology, and community building.",
+            },
+            {
+                label: "Press kit",
+                href: "/press-kit/",
+                description: "Find Robin's verified bio, achievements, headshot, and event links.",
+            },
+        ],
+        gallery: [
+            {
+                src: "/images/blog/devin-clay/robin-francis-devin-clay-mudbrew.webp",
+                alt: "Robin Francis seated at The MudBrew Cafe during the Devin & Clay gathering in Kochi",
+            },
+            {
+                src: "/images/blog/devin-clay/devin-clay-pottery-piece.webp",
+                alt: "A small pottery piece from Robin Francis's Devin & Clay experience at The MudBrew Cafe",
+            },
+            {
+                src: "/images/blog/devin-clay/robin-francis-devin-clay-badge.webp",
+                alt: "Robin Francis holding his Devin & Clay builder badge at The MudBrew Cafe in Kochi",
+            },
+        ],
+        content:
+            `There are days when you spend hours staring at a screen, moving between lines of code, ideas, meetings, and deadlines.
+
+And then there are days when you step away from the screen, put your hands into a lump of clay, have a good meal, meet interesting people, and somehow come back with even better ideas.
+
+**Devin & Clay was one of those days.** 🏺💻
+
+Hosted at **The MudBrew Cafe, Kochi**, the event brought together two things that do not usually find themselves in the same sentence: **pottery and AI-assisted software building**.
+
+The idea was simple.
+
+**Shape with your hands. Build with Devin.**
+
+But what happened throughout the day was much more than a combination of pottery and coding.
+
+It became a space to reconnect, experiment, have conversations, and remember that creativity does not always come from sitting in front of a laptop.
+
+A Different Kind of Tech Gathering
+
+Devin & Clay was not designed to be another hackathon.
+
+There were no intense submission deadlines, no judging panels, and no pressure to build something overnight.
+
+It was not even a traditional tech meetup.
+
+Instead, it was deliberately small and personal, a gathering where builders could spend time with one another, explore **Devin, the AI software engineer**, and experience a completely different creative activity alongside it.
+
+The setting played an important role.
+
+A pottery café is very different from a conference room.
+
+There is something about being surrounded by clay, coffee, conversations, natural light, and people working with their hands that changes the energy of a room.
+
+The atmosphere was relaxed.
+
+People were talking.
+
+Laptops were open.
+
+Ideas were being exchanged.
+
+And somewhere between all of that, pottery wheels were spinning.
+
+From Clay to Code
+
+One of my favourite parts of the experience was the contrast.
+
+On one side, we were using our hands to slowly shape something from a raw piece of clay.
+
+On the other, we were using AI to turn ideas into software.
+
+Both processes have something surprisingly similar at their core.
+
+You start with something unfinished.
+
+You experiment.
+
+You make mistakes.
+
+You adjust.
+
+You reshape.
+
+And eventually, something begins to take form.
+
+That became an unexpected theme of the day.
+
+**Whether you're shaping clay or building software, creation is still creation.**
+
+Pottery Is Therapy
+
+There is a reason pottery has such a calming quality.
+
+You cannot rush it.
+
+You have to pay attention to the material in front of you. You have to feel the clay, understand its movement, and respond to what is happening instead of forcing it into exactly what you imagined.
+
+For someone who spends a lot of time thinking digitally, that experience felt refreshing.
+
+No keyboard.
+
+No notifications.
+
+No endless tabs.
+
+Just clay, hands, patience, and a little bit of chaos.
+
+And somewhere along the way, I realised something:
+
+> **Pottery is therapy. You shape the clay, and somehow, it shapes you too.**
+
+It gave us an opportunity to slow down and simply enjoy making something.
+
+Not everything needs to be optimised.
+
+Not everything needs to become a product.
+
+Sometimes, creating something simply because it feels good is enough.
+
+Then Came the Building
+
+After getting our hands dirty with pottery, we shifted back into the world of software.
+
+The event included an introduction to **Devin** followed by a hands-on co-building session.
+
+For many participants, this was their first real experience with Devin.
+
+Instead of only hearing about AI-assisted development, people had the chance to work with it, experiment with their ideas, and see how an AI software engineer could fit into their existing workflow.
+
+That distinction matters.
+
+There is a big difference between *hearing about a tool* and *actually building with it*.
+
+The room became a space for experimentation.
+
+People discussed projects.
+
+They explored possibilities.
+
+They tested ideas.
+
+They shared what they were building.
+
+And, most importantly, people were building together rather than simply listening to a speaker.
+
+The Power of Better Surroundings
+
+One of the biggest takeaways I carried home from the evening was not actually about Devin or pottery.
+
+It was about **environment**.
+
+We often think creativity is something that happens entirely inside our heads.
+
+But our surroundings matter.
+
+The people around us matter.
+
+The conversations we have matter.
+
+Even the physical environment we work in can influence the way we think.
+
+A different environment can create a different kind of conversation.
+
+A relaxed conversation can lead to a different question.
+
+A different question can lead to a different idea.
+
+And a different idea can eventually become something meaningful.
+
+That is why I genuinely believe:
+
+> **Ideas are created in better places, around better people, and in better surroundings.**
+
+Devin & Clay was a small example of that.
+
+More Than Just Building
+
+The food, conversations, networking, and informal interactions were just as important as the technical session.
+
+Some of the best moments were not necessarily the moments where someone was actively building.
+
+They were the conversations between builds.
+
+The introductions.
+
+The random ideas.
+
+The discussions about side projects.
+
+The stories about what people were working on.
+
+The moments where someone says, *"What if we tried this?"*
+
+Communities are built through these small interactions.
+
+A strong builder community is not only about technology.
+
+It is about trust.
+
+Curiosity.
+
+Shared experiences.
+
+And creating spaces where people feel comfortable enough to experiment.
+
+A New Kind of Builder Community in Kochi
+
+Kochi has an incredibly interesting and growing technology ecosystem.
+
+There are developers, designers, students, founders, indie hackers, researchers, creators, and people experimenting with entirely new ways of building.
+
+Events like this create opportunities for these communities to overlap.
+
+A software engineer might meet a founder.
+
+A student might meet an indie hacker.
+
+Someone trying Devin for the first time might discover a new way to approach a project.
+
+And someone who came primarily for the pottery might leave with a new perspective on technology.
+
+That kind of cross-pollination is valuable.
+
+The most interesting communities are often formed when people from slightly different worlds come together.
+
+Reconnecting, Reinventing, Creating
+
+Looking back, Devin & Clay felt less like an event and more like a shared experience.
+
+We came together to **reconnect**.
+
+We stepped away from our usual routines to **reinvent how we think about building**.
+
+And we spent the day **creating**, sometimes with clay, sometimes with code, and sometimes simply through conversations.
+
+That combination made the experience memorable.
+
+There was something beautiful about moving between two very different forms of creation throughout the day.
+
+One required patience and touch.
+
+The other required logic and experimentation.
+
+Both required curiosity.
+
+Both involved failure.
+
+Both rewarded iteration.
+
+And both reminded us that the joy is often in the process, not just the final result.
+
+The Beginning, Not the End
+
+What happened at Devin & Clay may have been a small gathering, but I believe experiences like this can become the foundation for something much larger.
+
+Not just more events.
+
+A **community**.
+
+A community where people can come together to build, learn, experiment, collaborate, and occasionally do something completely unexpected.
+
+Maybe the next gathering will involve code and something else entirely.
+
+Maybe it will bring together people who would never normally meet.
+
+Maybe it will inspire a project that would never have existed otherwise.
+
+That's the exciting part.
+
+We don't know yet.
+
+And perhaps that's exactly how it should be.
+
+For now, I am simply grateful that we got to spend a day surrounded by **good people, good conversations, good food, clay, code, and a lot of curiosity.**
+
+Sometimes, stepping away from the usual way of working is exactly what helps us build better things.
+
+**Shape with your hands.
+Build with your ideas.
+And create in places that inspire you.**
+
+Until the next one. 🚀
+
+Event at a Glance
+
+**Event:** Devin & Clay
+**Date:** 15 August 2026
+**Time:** 2:00 PM – 8:00 PM
+**Venue:** The MudBrew Cafe, Kochi, Kerala
+**Format:** Pottery café experience + Devin introduction + hands-on co-building + networking
+
+A Note of Gratitude
+
+A huge thank you to the people who brought this experience together and to everyone who showed up with curiosity and an openness to try something different.
+
+And to everyone who spent the day building, shaping, sharing, and creating, thank you for making the room what it was.
+
+**Here's to more unconventional ways of bringing builders together.** 🏺💻✨`,
+    },
+    {
         id: "static-10",
         slug: "ncc-thal-sainik-camp-national-bronze-medal-journey",
         title: "From an RDC Dream to a TSC Bronze: The NCC Journey That Built Me",

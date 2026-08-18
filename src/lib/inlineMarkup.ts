@@ -1,4 +1,4 @@
-export const INLINE_MARKUP_PATTERN = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
+export const INLINE_MARKUP_PATTERN = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
 
 export function getSafeLinkHref(href: unknown) {
     const value = typeof href === "string" ? href.trim() : "";
@@ -20,5 +20,5 @@ export function getSafeLinkHref(href: unknown) {
 }
 
 export function stripInlineMarkup(text: string) {
-    return text.replace(INLINE_MARKUP_PATTERN, (_match, linkLabel, _href, boldText) => linkLabel ?? boldText ?? "");
+    return text.replace(INLINE_MARKUP_PATTERN, (_match, linkLabel, _href, boldText, italicText) => linkLabel ?? boldText ?? italicText ?? "");
 }
