@@ -72,6 +72,183 @@
     }
 }
 
+@layer components {
+    /*
+     * Liquid glass.
+     *
+     * What makes the material read as glass rather than "a translucent box" is
+     * the lighting, not the blur: a bright specular edge along the top where
+     * light catches the bevel, a darker contact edge at the bottom, and a soft
+     * shadow underneath so the surface sits above the page instead of in it.
+     * The saturate() is what keeps colour behind the panel from going muddy.
+     *
+     * Inputs cannot carry pseudo-elements reliably, so every layer here is a
+     * background or a shadow. That keeps one class usable on input, textarea
+     * and button alike.
+     */
+    .liquid-glass {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(0 0% 100% / 0.6) 0%,
+                hsl(0 0% 100% / 0.32) 100%
+            );
+        /*
+         * Via @apply so Tailwind owns the vendor prefixing. Written by hand,
+         * the build's CSS minifier kept only -webkit-backdrop-filter and
+         * dropped the standard property, which silently removes the blur in
+         * Firefox.
+         */
+        @apply backdrop-blur-xl backdrop-saturate-150;
+        border: 1px solid hsl(0 0% 100% / 0.7);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.9),
+            inset 0 -1px 0 0 hsl(220 30% 20% / 0.06),
+            0 8px 24px -10px hsl(220 40% 20% / 0.22);
+        transition:
+            background 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .dark .liquid-glass {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(0 0% 100% / 0.1) 0%,
+                hsl(0 0% 100% / 0.035) 100%
+            );
+        border-color: hsl(0 0% 100% / 0.14);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.18),
+            inset 0 -1px 0 0 hsl(0 0% 0% / 0.4),
+            0 12px 32px -12px hsl(0 0% 0% / 0.65);
+    }
+
+    /* Lift on hover the way a real pane catches more light as it tilts. */
+    .liquid-glass:hover:not(:disabled) {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(0 0% 100% / 0.72) 0%,
+                hsl(0 0% 100% / 0.42) 100%
+            );
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 1),
+            inset 0 -1px 0 0 hsl(220 30% 20% / 0.07),
+            0 12px 30px -10px hsl(220 40% 20% / 0.26);
+    }
+
+    .dark .liquid-glass:hover:not(:disabled) {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(0 0% 100% / 0.15) 0%,
+                hsl(0 0% 100% / 0.06) 100%
+            );
+        border-color: hsl(0 0% 100% / 0.2);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.26),
+            inset 0 -1px 0 0 hsl(0 0% 0% / 0.4),
+            0 16px 38px -12px hsl(0 0% 0% / 0.7);
+    }
+
+    /* Focus reads as the pane catching the accent light, not a stuck-on ring. */
+    .liquid-glass:focus-visible,
+    .liquid-glass:focus {
+        outline: none;
+        border-color: hsl(var(--primary) / 0.55);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.9),
+            0 0 0 3px hsl(var(--primary) / 0.18),
+            0 10px 28px -10px hsl(var(--primary) / 0.35);
+    }
+
+    .dark .liquid-glass:focus-visible,
+    .dark .liquid-glass:focus {
+        border-color: hsl(var(--primary) / 0.6);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.24),
+            0 0 0 3px hsl(var(--primary) / 0.25),
+            0 12px 34px -12px hsl(var(--primary) / 0.45);
+    }
+
+    /*
+     * The submit button: same material, tinted by the brand light.
+     *
+     * Each selector is repeated under .dark because `.dark .liquid-glass` is
+     * more specific than a bare `.liquid-glass-primary`, and would otherwise
+     * repaint the button with the neutral surface in dark mode.
+     */
+    .liquid-glass-primary,
+    .dark .liquid-glass-primary {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(var(--primary) / 0.24) 0%,
+                hsl(var(--primary) / 0.12) 100%
+            );
+        /*
+         * The label cannot be plain --primary here: the tint lifts the surface
+         * under it to ~3.6:1, below the 4.5:1 AA floor for 14px text. Darker
+         * over the light pane, brighter over the dark one.
+         */
+        color: hsl(210 100% 30%);
+        border-color: hsl(var(--primary) / 0.4);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.6),
+            inset 0 -1px 0 0 hsl(var(--primary) / 0.2),
+            0 10px 26px -12px hsl(var(--primary) / 0.5);
+    }
+
+    .dark .liquid-glass-primary {
+        color: hsl(210 100% 70%);
+    }
+
+    .liquid-glass-primary:hover:not(:disabled),
+    .dark .liquid-glass-primary:hover:not(:disabled) {
+        background:
+            linear-gradient(
+                180deg,
+                hsl(var(--primary) / 0.34) 0%,
+                hsl(var(--primary) / 0.18) 100%
+            );
+        border-color: hsl(var(--primary) / 0.55);
+        box-shadow:
+            inset 0 1px 0 0 hsl(0 0% 100% / 0.75),
+            inset 0 -1px 0 0 hsl(var(--primary) / 0.24),
+            0 14px 32px -12px hsl(var(--primary) / 0.6);
+    }
+
+    .liquid-glass-primary:active:not(:disabled),
+    .dark .liquid-glass-primary:active:not(:disabled) {
+        transform: translateY(1px);
+        box-shadow:
+            inset 0 2px 6px 0 hsl(var(--primary) / 0.28),
+            0 4px 12px -8px hsl(var(--primary) / 0.5);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .liquid-glass {
+            transition: none;
+        }
+    }
+
+    /*
+     * Safari and Firefox without backdrop-filter would render these panes as
+     * near-invisible tints, so fall back to an opaque surface.
+     */
+    @supports not (backdrop-filter: blur(1px)) {
+        .liquid-glass {
+            background: hsl(0 0% 100% / 0.92);
+        }
+
+        .dark .liquid-glass {
+            background: hsl(222 47% 11% / 0.94);
+        }
+    }
+}
+
 @layer base {
     * {
         @apply border-border;

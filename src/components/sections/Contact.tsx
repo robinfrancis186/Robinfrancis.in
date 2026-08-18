@@ -91,7 +91,7 @@ const Contact = () => {
                                     autoComplete="name"
                                     maxLength={80}
                                     required
-                                    className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
+                                    className="liquid-glass w-full rounded-xl px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground"
                                 />
                                 <label htmlFor="contact-email" className="sr-only">
                                     Your email
@@ -106,7 +106,7 @@ const Contact = () => {
                                     autoComplete="email"
                                     maxLength={120}
                                     required
-                                    className="w-full rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
+                                    className="liquid-glass w-full rounded-xl px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground"
                                 />
                             </div>
                             <label htmlFor="contact-message" className="sr-only">
@@ -121,12 +121,12 @@ const Contact = () => {
                                 onChange={(e) => setMessage(e.target.value)}
                                 maxLength={1500}
                                 required
-                                className="mt-4 w-full resize-none rounded-lg border border-neutral-200/50 bg-white/50 px-4 py-3 text-neutral-900 placeholder:text-neutral-500 outline-none backdrop-blur-sm transition-all focus:ring-2 focus:ring-primary/50 dark:border-neutral-800 dark:bg-neutral-900/50 dark:text-neutral-100"
+                                className="liquid-glass mt-4 w-full resize-none rounded-xl px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground"
                             />
                             <button
                                 type="submit"
                                 disabled={buttonStatus === "loading"}
-                                className="w-full rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary transition hover:bg-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-60"
+                                className="liquid-glass liquid-glass-primary w-full rounded-xl px-4 py-3 text-sm font-semibold outline-none disabled:cursor-not-allowed disabled:opacity-60"
                             >
                                 {buttonStatus === "loading" ? "Sending..." : "Send message"}
                             </button>
