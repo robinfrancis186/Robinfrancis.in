@@ -37,5 +37,33 @@ User-agent: FacebookBot
 Allow: /
 Disallow: /cms/
 
+# Search and user-initiated fetchers, listed separately from the training
+# crawlers above. These are the agents that fetch a page in order to cite it
+# in an answer, so they matter most for answer-engine visibility.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /cms/
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /cms/
+User-agent: Claude-User
+Allow: /
+Disallow: /cms/
+User-agent: Perplexity-User
+Allow: /
+Disallow: /cms/
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /cms/
+User-agent: Amazonbot
+Allow: /
+Disallow: /cms/
+User-agent: meta-externalagent
+Allow: /
+Disallow: /cms/
+User-agent: cohere-ai
+Allow: /
+Disallow: /cms/
+
 # Sitemaps
 Sitemap: https://robinfrancis.in/sitemap.xml

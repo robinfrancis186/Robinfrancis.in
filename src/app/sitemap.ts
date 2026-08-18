@@ -4,16 +4,21 @@ import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { awards, mediaKit } from "@/data/profileProof";
 import { absoluteUrl } from "@/lib/seo";
 
-const defaultLastModified = "2026-07-19";
+const defaultLastModified = "2026-08-18";
 const blogTemplateLastModified = "2026-07-19";
 
+/*
+ * Hand-maintained because a build timestamp would tell crawlers every page
+ * changed on every deploy, which devalues the signal. Bump the entry you
+ * actually edited. Blog posts derive theirs from the post data instead.
+ */
 const routeLastModified = {
-  home: "2026-08-03",
-  projects: "2026-07-29",
+  home: "2026-08-18",
+  projects: "2026-08-18",
   achievements: "2026-08-03",
   pressKit: "2026-07-29",
   gallery: "2026-08-03",
-  card: "2026-07-19",
+  card: "2026-08-18",
   resume: "2026-07-06",
 } as const;
 

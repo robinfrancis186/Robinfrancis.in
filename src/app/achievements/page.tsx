@@ -13,7 +13,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, findProofLinks, proofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, personJsonLd, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const awardsDescription =
   "Robin Francis's achievements across IEEE leadership, IBM watsonx GenAI, humanitarian technology, accessibility, and inclusive innovation.";
@@ -155,12 +155,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Achievements | Robin Francis",
     description: awardsDescription,
     url: absoluteUrl("/achievements/"),
     images: awardImages,
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Achievements | Robin Francis",
     description: awardsDescription,

@@ -2,6 +2,29 @@ export const siteUrl = "https://robinfrancis.in";
 
 export const siteName = "Robin Francis";
 
+export const xHandle = "@robinfrancis186";
+
+/*
+ * Shared social defaults.
+ *
+ * Next replaces a parent `openGraph` / `twitter` object when a page declares
+ * its own rather than deep-merging them, so anything set only in the root
+ * layout silently disappears from every page that overrides it. Spreading
+ * these into each page's block is what keeps og:type, og:site_name, og:locale
+ * and the X attribution on the rendered pages.
+ */
+export const ogDefaults = {
+  type: "website",
+  siteName,
+  locale: "en_US",
+} as const;
+
+export const twitterDefaults = {
+  card: "summary_large_image",
+  site: xHandle,
+  creator: xHandle,
+} as const;
+
 export const defaultSeoDescription =
   "Robin Francis builds accessible AI products, scalable web systems, and community programs for people-centric technology.";
 

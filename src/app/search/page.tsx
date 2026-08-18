@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SearchPage } from "@/components/search/SearchPage";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, defaultSeoKeywords } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, twitterDefaults } from "@/lib/seo";
 
 const searchDescription =
   "Search Robin Francis's projects, articles, achievements, public proof, press resources, and gallery stories.";
@@ -18,11 +18,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Search | Robin Francis",
     description: searchDescription,
     url: absoluteUrl("/search/"),
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary",
     title: "Search | Robin Francis",
     description: searchDescription,

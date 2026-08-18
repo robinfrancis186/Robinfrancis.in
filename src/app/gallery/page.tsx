@@ -3,7 +3,7 @@ import { GalleryRoute } from "../_components/gallery-route";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const galleryDescription =
   "Explore Robin Francis's gallery of IEEE leadership, STRIDE inclusive innovation, speaking, awards, AI community events, and student mentorship.";
@@ -62,12 +62,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Gallery | Robin Francis",
     description: galleryDescription,
     url: absoluteUrl("/gallery/"),
     images: ["/images/gallery/gallery-ieee-kerala-public-awards-2025.webp"],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Gallery | Robin Francis",
     description: galleryDescription,

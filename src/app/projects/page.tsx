@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProjectsRoute } from "../_components/projects-route";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const projectDescription = "Explore AI, accessibility, product, and engineering projects built by Robin Francis.";
 
@@ -126,12 +126,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Projects | Robin Francis",
     description: projectDescription,
     url: absoluteUrl("/projects/"),
     images: ["/images/projects/stride-website.webp"],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Projects | Robin Francis",
     description: projectDescription,

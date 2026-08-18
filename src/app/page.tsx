@@ -1,15 +1,6 @@
 import type { Metadata } from "next";
 import { HomeRoute } from "./_components/home-route";
-import {
-  absoluteUrl,
-  defaultSeoDescription,
-  defaultSeoImage,
-  defaultSeoKeywords,
-  organizationJsonLd,
-  personJsonLd,
-  siteUrl,
-  websiteJsonLd,
-} from "@/lib/seo";
+import { absoluteUrl, defaultSeoDescription, defaultSeoImage, defaultSeoKeywords, ogDefaults, organizationJsonLd, personJsonLd, siteUrl, twitterDefaults, websiteJsonLd } from "@/lib/seo";
 
 const homeDescription = defaultSeoDescription;
 
@@ -103,12 +94,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,
     url: siteUrl,
     images: [defaultSeoImage],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Robin Francis | AI Innovator & Community Leader",
     description: homeDescription,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CardRoute } from "../_components/card-route";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const cardDescription =
   "Robin Francis is an AI innovator and community leader available for meaningful AI, product, accessibility, and community collaborations.";
@@ -47,12 +47,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Robin Francis Card | AI Innovator & Community Leader",
     description: cardDescription,
     url: absoluteUrl("/card/"),
     images: [defaultSeoImage],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Robin Francis Card | AI Innovator & Community Leader",
     description: cardDescription,

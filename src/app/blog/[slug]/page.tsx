@@ -6,7 +6,7 @@ import { findProofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { stripInlineMarkup } from "@/lib/inlineText";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, defaultSeoImage, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoImage, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       },
     },
     openGraph: {
+      ...ogDefaults,
       type: "article",
       title: post.title,
       description,
@@ -61,6 +62,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       tags: post.tags,
     },
     twitter: {
+      ...twitterDefaults,
       card: "summary_large_image",
       title: post.title,
       description,

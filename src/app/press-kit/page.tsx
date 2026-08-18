@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { awards, mediaKit, proofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, defaultSeoKeywords, personJsonLd, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, personJsonLd, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const pressKitDescription =
   "Official media kit for Robin Francis with headshot, bios, achievements, contact details, and verified links for press and speaking use.";
@@ -55,12 +55,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Press Kit | Robin Francis",
     description: pressKitDescription,
     url: absoluteUrl("/press-kit/"),
     images: [mediaKit.headshot],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Press Kit | Robin Francis",
     description: pressKitDescription,

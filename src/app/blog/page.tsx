@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BlogRoute } from "../_components/blog-route";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, defaultSeoKeywords, siteUrl } from "@/lib/seo";
+import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const blogDescription =
   "Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis.";
@@ -51,12 +51,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    ...ogDefaults,
     title: "Blog | Robin Francis",
     description: blogDescription,
     url: absoluteUrl("/blog/"),
     images: ["/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp"],
   },
   twitter: {
+    ...twitterDefaults,
     card: "summary_large_image",
     title: "Blog | Robin Francis",
     description: blogDescription,
