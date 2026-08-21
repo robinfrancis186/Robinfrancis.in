@@ -45,54 +45,6 @@ const projects = [
       "A sustainability platform concept using surplus prediction to reduce food waste and improve food redistribution workflows.",
     keywords: ["sustainability", "food waste", "surplus prediction", "redistribution"],
   },
-  {
-    id: "creative-hub",
-    title: "Creative Hub",
-    category: "Creative portfolio platform",
-    description:
-      "A visual platform concept for presenting creative work, collaborations, and portfolio stories.",
-    keywords: ["creative", "portfolio", "collaboration"],
-  },
-  {
-    id: "boltshift-launch",
-    title: "Boltshift Launch",
-    category: "Product launch website",
-    description:
-      "A high-conversion product launch page concept with interactive 3D elements, dynamic pricing, and real-time analytics.",
-    keywords: ["landing page", "3D", "pricing", "analytics", "launch"],
-  },
-  {
-    id: "fittracker",
-    title: "FitTracker",
-    category: "Intelligent fitness app",
-    description:
-      "A fitness application concept with personalized workout plans, real-time activity tracking, and community challenges.",
-    keywords: ["fitness", "workouts", "activity tracking", "mobile app"],
-  },
-  {
-    id: "dataflow",
-    title: "DataFlow",
-    category: "Real-time data visualization",
-    description:
-      "A data visualization platform concept with live streaming, complex charting, and interactive filtering.",
-    keywords: ["data", "visualization", "streaming", "charts", "analytics"],
-  },
-  {
-    id: "quotient-rebrand",
-    title: "Quotient Rebrand",
-    category: "Brand identity",
-    description:
-      "A brand identity redesign concept covering typography, color systems, campaign visuals, and digital brand guidelines.",
-    keywords: ["branding", "identity", "typography", "campaign", "design"],
-  },
-  {
-    id: "taskflow-pro",
-    title: "TaskFlow Pro",
-    category: "Collaborative task management",
-    description:
-      "A real-time task management platform concept with live cursors, shared workspaces, and conflict-free synchronization.",
-    keywords: ["tasks", "collaboration", "shared workspace", "real-time", "synchronization"],
-  },
 ] as const;
 
 const projectDocuments: SearchDocument[] = projects.map((project) => ({

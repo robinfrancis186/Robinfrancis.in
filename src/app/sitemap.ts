@@ -45,12 +45,6 @@ const projectImages = [
   "/images/projects/bulkyfi-landing-v2.webp",
   "/images/projects/bulkyfi-dashboard-v2.webp",
   "/images/projects/stride-website.webp",
-  "/images/projects/creative_hub.webp",
-  "/images/projects/boltshift.webp",
-  "/images/projects/fit_tracker.webp",
-  "/images/projects/dataflow.webp",
-  "/images/projects/quotient_rebrand.webp",
-  "/images/projects/taskflow_pro.webp",
 ];
 
 function uniqueImages(images: string[]) {
