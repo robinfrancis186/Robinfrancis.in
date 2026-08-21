@@ -35,6 +35,7 @@ export const socialProfiles = [
   "https://www.youtube.com/@robinfrancis186",
   "https://www.youtube.com/channel/UCNiT4BYZc8RVxwhSdexgxFQ",
   "https://medium.com/@robinfrancis186",
+  "https://www.wikidata.org/wiki/Q141142455",
 ] as const;
 
 export const twitterDefaults = {
