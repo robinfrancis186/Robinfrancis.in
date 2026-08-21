@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import BlobRunner from "@/components/ui/BlobRunner";
+import JetpackRunner from "@/components/ui/JetpackRunner";
 
 export const metadata: Metadata = {
   title: "Page Not Found | Robin Francis",
@@ -29,10 +29,10 @@ export default function NotFound() {
         This page went missing.
       </h1>
       <p className="mb-8 max-w-xl text-muted-foreground">
-        Nothing lives at this address. Have a run around while you decide where to go next.
+        Nothing lives at this address. Take the jetpack for a lap while you decide where to go next.
       </p>
 
-      <BlobRunner />
+      <JetpackRunner />
 
       <nav aria-label="Suggested pages" className="mt-10 grid gap-3 sm:grid-cols-2">
         {DESTINATIONS.map((destination) => (
