@@ -90,11 +90,19 @@ export const proofLinks: ProofLink[] = [
     category: "press",
   },
   {
+    title: "Codex Nightline event listing",
+    label: "Luma",
+    href: "https://luma.com/7fhasbun",
+    description:
+      "Event listing for Codex Nightline, presented by OpenAI Build Week, giving the 18 July 2026 date, the Vyttila Metro boarding point, and the overnight build-and-demo schedule.",
+    category: "speaking",
+  },
+  {
     title: "Codex Nightline official event site",
     label: "Codex Nightline",
     href: "https://www.codexnightline.in/",
     description:
-      "Official Codex Nightline site describing the after-hours Kochi Metro AI build sprint, its solo-build format, build tracks, and organising partners.",
+      "Official Codex Nightline site: the world's first AI build sprint inside a moving metro system, held 18 July 2026 from Vyttila Metro Station with around 100 curated solo builders. Presented by OpenAI Build Week, run by Codex Community Kochi under the OpenAI Codex Ambassador programme, with Kochi Metro Rail Limited as venue and mobility partner.",
     category: "speaking",
   },
   {
