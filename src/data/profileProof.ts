@@ -276,6 +276,10 @@ export const mediaKit = {
       href: "https://x.com/robinfrancis186",
     },
     {
+      label: "YouTube",
+      href: "https://www.youtube.com/@robinfrancis186",
+    },
+    {
       label: "Medium",
       href: "https://medium.com/@robinfrancis186",
     },

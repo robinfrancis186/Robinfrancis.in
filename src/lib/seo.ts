@@ -19,6 +19,24 @@ export const ogDefaults = {
   locale: "en_US",
 } as const;
 
+/**
+ * Canonical profile URLs for schema.org sameAs.
+ *
+ * One list, imported everywhere a sameAs is emitted; it previously lived in
+ * both this file and the card page and had already drifted. YouTube is listed
+ * by handle and by channel ID: handles can be changed, the UC id cannot, and
+ * the Knowledge Graph commonly keys on the channel form.
+ */
+export const socialProfiles = [
+  "https://github.com/robinfrancis186",
+  "https://www.linkedin.com/in/robin-francis-b43565175",
+  "https://www.instagram.com/robinfrancis186",
+  "https://x.com/robinfrancis186",
+  "https://www.youtube.com/@robinfrancis186",
+  "https://www.youtube.com/channel/UCNiT4BYZc8RVxwhSdexgxFQ",
+  "https://medium.com/@robinfrancis186",
+] as const;
+
 export const twitterDefaults = {
   card: "summary_large_image",
   site: xHandle,
@@ -121,13 +139,7 @@ export const personJsonLd = {
       url: "https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/",
     },
   ],
-  sameAs: [
-    "https://github.com/robinfrancis186",
-    "https://www.linkedin.com/in/robin-francis-b43565175",
-    "https://www.instagram.com/robinfrancis186",
-    "https://x.com/robinfrancis186",
-    "https://medium.com/@robinfrancis186",
-  ],
+  sameAs: [...socialProfiles],
 };
 
 export const organizationJsonLd = {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CardRoute } from "../_components/card-route";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
+import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, ogDefaults, siteUrl, socialProfiles, twitterDefaults } from "@/lib/seo";
 
 const cardDescription =
   "Robin Francis is an AI innovator and community leader available for meaningful AI, product, accessibility, and community collaborations.";
@@ -17,13 +17,7 @@ const cardJsonLd = [
       name: "Robin Francis",
       url: `${siteUrl}/`,
       jobTitle: "AI Innovator and Community Leader",
-      sameAs: [
-        "https://github.com/robinfrancis186",
-        "https://www.linkedin.com/in/robin-francis-b43565175",
-        "https://www.instagram.com/robinfrancis186",
-        "https://x.com/robinfrancis186",
-        "https://medium.com/@robinfrancis186",
-      ],
+      sameAs: [...socialProfiles],
     },
   },
   breadcrumbJsonLd([homeBreadcrumb, { name: "Card", path: "/card/" }]),
@@ -87,6 +81,7 @@ export default function Page() {
               <a href="https://x.com/robinfrancis186">X</a>
             </li>
             <li>
+              <a href="https://www.youtube.com/@robinfrancis186">YouTube</a>
               <a href="https://medium.com/@robinfrancis186">Medium</a>
             </li>
           </ul>
