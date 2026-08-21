@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 import { motion } from "framer-motion";
+import { revealFrom, revealTo, revealTransition, revealViewport } from "@/lib/motion";
 import { GraduationCap } from "lucide-react";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import InteractivePortrait from "@/components/ui/InteractivePortrait";
@@ -83,9 +84,10 @@ const About = () => {
             <TracingBeam className="px-6">
                 <div className="max-w-3xl mx-auto antialiased pt-4 relative">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                        initial={revealFrom.up}
+                        whileInView={revealTo.up}
+                        transition={revealTransition}
+                        viewport={revealViewport}
                         className="mb-12"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
@@ -140,9 +142,10 @@ const About = () => {
                             {education.map((edu, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
+                                    initial={revealFrom.left}
+                                    whileInView={revealTo.left}
+                                    transition={{ ...revealTransition, delay: index * 0.06 }}
+                                    viewport={revealViewport}
                                     className="relative pl-8"
                                 >
                                     <div className="absolute left-0 top-1.5 h-5 w-5 rounded-full border-4 border-background bg-primary shadow-lg shadow-primary/30" />
@@ -157,10 +160,10 @@ const About = () => {
                 </div>
             </TracingBeam>
             <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={revealFrom.up}
+                whileInView={revealTo.up}
+                transition={revealTransition}
+                viewport={revealViewport}
                 className="mt-8 border-y border-border/70 py-10 text-foreground shadow-sm transition-colors duration-300 dark:border-white/10 dark:text-white md:py-12"
                 style={{ backgroundColor: isDarkTheme ? "#070707" : "hsl(var(--card))" }}
             >

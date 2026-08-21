@@ -33,6 +33,8 @@ export interface MasonryGalleryProps {
     colorShiftOnHover?: boolean;
     className?: string;
     itemClassName?: string;
+    /** Called with the item index when a tile is activated. */
+    onItemActivate?: (index: number) => void;
 }
 
 function getAspectRatio(item: MasonryItem) {
@@ -48,7 +50,8 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
     scaleOnHover = true,
     colorShiftOnHover = false,
     className,
-    itemClassName
+    itemClassName,
+    onItemActivate
 }) => {
     return (
         <div
@@ -80,6 +83,8 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                                     scaleOnHover && 'group-hover:scale-[0.98] group-focus-within:scale-[0.98]'
                                 )}
                                 priority={index < 2}
+                                loading={index < 6 ? undefined : "lazy"}
+                                quality={72}
                             />
                             {colorShiftOnHover && (
                                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />
@@ -114,6 +119,24 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                         >
                             {content}
                         </a>
+                    );
+                }
+
+                if (onItemActivate) {
+                    return (
+                        <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => onItemActivate(index)}
+                            aria-label={
+                                item.title
+                                    ? `View ${item.title} full size`
+                                    : `View image ${index + 1} full size`
+                            }
+                            className="block w-full cursor-zoom-in rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                            {content}
+                        </button>
                     );
                 }
 

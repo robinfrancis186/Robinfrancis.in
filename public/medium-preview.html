@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medium preview | Robin Francis</title>
+  <style>
+    :root { color-scheme: light; --ink: #242424; --muted: #6b6b6b; --line: #e6e6e6; --green: #1a8917; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #fff; font-family: Georgia, 'Times New Roman', serif; }
+    .preview-banner { position: sticky; top: 0; z-index: 10; padding: 12px 20px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); color: var(--muted); font: 14px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; text-align: center; }
+    .preview-banner strong { color: var(--green); }
+    .index { width: min(1100px, calc(100% - 40px)); margin: 32px auto 64px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .index h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.02em; }
+    .index p { margin: 0 0 24px; color: var(--muted); font-size: 16px; }
+    .index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .index-card { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: inherit; background: #fff; }
+    .index-card:hover { border-color: #aaa; }
+    .index-card img { width: 92px; height: 70px; object-fit: cover; border-radius: 4px; }
+    .index-card h2 { margin: 0 0 5px; font: 600 15px/1.25 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .index-card span { color: var(--muted); font: 12px/1.3 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .post { width: min(680px, calc(100% - 40px)); margin: 80px auto; }
+    .post + .post { padding-top: 80px; border-top: 1px solid var(--line); }
+    .post-header { margin-bottom: 36px; }
+    .post-header .eyebrow { margin: 0 0 18px; color: var(--green); font: 700 12px/1.2 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .post-header h1 { margin: 0 0 14px; font-size: clamp(36px, 6vw, 52px); line-height: 1.05; letter-spacing: -.035em; font-weight: 700; }
+    .post-header .dek { margin: 0 0 20px; color: var(--muted); font-size: 21px; line-height: 1.42; }
+    .byline { display: flex; align-items: center; gap: 8px; color: var(--muted); font: 14px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .byline strong { color: var(--ink); }
+    .cover { display: block; width: 100%; max-height: 520px; margin: 28px 0 40px; object-fit: cover; border-radius: 2px; }
+    .post-body { font-size: 20px; line-height: 1.65; }
+    .post-body p { margin: 0 0 1.35em; }
+    .post-body h2 { margin: 1.8em 0 .55em; font-size: 30px; line-height: 1.2; letter-spacing: -.02em; }
+    .post-body h3 { margin: 1.5em 0 .5em; font-size: 24px; line-height: 1.25; }
+    .post-body blockquote { margin: 1.5em 0; padding: .05em 0 .05em 24px; border-left: 3px solid var(--ink); font-size: 24px; line-height: 1.4; }
+    .post-body img, .gallery img { display: block; width: 100%; max-height: 620px; margin: 38px 0 8px; object-fit: contain; background: #f7f7f7; }
+    .caption { margin: 0 0 34px; color: var(--muted); font: 13px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .source { margin: 44px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .source a { color: var(--ink); }
+    .status { width: min(680px, calc(100% - 40px)); margin: 80px auto; color: var(--muted); font: 15px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    @media (max-width: 640px) { .post { width: min(100% - 28px, 680px); margin: 56px auto; } .index { width: calc(100% - 28px); } .post-body { font-size: 18px; } .post-header .dek { font-size: 19px; } .post-body blockquote { font-size: 21px; } }
+  </style>
+</head>
+<body>
+  <div class="preview-banner"><strong>Preview only</strong> · Medium-style layout · No stories have been published</div>
+  <section class="index">
+    <h1>Robin Francis on Medium</h1>
+    <p>Eight website blogs prepared with Medium-friendly typography, cover images, inline galleries, captions, and canonical links back to robinfrancis.in.</p>
+    <div id="index-grid" class="index-grid"></div>
+  </section>
+  <div id="posts"></div>
+  <div id="status" class="status">Loading previews...</div>
+  <script>
+    const slugs = [
+      'devin-clay-pottery-met-code-kochi',
+      'ncc-thal-sainik-camp-national-bronze-medal-journey',
+      'ieee-region-10-international-virtual-career-fair-2025',
+      'codex-nightline-ai-hackathon-moving-kochi-metro',
+      'inclucode-2026-inclusive-software-innovation-buildathon',
+      'ieee-sahrdaya-student-branch-movement',
+      'soulsync-emotional-wellness',
+      'ieee-r10-volunteer-award'
+    ];
+    const base = 'https://robinfrancis.in/blog/';
+    const sectionHeadings = new Set([
+      'A Different Kind of Tech Gathering', 'From Clay to Code', 'Pottery Is Therapy', 'Then Came the Building',
+      'The Power of Better Surroundings', 'More Than Just Building', 'A New Kind of Builder Community in Kochi',
+      'Reconnecting, Reinventing, Creating', 'The Beginning, Not the End', 'Event at a Glance', 'A Note of Gratitude',
+      'The Responsibility of Continuing a Legacy', 'Building Leaders, Not Just Events', 'Growth That Was Built Step by Step',
+      'TechX Infinia, ALTAIR 2.0, and the Spirit of Thinking Big', 'The Strength of Societies and Volunteers',
+      'The Challenges No One Sees', 'A Journey That Changed Me', 'Gratitude to the People Who Made It Possible',
+      'More Than a Tenure', 'The Legacy Continues', 'From an Idea to a Growing Community', 'Selecting the Finalist Teams',
+      'A Structured Mentoring Journey', 'Supporting Teams Beyond Mentorship', 'The Offline Finale',
+      'Evaluation That Prioritised Working Solutions', 'The Impact of INCLUCODE', 'A Collective Effort', 'A Personal Reflection',
+      '100 Builders. 100 Projects. One Moving Metro.', 'When the Journey Becomes the Deadline', 'My Experience as an Organizer and Mentor',
+      'A Community Effort', 'Beyond the Final Station', 'A Milestone Measured in Opportunities', 'Why the Virtual Format Mattered',
+      'My Role as Co-Lead', 'The Trust Behind the Responsibility', 'OneIEEE in Action', 'Recruiters Who Believed in the Initiative',
+      'Impact Beyond a Single Day', 'Part of a Growing Global Movement', 'What the Experience Taught Me', 'A Collective Achievement',
+      'It Began at Don Bosco', 'RDC Was the Dream. TSC Became the Journey.', 'Camp After Camp, Selection After Selection',
+      'The .22 Rifle and the Discipline of Stillness', 'Grouping', 'Snap Shooting', 'Representing Kerala on the National Stage',
+      'The Medal Belonged to More Than the Shooters', 'Learning From Officers and Their Experiences', 'What NCC Changed in Me',
+      'Becoming an Example for Those Who Followed', 'Gratitude', 'The Medal Was Bronze. The Memory Is Priceless.'
+    ]);
+    const esc = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    const text = (node) => node ? node.textContent.trim().replace(/\s+/g, ' ') : '';
+    const absolute = (src) => src && new URL(src, location.origin).href;
+    async function loadPost(slug) {
+      const response = await fetch('/blog/' + slug + '/');
+      if (!response.ok) throw new Error(slug + ' returned ' + response.status);
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const article = doc.querySelector('article');
+      const title = doc.querySelector('meta[property="og:title"]')?.content || doc.querySelector('title')?.textContent || slug;
+      const date = doc.querySelector('meta[property="article:published_time"]')?.content || '';
+      const description = doc.querySelector('meta[name="description"]')?.content || '';
+      const images = [...(article ? article.querySelectorAll('img') : [])];
+      const cover = images.shift();
+      const imageData = images.map((img) => ({ src: absolute(img.getAttribute('src')), alt: img.getAttribute('alt') || title }));
+      if (cover) cover.src = absolute(cover.getAttribute('src'));
+      const body = article ? article.cloneNode(true) : document.createElement('article');
+      body.querySelectorAll('h1, time, button, nav, a[href="/blog/"], [role="navigation"], .article-actions, .article-header, img, [aria-label*="Sources"], section').forEach((node) => node.remove());
+      body.querySelectorAll('h2, h3, p').forEach((node) => {
+        const value = text(node);
+        if (value === 'Article overview' || value === title || /^Published on/.test(value)) node.remove();
+        else if (node.tagName === 'P' && value === description) node.remove();
+        else if (node.tagName === 'P' && value.startsWith('> ')) {
+          const quote = body.ownerDocument.createElement('blockquote');
+          quote.textContent = value.slice(2);
+          node.replaceWith(quote);
+        }
+        else if (node.tagName === 'P' && sectionHeadings.has(value)) {
+          const heading = body.ownerDocument.createElement('h2');
+          heading.textContent = value;
+          node.replaceWith(heading);
+        }
+      });
+      body.querySelectorAll('h2, h3, p, blockquote, ul, ol').forEach((node) => { if (!text(node) && !node.querySelector('img')) node.remove(); });
+      return { slug, title, date, description, cover: cover ? { src: cover.src, alt: cover.alt || title } : null, images: imageData, body };
+    }
+    function renderIndex(posts) {
+      document.querySelector('#index-grid').innerHTML = posts.map((post, index) => '<a class="index-card" href="#post-' + index + '">' + (post.cover ? '<img src="' + esc(post.cover.src) + '" alt="' + esc(post.cover.alt) + '">' : '') + '<span><h2>' + esc(post.title) + '</h2><span>' + esc(post.date || 'Website article') + '</span></span></a>').join('');
+    }
+    function renderPost(post, index) {
+      const wrapper = document.createElement('article');
+      wrapper.className = 'post'; wrapper.id = 'post-' + index;
+      const deckText = post.description || '';
+      const coverHtml = post.cover ? '<img class="cover" src="' + esc(post.cover.src) + '" alt="' + esc(post.cover.alt) + '">' : '';
+      const galleryHtml = post.images.map((image) => '<img src="' + esc(image.src) + '" alt="' + esc(image.alt) + '"><p class="caption">' + esc(image.alt) + '</p>').join('');
+      wrapper.innerHTML = '<header class="post-header"><p class="eyebrow">Robin Francis · Website article</p><h1>' + esc(post.title) + '</h1><p class="dek">' + esc(deckText) + '</p><div class="byline"><strong>Robin Francis</strong><span>·</span><span>' + esc(post.date || 'Published on robinfrancis.in') + '</span></div></header>' + coverHtml + '<div class="post-body"></div><div class="gallery"></div><p class="source">Originally published on <a href="' + base + post.slug + '/" target="_blank" rel="noreferrer">robinfrancis.in/blog/' + post.slug + '/</a>. This link will be set as the canonical source when the Medium story is published.</p>';
+      wrapper.querySelector('.post-body').append(...[...post.body.childNodes]);
+      wrapper.querySelector('.gallery').innerHTML = galleryHtml;
+      return wrapper;
+    }
+    (async () => {
+      try {
+        const posts = await Promise.all(slugs.map(loadPost));
+        renderIndex(posts);
+        const container = document.querySelector('#posts');
+        posts.forEach((post, index) => container.appendChild(renderPost(post, index)));
+        document.querySelector('#status').textContent = 'Preview ready for all ' + posts.length + ' website blogs. Publishing is paused for your approval.';
+      } catch (error) {
+        document.querySelector('#status').textContent = 'Preview error: ' + error.message;
+      }
+    })();
+  </script>
+</body>
+</html>

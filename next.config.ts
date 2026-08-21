@@ -1,5 +1,17 @@
 import type { NextConfig } from "next";
 
+/**
+ * Retired posts mapped to their nearest living replacement. Keeping these as
+ * content-matched 301s consolidates any link equity instead of dumping every
+ * old URL on the index page.
+ */
+const RETIRED_POST_REDIRECTS: Record<string, string> = {
+  "future-of-accessible-technology": "/blog/inclucode-2026-inclusive-software-innovation-buildathon/",
+  "scalable-systems-with-communities": "/blog/ieee-sahrdaya-student-branch-movement/",
+  "people-centric-ai": "/blog/soulsync-emotional-wellness/",
+};
+
+
 const nextConfig: NextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
@@ -16,22 +28,15 @@ const nextConfig: NextConfig = {
         destination: "/achievements/",
         permanent: true,
       },
-      // Retired blog posts. Keep the indexed URLs pointing at the Journal index.
-      ...[
-        "future-of-accessible-technology",
-        "scalable-systems-with-communities",
-        "people-centric-ai",
-      ].flatMap((slug) => [
-        {
-          source: `/blog/${slug}/`,
-          destination: "/blog/",
-          permanent: true,
-        },
-        {
-          source: `/blog/${slug}`,
-          destination: "/blog/",
-          permanent: true,
-        },
+      /*
+       * Retired blog posts used to 301 to /blog/, which Google treats as a soft
+       * redirect and keeps the old URLs in the index under their old titles.
+       * Each now points at the closest surviving post so the redirect is a real
+       * content match; anything without one is handled as 410 in middleware.
+       */
+      ...Object.entries(RETIRED_POST_REDIRECTS).flatMap(([slug, destination]) => [
+        { source: `/blog/${slug}/`, destination, permanent: true },
+        { source: `/blog/${slug}`, destination, permanent: true },
       ]),
       {
         source: "/speaking/",

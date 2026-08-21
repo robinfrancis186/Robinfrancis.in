@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { revealViewport } from "@/lib/motion";
 import { ExternalLink, Github } from "lucide-react";
 import {
     useCallback,
@@ -236,7 +237,7 @@ const GitHubActivity = () => {
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={revealViewport}
             className="liquid-glass relative z-10 overflow-hidden rounded-[2rem] p-5 text-foreground md:p-6"
         >
             <div className="mb-4 flex items-center gap-4">
@@ -425,7 +426,7 @@ const GitHubRadialChart = ({
                                 stroke="none"
                                 initial={{ opacity: 0, scale: 0 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: "-80px" }}
+                                viewport={revealViewport}
                                 transition={{
                                     duration: 0.35,
                                     delay: Math.min((weekIndex * 7 + dayOfWeek) * 0.004, 0.45),

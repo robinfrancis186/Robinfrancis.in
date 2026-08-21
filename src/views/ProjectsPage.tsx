@@ -33,6 +33,78 @@ function ProjectImage({ src, alt, className, priority = false }: { src: string; 
     );
 }
 
+type FeaturedProject = {
+    title: string;
+    category: string;
+    summary: string;
+    image: string;
+    imageAlt: string;
+    accent?: string;
+};
+
+const ACCENT_DOT: Record<string, string> = {
+    emerald: "bg-emerald-400",
+    amber: "bg-amber-400",
+    violet: "bg-violet-400",
+    sky: "bg-sky-400",
+};
+
+/**
+ * One project tile. The page previously repeated this markup per card, which
+ * is why adding an entry meant copying 25 lines and why a half-edited copy
+ * could render as an empty bordered box.
+ */
+const ProjectCard = ({
+    project,
+    onOpen,
+    imageClassName = "h-56",
+    priority = false,
+}: {
+    project: FeaturedProject;
+    onOpen: () => void;
+    imageClassName?: string;
+    priority?: boolean;
+}) => (
+    <button
+        type="button"
+        onClick={onOpen}
+        className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+    >
+        <ProjectImage
+            src={project.image}
+            alt={project.imageAlt}
+            priority={priority}
+            className={`${imageClassName} w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top`}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300" />
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+            <p className="text-xs text-white/80 font-geist">{project.category}</p>
+            <div className="mt-1 flex items-center justify-between">
+                <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">
+                    {project.title}
+                </h4>
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
+                    <ArrowRight className="h-4 w-4" />
+                </span>
+            </div>
+        </div>
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 p-6 backdrop-blur-md items-center justify-center">
+            <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
+                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">
+                    {project.title}
+                </h3>
+                <p className="text-sm text-white/90 leading-relaxed mb-4 line-clamp-5">
+                    {project.summary}
+                </p>
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
+                    <span className={`h-2 w-2 rounded-full ${ACCENT_DOT[project.accent ?? ""] ?? "bg-primary"}`} />
+                    View Summary
+                </div>
+            </div>
+        </div>
+    </button>
+);
+
 const ProjectsPage = () => {
     const [selectedProject, setSelectedProject] = useState<null | ProjectDetail>(null);
 
@@ -79,6 +151,48 @@ const ProjectsPage = () => {
                 alt: 'BulkyFi certificate batch dashboard with template design and recipient preview',
             },
         ],
+    };
+
+    /*
+     * Real, source-backed work that previously only appeared on the homepage
+     * grid. Each one has an accent so the cards keep the page's colour rhythm.
+     */
+    const soulSyncProject = {
+        title: 'SoulSync',
+        category: 'AI Companion • Cognitive Wellness',
+        summary: 'An AI companion for emotional and cognitive wellness, built for the silver economy. It combines emotion tracking, memory recall, and privacy-conscious caregiver support, with models tuned to run on-device so personal context never leaves the phone. Team Bits & Bytes took second prize with it at the IBM watsonx GenAI Challenge.',
+        image: '/images/project-soulsync.webp',
+        imageAlt: 'SoulSync AI companion dashboard showing emotion tracking and memory recall',
+        accent: 'emerald',
+        live: 'https://robinfrancis.in/blog/soulsync-emotional-wellness/',
+    };
+
+    const foodLoopProject = {
+        title: 'FoodLoop',
+        category: 'Sustainability • Machine Learning',
+        summary: 'A food redistribution platform that uses machine-learning surplus prediction to cut waste and route edible surplus to the people who need it, turning an operations problem into a forecasting one.',
+        image: '/images/project-foodloop.webp',
+        imageAlt: 'FoodLoop food redistribution platform interface with surplus prediction charts',
+        accent: 'amber',
+    };
+
+    const techXProject = {
+        title: 'TechX Infinia',
+        category: 'Flagship Event • Leadership',
+        summary: 'An emerging-technology festival founded and led for more than 450 participants, spanning talks, an expo, and school outreach. Built the programme, the partner roster, and the volunteer structure that ran it.',
+        image: '/images/gallery/gallery-techx-infinia-audience.webp',
+        imageAlt: 'TechX Infinia audience holding up lit phone torches during the flagship event',
+        accent: 'violet',
+    };
+
+    const careerFairProject = {
+        title: 'IEEE R10 Career Fair',
+        category: 'Global Community • Programme Design',
+        summary: "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
+        image: '/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp',
+        imageAlt: 'IEEE Region 10 Virtual Career Fair 2025 outcomes: 245 registrations, 31 recruiters, 2,578 booth visits, 310 applications',
+        accent: 'sky',
+        live: 'https://robinfrancis.in/blog/ieee-region-10-international-virtual-career-fair-2025/',
     };
 
     const strideProject = {
@@ -141,6 +255,8 @@ const ProjectsPage = () => {
                                         </div>
                                     </div>
                                 </button>
+
+                                <ProjectCard project={soulSyncProject} onOpen={() => openProject(soulSyncProject)} imageClassName="h-56" />
 
                                 <button type="button" onClick={() => openProject(bulkyFiProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
                                     <ProjectImage src={bulkyFiProject.image} alt={bulkyFiProject.imageAlt} priority className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
@@ -217,6 +333,10 @@ const ProjectsPage = () => {
                                     </div>
                                 </a>
 
+                                <ProjectCard project={foodLoopProject} onOpen={() => openProject(foodLoopProject)} imageClassName="h-56" />
+
+                                <ProjectCard project={techXProject} onOpen={() => openProject(techXProject)} imageClassName="h-64" />
+
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <ProjectImage src="/images/projects/fit_tracker.webp" alt="Stacked mobile fitness app screens with activity charts, heart metrics, and progress rings" className="h-56 w-full transition-transform duration-500 group-hover:scale-105 object-cover" />
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300"></div>
@@ -291,6 +411,8 @@ const ProjectsPage = () => {
                                         </div>
                                     </div>
                                 </button>
+
+                                <ProjectCard project={careerFairProject} onOpen={() => openProject(careerFairProject)} imageClassName="h-56" />
 
                                 <a href="#portfolio" className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm">
                                     <ProjectImage src="/images/projects/quotient_rebrand.webp" alt="Brand identity and campaign visuals" className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105" />

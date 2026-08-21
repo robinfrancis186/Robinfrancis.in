@@ -29,7 +29,12 @@ const Hero = () => {
             </div>
 
             {/* Social Media Icons - Fixed Left Side (Desktop) */}
-            <div className="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-6">
+            {/*
+              * Scoped to the hero rather than fixed to the viewport. As a fixed
+              * rail it stayed on screen for the whole page and printed over the
+              * achievements cards further down. The same links are in the footer.
+              */}
+            <div className="hidden lg:flex absolute left-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-6">
                 <a 
                     href="mailto:robinfrancis186@gmail.com" 
                     target="_blank"

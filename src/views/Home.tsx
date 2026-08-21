@@ -18,7 +18,7 @@ interface DeferredSectionProps {
 const DeferredSection = ({
     children,
     placeholderClassName = "min-h-[40vh]",
-    rootMargin = "500px 0px",
+    rootMargin = "1200px 0px",
 }: DeferredSectionProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -63,7 +63,7 @@ const Home = () => {
     return (
         <main>
             <Hero />
-            <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="300px 0px">
+            <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="1600px 0px">
                 <About />
             </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[44vh]">
