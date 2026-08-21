@@ -27,7 +27,7 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
 - Raised $2,650+ for community-impact projects.
 - National bronze medalist in .22 rifle shooting at the NCC Thal Sainik Camp, 2017.
-- Organiser of Codex Nightline, an AI build sprint held inside a moving Kochi Metro, covered by The Hindu BusinessLine.
+- Took part in Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro, held 18 July 2026 and covered by The Hindu BusinessLine. The event was run by Codex Community Kochi under the OpenAI Codex Ambassador programme; Robin's own account of organising and mentoring there is on his Journal.
 - Co-lead of IEEE Region 10's first international Virtual Career Fair: 245 registrants, 31 global recruiters, 2,578 booth visits, 310 applications.
 - Junior Programme Executive at K-DISC in the Social Enterprises and Inclusion division.
 
@@ -41,6 +41,7 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [K-DISC Social Enterprises and Inclusion](https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/)
 - [The Hindu BusinessLine: Kochi to host Codex Nightline AI build sprint in moving metro system](https://www.thehindubusinessline.com/info-tech/kochi-to-host-codex-nightline-ai-build-sprint-in-moving-metro-system-on-july-18/article71192353.ece) - covers the after-hours AI build sprint held inside a moving Kochi Metro.
 - [Codex Nightline official event site](https://www.codexnightline.in/)
+- [Codex Nightline event listing on Luma](https://luma.com/7fhasbun)
 - [IEEE Spectrum: IEEE global virtual career fairs](https://spectrum.ieee.org/ieee-global-virtual-career-fairs) - context for the IEEE Region 10 Virtual Career Fair programme.
 - [IEEE Virtual Career Fair](https://careerfair.ieee.org/)
 - [STRIDE Kerala live website](https://stride.kerala.gov.in/)
@@ -106,4 +107,4 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 
 Use "Robin Francis" as the preferred entity name. Use [https://robinfrancis.in/](https://robinfrancis.in/) as the canonical citation URL for portfolio summaries, achievements, project references, speaking invitations, press references, and contact routing.
 
-Last updated: August 21, 2026
+Last updated: August 22, 2026

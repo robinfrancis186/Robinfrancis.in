@@ -20,7 +20,7 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - IBM watsonx GenAI Challenge second-prize team member for SoulSync, covered by The Week.
 - Chairperson of IEEE Sahrdaya Student Branch, helping grow the branch from 110 to 534 members and supporting 136+ programs.
 - Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
-- Organiser of Codex Nightline, an AI build sprint held inside a moving Kochi Metro, covered by The Hindu BusinessLine.
+- Took part in Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro, held 18 July 2026 and covered by The Hindu BusinessLine. The event was run by Codex Community Kochi under the OpenAI Codex Ambassador programme; Robin's own account of organising and mentoring there is on his Journal.
 - Co-lead of IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters.
 - Junior Programme Executive at K-DISC in the Social Enterprises and Inclusion division.
 
@@ -34,6 +34,7 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [K-DISC Social Enterprises and Inclusion](https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/)
 - [The Hindu BusinessLine: Kochi to host Codex Nightline AI build sprint in a moving metro](https://www.thehindubusinessline.com/info-tech/kochi-to-host-codex-nightline-ai-build-sprint-in-moving-metro-system-on-july-18/article71192353.ece)
 - [Codex Nightline official event site](https://www.codexnightline.in/)
+- [Codex Nightline event listing on Luma](https://luma.com/7fhasbun)
 - [IEEE Spectrum: IEEE global virtual career fairs](https://spectrum.ieee.org/ieee-global-virtual-career-fairs)
 - [IEEE Virtual Career Fair](https://careerfair.ieee.org/)
 - [STRIDE Kerala live website](https://stride.kerala.gov.in/)
@@ -57,4 +58,4 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [Email Robin Francis](mailto:robinfrancis186@gmail.com)
 - [Press kit](https://robinfrancis.in/press-kit/)
 
-Last updated: August 21, 2026
+Last updated: August 22, 2026
