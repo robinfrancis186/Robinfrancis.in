@@ -187,3 +187,7 @@ Robin Francis
 - Email: robinfrancis186@gmail.com
 
 Last updated: July 6, 2026
+
+## Licensing
+
+No repository-wide LICENSE file is included. This documentation does not grant a new software license. Existing third-party licenses and notices continue to apply to their respective code, datasets, artwork, and trademarks. Contact the maintainers to clarify permissions before redistributing project-owned material.
