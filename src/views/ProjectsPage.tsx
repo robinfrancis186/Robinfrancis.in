@@ -204,6 +204,16 @@ const ProjectsPage = () => {
         live: 'https://stride.kerala.gov.in/',
     };
 
+    const sightProject = {
+        title: 'IEEE SIGHT Kerala',
+        category: 'Humanitarian Technology • Public Interest',
+        summary: 'A public-interest website for IEEE Kerala Section SIGHT, bringing its 2026 leadership directory, mission, community projects, events, funding opportunities, and contact pathways into one accessible home.',
+        image: '/images/projects/ieee-sight-website.webp',
+        imageAlt: 'IEEE SIGHT Kerala website homepage with the Engineering for the everyday headline',
+        accent: 'sky',
+        live: 'https://sight.ieeekerala.org/',
+    };
+
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
             <Breadcrumbs
@@ -319,6 +329,8 @@ const ProjectsPage = () => {
                                         </div>
                                     </div>
                                 </button>
+
+                                <ProjectCard project={sightProject} onOpen={() => openProject(sightProject)} imageClassName="h-64" />
 
                                 <ProjectCard project={careerFairProject} onOpen={() => openProject(careerFairProject)} imageClassName="h-56" />
 

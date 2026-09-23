@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { findStaticBlogPost, STATIC_BLOG_POSTS } from "@/data/blogPosts";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl } from "@/lib/seo";
 import { stripInlineMarkup } from "@/lib/inlineText";
 
@@ -64,7 +65,7 @@ export default async function Page({ params }: MediumImportPageProps) {
         </p>
         <img
           src={absoluteUrl(post.image)}
-          alt={post.imageAlt ?? `Cover image for ${post.title}`}
+          alt={ensureRobinFrancisAlt(post.imageAlt ?? `Cover image for ${post.title}`, "article")}
           width="1200"
           height="720"
         />
@@ -79,7 +80,7 @@ export default async function Page({ params }: MediumImportPageProps) {
           <img
             key={image.src}
             src={absoluteUrl(image.src)}
-            alt={image.alt}
+            alt={ensureRobinFrancisAlt(image.alt, "article")}
             width="900"
             height="560"
             loading="lazy"

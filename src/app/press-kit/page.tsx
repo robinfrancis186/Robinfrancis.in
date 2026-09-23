@@ -9,7 +9,7 @@ import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, personJsonLd, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const pressKitDescription =
-  "Official media kit for Robin Francis with headshot, bios, achievements, contact details, and verified links for press and speaking use.";
+  "Official Robin Francis press kit with bio, headshot, IEEE and AI achievements, speaking topics, verified sources, and contact details.";
 
 const pressKitJsonLd = [
   personJsonLd,
@@ -37,7 +37,7 @@ const pressKitJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Press Kit | Robin Francis",
+  title: "Robin Francis Press Kit | Bio, Awards & Contact",
   description: pressKitDescription,
   keywords: [
     ...defaultSeoKeywords,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...ogDefaults,
-    title: "Press Kit | Robin Francis",
+    title: "Robin Francis Press Kit | Bio, Awards & Contact",
     description: pressKitDescription,
     url: absoluteUrl("/press-kit/"),
     images: [mediaKit.headshot],
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     ...twitterDefaults,
     card: "summary_large_image",
-    title: "Press Kit | Robin Francis",
+    title: "Robin Francis Press Kit | Bio, Awards & Contact",
     description: pressKitDescription,
     images: [mediaKit.headshot],
   },

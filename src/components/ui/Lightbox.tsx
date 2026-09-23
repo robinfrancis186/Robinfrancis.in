@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 import NextImage from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
 export type LightboxItem = {
     img: string;
@@ -123,7 +124,7 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                             <NextImage
                                 key={item.img}
                                 src={item.img}
-                                alt={item.alt}
+                                alt={ensureRobinFrancisAlt(item.alt, "gallery")}
                                 width={item.imageWidth || 1600}
                                 height={item.imageHeight || 1200}
                                 sizes="(min-width: 1024px) 1024px, 100vw"

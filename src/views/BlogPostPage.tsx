@@ -323,6 +323,27 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     )}
                 </div>
 
+                {Array.isArray(post.internalLinks) && post.internalLinks.length > 0 && (
+                    <section aria-labelledby="article-explore-heading" className="mt-14 border-t border-neutral-200 pt-8 dark:border-neutral-800">
+                        <h2 id="article-explore-heading" className="text-2xl font-bold font-geist text-neutral-950 dark:text-neutral-50">
+                            Keep exploring
+                        </h2>
+                        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                            {post.internalLinks.map((link: NonNullable<StaticBlogPost["internalLinks"]>[number]) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="block rounded-xl border border-neutral-200 p-5 transition hover:border-primary hover:shadow-sm dark:border-neutral-800"
+                                    >
+                                        <span className="font-semibold text-neutral-950 dark:text-neutral-50">{link.label}</span>
+                                        <span className="mt-2 block text-sm leading-6 text-neutral-600 dark:text-neutral-400">{link.description}</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
                 {Array.isArray(post.gallery) && post.gallery.length > 0 && (
                     <section aria-label={`${post.title} photo gallery`} className="mt-14">
                         <h2 className="text-3xl font-bold mb-6 font-geist">Moments from the journey</h2>

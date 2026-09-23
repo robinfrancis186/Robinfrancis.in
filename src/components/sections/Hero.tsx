@@ -204,6 +204,7 @@ const Hero = () => {
                         alt="Robin Francis, professional portrait with dark background theme" 
                         width={420}
                         height={550}
+                        priority
                         sizes="(min-width: 768px) 420px, (min-width: 640px) 320px, 280px"
                         className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
                     />

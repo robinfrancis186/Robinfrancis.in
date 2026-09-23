@@ -1236,6 +1236,8 @@ Code Inclusive. Build Accessible. Empower Independence.`,
         imageAlt: "Robin Francis addressing students during an IEEE Sahrdaya classroom session",
         excerpt:
             "How IEEE Sahrdaya Student Branch grew from a campus organization into a movement of leadership, confidence, service, and community.",
+        metaDescription:
+            "Robin Francis reflects on leading IEEE Sahrdaya Student Branch, growing its community, and building a culture of leadership, service, and student impact.",
         date: "2026-07-02",
         updatedAt: "2026-07-07",
         proofTitles: [
@@ -1469,6 +1471,8 @@ We built a movement.`,
         category: "Wellness",
         tags: ["Wellness"],
         image: "/images/blog/1720937570476.webp",
+        seoTitle: "SoulSync: AI for Emotional and Cognitive Wellness",
+        imageAlt: "Robin Francis and the SoulSync AI wellness project team at a technology event",
         excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
         metaDescription:
             "How SoulSync approaches cognitive wellness for elders: emotion tracking, memory recall, and caregiver support designed around dignity and privacy.",
@@ -1510,6 +1514,8 @@ We built a movement.`,
         category: "Leadership",
         tags: ["Leadership"],
         image: "/images/blog/blog2/1731994207232.webp",
+        seoTitle: "IEEE Region 10 Outstanding Volunteer Award | Robin Francis",
+        imageAlt: "Robin Francis featured in IEEE Region 10 volunteer recognition",
         excerpt: "Reflections on leadership, community-building, and global recognition.",
         metaDescription:
             "What the IEEE Region 10 Outstanding Volunteer Award 2024 recognised: years of student-branch leadership, volunteer systems, and community programmes.",

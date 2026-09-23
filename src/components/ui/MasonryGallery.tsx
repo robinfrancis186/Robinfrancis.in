@@ -84,7 +84,6 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                                 )}
                                 priority={index < 2}
                                 loading={index < 6 ? undefined : "lazy"}
-                                quality={72}
                             />
                             {colorShiftOnHover && (
                                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />

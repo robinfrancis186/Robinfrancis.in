@@ -3,7 +3,8 @@ import { ProjectsRoute } from "../_components/projects-route";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
-const projectDescription = "Explore AI, accessibility, product, and engineering projects built by Robin Francis.";
+const projectDescription =
+  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, and public-interest technology.";
 
 const projects = [
   {
@@ -38,6 +39,16 @@ const projects = [
     image: absoluteUrl("/images/projects/stride-website.webp"),
     type: "WebSite",
     sameAs: ["https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/"],
+  },
+  {
+    name: "IEEE SIGHT Kerala Website",
+    category: "Humanitarian technology website",
+    description:
+      "The official IEEE Kerala Section SIGHT website with 2026 leadership, mission, community projects, events, funding opportunities, and contact information.",
+    url: "https://sight.ieeekerala.org/",
+    image: absoluteUrl("/images/projects/ieee-sight-website.webp"),
+    type: "WebSite",
+    sameAs: ["https://github.com/robinfrancis186/ieee-sight-website-2026"],
   },
   {
     name: "SoulSync",
@@ -107,7 +118,7 @@ const projectsJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Projects | Robin Francis",
+  title: "Robin Francis Projects | AI & Accessibility",
   description: projectDescription,
   keywords: [
     ...defaultSeoKeywords,
@@ -116,6 +127,8 @@ export const metadata: Metadata = {
     "Argus autonomous QA",
     "BulkyFi certificate generator",
     "STRIDE Kerala website",
+    "IEEE SIGHT Kerala website",
+    "humanitarian technology website",
     "assistive technology projects",
   ],
   alternates: {
@@ -127,7 +140,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...ogDefaults,
-    title: "Projects | Robin Francis",
+    title: "Robin Francis Projects | AI & Accessibility",
     description: projectDescription,
     url: absoluteUrl("/projects/"),
     images: ["/images/projects/stride-website.webp"],
@@ -135,7 +148,7 @@ export const metadata: Metadata = {
   twitter: {
     ...twitterDefaults,
     card: "summary_large_image",
-    title: "Projects | Robin Francis",
+    title: "Robin Francis Projects | AI & Accessibility",
     description: projectDescription,
     images: ["/images/projects/stride-website.webp"],
   },

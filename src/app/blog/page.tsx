@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const blogDescription =
-  "Insights on AI engineering, accessible technology, product building, and community leadership by Robin Francis.";
+  "Read Robin Francis's notes on AI engineering, accessible technology, product building, and community leadership from Kerala and beyond.";
 
 const blogJsonLd = [
   {
@@ -27,13 +27,33 @@ const blogJsonLd = [
       datePublished: post.date,
       dateModified: post.updatedAt ?? post.date,
       image: absoluteUrl(post.image),
+      author: {
+        "@type": "Person",
+        name: "Robin Francis",
+        url: `${siteUrl}/`,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Robin Francis",
+        url: `${siteUrl}/`,
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/images/favicon-r.png"),
+        },
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": absoluteUrl(`/blog/${post.slug}/`),
+      },
+      articleSection: post.category,
+      keywords: post.tags.join(", "),
     })),
   },
   breadcrumbJsonLd([homeBreadcrumb, { name: "Blog", path: "/blog/" }]),
 ];
 
 export const metadata: Metadata = {
-  title: "Blog | Robin Francis",
+  title: "Robin Francis Blog | AI, Leadership & Building",
   description: blogDescription,
   keywords: [
     ...defaultSeoKeywords,
@@ -52,7 +72,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...ogDefaults,
-    title: "Blog | Robin Francis",
+    title: "Robin Francis Blog | AI, Leadership & Building",
     description: blogDescription,
     url: absoluteUrl("/blog/"),
     images: ["/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp"],
@@ -60,7 +80,7 @@ export const metadata: Metadata = {
   twitter: {
     ...twitterDefaults,
     card: "summary_large_image",
-    title: "Blog | Robin Francis",
+    title: "Robin Francis Blog | AI, Leadership & Building",
     description: blogDescription,
     images: ["/images/blog/ieee-sahrdaya-chairperson/ieee-sahrdaya-classroom-session-1.webp"],
   },

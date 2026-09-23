@@ -6,7 +6,7 @@ import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const galleryDescription =
-  "Explore Robin Francis's gallery of IEEE leadership, STRIDE inclusive innovation, speaking, awards, AI community events, and student mentorship.";
+  "Photos of Robin Francis at IEEE events, AI community gatherings, inclusive innovation programs, awards, and student mentorship in Kerala.";
 
 const galleryJsonLd = [
   {
@@ -24,7 +24,7 @@ const galleryJsonLd = [
       "@type": "ImageObject",
       name: item.title,
       description: item.description,
-      caption: item.alt,
+      caption: ensureRobinFrancisAlt(item.alt, "gallery"),
       contentUrl: absoluteUrl(item.img),
       url: absoluteUrl(item.img),
       dateCreated: item.date,
@@ -41,7 +41,7 @@ const galleryJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Gallery | Robin Francis",
+  title: "Robin Francis Gallery | AI, IEEE & Community",
   description: galleryDescription,
   keywords: [
     ...defaultSeoKeywords,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...ogDefaults,
-    title: "Gallery | Robin Francis",
+    title: "Robin Francis Gallery | AI, IEEE & Community",
     description: galleryDescription,
     url: absoluteUrl("/gallery/"),
     images: ["/images/gallery/gallery-ieee-kerala-public-awards-2025.webp"],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   twitter: {
     ...twitterDefaults,
     card: "summary_large_image",
-    title: "Gallery | Robin Francis",
+    title: "Robin Francis Gallery | AI, IEEE & Community",
     description: galleryDescription,
     images: ["/images/gallery/gallery-ieee-kerala-public-awards-2025.webp"],
   },

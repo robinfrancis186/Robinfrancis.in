@@ -115,9 +115,13 @@ export const personJsonLd = {
       },
     },
     {
-      "@type": "VideoObject",
+      "@type": "CreativeWork",
       name: "Sahrdaya Team grabs 2nd in IBM WatsonX Challenge conducted for students",
       url: "https://www.youtube.com/watch?v=B0OYd-Bit2Y",
+      publisher: {
+        "@type": "Organization",
+        name: "YouTube",
+      },
     },
     {
       "@type": "WebPage",

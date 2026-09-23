@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoImage, defaultSeoKeywords, ogDefaults, siteUrl, socialProfiles, twitterDefaults } from "@/lib/seo";
 
 const cardDescription =
-  "Robin Francis is an AI innovator and community leader available for meaningful AI, product, accessibility, and community collaborations.";
+  "Connect with Robin Francis, AI innovator and software engineer, for AI products, accessible technology, community leadership, or speaking.";
 
 const cardJsonLd = [
   {
@@ -24,7 +24,7 @@ const cardJsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Robin Francis Card | AI Innovator & Community Leader",
+  title: "Robin Francis Contact Card | AI Collaborator",
   description: cardDescription,
   keywords: [
     ...defaultSeoKeywords,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...ogDefaults,
-    title: "Robin Francis Card | AI Innovator & Community Leader",
+    title: "Robin Francis Contact Card | AI Collaborator",
     description: cardDescription,
     url: absoluteUrl("/card/"),
     images: [defaultSeoImage],
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     ...twitterDefaults,
     card: "summary_large_image",
-    title: "Robin Francis Card | AI Innovator & Community Leader",
+    title: "Robin Francis Contact Card | AI Collaborator",
     description: cardDescription,
     images: [defaultSeoImage],
   },

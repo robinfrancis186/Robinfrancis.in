@@ -38,6 +38,7 @@ const homeProjectImages = [
   "/images/gallery/gallery-techx-infinia-audience.webp",
   "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp",
   "/images/projects/stride-website.webp",
+  "/images/projects/ieee-sight-website.webp",
 ];
 
 const projectImages = [

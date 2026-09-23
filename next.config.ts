@@ -41,12 +41,12 @@ const nextConfig: NextConfig = {
       {
         source: "/speaking/",
         destination: "/achievements/",
-        permanent: false,
+        permanent: true,
       },
       {
         source: "/speaking",
         destination: "/achievements/",
-        permanent: false,
+        permanent: true,
       },
       {
         source: "/:path*",
