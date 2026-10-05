@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server";
-import OpenAI from "openai";
 import { formatContext, retrievePassages, type RetrievedPassage } from "@/lib/askRetrieval";
 import {
     guardQuestion,
@@ -19,21 +18,12 @@ const RELEVANCE_FLOOR = 22;
 const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 200;
 
-const MODEL = process.env.OPENAI_ASK_MODEL ?? "gpt-4o-mini";
+const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-flash-latest";
 
 type CachedAnswer = { answer: string; sources: Source[]; at: number };
 type Source = { title: string; href: string };
 
 const answerCache = new Map<string, CachedAnswer>();
-
-let client: OpenAI | null = null;
-
-function getClient() {
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) return null;
-    if (!client) client = new OpenAI({ apiKey });
-    return client;
-}
 
 const SYSTEM_PROMPT = `You are RoSi (short for Robin's Super Intelligence), the assistant on Robin Francis's site. If asked your name, say so. You answer visitor questions about Robin Francis on his portfolio site, robinfrancis.in. Visitors are recruiters, collaborators, and event organisers.
 
@@ -190,8 +180,8 @@ export async function POST(request: NextRequest) {
         return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
     }
 
-    const openai = getClient();
-    if (!openai) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
         return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
     }
 
@@ -218,21 +208,47 @@ export async function POST(request: NextRequest) {
     try {
         await consume("global", "site", LIMITS.global);
 
-        const completion = await openai.chat.completions.create({
-            model: MODEL,
-            max_tokens: 320,
-            temperature: 0.3,
-            messages: [
-                { role: "system", content: SYSTEM_PROMPT },
-                ...history,
-                {
-                    role: "user",
-                    content: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}`,
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-goog-api-key": apiKey,
                 },
-            ],
-        });
+                body: JSON.stringify({
+                    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                    contents: [
+                        ...history.map((turn) => ({
+                            role: turn.role === "assistant" ? "model" : "user",
+                            parts: [{ text: turn.content }],
+                        })),
+                        {
+                            role: "user",
+                            parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
+                        },
+                    ],
+                    generationConfig: { maxOutputTokens: 320, temperature: 0.3 },
+                }),
+            }
+        );
 
-        const answer = sanitizeAnswer(completion.choices[0]?.message?.content ?? "");
+        if (!response.ok) {
+            if (response.status === 429) {
+                return NextResponse.json(
+                    { error: "Busy right now. Please try again in a moment." },
+                    { status: 429 }
+                );
+            }
+            console.error("Ask Gemini request failed", response.status);
+            return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
+        }
+
+        const result = await response.json();
+        const text = result?.candidates?.[0]?.content?.parts
+            ?.map((part: { text?: string }) => part.text ?? "")
+            .join("");
+        const answer = sanitizeAnswer(typeof text === "string" ? text : "");
 
         if (!answer) {
             return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
@@ -240,15 +256,8 @@ export async function POST(request: NextRequest) {
 
         writeCache(key, { answer, sources, at: Date.now() });
         return reply(answer, sources, "model");
-    } catch (error) {
-        if (error instanceof OpenAI.APIError && error.status === 429) {
-            return NextResponse.json(
-                { error: "Busy right now. Please try again in a moment." },
-                { status: 429 }
-            );
-        }
-
-        console.error("Ask model request failed", error);
+    } catch {
+        console.error("Ask Gemini request failed");
         // An outage should degrade the answer, not remove the feature.
         return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
     }
