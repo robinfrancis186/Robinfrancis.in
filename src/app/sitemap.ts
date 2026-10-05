@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { awards, mediaKit } from "@/data/profileProof";
+import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { absoluteUrl } from "@/lib/seo";
 
 const defaultLastModified = "2026-08-18";
@@ -14,7 +15,7 @@ const blogTemplateLastModified = "2026-07-19";
  */
 const routeLastModified = {
   home: "2026-08-18",
-  projects: "2026-08-18",
+  projects: "2026-09-23",
   achievements: "2026-08-03",
   pressKit: "2026-07-29",
   gallery: "2026-08-03",
@@ -42,10 +43,10 @@ const homeProjectImages = [
 ];
 
 const projectImages = [
-  "/images/projects/argus.webp",
-  "/images/projects/bulkyfi-landing-v2.webp",
-  "/images/projects/bulkyfi-dashboard-v2.webp",
-  "/images/projects/stride-website.webp",
+  ...PROJECT_DETAILS.flatMap((project) => [
+    project.image,
+    ...(project.images?.map((image) => image.src) ?? []),
+  ]),
 ];
 
 function uniqueImages(images: string[]) {
@@ -131,5 +132,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ], latestDate(blogTemplateLastModified, post.updatedAt ?? post.date)),
   );
 
-  return [...coreRoutes, ...blogRoutes];
+  const projectRoutes = PROJECT_DETAILS.map((project) =>
+    sitemapEntry(
+      `/projects/${project.slug}/`,
+      0.72,
+      "monthly",
+      [project.image, ...(project.images?.map((image) => image.src) ?? [])],
+      routeLastModified.projects,
+    ),
+  );
+
+  return [...coreRoutes, ...projectRoutes, ...blogRoutes];
 }

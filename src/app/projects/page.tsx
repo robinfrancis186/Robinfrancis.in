@@ -51,6 +51,33 @@ const projects = [
     sameAs: ["https://github.com/robinfrancis186/ieee-sight-website-2026"],
   },
   {
+    name: "Readit",
+    category: "Local-first personal library",
+    description:
+      "A private library and reader for books, periodicals, and PDFs, with searchable reading notes and bundled Malayalam and English dictionaries.",
+    url: "https://readit-opal.vercel.app/",
+    image: absoluteUrl("/images/projects/readit.webp"),
+    type: "SoftwareApplication",
+    applicationCategory: "EducationalApplication",
+    codeRepository: "https://github.com/robinfrancis186/readit",
+    sameAs: [
+      "https://github.com/robinfrancis186/readit",
+      "https://robinfrancis186.github.io/readit/",
+    ],
+  },
+  {
+    name: "Crown of Bharat",
+    category: "Indian-inspired 3D strategy game",
+    description:
+      "An Indian-inspired 3D strategy game for building a kingdom, upgrading buildings, preparing troops and heroes, and playing campaign, practice, or asynchronous online battles.",
+    url: "https://crown-of-bharat.vercel.app/",
+    image: absoluteUrl("/images/projects/crown-of-bharat.webp"),
+    type: "VideoGame",
+    applicationCategory: "GameApplication",
+    codeRepository: "https://github.com/robinfrancis186/crown-of-bharat",
+    sameAs: ["https://github.com/robinfrancis186/crown-of-bharat"],
+  },
+  {
     name: "SoulSync",
     category: "AI wellness companion",
     description:
@@ -129,6 +156,12 @@ export const metadata: Metadata = {
     "STRIDE Kerala website",
     "IEEE SIGHT Kerala website",
     "humanitarian technology website",
+    "Readit personal library",
+    "local-first reading app",
+    "Malayalam English dictionary",
+    "Crown of Bharat",
+    "Indian strategy game",
+    "mobile landscape strategy game",
     "assistive technology projects",
   ],
   alternates: {

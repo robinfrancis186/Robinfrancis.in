@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -9,6 +10,7 @@ import { trackEvent } from '@/lib/analytics';
 import { ensureRobinFrancisAlt } from '@/lib/imageSeo';
 
 type ProjectDetail = {
+    slug: string;
     title: string;
     category: string;
     summary: string;
@@ -129,6 +131,7 @@ const ProjectsPage = () => {
     };
 
     const argusProject = {
+        slug: 'argus',
         title: 'Argus',
         category: 'AI QA • Browser Agent',
         summary: 'Argus is a local-first autonomous QA agent that scouts a website, understands the product, deploys synthetic user personas, and returns evidence-backed bug reports with screenshots, logs, and run summaries.',
@@ -138,6 +141,7 @@ const ProjectsPage = () => {
     };
 
     const bulkyFiProject = {
+        slug: 'bulkyfi',
         title: 'BulkyFi',
         category: 'Certificates • Local-First Tool',
         summary: 'BulkyFi is a local-first bulk certificate generator for creating professional certificates from templates and recipient spreadsheets. It runs in the browser, stores projects locally, and exports high-quality PDF or PNG certificates without requiring a backend.',
@@ -158,6 +162,7 @@ const ProjectsPage = () => {
      * grid. Each one has an accent so the cards keep the page's colour rhythm.
      */
     const soulSyncProject = {
+        slug: 'soulsync',
         title: 'SoulSync',
         category: 'AI Companion • Cognitive Wellness',
         summary: 'An AI companion for emotional and cognitive wellness, built for the silver economy. It combines emotion tracking, memory recall, and privacy-conscious caregiver support, with models tuned to run on-device so personal context never leaves the phone. Team Bits & Bytes took second prize with it at the IBM watsonx GenAI Challenge.',
@@ -168,6 +173,7 @@ const ProjectsPage = () => {
     };
 
     const foodLoopProject = {
+        slug: 'foodloop',
         title: 'FoodLoop',
         category: 'Sustainability • Machine Learning',
         summary: 'A food redistribution platform that uses machine-learning surplus prediction to cut waste and route edible surplus to the people who need it, turning an operations problem into a forecasting one.',
@@ -177,6 +183,7 @@ const ProjectsPage = () => {
     };
 
     const techXProject = {
+        slug: 'techx-infinia',
         title: 'TechX Infinia',
         category: 'Flagship Event • Leadership',
         summary: 'An emerging-technology festival founded and led for more than 450 participants, spanning talks, an expo, and school outreach. Built the programme, the partner roster, and the volunteer structure that ran it.',
@@ -186,6 +193,7 @@ const ProjectsPage = () => {
     };
 
     const careerFairProject = {
+        slug: 'ieee-r10-career-fair',
         title: 'IEEE R10 Career Fair',
         category: 'Global Community • Programme Design',
         summary: "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
@@ -196,6 +204,7 @@ const ProjectsPage = () => {
     };
 
     const strideProject = {
+        slug: 'stride',
         title: 'STRIDE Website',
         category: 'Accessibility • Social Impact',
         summary: 'Developed the official STRIDE website from scratch, creating a modern and accessible platform for an inclusive innovation initiative focused on assistive technology and social impact. The website showcases STRIDE’s mission, ecosystem, product catalog, community stories, news updates, and engagement opportunities, helping users understand and participate in Kerala’s inclusive innovation movement.',
@@ -205,6 +214,7 @@ const ProjectsPage = () => {
     };
 
     const sightProject = {
+        slug: 'ieee-sight-kerala',
         title: 'IEEE SIGHT Kerala',
         category: 'Humanitarian Technology • Public Interest',
         summary: 'A public-interest website for IEEE Kerala Section SIGHT, bringing its 2026 leadership directory, mission, community projects, events, funding opportunities, and contact pathways into one accessible home.',
@@ -212,6 +222,30 @@ const ProjectsPage = () => {
         imageAlt: 'IEEE SIGHT Kerala website homepage with the Engineering for the everyday headline',
         accent: 'sky',
         live: 'https://sight.ieeekerala.org/',
+    };
+
+    const readitProject = {
+        slug: 'readit',
+        title: 'Readit',
+        category: 'Local-First Library • Reading Tools',
+        summary: 'A private, local-first library and reader for books, periodicals, and PDFs, with searchable reading notes and bundled Malayalam and English dictionaries.',
+        image: '/images/projects/readit.webp',
+        imageAlt: 'Readit personal library project page for books, periodicals, PDFs, and dictionary tools',
+        accent: 'amber',
+        repo: 'https://github.com/robinfrancis186/readit',
+        live: 'https://readit-opal.vercel.app/',
+    };
+
+    const crownOfBharatProject = {
+        slug: 'crown-of-bharat',
+        title: 'Crown of Bharat',
+        category: 'Indian Strategy Game • 3D Web Game',
+        summary: 'An Indian-inspired 3D strategy game where players build a kingdom, upgrade buildings, prepare troops and heroes, and play campaign, practice, or asynchronous online battles.',
+        image: '/images/projects/crown-of-bharat.webp',
+        imageAlt: 'Crown of Bharat strategy game entry screen with a kingdom and Google sign-in panel',
+        accent: 'emerald',
+        repo: 'https://github.com/robinfrancis186/crown-of-bharat',
+        live: 'https://crown-of-bharat.vercel.app/',
     };
 
     return (
@@ -301,6 +335,10 @@ const ProjectsPage = () => {
 
                                 <ProjectCard project={techXProject} onOpen={() => openProject(techXProject)} imageClassName="h-64" />
 
+                                <ProjectCard project={readitProject} onOpen={() => openProject(readitProject)} imageClassName="h-64" />
+
+                                <ProjectCard project={crownOfBharatProject} onOpen={() => openProject(crownOfBharatProject)} imageClassName="h-64" />
+
                                 
                             </div>
 
@@ -358,6 +396,18 @@ const ProjectsPage = () => {
                                     </div>
                                 )}
                                 <div className="mt-6 flex flex-wrap gap-3">
+                                    <Link
+                                        href={`/projects/${selectedProject.slug}/`}
+                                        onClick={() => trackEvent('project_detail_open', {
+                                            project_name: selectedProject.title,
+                                            project_slug: selectedProject.slug,
+                                            link_location: 'projects_modal',
+                                        })}
+                                        className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                                    >
+                                        Read more
+                                        <ArrowUpRight className="h-4 w-4" />
+                                    </Link>
                                     {selectedProject.live && (
                                         <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" onClick={() => trackProjectOutbound(selectedProject, 'live')} className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-500">
                                             <ExternalLink className="h-4 w-4" />
