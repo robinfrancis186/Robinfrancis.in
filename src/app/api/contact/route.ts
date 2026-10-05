@@ -72,10 +72,6 @@ const runRedisCommand = async <T>(command: unknown[]) => {
   const redisToken = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
 
   if (!redisUrl || !redisToken) {
-    if (isProduction) {
-      throw new Error("Redis contact rate limiting is not configured.");
-    }
-
     return null;
   }
 
@@ -125,11 +121,10 @@ const isRateLimited = async (value: string) => {
       return redisResult;
     }
   } catch (error) {
-    if (isProduction) {
-      throw error;
-    }
-
-    console.warn("Redis contact rate limit unavailable; falling back to memory.", error);
+    // Fail open to the in-memory limiter, in production too: an unreachable
+    // Redis used to take the contact form offline with a 503.
+    const log = isProduction ? console.error : console.warn;
+    log("Redis contact rate limit unavailable; falling back to memory.", error);
   }
 
   return isMemoryRateLimited(key);

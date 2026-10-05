@@ -1,12 +1,21 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import Lenis from "lenis";
+import dynamic from "next/dynamic";
+import type Lenis from "lenis";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import MascotAssistant from "@/components/ui/MascotAssistant";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+
+/*
+ * The assistant is the only thing in the shared shell that needs the animation
+ * library, so it loads as its own chunk after the page is interactive rather
+ * than riding in the first bundle of every route.
+ */
+const MascotAssistant = dynamic(() => import("@/components/ui/MascotAssistant"), {
+  ssr: false,
+});
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -31,8 +40,14 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
         return undefined;
       }
 
-      const initTimer = window.setTimeout(() => {
-      lenis = new Lenis({
+      let cancelled = false;
+
+      const initTimer = window.setTimeout(async () => {
+      // Smooth scroll is a nicety that starts 1.5s in, so its code can too.
+      const { default: LenisScroll } = await import("lenis");
+      if (cancelled) return;
+
+      lenis = new LenisScroll({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: "vertical",
@@ -51,6 +66,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     }, 1500);
 
     return () => {
+      cancelled = true;
       window.clearTimeout(initTimer);
       if (animationFrameId) {
         window.cancelAnimationFrame(animationFrameId);

@@ -24,11 +24,12 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - 3x hackathon winner across GenAI, sustainability, and game development competitions.
 - Founder and lead of TechX Infinia, an IEEE Computer Society flagship event with 450+ participants.
 - IEEE Sahrdaya Student Branch Chairperson, helping grow the branch from 110 to 534 members and supporting 136+ programs.
-- Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
+- Builder of Argus, BulkyFi, Readit, Crown of Bharat, the official STRIDE Kerala website, and the IEEE SIGHT Kerala website.
 - Raised $2,650+ for community-impact projects.
 - National bronze medalist in .22 rifle shooting at the NCC Thal Sainik Camp, 2017.
 - Took part in Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro, held 18 July 2026 and covered by The Hindu BusinessLine. The event was run by Codex Community Kochi under the OpenAI Codex Ambassador programme; Robin's own account of organising and mentoring there is on his Journal.
-- Co-lead of IEEE Region 10's first international Virtual Career Fair: 245 registrants, 31 global recruiters, 2,578 booth visits, 310 applications.
+- Operations and Platform Team Lead, and Recruiter Outreach Team Lead for South India, for the IEEE Global Career Fair 2026: a 27-hour follow-the-sun virtual event with 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations in 43 countries, and 8,169 applications.
+- Co-lead of IEEE Region 10's first international Virtual Career Fair in 2025: 245 registrants, 31 global recruiters, 2,578 booth visits, 310 applications.
 - Junior Programme Executive at K-DISC in the Social Enterprises and Inclusion division.
 
 ## Proof And Source Links
@@ -53,6 +54,11 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [BulkyFi live app](https://bulkyfi.vercel.app/): local-first bulk certificate generator for templates and recipient spreadsheets, with browser storage and PDF/PNG export.
 - [BulkyFi GitHub repository](https://github.com/robinfrancis186/bulkyfi)
 - [STRIDE Kerala](https://stride.kerala.gov.in/): official website for an inclusive innovation initiative focused on assistive technology and social impact.
+- [IEEE Global Career Fair 2026](https://robinfrancis.in/projects/ieee-global-career-fair/): 27-hour follow-the-sun virtual career fair run under IEEE Technical Activities and its Industry Engagement Committee. Robin led the Operations and Platform team and recruiter outreach for South India. Event site: https://careerfair.ieee.org/global
+- [IEEE SIGHT Kerala website](https://sight.ieeekerala.org/): public-interest website for IEEE Kerala Section SIGHT, covering its 2026 leadership, mission, community projects, events, and funding opportunities. Project page: https://robinfrancis.in/projects/ieee-sight-kerala/
+- [IEEE R10 Career Fair 2025](https://robinfrancis.in/projects/ieee-r10-career-fair/): IEEE Region 10's first international Virtual Career Fair, co-led by Robin.
+- [Readit live app](https://readit-opal.vercel.app/): private, local-first library and reader for books, periodicals, and PDFs, with searchable notes and bundled Malayalam and English dictionaries. Repository: https://github.com/robinfrancis186/readit
+- [Crown of Bharat live game](https://crown-of-bharat.vercel.app/): Indian-inspired 3D strategy game with kingdom building, campaign, practice, and asynchronous online battles. Repository: https://github.com/robinfrancis186/crown-of-bharat
 - SoulSync: AI companion concept for cognitive wellness using facial recognition, emotion tracking, and memory recall workflows for elders and caregivers.
 - FoodLoop: AI platform concept for responsible food redistribution using machine learning surplus prediction to reduce food waste.
 

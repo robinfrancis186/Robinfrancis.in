@@ -14,8 +14,8 @@ const blogTemplateLastModified = "2026-07-19";
  * actually edited. Blog posts derive theirs from the post data instead.
  */
 const routeLastModified = {
-  home: "2026-08-18",
-  projects: "2026-09-23",
+  home: "2026-10-05",
+  projects: "2026-10-05",
   achievements: "2026-08-03",
   pressKit: "2026-07-29",
   gallery: "2026-08-03",

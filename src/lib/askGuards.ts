@@ -69,7 +69,7 @@ const SMALL_TALK =
 export const isSmallTalk = (question: string) => SMALL_TALK.test(question);
 
 export const SMALL_TALK_REPLY =
-    "Hello. Ask me anything about Robin's projects, writing, or recognitions and I will answer from what is published on this site.";
+    "Hello, I am RoSi, Robin's Super Intelligence. Ask me anything about Robin's projects, writing, or recognitions and I will answer from what is published on this site.";
 
 /**
  * Last line of defence on the way out. The model is instructed not to leak its

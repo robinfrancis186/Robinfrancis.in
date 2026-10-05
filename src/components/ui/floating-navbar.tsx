@@ -1,11 +1,5 @@
 "use client";
-import { useState } from "react";
-import {
-    motion,
-    AnimatePresence,
-    useScroll,
-    useMotionValueEvent,
-} from "framer-motion";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,45 +18,46 @@ export const FloatingNav = ({
     }[];
     className?: string;
 }) => {
-    const { scrollYProgress } = useScroll();
     const pathname = usePathname();
     const isHomePage = pathname === "/";
 
     const [visible, setVisible] = useState(true);
 
-    useMotionValueEvent(scrollYProgress, "change", (current) => {
-        // Check if current is not undefined and is a number
-        if (typeof current === "number") {
-            let direction = current! - scrollYProgress.getPrevious()!;
+    /*
+     * Show near the top and whenever the reader scrolls up; step aside on the
+     * way down. A plain passive listener and a CSS transition do this without
+     * putting the animation library in every page's first bundle.
+     */
+    useEffect(() => {
+        let last = window.scrollY;
+        let ticking = false;
 
-            if (scrollYProgress.get() < 0.05) {
-                setVisible(true);
-            } else {
-                if (direction < 0) {
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                const y = window.scrollY;
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                if (max <= 0 || y / max < 0.05) {
                     setVisible(true);
-                } else {
-                    setVisible(false);
+                } else if (y !== last) {
+                    setVisible(y < last);
                 }
-            }
-        }
-    });
+                last = y;
+                ticking = false;
+            });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
 
     return (
         <>
-            <AnimatePresence mode="wait">
-                <motion.div
-                    initial={{
-                        opacity: 1,
-                        y: -100,
-                    }}
-                    animate={{
-                        y: visible ? 0 : -100,
-                        opacity: visible ? 1 : 0,
-                    }}
-                    transition={{
-                        duration: 0.2,
-                    }}
+                <div
                     className={cn(
+                        "transition-[transform,opacity] duration-200",
+                        visible ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-[100px] opacity-0",
                         "flex max-w-fit fixed top-4 inset-x-0 mx-auto glass-panel rounded-full z-[5000] pr-2 pl-6 py-1.5 items-center justify-center space-x-5",
                         className
                     )}
@@ -122,8 +117,7 @@ export const FloatingNav = ({
                             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px" />
                         </Link>
                     )}
-                </motion.div>
-            </AnimatePresence>
+                </div>
         </>
     );
 };

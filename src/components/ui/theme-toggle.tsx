@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { useDomTheme } from "@/hooks/use-dom-theme";
@@ -56,9 +55,11 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                 className="size-7"
             >
                 <clipPath id="skiper-theme-toggle">
-                    <motion.path
-                        animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
-                        transition={{ ease: "easeInOut", duration: 0.35 }}
+                    <path
+                        style={{
+                            transform: isDark ? "translate(-12px, 10px)" : "translate(0px, 0px)",
+                            transition: "transform 0.35s ease-in-out",
+                        }}
                         d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
                     />
                 </clipPath>
@@ -68,14 +69,13 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                         cx="16"
                         cy="16"
                     />
-                    <motion.g
-                        initial={false}
-                        animate={{
-                            rotate: isDark ? -100 : 0,
-                            scale: isDark ? 0.5 : 1,
+                    <g
+                        style={{
+                            transformOrigin: "16px 16px",
+                            transform: isDark ? "rotate(-100deg) scale(0.5)" : "rotate(0deg) scale(1)",
                             opacity: isDark ? 0 : 1,
+                            transition: "transform 0.35s ease-in-out, opacity 0.35s ease-in-out",
                         }}
-                        transition={{ ease: "easeInOut", duration: 0.35 }}
                         stroke="currentColor"
                         strokeWidth="1.5"
                     >
@@ -87,7 +87,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                         <path d="m5.7 26.3 2.9-2.9" />
                         <path d="m5.8 5.8 2.8 2.8" />
                         <path d="m23.4 23.4 2.9 2.9" />
-                    </motion.g>
+                    </g>
                 </g>
             </svg>
         </button>

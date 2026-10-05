@@ -1,61 +1,29 @@
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
+import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { awards, mediaKit, proofLinks, speakingItems } from "@/data/profileProof";
 import { stripInlineMarkup } from "@/lib/inlineText";
 import type { SearchDocument } from "@/lib/search";
 
-const projects = [
-  {
-    id: "argus",
-    title: "Argus",
-    category: "AI QA browser agent",
-    description:
-      "A local-first autonomous QA agent that scouts websites, understands the product, deploys synthetic user personas, and returns evidence-backed bug reports with screenshots, logs, and run summaries.",
-    keywords: ["autonomous QA", "browser agent", "synthetic users", "testing", "GitHub"],
-  },
-  {
-    id: "bulkyfi",
-    title: "BulkyFi",
-    category: "Local-first certificate generator",
-    description:
-      "A browser-based bulk certificate generator for templates and recipient spreadsheets with local project storage and high-quality PDF or PNG export.",
-    keywords: ["certificates", "spreadsheet", "PDF", "PNG", "local-first", "GitHub"],
-  },
-  {
-    id: "stride",
-    title: "STRIDE Website",
-    category: "Accessibility and social impact",
-    description:
-      "The official STRIDE Kerala website, built as an accessible platform for assistive technology, inclusive innovation, ecosystem stories, products, media, and public engagement.",
-    keywords: ["K-DISC", "assistive technology", "inclusive innovation", "Kerala", "accessibility"],
-  },
-  {
-    id: "soulsync",
-    title: "SoulSync",
-    category: "AI wellness companion",
-    description:
-      "An AI companion concept for emotional and cognitive wellness with emotion tracking, memory recall, and privacy-conscious caregiver support for seniors.",
-    keywords: ["IBM watsonx", "GenAI", "silver economy", "caregivers", "seniors", "wellness"],
-  },
-  {
-    id: "foodloop",
-    title: "FoodLoop",
-    category: "Responsible food redistribution",
-    description:
-      "A sustainability platform concept using surplus prediction to reduce food waste and improve food redistribution workflows.",
-    keywords: ["sustainability", "food waste", "surplus prediction", "redistribution"],
-  },
-] as const;
-
-const projectDocuments: SearchDocument[] = projects.map((project) => ({
-  id: `project-${project.id}`,
+/*
+ * Built from the same data as the project pages, so a project added there is
+ * searchable, and answerable by the assistant, without a second list to keep
+ * in step.
+ */
+const projectDocuments: SearchDocument[] = PROJECT_DETAILS.map((project) => ({
+  id: `project-${project.slug}`,
   title: project.title,
-  href: "/projects/#portfolio",
+  href: `/projects/${project.slug}/`,
   type: "Project",
   section: project.category,
-  description: project.description,
-  content: `${project.category}. ${project.description}`,
-  keywords: project.keywords,
+  description: project.summary,
+  content: [
+    project.category,
+    project.summary,
+    ...project.highlights,
+    ...project.details.map((detail) => `${detail.heading}. ${detail.body}`),
+  ].join(" "),
+  keywords: [...project.stack],
 }));
 
 const articleDocuments: SearchDocument[] = STATIC_BLOG_POSTS.map((post) => ({
@@ -143,7 +111,7 @@ const pageDocuments: SearchDocument[] = [
     section: "Portfolio",
     description:
       "AI, accessibility, local-first, product design, and engineering projects built by Robin Francis.",
-    content: projects.map((project) => `${project.title}. ${project.description}`).join(" "),
+    content: PROJECT_DETAILS.map((project) => `${project.title}. ${project.summary}`).join(" "),
     keywords: ["portfolio", "products", "software", "case studies", "GitHub"],
   },
   {

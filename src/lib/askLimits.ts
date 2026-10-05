@@ -81,7 +81,8 @@ const memoryHit = (key: string, windowMs: number, max: number) => {
 /**
  * Counts one hit against a bucket and reports whether it is now over budget.
  * Redis when configured so limits hold across serverless instances, in-memory
- * otherwise (correct locally, best-effort on a single warm instance).
+ * otherwise or when Redis is unreachable (correct locally, best-effort on a
+ * single warm instance).
  */
 export async function consume(
     bucket: string,
@@ -100,8 +101,13 @@ export async function consume(
             return count > max;
         }
     } catch (error) {
-        if (isProduction) throw error;
-        console.warn(`Redis unavailable for ${bucket}; using memory.`, error);
+        /*
+         * Fail open to the in-memory counter, in production too. Throwing here
+         * took the whole assistant offline when the Redis database went away;
+         * a weaker per-instance limit is a better failure than no assistant.
+         */
+        const log = isProduction ? console.error : console.warn;
+        log(`Redis unavailable for ${bucket}; using memory.`, error);
     }
 
     return memoryHit(key, windowMs, max);
@@ -119,7 +125,7 @@ export async function isExhausted(
         const current = await runRedis<string | null>(["GET", key]);
         if (current) return Number(current.result ?? 0) > max;
     } catch (error) {
-        if (isProduction) throw error;
+        if (isProduction) console.error(`Redis unavailable for ${bucket}; using memory.`, error);
     }
 
     const counter = memory.get(key);

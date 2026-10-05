@@ -6,6 +6,8 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 
 - [Homepage](https://robinfrancis.in/)
 - [Projects](https://robinfrancis.in/projects/)
+- [Project: IEEE Global Career Fair 2026](https://robinfrancis.in/projects/ieee-global-career-fair/)
+- [Project: IEEE SIGHT Kerala website](https://robinfrancis.in/projects/ieee-sight-kerala/)
 - [Achievements](https://robinfrancis.in/achievements/)
 - [Press kit](https://robinfrancis.in/press-kit/)
 - [Blog](https://robinfrancis.in/blog/)
@@ -19,9 +21,10 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - IEEE Region 10 Outstanding Volunteer Award 2024 recipient, listed by IEEE Region 10.
 - IBM watsonx GenAI Challenge second-prize team member for SoulSync, covered by The Week.
 - Chairperson of IEEE Sahrdaya Student Branch, helping grow the branch from 110 to 534 members and supporting 136+ programs.
-- Builder of Argus, BulkyFi, and the official STRIDE Kerala website.
+- Builder of Argus, BulkyFi, Readit, Crown of Bharat, the official STRIDE Kerala website, and the IEEE SIGHT Kerala website.
 - Took part in Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro, held 18 July 2026 and covered by The Hindu BusinessLine. The event was run by Codex Community Kochi under the OpenAI Codex Ambassador programme; Robin's own account of organising and mentoring there is on his Journal.
-- Co-lead of IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters.
+- Operations and Platform Team Lead, and Recruiter Outreach Team Lead for South India, for the IEEE Global Career Fair 2026: a 27-hour follow-the-sun virtual event with 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations in 43 countries, and 8,169 applications.
+- Co-lead of IEEE Region 10's first international Virtual Career Fair in 2025, connecting 245 registrants with 31 global recruiters.
 - Junior Programme Executive at K-DISC in the Social Enterprises and Inclusion division.
 
 ## Proof Links
@@ -38,6 +41,8 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [IEEE Spectrum: IEEE global virtual career fairs](https://spectrum.ieee.org/ieee-global-virtual-career-fairs)
 - [IEEE Virtual Career Fair](https://careerfair.ieee.org/)
 - [STRIDE Kerala live website](https://stride.kerala.gov.in/)
+- [IEEE Global Career Fair](https://careerfair.ieee.org/global)
+- [IEEE SIGHT Kerala live website](https://sight.ieeekerala.org/)
 - [INSPIRA: The IEEE Sahrdaya SB Magazine 2024](https://cdnc.heyzine.com/files/uploaded/97d868213fc130fa21bf351552f7747c05e9778f.pdf)
 - [Argus GitHub repository](https://github.com/robinfrancis186/argus.git)
 - [BulkyFi live app](https://bulkyfi.vercel.app/)

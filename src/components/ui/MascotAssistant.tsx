@@ -25,7 +25,7 @@ const GREETING: Turn = {
     id: "greeting",
     role: "assistant",
     content:
-        "Hi, I'm Robin's site assistant. Ask me about his projects, writing, or recognitions and I'll answer from what's published here.",
+        "Hi, I'm RoSi, Robin's Super Intelligence. Ask me about his projects, writing, or recognitions and I'll answer from what's published here.",
 };
 
 /** The mascot looks toward the input while you type, and up at its own replies. */
@@ -191,7 +191,7 @@ const MascotAssistant = () => {
                         ref={panelRef}
                         role="dialog"
                         aria-modal="false"
-                        aria-label="Ask about Robin Francis"
+                        aria-label="RoSi, Robin's Super Intelligence"
                         className="pointer-events-auto flex h-[min(30rem,70vh)] w-[min(23rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl backdrop-blur-xl"
                         initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.96 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -201,10 +201,10 @@ const MascotAssistant = () => {
                         <div className="flex items-center justify-between border-b border-border px-4 py-3">
                             <div>
                                 <p className="text-sm font-semibold text-foreground">
-                                    Ask about Robin
+                                    RoSi
                                 </p>
                                 <p className="text-[0.7rem] text-muted-foreground">
-                                    Answers come from this site
+                                    Robin&apos;s Super Intelligence · answers from this site
                                 </p>
                             </div>
                             <button
@@ -213,7 +213,7 @@ const MascotAssistant = () => {
                                     setIsOpen(false);
                                     launcherRef.current?.focus();
                                 }}
-                                aria-label="Close the assistant"
+                                aria-label="Close RoSi"
                                 className="rounded-full p-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                             >
                                 <X className="h-4 w-4" />
@@ -300,7 +300,7 @@ const MascotAssistant = () => {
                         <form onSubmit={onSubmit} className="border-t border-border p-3">
                             <div className="flex items-center gap-2">
                                 <label htmlFor="assistant-input" className="sr-only">
-                                    Ask a question about Robin Francis
+                                    Ask RoSi a question about Robin Francis
                                 </label>
                                 <input
                                     id="assistant-input"
@@ -311,7 +311,7 @@ const MascotAssistant = () => {
                                     onBlur={() => setIsTyping(false)}
                                     maxLength={300}
                                     autoComplete="off"
-                                    placeholder="Ask a question…"
+                                    placeholder="Ask RoSi about Robin…"
                                     className="w-full rounded-full border border-border bg-background px-4 py-2 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50"
                                 />
                                 <button
@@ -338,7 +338,7 @@ const MascotAssistant = () => {
                     });
                 }}
                 aria-expanded={isOpen}
-                aria-label={isOpen ? "Close the assistant" : "Ask a question about Robin"}
+                aria-label={isOpen ? "Close RoSi" : "Ask RoSi, Robin's Super Intelligence"}
                 className="pointer-events-auto rounded-full transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
                 <BlobMascot size={64} mood={mood} focusTarget={gaze} label="" />
