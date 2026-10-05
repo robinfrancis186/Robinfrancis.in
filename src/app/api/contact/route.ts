@@ -120,11 +120,11 @@ const isRateLimited = async (value: string) => {
     if (redisResult !== null) {
       return redisResult;
     }
-  } catch (error) {
+  } catch {
     // Fail open to the in-memory limiter, in production too: an unreachable
     // Redis used to take the contact form offline with a 503.
     const log = isProduction ? console.error : console.warn;
-    log("Redis contact rate limit unavailable; falling back to memory.", error);
+    log("Redis contact rate limit unavailable; falling back to memory.");
   }
 
   return isMemoryRateLimited(key);

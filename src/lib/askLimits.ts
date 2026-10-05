@@ -100,14 +100,14 @@ export async function consume(
             }
             return count > max;
         }
-    } catch (error) {
+    } catch {
         /*
          * Fail open to the in-memory counter, in production too. Throwing here
          * took the whole assistant offline when the Redis database went away;
          * a weaker per-instance limit is a better failure than no assistant.
          */
         const log = isProduction ? console.error : console.warn;
-        log(`Redis unavailable for ${bucket}; using memory.`, error);
+        log(`Redis unavailable for ${bucket}; using memory.`);
     }
 
     return memoryHit(key, windowMs, max);
@@ -124,8 +124,8 @@ export async function isExhausted(
     try {
         const current = await runRedis<string | null>(["GET", key]);
         if (current) return Number(current.result ?? 0) > max;
-    } catch (error) {
-        if (isProduction) console.error(`Redis unavailable for ${bucket}; using memory.`, error);
+    } catch {
+        if (isProduction) console.error(`Redis unavailable for ${bucket}; using memory.`);
     }
 
     const counter = memory.get(key);
