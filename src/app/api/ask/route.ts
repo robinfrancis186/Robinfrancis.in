@@ -208,30 +208,33 @@ export async function POST(request: NextRequest) {
     try {
         await consume("global", "site", LIMITS.global);
 
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-goog-api-key": apiKey,
-                },
-                body: JSON.stringify({
-                    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                    contents: [
-                        ...history.map((turn) => ({
-                            role: turn.role === "assistant" ? "model" : "user",
-                            parts: [{ text: turn.content }],
-                        })),
-                        {
-                            role: "user",
-                            parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
-                        },
-                    ],
-                    generationConfig: { maxOutputTokens: 320, temperature: 0.3 },
-                }),
-            }
-        );
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent`;
+        const request = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-goog-api-key": apiKey,
+            },
+            body: JSON.stringify({
+                systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                contents: [
+                    ...history.map((turn) => ({
+                        role: turn.role === "assistant" ? "model" : "user",
+                        parts: [{ text: turn.content }],
+                    })),
+                    {
+                        role: "user",
+                        parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
+                    },
+                ],
+                generationConfig: { maxOutputTokens: 320, temperature: 0.3 },
+            }),
+        };
+        let response = await fetch(url, request);
+        if (response.status === 503) {
+            await new Promise((resolve) => setTimeout(resolve, 800));
+            response = await fetch(url, request);
+        }
 
         if (!response.ok) {
             if (response.status === 429) {
