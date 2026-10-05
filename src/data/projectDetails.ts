@@ -242,11 +242,63 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
     ],
   },
   {
+    slug: "ieee-global-career-fair",
+    title: "IEEE Global Career Fair",
+    category: "Global Programme • Operations & Platform Lead • 2026",
+    summary:
+      "Led the Operations and Platform team, and recruiter outreach for South India, for the IEEE Global Career Fair 2026: a 27-hour, follow-the-sun virtual event that drew 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations, and 8,169 applications.",
+    image: "/images/projects/ieee-global-career-fair-results.webp",
+    imageAlt:
+      "IEEE Global Career Fair 2026 results: 163 hiring locations, 40 sectors, 700+ jobs, 43 recruiter countries, 11,020 candidates from 131 countries, and 8,169 applications",
+    accent: "sky",
+    live: "https://careerfair.ieee.org/global",
+    highlights: [
+      "Operations and Platform Team Lead for a 27-hour, follow-the-sun virtual career fair.",
+      "Recruiter Outreach Team Lead for South India.",
+      "11,020 candidates from 131 countries submitted 8,169 applications.",
+      "Recruiters offered 700+ jobs across 163 hiring locations, 43 countries, and 40 sectors.",
+      "20+ sessions and 80+ speakers ran alongside the virtual exhibit hall.",
+    ],
+    stack: ["Operations leadership", "Virtual event platform", "Recruiter outreach", "Global volunteer coordination"],
+    details: [
+      {
+        heading: "One fair, five regions, 27 hours",
+        body: "The IEEE Global Career Fair 2026, run under IEEE Technical Activities and its Industry Engagement Committee, followed the sun: it opened with Asia and Oceania, moved through India, then Europe, the Middle East and Africa, and closed with Latin America and the USA and Canada. Each region ran its own working day, so the event stayed open for 27 hours end to end.",
+      },
+      {
+        heading: "My role: operations, platform, and South India outreach",
+        body: "I led the Operations and Platform team, which kept the virtual venue running as each region handed over to the next, so that booths, sessions, and candidate journeys worked for whoever was online at that hour. I also led recruiter outreach for South India, bringing employers from the region into the fair.",
+      },
+      {
+        heading: "What the numbers describe",
+        body: "On the recruiter side the fair covered 163 hiring locations in 43 countries, across 40 sectors, with more than 700 jobs on offer. On the candidate side, 11,020 people from 131 countries took part and submitted 8,169 applications. Just over half of them, 52 percent, had less than a year of experience, which makes the fair a first door into industry for many of them.",
+      },
+    ],
+    images: [
+      {
+        src: "/images/projects/ieee-global-career-fair-follow-the-sun.webp",
+        alt: "IEEE Global Career Fair 27-hour follow-the-sun schedule across Asia and Oceania, India, EMEA, Latin America, and USA and Canada",
+      },
+      {
+        src: "/images/projects/ieee-global-career-fair-hiring-locations.webp",
+        alt: "World map of the IEEE Global Career Fair's 163 hiring locations across 43 countries",
+      },
+      {
+        src: "/images/projects/ieee-global-career-fair-event-highlights.webp",
+        alt: "Highlights from the IEEE Global Career Fair: live sessions, speakers, and the virtual exhibit hall",
+      },
+      {
+        src: "/images/projects/ieee-global-career-fair-asia-pacific-recruiters.webp",
+        alt: "Featured Asia Pacific recruiters at the IEEE Global Career Fair",
+      },
+    ],
+  },
+  {
     slug: "ieee-r10-career-fair",
     title: "IEEE R10 Career Fair",
-    category: "Global Community • Programme Design",
+    category: "Global Community • Programme Design • 2025",
     summary:
-      "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
+      "Co-led IEEE Region 10's first international Virtual Career Fair in 2025, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
     image: "/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp",
     imageAlt: "IEEE Region 10 Virtual Career Fair 2025 outcomes: 245 registrations, 31 recruiters, 2,578 booth visits, 310 applications",
     accent: "sky",

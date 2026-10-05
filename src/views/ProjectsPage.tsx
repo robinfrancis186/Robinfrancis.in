@@ -192,11 +192,22 @@ const ProjectsPage = () => {
         accent: 'violet',
     };
 
+    const globalCareerFairProject = {
+        slug: 'ieee-global-career-fair',
+        title: 'IEEE Global Career Fair',
+        category: 'Global Programme • Operations & Platform Lead • 2026',
+        summary: 'Led the Operations and Platform team, and recruiter outreach for South India, for the 2026 edition of a 27-hour, follow-the-sun virtual career fair: 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations, and 8,169 applications.',
+        image: '/images/projects/ieee-global-career-fair-results.webp',
+        imageAlt: 'IEEE Global Career Fair results: 11,020 candidates, 131 countries, 700+ jobs, 163 hiring locations, and 8,169 applications',
+        accent: 'sky',
+        live: 'https://careerfair.ieee.org/global',
+    };
+
     const careerFairProject = {
         slug: 'ieee-r10-career-fair',
         title: 'IEEE R10 Career Fair',
-        category: 'Global Community • Programme Design',
-        summary: "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
+        category: 'Global Community • Programme Design • 2025',
+        summary: "Co-led IEEE Region 10's first international Virtual Career Fair in 2025, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
         image: '/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp',
         imageAlt: 'IEEE Region 10 Virtual Career Fair 2025 outcomes: 245 registrations, 31 recruiters, 2,578 booth visits, 310 applications',
         accent: 'sky',
@@ -325,6 +336,8 @@ const ProjectsPage = () => {
                                         </div>
                                     </div>
                                 </button>
+
+                                <ProjectCard project={globalCareerFairProject} onOpen={() => openProject(globalCareerFairProject)} imageClassName="h-72" />
 
                             </div>
 

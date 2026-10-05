@@ -107,10 +107,19 @@ const projects = [
     type: "CreativeWork",
   },
   {
+    name: "IEEE Global Career Fair",
+    category: "Global virtual career fair",
+    description:
+      "Operations and Platform Team Lead, and Recruiter Outreach Team Lead for South India, for the 27-hour follow-the-sun IEEE Global Career Fair 2026: 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations, and 8,169 applications.",
+    url: absoluteUrl("/projects/ieee-global-career-fair/"),
+    image: absoluteUrl("/images/projects/ieee-global-career-fair-results.webp"),
+    type: "CreativeWork",
+  },
+  {
     name: "IEEE R10 Career Fair",
     category: "International virtual career fair",
     description:
-      "Co-led IEEE Region 10's first international Virtual Career Fair, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
+      "Co-led IEEE Region 10's first international Virtual Career Fair in 2025, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
     url: absoluteUrl("/blog/ieee-region-10-international-virtual-career-fair-2025/"),
     image: absoluteUrl("/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp"),
     type: "CreativeWork",
@@ -156,6 +165,7 @@ export const metadata: Metadata = {
     "STRIDE Kerala website",
     "IEEE SIGHT Kerala website",
     "humanitarian technology website",
+    "IEEE Global Career Fair",
     "Readit personal library",
     "local-first reading app",
     "Malayalam English dictionary",
