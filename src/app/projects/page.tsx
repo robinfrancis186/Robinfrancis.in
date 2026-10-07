@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const projectDescription =
-  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, and public-interest technology.";
+  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, flood-intelligence demos, and public-interest technology.";
 
 const projects = [
   {
@@ -76,6 +76,28 @@ const projects = [
     applicationCategory: "GameApplication",
     codeRepository: "https://github.com/robinfrancis186/crown-of-bharat",
     sameAs: ["https://github.com/robinfrancis186/crown-of-bharat"],
+  },
+  {
+    name: "floodRISE",
+    category: "Flood-intelligence and emergency decision-support demo",
+    description:
+      "A human-verified flood-intelligence MVP demonstrated through a deterministic Chennai replay. The hosted preview is labeled demo data and is not a live emergency service.",
+    url: "https://floodrise.vercel.app/",
+    image: absoluteUrl("/images/projects/floodrise-preview.webp"),
+    type: "SoftwareApplication",
+    codeRepository: "https://github.com/robinfrancis186/floodRISE",
+    sameAs: ["https://github.com/robinfrancis186/floodRISE"],
+  },
+  {
+    name: "Rofin UI",
+    category: "Dependency-free vanilla web UI library",
+    description:
+      "An open-source, framework-independent UI library built with HTML, CSS, and vanilla JavaScript, with a live gallery of reusable components, effects, and page sections.",
+    url: "https://rofin-ui.vercel.app/",
+    image: absoluteUrl("/images/projects/rofin-ui-preview.webp"),
+    type: "SoftwareSourceCode",
+    codeRepository: "https://github.com/robinfrancis186/rofin-ui",
+    sameAs: ["https://github.com/robinfrancis186/rofin-ui"],
   },
   {
     name: "SoulSync",
@@ -172,6 +194,8 @@ export const metadata: Metadata = {
     "Crown of Bharat",
     "Indian strategy game",
     "mobile landscape strategy game",
+    "floodRISE flood intelligence demo",
+    "Rofin UI vanilla JavaScript component library",
     "assistive technology projects",
   ],
   alternates: {

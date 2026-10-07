@@ -259,6 +259,38 @@ const ProjectsPage = () => {
         live: 'https://crown-of-bharat.vercel.app/',
     };
 
+    const floodRiseProject = {
+        slug: 'floodrise',
+        title: 'floodRISE',
+        category: 'Flood Intelligence • Emergency Decision Support',
+        summary: 'A human-verified flood-intelligence and emergency decision-support MVP, demonstrated through a deterministic Chennai replay. Its hosted preview is labeled demo data and is not a live emergency service.',
+        image: '/images/projects/floodrise-preview.webp',
+        imageAlt: 'floodRISE operations map showing a clearly labeled Chennai demo replay, not live flood data',
+        accent: 'sky',
+        repo: 'https://github.com/robinfrancis186/floodRISE',
+        live: 'https://floodrise.vercel.app/',
+        images: [
+            { src: '/images/projects/floodrise-field.webp', alt: 'floodRISE field view showing Chennai flood conditions and community reports' },
+            { src: '/images/projects/floodrise-route.webp', alt: 'floodRISE field route view showing demo map conditions and route guidance status' },
+        ],
+    };
+
+    const rofinUiProject = {
+        slug: 'rofin-ui',
+        title: 'Rofin UI',
+        category: 'Open Source • Vanilla Web UI',
+        summary: 'A modular, framework-independent UI library built with HTML, CSS, and vanilla JavaScript. Its live gallery documents reusable components, optional effects, and ready-to-use sections without runtime dependencies.',
+        image: '/images/projects/rofin-ui-preview.webp',
+        imageAlt: 'Rofin UI documentation page introducing its lightweight component library',
+        accent: 'violet',
+        repo: 'https://github.com/robinfrancis186/rofin-ui',
+        live: 'https://rofin-ui.vercel.app/',
+        images: [
+            { src: '/images/projects/rofin-ui-catalog.webp', alt: 'Rofin UI catalog showing its reusable component gallery' },
+            { src: '/images/projects/rofin-ui-landing-example.webp', alt: 'Rofin UI full-page landing example built from the component library' },
+        ],
+    };
+
     return (
         <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
             <Breadcrumbs
@@ -352,6 +384,8 @@ const ProjectsPage = () => {
 
                                 <ProjectCard project={crownOfBharatProject} onOpen={() => openProject(crownOfBharatProject)} imageClassName="h-64" />
 
+                                <ProjectCard project={floodRiseProject} onOpen={() => openProject(floodRiseProject)} imageClassName="h-64" />
+
                                 
                             </div>
 
@@ -384,6 +418,8 @@ const ProjectsPage = () => {
                                 <ProjectCard project={sightProject} onOpen={() => openProject(sightProject)} imageClassName="h-64" />
 
                                 <ProjectCard project={careerFairProject} onOpen={() => openProject(careerFairProject)} imageClassName="h-56" />
+
+                                <ProjectCard project={rofinUiProject} onOpen={() => openProject(rofinUiProject)} imageClassName="h-64" />
 
                                 
                             </div>

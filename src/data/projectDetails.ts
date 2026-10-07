@@ -404,6 +404,86 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
       },
     ],
   },
+  {
+    slug: "floodrise",
+    title: "floodRISE",
+    category: "Flood Intelligence • Emergency Decision Support",
+    summary:
+      "A human-verified flood-intelligence and emergency decision-support MVP, demonstrated through a deterministic Chennai replay. Its hosted preview is labeled demo data and is not a live emergency service.",
+    image: "/images/projects/floodrise-preview.webp",
+    imageAlt: "floodRISE operations map showing a clearly labeled Chennai demo replay, not live flood data",
+    accent: "sky",
+    repo: "https://github.com/robinfrancis186/floodRISE",
+    live: "https://floodrise.vercel.app/",
+    highlights: [
+      "Demonstrates a deterministic Chennai flood replay with visible demo labeling.",
+      "Brings community reports, impact estimates, shelters, and evacuation routing into an operations view.",
+      "Keeps human review and audit workflows central to emergency decision support.",
+    ],
+    stack: ["React", "FastAPI", "MapLibre", "OpenStreetMap", "Deterministic replay"],
+    details: [
+      {
+        heading: "Flood intelligence with human review",
+        body: "floodRISE brings reported conditions, impact estimates, shelters, and lower-risk routes into an operations view. The project explores how those signals can support decisions while keeping verification and human approval visible.",
+      },
+      {
+        heading: "A replay, not a live alert system",
+        body: "The hosted experience is a deterministic Chennai scenario marked DEMO DATA and NOT LIVE. It is a demonstration of the workflow and must not be used to make real emergency or evacuation decisions.",
+      },
+    ],
+    images: [
+      {
+        src: "/images/projects/floodrise-field.webp",
+        alt: "floodRISE field view showing Chennai flood conditions and community reports",
+      },
+      {
+        src: "/images/projects/floodrise-route.webp",
+        alt: "floodRISE field route view showing demo map conditions and route guidance status",
+      },
+    ],
+  },
+  {
+    slug: "rofin-ui",
+    title: "Rofin UI",
+    category: "Open Source • Vanilla Web UI",
+    summary:
+      "A modular, framework-independent UI library built with HTML, CSS, and vanilla JavaScript. Its live gallery documents reusable components, optional effects, and ready-to-use sections without runtime dependencies.",
+    image: "/images/projects/rofin-ui-preview.webp",
+    imageAlt: "Rofin UI documentation page introducing its lightweight component library",
+    accent: "violet",
+    repo: "https://github.com/robinfrancis186/rofin-ui",
+    live: "https://rofin-ui.vercel.app/",
+    highlights: [
+      "Uses native HTML, CSS, and vanilla JavaScript with no runtime dependencies.",
+      "Keeps components framework-independent and individually usable.",
+      "Pairs the library with a live gallery of components, effects, and page sections.",
+    ],
+    stack: ["HTML", "CSS", "Vanilla JavaScript", "Accessibility", "Reduced-motion support"],
+    details: [
+      {
+        heading: "A UI library without framework lock-in",
+        body: "Rofin UI is a collection of reusable interface patterns built on browser-native technologies. The aim is to make polished interactions available without asking a project to adopt a framework or add runtime dependencies.",
+      },
+      {
+        heading: "Browse, copy, and adapt",
+        body: "The documentation site provides a visual gallery of components, optional effects, and complete sections. Teams can inspect an example and adapt the parts that fit their own product.",
+      },
+      {
+        heading: "An evolving open-source project",
+        body: "Rofin UI is an early-stage library, so its APIs and styles may continue to evolve. The repository is the source of truth for its current implementation and usage guidance.",
+      },
+    ],
+    images: [
+      {
+        src: "/images/projects/rofin-ui-catalog.webp",
+        alt: "Rofin UI catalog showing its reusable component gallery",
+      },
+      {
+        src: "/images/projects/rofin-ui-landing-example.webp",
+        alt: "Rofin UI full-page landing example built from the component library",
+      },
+    ],
+  },
 ];
 
 export function findProjectDetail(slug: string) {
