@@ -127,11 +127,6 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                             key={item.id}
                             type="button"
                             onClick={() => onItemActivate(index)}
-                            aria-label={
-                                item.title
-                                    ? `View ${item.title} full size`
-                                    : `View image ${index + 1} full size`
-                            }
                             className="block w-full cursor-zoom-in rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                             {content}

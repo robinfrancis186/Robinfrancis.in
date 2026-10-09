@@ -248,7 +248,7 @@ const SocialButton = ({
 const ActionButton = ({ action }: { action: ActionButtonProps }) => (
     <a
         href={action.href}
-        className="group relative z-10 mt-8 flex min-w-52 items-center justify-center gap-3 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-[0_18px_42px_rgba(10,132,255,0.28)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-[0_22px_54px_rgba(10,132,255,0.34)] active:scale-95 sm:min-w-56 sm:text-lg"
+        className="group relative z-10 mt-8 flex min-w-52 items-center justify-center gap-3 rounded-full bg-blue-700 px-7 py-3.5 text-base font-semibold text-white shadow-[0_18px_42px_rgba(10,132,255,0.28)] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-800 hover:shadow-[0_22px_54px_rgba(10,132,255,0.34)] active:scale-95 sm:min-w-56 sm:text-lg"
     >
         <span>{action.text}</span>
         <ArrowUpRight size={16} className="transition-transform duration-300 ease-out group-hover:rotate-45" />

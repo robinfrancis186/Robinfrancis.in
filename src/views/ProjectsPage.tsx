@@ -82,9 +82,9 @@ const ProjectCard = ({
         <div className="absolute bottom-0 left-0 right-0 p-5">
             <p className="text-xs text-white/80 font-geist">{project.category}</p>
             <div className="mt-1 flex items-center justify-between">
-                <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">
+                <p className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">
                     {project.title}
-                </h4>
+                </p>
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                     <ArrowRight className="h-4 w-4" />
                 </span>
@@ -92,9 +92,9 @@ const ProjectCard = ({
         </div>
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 p-6 backdrop-blur-md items-center justify-center">
             <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">
+                <p className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">
                     {project.title}
-                </h3>
+                </p>
                 <p className="text-sm text-white/90 leading-relaxed mb-4 line-clamp-5">
                     {project.summary}
                 </p>
@@ -335,7 +335,7 @@ const ProjectsPage = () => {
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{argusProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{argusProject.title}</h4>
+                                            <p className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{argusProject.title}</p>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -343,7 +343,7 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{argusProject.title}</h3>
+                                            <p className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{argusProject.title}</p>
                                             <p className="text-sm text-white/90 leading-relaxed mb-4">{argusProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
                                                 <span className="h-2 w-2 rounded-full bg-lime-400"></span>
@@ -361,7 +361,7 @@ const ProjectsPage = () => {
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{bulkyFiProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{bulkyFiProject.title}</h4>
+                                            <p className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{bulkyFiProject.title}</p>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -369,7 +369,7 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{bulkyFiProject.title}</h3>
+                                            <p className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{bulkyFiProject.title}</p>
                                             <p className="text-sm text-white/90 leading-relaxed mb-4">{bulkyFiProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
                                                 <span className="h-2 w-2 rounded-full bg-blue-400"></span>
@@ -407,7 +407,7 @@ const ProjectsPage = () => {
                                     <div className="absolute bottom-0 left-0 right-0 p-5">
                                         <p className="text-xs text-white/80 font-geist">{strideProject.category}</p>
                                         <div className="mt-1 flex items-center justify-between">
-                                            <h4 className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{strideProject.title}</h4>
+                                            <p className="text-base sm:text-lg tracking-tight font-medium text-white font-geist">{strideProject.title}</p>
                                             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-900">
                                                 <ArrowRight className="h-4 w-4" />
                                             </span>
@@ -415,7 +415,7 @@ const ProjectsPage = () => {
                                     </div>
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex bg-black/40 pt-6 pr-6 pb-6 pl-6 backdrop-blur-md items-center justify-center">
                                         <div className="transform group-hover:translate-y-0 transition-transform duration-300 delay-75 text-center translate-y-8">
-                                            <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{strideProject.title}</h3>
+                                            <p className="text-xl sm:text-2xl font-semibold tracking-tight text-white mb-3">{strideProject.title}</p>
                                             <p className="text-sm text-white/90 leading-relaxed mb-4">{strideProject.summary}</p>
                                             <div className="inline-flex items-center gap-2 rounded-full bg-white/20 text-white text-xs px-3 py-1.5 backdrop-blur-sm">
                                                 <span className="h-2 w-2 rounded-full bg-fuchsia-400"></span>

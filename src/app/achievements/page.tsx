@@ -205,7 +205,7 @@ export default function AchievementsPage() {
             <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap">
               <Link
                 href="/press-kit/"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-800 sm:w-auto"
               >
                 Open press kit
                 <FileText className="h-4 w-4" aria-hidden="true" />
@@ -310,9 +310,9 @@ export default function AchievementsPage() {
             <div key={item.title} className="flex gap-3 rounded-lg border border-neutral-200 p-4 dark:border-neutral-800">
               <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
               <div>
-                <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-950 dark:text-white">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-neutral-950 dark:text-white">
                   {item.title}
-                </h3>
+                </h2>
                 <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
                   {item.copy}
                 </p>
@@ -531,7 +531,7 @@ export default function AchievementsPage() {
             ))}
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-between rounded-lg border border-primary bg-primary px-4 py-4 text-sm font-semibold text-white transition hover:bg-primary/90 sm:col-span-2"
+              className="inline-flex items-center justify-between rounded-lg border border-blue-700 bg-blue-700 px-4 py-4 text-sm font-semibold text-white transition hover:bg-blue-800 sm:col-span-2"
             >
               Start a conversation
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

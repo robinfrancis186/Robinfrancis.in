@@ -25,7 +25,7 @@ const GREETING: Turn = {
     id: "greeting",
     role: "assistant",
     content:
-        "Hi, I'm RoSi, Robin's Super Intelligence. Ask me about his projects, writing, or recognitions and I'll answer from what's published here.",
+        "Hi, I'm RoSi, Robin's Super Intelligence. Ask me about his projects, writing, recognitions, or selected public posts. I answer from published sources and link them when available.",
 };
 
 /** The mascot looks toward the input while you type, and up at its own replies. */
@@ -189,6 +189,7 @@ const MascotAssistant = () => {
                 {isOpen && (
                     <motion.div
                         ref={panelRef}
+                        id="rosi-assistant-panel"
                         role="dialog"
                         aria-modal="false"
                         aria-label="RoSi, Robin's Super Intelligence"
@@ -204,7 +205,7 @@ const MascotAssistant = () => {
                                     RoSi
                                 </p>
                                 <p className="text-[0.7rem] text-muted-foreground">
-                                    Robin&apos;s Super Intelligence · answers from this site
+                                    Robin&apos;s Super Intelligence · answers from published sources
                                 </p>
                             </div>
                             <button
@@ -338,6 +339,7 @@ const MascotAssistant = () => {
                     });
                 }}
                 aria-expanded={isOpen}
+                aria-controls="rosi-assistant-panel"
                 aria-label={isOpen ? "Close RoSi" : "Ask RoSi, Robin's Super Intelligence"}
                 className="pointer-events-auto rounded-full transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >

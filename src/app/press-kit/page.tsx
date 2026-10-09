@@ -185,7 +185,7 @@ export default function PressKitPage() {
             eventParams={{
               contact_method: "email",
             }}
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
           >
             <Mail className="h-4 w-4" aria-hidden="true" />
             {mediaKit.contactEmail}

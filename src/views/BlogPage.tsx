@@ -39,9 +39,9 @@ const BlogPage = () => {
                             <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">{tag.toUpperCase()}</span>
                             <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">{date}</span>
                         </div>
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary text-neutral-900 dark:text-neutral-100 transition-colors">
+                        <h2 className="text-xl font-bold mb-2 group-hover:text-primary text-neutral-900 dark:text-neutral-100 transition-colors">
                             {title}
-                        </h3>
+                        </h2>
                         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm line-clamp-2">
                             {excerpt}
                         </p>
