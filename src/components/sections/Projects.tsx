@@ -51,10 +51,11 @@ export default function Projects() {
                         variants={item}
                         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
                         image="/images/project-foodloop.webp"
-                        imageAlt="FoodLoop food redistribution platform: ML surplus prediction interface"
+                        imageAlt="FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination"
                         title="FoodLoop"
-                        description="AI Platform for Responsible Food Redistribution. Reduces food waste using ML surplus prediction."
-                        tags={["Machine Learning", "Sustainability", "React"]}
+                        description="Mobile-first food rescue pilot for India. Helps kitchens share surplus and nearby communities reserve free portions for pickup."
+                        tags={["Flutter", "Food Rescue", "India Pilot"]}
+                        demoLink="https://robinfrancis186.github.io/foodloop/"
                     />
 
                     <GridItem

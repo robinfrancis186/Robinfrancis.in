@@ -60,7 +60,7 @@ Robin Francis is an AI product builder, software engineer, and community leader 
 - [Readit live app](https://readit-opal.vercel.app/): private, local-first library and reader for books, periodicals, and PDFs, with searchable notes and bundled Malayalam and English dictionaries. Repository: https://github.com/robinfrancis186/readit
 - [Crown of Bharat live game](https://crown-of-bharat.vercel.app/): Indian-inspired 3D strategy game with kingdom building, campaign, practice, and asynchronous online battles. Repository: https://github.com/robinfrancis186/crown-of-bharat
 - SoulSync: AI companion concept for cognitive wellness using facial recognition, emotion tracking, and memory recall workflows for elders and caregivers.
-- FoodLoop: AI platform concept for responsible food redistribution using machine learning surplus prediction to reduce food waste.
+- [FoodLoop](https://robinfrancis186.github.io/foodloop/): mobile-first Flutter food rescue pilot for India. Kitchens can share edible surplus, nearby community members can reserve portions for free, and both sides can coordinate pickup handover. The gallery screenshots use fictional local-demo listings and service records, not live food or confirmed pickups. The kitchen surplus estimate is advisory and has not been back-tested on real partner data. [Repository](https://github.com/robinfrancis186/foodloop) · [Project page](https://robinfrancis.in/projects/foodloop/).
 
 ## Education
 

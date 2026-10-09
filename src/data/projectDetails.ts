@@ -110,26 +110,63 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
   {
     slug: "foodloop",
     title: "FoodLoop",
-    category: "Sustainability • Machine Learning",
+    category: "Food Rescue • India Pilot",
     summary:
-      "A food redistribution platform that uses machine-learning surplus prediction to cut waste and route edible surplus to the people who need it, turning an operations problem into a forecasting one.",
+      "A mobile-first Flutter pilot for India that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. The screenshots show fictional local-demo data, not live food listings or confirmed pickups.",
     image: "/images/project-foodloop.webp",
-    imageAlt: "FoodLoop food redistribution platform interface with surplus prediction charts",
+    imageAlt: "FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination",
     accent: "amber",
+    repo: "https://github.com/robinfrancis186/foodloop",
+    live: "https://robinfrancis186.github.io/foodloop/",
     highlights: [
-      "Predicts surplus before it becomes waste.",
-      "Connects food-service operations with redistribution workflows.",
-      "Frames sustainability as a coordination and forecasting problem.",
+      "Helps kitchens share surplus food and nearby community members reserve portions for free.",
+      "Keeps pickup windows, storage guidance, allergen notes, and handover details together.",
+      "Includes an advisory kitchen estimate based on sample service history, not a validated production model.",
+      "The screenshots use fictional local-demo listings and do not represent real food or pickups.",
     ],
-    stack: ["Machine learning", "Forecasting", "Food systems", "Impact design"],
+    stack: ["Flutter", "Firebase", "OpenStreetMap", "Food redistribution", "Indian localization"],
     details: [
       {
-        heading: "From waste to signal",
-        body: "FoodLoop starts with a practical question: can a team know about likely surplus early enough to do something useful with it? Prediction creates that window, turning a last-minute disposal problem into a coordinated handoff.",
+        heading: "Free surplus, coordinated locally",
+        body: "FoodLoop is a mobile-first pilot for redistributing edible surplus in India. Kitchens can share available portions, nearby community members can reserve what they need for free, and both sides can coordinate the collection and handover.",
       },
       {
-        heading: "Technology in service of logistics",
-        body: "The interesting work is not only the model. It is the workflow around the model, where kitchens, coordinators, and community partners can act on a clearer picture of what is available and when.",
+        heading: "Clear details for a safer handoff",
+        body: "Listings bring together collection windows, use-by times, storage notes, and allergen information. Public map pins are approximate; exact collection details are available only after an active reservation. The pilot does not certify food safety, so kitchens still need to follow applicable handling requirements.",
+      },
+      {
+        heading: "An advisory kitchen estimate",
+        body: "The kitchen workspace compares a nearest-neighbor surplus estimate with a same-meal median baseline after at least five services with confirmed untouched surplus. This is an early advisory method, not a back-tested production model. It never certifies food or publishes a forecast automatically.",
+      },
+      {
+        heading: "A pilot, not live sample inventory",
+        body: "The screenshots show fictional local-demo listings, kitchens, locations, and service records. They are included to explain the product flow and must not be used to arrange a real pickup. Kitchen publishing in the connected pilot is gated behind coordinator verification.",
+      },
+    ],
+    images: [
+      {
+        src: "/images/projects/foodloop-discover.webp",
+        alt: "FoodLoop mobile discovery screen with fictional sample food listings in Thrissur",
+      },
+      {
+        src: "/images/projects/foodloop-reserve.webp",
+        alt: "FoodLoop sample listing details with collection window, allergen notes, and reservation controls",
+      },
+      {
+        src: "/images/projects/foodloop-map.webp",
+        alt: "FoodLoop local demo map with approximate sample pickup locations",
+      },
+      {
+        src: "/images/projects/foodloop-pickups.webp",
+        alt: "FoodLoop sample pickup card with a demo handover code and collection window",
+      },
+      {
+        src: "/images/projects/foodloop-kitchen-plan.webp",
+        alt: "FoodLoop kitchen planning screen with an advisory sample-history surplus estimate",
+      },
+      {
+        src: "/images/projects/foodloop-service-log.webp",
+        alt: "FoodLoop kitchen service log with fictional sample records",
       },
     ],
   },

@@ -175,11 +175,21 @@ const ProjectsPage = () => {
     const foodLoopProject = {
         slug: 'foodloop',
         title: 'FoodLoop',
-        category: 'Sustainability • Machine Learning',
-        summary: 'A food redistribution platform that uses machine-learning surplus prediction to cut waste and route edible surplus to the people who need it, turning an operations problem into a forecasting one.',
+        category: 'Food Rescue • India Pilot',
+        summary: 'A mobile-first Flutter pilot for India that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. The screenshots show fictional local-demo data, not live food listings or confirmed pickups.',
         image: '/images/project-foodloop.webp',
-        imageAlt: 'FoodLoop food redistribution platform interface with surplus prediction charts',
+        imageAlt: 'FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination',
         accent: 'amber',
+        repo: 'https://github.com/robinfrancis186/foodloop',
+        live: 'https://robinfrancis186.github.io/foodloop/',
+        images: [
+            { src: '/images/projects/foodloop-discover.webp', alt: 'FoodLoop mobile discovery screen with fictional sample food listings in Thrissur' },
+            { src: '/images/projects/foodloop-reserve.webp', alt: 'FoodLoop sample listing details with collection window, allergen notes, and reservation controls' },
+            { src: '/images/projects/foodloop-map.webp', alt: 'FoodLoop local demo map with approximate sample pickup locations' },
+            { src: '/images/projects/foodloop-pickups.webp', alt: 'FoodLoop sample pickup card with a demo handover code and collection window' },
+            { src: '/images/projects/foodloop-kitchen-plan.webp', alt: 'FoodLoop kitchen planning screen with an advisory sample-history surplus estimate' },
+            { src: '/images/projects/foodloop-service-log.webp', alt: 'FoodLoop kitchen service log with fictional sample records' },
+        ],
     };
 
     const techXProject = {

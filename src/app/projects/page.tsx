@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const projectDescription =
-  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, flood-intelligence demos, and public-interest technology.";
+  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, mobile-first food rescue, and public-interest technology.";
 
 const projects = [
   {
@@ -111,13 +111,15 @@ const projects = [
   },
   {
     name: "FoodLoop",
-    category: "Responsible food redistribution",
+    category: "Mobile-first food rescue pilot for India",
     description:
-      "A sustainability platform concept using surplus prediction to reduce food waste and improve redistribution workflows.",
-    url: absoluteUrl("/projects/"),
+      "A mobile-first Flutter pilot that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. Project screenshots show fictional local-demo data, not live listings or confirmed pickups.",
+    url: "https://robinfrancis186.github.io/foodloop/",
     image: absoluteUrl("/images/project-foodloop.webp"),
     type: "SoftwareApplication",
-    applicationCategory: "BusinessApplication",
+    applicationCategory: "MobileApplication",
+    codeRepository: "https://github.com/robinfrancis186/foodloop",
+    sameAs: ["https://github.com/robinfrancis186/foodloop"],
   },
   {
     name: "TechX Infinia",
@@ -196,6 +198,8 @@ export const metadata: Metadata = {
     "mobile landscape strategy game",
     "floodRISE flood intelligence demo",
     "Rofin UI vanilla JavaScript component library",
+    "FoodLoop India food rescue pilot",
+    "Flutter food surplus donation and pickup",
     "assistive technology projects",
   ],
   alternates: {
