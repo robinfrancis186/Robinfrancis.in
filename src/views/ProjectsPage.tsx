@@ -245,6 +245,18 @@ const ProjectsPage = () => {
         live: 'https://sight.ieeekerala.org/',
     };
 
+    const membershipDevelopmentProject = {
+        slug: 'ieee-kerala-membership-development',
+        title: 'IEEE Kerala Membership Development',
+        category: 'Membership Development • Student Branches',
+        summary: 'An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a practical membership playbook, branch rebate calculator, IEEE Day offers, funding and scholarship research, and event examples to adapt.',
+        image: '/images/gallery/gallery-ieee-kerala-section-kochi-team.webp',
+        imageAlt: 'IEEE Kerala Section volunteers gathered at the Kochi office',
+        accent: 'sky',
+        repo: 'https://github.com/robinfrancis186/ieee-kerala-membership-development',
+        live: 'https://ieee-kerala-membership-development.vercel.app/',
+    };
+
     const readitProject = {
         slug: 'readit',
         title: 'Readit',
@@ -426,6 +438,8 @@ const ProjectsPage = () => {
                                 </button>
 
                                 <ProjectCard project={sightProject} onOpen={() => openProject(sightProject)} imageClassName="h-64" />
+
+                                <ProjectCard project={membershipDevelopmentProject} onOpen={() => openProject(membershipDevelopmentProject)} imageClassName="h-64" />
 
                                 <ProjectCard project={careerFairProject} onOpen={() => openProject(careerFairProject)} imageClassName="h-56" />
 

@@ -279,6 +279,34 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
     ],
   },
   {
+    slug: "ieee-kerala-membership-development",
+    title: "IEEE Kerala Membership Development",
+    category: "Membership Development • Student Branches",
+    summary:
+      "An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a practical membership playbook, branch rebate calculator, IEEE Day offers, funding and scholarship research, and event examples to adapt.",
+    image: "/images/gallery/gallery-ieee-kerala-section-kochi-team.webp",
+    imageAlt: "IEEE Kerala Section volunteers gathered at the Kochi office",
+    accent: "sky",
+    repo: "https://github.com/robinfrancis186/ieee-kerala-membership-development",
+    live: "https://ieee-kerala-membership-development.vercel.app/",
+    highlights: [
+      "Explains membership development and branch continuity through a practical session playbook.",
+      "Links funding and scholarship programs to IEEE sources for eligibility and cycle checks.",
+      "Adds focused pages for IEEE Day offers and Student Branch event inspiration.",
+    ],
+    stack: ["Membership development", "IEEE student branches", "Source-linked research", "Static web guide"],
+    details: [
+      {
+        heading: "A field guide for branch volunteers",
+        body: "The guide helps volunteers connect the value of IEEE membership to useful experiences, welcoming participation, and a steady path into branch leadership. It includes a branch rebate estimator and a simple growth playbook.",
+      },
+      {
+        heading: "Opportunities and event ideas, with sources",
+        body: "Funding, scholarships, awards, travel support, and event examples link back to IEEE or organizer sources. Current calls are separated from recurring programs and closed cycles so volunteers can check eligibility and dates before planning.",
+      },
+    ],
+  },
+  {
     slug: "ieee-global-career-fair",
     title: "IEEE Global Career Fair",
     category: "Global Programme • Operations & Platform Lead • 2026",

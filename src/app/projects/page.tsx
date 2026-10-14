@@ -51,6 +51,16 @@ const projects = [
     sameAs: ["https://github.com/robinfrancis186/ieee-sight-website-2026"],
   },
   {
+    name: "IEEE Kerala Membership Development",
+    category: "IEEE Student Branch membership development resource",
+    description:
+      "An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a membership playbook, rebate calculator, funding and scholarship research, IEEE Day offers, and event examples.",
+    url: "https://ieee-kerala-membership-development.vercel.app/",
+    image: absoluteUrl("/images/gallery/gallery-ieee-kerala-section-kochi-team.webp"),
+    type: "WebSite",
+    sameAs: ["https://github.com/robinfrancis186/ieee-kerala-membership-development"],
+  },
+  {
     name: "Readit",
     category: "Local-first personal library",
     description:
