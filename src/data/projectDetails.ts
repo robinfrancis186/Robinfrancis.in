@@ -284,10 +284,9 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
     category: "Membership Development • Student Branches",
     summary:
       "An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a practical membership playbook, branch rebate calculator, IEEE Day offers, funding and scholarship research, and event examples to adapt.",
-    image: "/images/gallery/gallery-ieee-kerala-section-kochi-team.webp",
-    imageAlt: "IEEE Kerala Section volunteers gathered at the Kochi office",
+    image: "/images/projects/ieee-membership-development/home.webp",
+    imageAlt: "Screenshot of the IEEE Kerala Membership Development homepage with its chapter guide and paths to IEEE Day, funding, and branch events",
     accent: "sky",
-    repo: "https://github.com/robinfrancis186/ieee-kerala-membership-development",
     live: "https://ieee-kerala-membership-development.vercel.app/",
     highlights: [
       "Explains membership development and branch continuity through a practical session playbook.",
@@ -295,6 +294,20 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
       "Adds focused pages for IEEE Day offers and Student Branch event inspiration.",
     ],
     stack: ["Membership development", "IEEE student branches", "Source-linked research", "Static web guide"],
+    images: [
+      {
+        src: "/images/projects/ieee-membership-development/funding.webp",
+        alt: "Screenshot of the IEEE Kerala Membership Development funding and awards page",
+      },
+      {
+        src: "/images/projects/ieee-membership-development/events.webp",
+        alt: "Screenshot of the IEEE Kerala Membership Development events by branches page",
+      },
+      {
+        src: "/images/projects/ieee-membership-development/ieee-day.webp",
+        alt: "Screenshot of the IEEE Kerala Membership Development IEEE Day offers page",
+      },
+    ],
     details: [
       {
         heading: "A field guide for branch volunteers",

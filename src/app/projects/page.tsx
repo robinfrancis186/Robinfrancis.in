@@ -56,9 +56,8 @@ const projects = [
     description:
       "An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a membership playbook, rebate calculator, funding and scholarship research, IEEE Day offers, and event examples.",
     url: "https://ieee-kerala-membership-development.vercel.app/",
-    image: absoluteUrl("/images/gallery/gallery-ieee-kerala-section-kochi-team.webp"),
+    image: absoluteUrl("/images/projects/ieee-membership-development/home.webp"),
     type: "WebSite",
-    sameAs: ["https://github.com/robinfrancis186/ieee-kerala-membership-development"],
   },
   {
     name: "Readit",
