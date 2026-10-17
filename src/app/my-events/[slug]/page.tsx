@@ -88,6 +88,7 @@ export default async function Page({ params }: EventPageProps) {
               <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
                 <p><span className="font-semibold text-foreground">Date:</span> {event.date ? <time dateTime={event.date}>{dateLabel}</time> : dateLabel}</p>
                 <p><span className="font-semibold text-foreground">Organizing unit:</span> {eventUnitName(event.unit)}</p>
+                {event.role && <p><span className="font-semibold text-foreground">My role:</span> {event.role}</p>}
                 {event.story?.venue && <p><span className="font-semibold text-foreground">Where:</span> {event.story.venue}</p>}
               </div>
               {event.story && <div className="mt-8 max-w-3xl border-t border-border pt-6 text-base leading-8 text-muted-foreground">
@@ -101,6 +102,7 @@ export default async function Page({ params }: EventPageProps) {
                   <h2 id="highlights-heading" className="text-lg font-semibold text-foreground">Programme highlights</h2>
                   <ul className="mt-2 list-disc pl-5">{event.story.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
                 </section> : null}
+                {event.story.sourceUrl && <a href={event.story.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Read my event post on LinkedIn <span className="sr-only">(opens in a new tab)</span></a>}
               </div>}
             </div>
           </article>

@@ -59,7 +59,7 @@ export default function Page() {
       <noscript>
         <section aria-labelledby="events-fallback-heading">
           <h1 id="events-fallback-heading">My Events Directory</h1>
-          <p>{description} Sources include 2023 Chair-term materials and the IEEE Sahrdaya Student Branch Annual Report, 2024.</p>
+          <p>{description}</p>
           <ul>{MY_EVENTS.map((event) => <li key={event.id}>{event.date ? <time dateTime={event.date}>{event.dateLabel ?? event.date}</time> : event.dateLabel ?? event.year} · {event.title} · {event.unit}</li>)}</ul>
         </section>
       </noscript>

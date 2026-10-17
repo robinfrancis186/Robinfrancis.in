@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MY_EVENTS, matchesEventSearch, eventUnitName } from "@/data/myEvents";
 import { homeBreadcrumb } from "@/lib/breadcrumbs";
 
-const filters = ["All events", "Student Branch", "Society chapter", "TechX Infinia"] as const;
+const filters = ["All events", "Community events", "Student Branch", "Society chapter", "TechX Infinia"] as const;
 
 function eventSortDate(event: (typeof MY_EVENTS)[number]) {
   if (event.date) return event.date;
@@ -71,7 +71,7 @@ export default function MyEventsPage() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search events, years, speakers or chapters"
+                placeholder="Search events, years, speakers or communities"
                 className="min-h-12 w-full rounded-2xl border border-border bg-card pl-11 pr-4 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </label>
@@ -115,6 +115,7 @@ export default function MyEventsPage() {
                         <span className="rounded-full border border-border px-3 py-1">{event.group === "TechX Infinia" ? "Flagship" : event.unit}</span>
                       </div>
                       <h3 className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">{event.title}</h3>
+                      {event.role && <p className="mt-2 text-xs font-semibold text-primary">My role: {event.role}</p>}
                       <p className="mt-3 text-sm leading-6 text-muted-foreground">{event.story?.summary}</p>
                       <div className="mt-auto flex items-end justify-between gap-3 pt-6">
                         <p className="text-xs text-muted-foreground">{eventUnitName(event.unit)}</p>
@@ -137,7 +138,7 @@ export default function MyEventsPage() {
         </section>
 
         <aside className="mt-12 rounded-3xl border border-border bg-muted/40 p-5 text-sm leading-6 text-muted-foreground sm:p-7">
-          <p>The current collection draws on IEEE Sahrdaya's 2023 event records and 2024 annual report. Each programme reflects the shared work of its organisers, volunteers and community.</p>
+          <p>Event stories bring together original programme records, photographs and my public updates. Each programme reflects the shared work of its organisers, volunteers and community.</p>
         </aside>
       </div>
     </main>

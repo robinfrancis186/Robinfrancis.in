@@ -2,6 +2,7 @@ import { EVENT_STORIES_2023 } from "./eventStories2023";
 import { EVENT_STORIES_2024, type EventStory } from "./eventStories2024";
 import { EVENT_STORIES_2024_LATE, INFINIA_SESSION_STORIES } from "./eventStories2024Late";
 import { EVENT_MEDIA } from "./eventMedia";
+import { COMMUNITY_EVENTS } from "./communityEvents";
 
 export type MyEvent = {
   id: string;
@@ -11,7 +12,8 @@ export type MyEvent = {
   year: number;
   dateLabel?: string;
   unit: string;
-  group: "Student Branch" | "Society chapter" | "TechX Infinia";
+  group: "Student Branch" | "Society chapter" | "TechX Infinia" | "Community events";
+  role?: string;
   image?: { src: string; alt: string; kind: "photo" | "poster" | "document" };
   sessions?: MyEventSession[];
   story?: EventStory;
@@ -41,7 +43,7 @@ const unitNames: Record<string, string> = {
 export const eventUnitName = (unit: string) => unitNames[unit] ?? unit;
 
 export function eventSearchText(event: MyEvent) {
-  return [event.title, event.unit, eventUnitName(event.unit), event.group, event.year, event.date,
+  return [event.title, event.unit, eventUnitName(event.unit), event.group, event.role, event.year, event.date,
     event.dateLabel, event.story?.summary, ...(event.story?.paragraphs ?? []),
     ...(event.story?.speakers ?? []), event.story?.venue,
     ...(event.sessions?.map((session) => `${session.title} ${session.summary ?? ""}`) ?? []),
@@ -264,11 +266,11 @@ const corrections: Record<string, Partial<MyEvent>> = {
   "augmented-reality-using-unity": { endDate: "2024-10-09", dateLabel: "8 to 9 October 2024" },
 };
 
-export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents].map((event) => ({
+export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents, ...COMMUNITY_EVENTS].map((event) => ({
   ...event,
   ...corrections[event.id],
   ...(EVENT_MEDIA[event.id] ? { image: EVENT_MEDIA[event.id][0], gallery: EVENT_MEDIA[event.id].slice(1) } : {}),
-  story: EVENT_STORIES_2023[event.id] ?? EVENT_STORIES_2024[event.id] ?? EVENT_STORIES_2024_LATE[event.id],
+  story: event.story ?? EVENT_STORIES_2023[event.id] ?? EVENT_STORIES_2024[event.id] ?? EVENT_STORIES_2024_LATE[event.id],
 })).sort((a, b) =>
   (b.date ?? `${b.year}-01-01`).localeCompare(a.date ?? `${a.year}-01-01`),
 );

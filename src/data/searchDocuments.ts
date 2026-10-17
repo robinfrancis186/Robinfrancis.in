@@ -47,7 +47,7 @@ const eventDocuments: SearchDocument[] = MY_EVENTS.map((event) => ({
   section: `${event.unit} · ${event.year}`,
   description: event.story?.summary ?? event.title,
   content: eventSearchText(event),
-  keywords: ["event", "IEEE", "Sahrdaya", String(event.year), event.group, ...(event.sessions?.map((session) => session.title) ?? [])],
+  keywords: ["event", String(event.year), event.group, event.unit, ...(event.story?.speakers ?? []), ...(event.sessions?.map((session) => session.title) ?? [])],
   ...(event.date ? { date: event.date } : {}),
 }));
 
