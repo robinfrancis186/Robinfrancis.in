@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { MY_EVENTS, matchesEventSearch, eventUnitName } from "@/data/myEvents";
+import { EVENT_TOPIC_FILTERS, MY_EVENTS, matchesEventSearch, matchesEventTopic, eventUnitName } from "@/data/myEvents";
 import { homeBreadcrumb } from "@/lib/breadcrumbs";
 
-const filters = ["All events", "Community events", "Student Branch", "Society chapter", "TechX Infinia"] as const;
+const filters = ["All events", ...EVENT_TOPIC_FILTERS] as const;
+type EventFilter = (typeof filters)[number];
 
 function eventSortDate(event: (typeof MY_EVENTS)[number]) {
   if (event.date) return event.date;
@@ -19,11 +20,11 @@ function eventSortDate(event: (typeof MY_EVENTS)[number]) {
 
 export default function MyEventsPage() {
   const [query, setQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All events");
+  const [activeFilter, setActiveFilter] = useState<EventFilter>("All events");
 
   const visibleEvents = useMemo(() => {
     return [...MY_EVENTS]
-      .filter((event) => activeFilter === "All events" || event.group === activeFilter)
+      .filter((event) => activeFilter === "All events" || matchesEventTopic(event, activeFilter))
       .filter((event) => matchesEventSearch(event, query))
       .sort((a, b) => eventSortDate(b).localeCompare(eventSortDate(a)));
   }, [activeFilter, query]);
@@ -61,7 +62,7 @@ export default function MyEventsPage() {
         <section aria-labelledby="directory-heading">
           <div className="mb-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Learning, building and community</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Browse by event type and focus</p>
               <h2 id="directory-heading" className="mt-2 text-2xl font-bold sm:text-3xl">Explore the events</h2>
             </div>
             <label className="relative block w-full lg:max-w-sm">
@@ -71,7 +72,7 @@ export default function MyEventsPage() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search events, years, speakers or communities"
+                placeholder="Search events, years, topics or speakers"
                 className="min-h-12 w-full rounded-2xl border border-border bg-card pl-11 pr-4 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </label>

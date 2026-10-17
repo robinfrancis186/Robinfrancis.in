@@ -25,7 +25,7 @@ const GREETING: Turn = {
     id: "greeting",
     role: "assistant",
     content:
-        "Hi, I'm RoSi, Robin's Super Intelligence. Ask me about his projects, writing, recognitions, or selected public posts. I answer from published sources and link them when available.",
+        "Hi, I'm RoSi, Robin's Super Intelligence. Ask me about his projects, writing, recognitions, or selected public updates. I can point you to the relevant page or project.",
 };
 
 /** The mascot looks toward the input while you type, and up at its own replies. */
@@ -205,7 +205,7 @@ const MascotAssistant = () => {
                                     RoSi
                                 </p>
                                 <p className="text-[0.7rem] text-muted-foreground">
-                                    Robin&apos;s Super Intelligence · answers from published sources
+                                    Robin&apos;s Super Intelligence
                                 </p>
                             </div>
                             <button
@@ -249,6 +249,8 @@ const MascotAssistant = () => {
                                                     <a
                                                         key={source.href}
                                                         href={source.href}
+                                                        target={/^https?:\/\//i.test(source.href) ? "_blank" : undefined}
+                                                        rel={/^https?:\/\//i.test(source.href) ? "noopener noreferrer" : undefined}
                                                         className="rounded-full bg-background/70 px-2 py-0.5 text-[0.65rem] font-medium text-muted-foreground transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                                                     >
                                                         {source.title}

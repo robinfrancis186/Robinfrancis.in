@@ -57,6 +57,26 @@ export function matchesEventSearch(event: MyEvent, query: string) {
   );
 }
 
+export const EVENT_TOPIC_FILTERS = ["Assistive tech", "Hackathons", "Talks", "Workshops", "Technical", "Non-technical"] as const;
+export type EventTopicFilter = (typeof EVENT_TOPIC_FILTERS)[number];
+
+const topicPatterns: Partial<Record<EventTopicFilter, RegExp>> = {
+  "Assistive tech": /\b(?:assistive(?:\s+technology)?|accessib(?:ility|le)|disabilit(?:y|ies)|neurodivergent|inclusive design)\b/i,
+  Hackathons: /\b(?:hackathon|buildathon|makeathon|designathon|build sprint)\b/i,
+  Talks: /\b(?:talk|webinar|seminar|lecture|keynote|panel)\b/i,
+  Workshops: /\b(?:workshop|bootcamp|internship|training)\b/i,
+};
+
+const technicalPattern = /\b(?:accessib(?:ility|le)|ai|aiot|api|ar\/vr|arduino|artificial intelligence|automation|biomedical|bioengineering|biotechnology|buildathon|cloud|coding|computer|cybersecurity|data|deep learning|designathon|electrical|electronics|engineering scenarios?|foss|game development|genai|hackathon|latex|makeathon|matlab|machine learning|open[ -]source|optics|optical|pcb|physics|programming|prompt[ -]engineering|python|renewable energy|robot(?:ics)?|rtl|science|signal(?:s|[ -]processing)?|smart[ -]grid|software|soldering|sustainable energy|tech|techx|technology|technical|transformer|virtual reality|vtools|web development)\b/i;
+const nonTechnicalPattern = /\b(?:annual general meeting|career fair|christmas|committee|communication|confidence|cultural|debate|efootball|entrepreneurship|football|idea[ -]pitching|international internships?|knowledge[ -]sharing|leadership|managerial|marketing|membership|music|networking|orientation|performance|personal branding|pitch|pool activity|postgraduate|poster design|public speaking|quiz|resume|social media|speaking competition|spotlight|stress interview|treasure hunt|triathlon|videography)\b/i;
+
+export function matchesEventTopic(event: MyEvent, topic: EventTopicFilter) {
+  const text = `${event.title} ${event.story?.summary ?? ""}`;
+  if (topic === "Technical") return technicalPattern.test(text);
+  if (topic === "Non-technical") return nonTechnicalPattern.test(text) && !technicalPattern.test(text);
+  return topicPatterns[topic]?.test(text) ?? false;
+}
+
 export function findMyEvent(id: string) {
   return MY_EVENTS.find((event) => event.id === id);
 }

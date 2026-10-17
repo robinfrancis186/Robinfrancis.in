@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { findProjectDetail } from "@/data/projectDetails";
 import { formatContext, retrievePassages, type RetrievedPassage } from "@/lib/askRetrieval";
 import {
     guardQuestion,
@@ -19,6 +20,7 @@ const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 200;
 
 const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-flash-latest";
+const PLAY_GAME_INTENT = /\b(?:open|launch|play|start)\s+(?:(?:the|this|that|my)\s+)?(?:crown of bharat(?:\s+game)?|game)\b/i;
 
 type CachedAnswer = { answer: string; sources: Source[]; at: number };
 type Source = { title: string; href: string };
@@ -51,11 +53,13 @@ const toSources = (passages: RetrievedPassage[]) => {
     const seen = new Set<string>();
     const sources: Source[] = [];
 
+    const bestScore = passages[0]?.score ?? 0;
     for (const passage of passages) {
+        if (passage.score < Math.max(RELEVANCE_FLOOR, bestScore * 0.7)) break;
         if (seen.has(passage.href)) continue;
         seen.add(passage.href);
         sources.push({ title: passage.title, href: passage.href });
-        if (sources.length === 3) break;
+        if (sources.length === 2) break;
     }
 
     return sources;
@@ -71,7 +75,10 @@ const retrievalOnlyAnswer = (passages: RetrievedPassage[]) => {
     }
 
     const best = passages[0];
-    const sentences = best.text.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
+    const sentences = best.text.match(/[^.!?]+[.!?]+/g)?.slice(0, 2).join(" ").trim();
+    if (!sentences) {
+        return "I could not find a complete answer in the site sources. The contact form at /#contact reaches Robin directly.";
+    }
     return `The closest match on the site is ${best.title}: ${sentences}`;
 };
 
@@ -167,13 +174,22 @@ export async function POST(request: NextRequest) {
         return reply(SMALL_TALK_REPLY, [], "guard");
     }
 
+    if (PLAY_GAME_INTENT.test(question)) {
+        const game = findProjectDetail("crown-of-bharat");
+        if (game?.live) {
+            return reply(`Open ${game.title} using the link below.`, [{ title: `Play ${game.title}`, href: game.live }], "retrieval");
+        }
+    }
+
     const key = cacheKey(question);
     const cached = readCache(key);
     if (cached) {
         return reply(cached.answer, cached.sources, "cache");
     }
 
-    const passages = retrievePassages(question);
+    const passages = retrievePassages(question).filter((passage, index, ranked) =>
+        index < 3 && passage.score >= Math.max(RELEVANCE_FLOOR, (ranked[0]?.score ?? 0) * 0.7)
+    );
     const sources = toSources(passages);
 
     // Nothing on the site matches, so there is nothing for a model to ground on.
@@ -228,7 +244,7 @@ export async function POST(request: NextRequest) {
                         parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
                     },
                 ],
-                generationConfig: { maxOutputTokens: 320, temperature: 0.3 },
+                generationConfig: { maxOutputTokens: 512, temperature: 0.3 },
             }),
         };
         let response = await fetch(url, request);
@@ -252,14 +268,16 @@ export async function POST(request: NextRequest) {
         const text = result?.candidates?.[0]?.content?.parts
             ?.map((part: { text?: string }) => part.text ?? "")
             .join("");
+        const candidate = result?.candidates?.[0];
         const answer = sanitizeAnswer(typeof text === "string" ? text : "");
+        const completeAnswer = answer.match(/[^.!?]+[.!?]+/g)?.join(" ").trim() ?? "";
 
-        if (!answer) {
+        if (!completeAnswer || candidate?.finishReason !== "STOP") {
             return reply(retrievalOnlyAnswer(passages), sources, "retrieval");
         }
 
-        writeCache(key, { answer, sources, at: Date.now() });
-        return reply(answer, sources, "model");
+        writeCache(key, { answer: completeAnswer, sources, at: Date.now() });
+        return reply(completeAnswer, sources, "model");
     } catch {
         console.error("Ask Gemini request failed");
         // An outage should degrade the answer, not remove the feature.
