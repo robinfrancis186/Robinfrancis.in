@@ -38,6 +38,16 @@ async function main() {
     assert(community.find((event) => event.id === id).story.paragraphs.some((text) => /across|programme-wide/.test(text)));
   }
   assert(!community.some((event) => event.id === "stride-2026-inclusive-hackathons"));
+  const sheSolve = community.find((event) => event.id === "shesolve-2026");
+  const thinkable = community.find((event) => event.id === "thinkable-2026");
+  const assistX = community.find((event) => event.id === "assistx-2026");
+  assert(sheSolve.image.src.endsWith("stride-2026-inclusive-hackathons-3.webp"));
+  assert(thinkable.image.src.endsWith("thinkable-2026-audience.webp"));
+  assert(assistX.image.src.endsWith("assistx-2026-audience.webp"));
+  for (const event of [thinkable, assistX]) {
+    assert(event.gallery.some((image) => image.kind === "poster" && image.src.includes(event.id)));
+    assert(!JSON.stringify([event.image, ...event.gallery]).includes("not identified"));
+  }
   assert.equal(community.filter((event) => event.id === "inclucode-2026").length, 1);
   assert.equal(community.filter((event) => event.id === "stride-2025").length, 1);
   assert.equal(community.filter((event) => event.id === "ieee-yess-2024").length, 1);

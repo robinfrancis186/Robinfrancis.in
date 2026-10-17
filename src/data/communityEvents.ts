@@ -103,7 +103,7 @@ export const COMMUNITY_EVENTS: MyEvent[] = [
     title: "STRIDE SheSolve 2026",
     year: 2026, dateLabel: "March 2026",
     unit: "STRIDE", group: "Community events", role: "Programme contributor",
-    image: eventImage("stride-2026-inclusive-hackathons", 1, "STRIDE awareness session from the shared programme recap; the individual hackathon pictured is not identified"),
+    image: eventImage("stride-2026-inclusive-hackathons", 3, "Robin Francis addressing students during STRIDE SheSolve at LBSITW Poojappura"),
     story: {
       summary: "A women's inclusive innovation hackathon at LBSITW Poojappura, held as part of International Women's Day activities.",
       paragraphs: [
@@ -121,7 +121,11 @@ export const COMMUNITY_EVENTS: MyEvent[] = [
     title: "STRIDE Thinkable 2026",
     year: 2026, dateLabel: "March 2026",
     unit: "STRIDE", group: "Community events", role: "Programme contributor",
-    image: eventImage("stride-2026-inclusive-hackathons", 2, "STRIDE auditorium awareness session from the shared programme recap; the individual hackathon pictured is not identified"),
+    image: { src: "/images/events/community/thinkable-2026-audience.webp", alt: "Robin Francis speaking to the Thinkable audience at Sahrdaya", kind: "photo" },
+    gallery: [
+      { src: "/images/events/community/thinkable-2026-portrait.webp", alt: "Robin Francis speaking during STRIDE Thinkable at Sahrdaya", kind: "photo" },
+      { src: "/images/events/community/thinkable-2026-poster.webp", alt: "STRIDE Thinkable teaser poster: Where Ideas Enable Lives, Coming Soon, with K-DISC and Sahrdaya branding", kind: "poster" },
+    ],
     story: {
       summary: "An inclusive innovation hackathon at Sahrdaya focused on making learning and everyday living more accessible.",
       paragraphs: [
@@ -139,11 +143,15 @@ export const COMMUNITY_EVENTS: MyEvent[] = [
     title: "STRIDE AssistX 2026",
     year: 2026, dateLabel: "March 2026",
     unit: "STRIDE", group: "Community events", role: "Programme contributor",
-    image: eventImage("stride-2026-inclusive-hackathons", 3, "STRIDE classroom awareness session from the shared programme recap; the individual hackathon pictured is not identified"),
+    image: { src: "/images/events/community/assistx-2026-audience.webp", alt: "Robin Francis addressing the AssistX orientation audience at Vidya Academy of Science and Technology", kind: "photo" },
+    gallery: [
+      eventImage("stride-2026-inclusive-hackathons", 1, "Robin Francis speaking to students at the AssistX orientation session at Vidya Academy"),
+      { src: "/images/events/community/assistx-2026-poster.webp", alt: "AssistX Engineering Independence poster announcing Robin Francis's orientation session on 23 March, 11:00 AM to 12:30 PM, at Vidya Academy's auditorium", kind: "poster" },
+    ],
     story: {
       summary: "An inclusive technology hackathon at Vidya Academy of Science and Technology, turning ideas into practical assistive solutions.",
       paragraphs: [
-        "AssistX brought STRIDE's inclusive innovation approach to Vidya Academy of Science and Technology. The hackathon challenged participants to turn ideas into real-world solutions for neurodivergent individuals and people with disabilities, with attention to impact, scale and sustainability.",
+        "AssistX brought STRIDE's inclusive innovation approach to Vidya Academy of Science and Technology. The hackathon challenged participants to turn ideas into real-world solutions for neurodivergent individuals and people with disabilities, with attention to impact, scale and sustainability. I also led its orientation session, advertised for 23 March from 11:00 AM to 12:30 PM in the college auditorium under the theme Engineering Independence.",
         "I contributed to the wider programme linking awareness and student innovation. AssistX was its own event, distinct from SheSolve and Thinkable. Together the three hackathons recorded 708 participants and 228 submissions; those totals are programme-wide and should not be read as AssistX attendance or submissions alone.",
       ],
       venue: "Vidya Academy of Science and Technology, Thrissur",

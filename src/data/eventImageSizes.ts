@@ -1,5 +1,10 @@
 // Intrinsic sizes keep small archive originals from being stretched full-width.
 export const EVENT_IMAGE_SIZES: Record<string, [number, number]> = {
+"/images/events/community/thinkable-2026-portrait.webp": [1800,2400],
+"/images/events/community/thinkable-2026-audience.webp": [2400,1088],
+"/images/events/community/assistx-2026-audience.webp": [2400,1800],
+"/images/events/community/thinkable-2026-poster.webp": [1920,2400],
+"/images/events/community/assistx-2026-poster.webp": [1920,2400],
 "/images/events/community/indiafoss-2026-1.webp": [800,600],
 "/images/events/community/indiafoss-2026-2.webp": [800,600],
 "/images/events/community/indiafoss-2026-3.webp": [1152,1536],
