@@ -28,7 +28,6 @@ export function EventImage({ image, title, priority = false, compact = false }: 
       </button>
       <figcaption className="px-4 pb-3 text-center text-xs leading-5 text-muted-foreground">
         {image.alt}
-        <a href={image.src} target="_blank" rel="noopener noreferrer" className="mx-auto flex min-h-11 w-fit items-center text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Open original image <span className="sr-only">in a new tab</span></a>
       </figcaption>
       {open && <Lightbox items={[{ img: image.src, alt: image.alt, title, imageWidth: width, imageHeight: height }]}
         index={0} onClose={() => setOpen(false)} onNavigate={() => {}} />}
