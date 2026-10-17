@@ -58,7 +58,7 @@ export const FloatingNav = ({
                     className={cn(
                         "transition-[transform,opacity] duration-200",
                         visible ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-[100px] opacity-0",
-                        "flex max-w-fit fixed top-4 inset-x-0 mx-auto glass-panel rounded-full z-[5000] pr-2 pl-6 py-1.5 items-center justify-center space-x-5",
+                        "flex max-w-fit fixed top-4 inset-x-0 mx-auto glass-panel rounded-full z-[5000] px-3 sm:px-6 py-1 sm:py-1.5 items-center justify-center space-x-1 sm:space-x-4",
                         className
                     )}
                 >

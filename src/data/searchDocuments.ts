@@ -1,6 +1,7 @@
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { PROJECT_DETAILS } from "@/data/projectDetails";
+import { MY_EVENTS, eventSearchText } from "@/data/myEvents";
 import { awards, mediaKit, proofLinks, speakingItems } from "@/data/profileProof";
 import { stripInlineMarkup } from "@/lib/inlineText";
 import type { SearchDocument } from "@/lib/search";
@@ -36,6 +37,18 @@ const articleDocuments: SearchDocument[] = STATIC_BLOG_POSTS.map((post) => ({
   content: stripInlineMarkup(post.content),
   keywords: post.tags,
   date: post.updatedAt ?? post.date,
+}));
+
+const eventDocuments: SearchDocument[] = MY_EVENTS.map((event) => ({
+  id: `event-${event.id}`,
+  title: event.title,
+  href: `/my-events/${event.id}/`,
+  type: "Resource",
+  section: `${event.unit} · ${event.year}`,
+  description: event.story?.summary ?? event.title,
+  content: eventSearchText(event),
+  keywords: ["event", "IEEE", "Sahrdaya", String(event.year), event.group, ...(event.sessions?.map((session) => session.title) ?? [])],
+  ...(event.date ? { date: event.date } : {}),
 }));
 
 const achievementDocuments: SearchDocument[] = awards.map((award) => ({
@@ -278,6 +291,7 @@ export const SEARCH_DOCUMENTS: readonly SearchDocument[] = [
   ...pageDocuments,
   ...articleDocuments,
   ...projectDocuments,
+  ...eventDocuments,
   ...achievementDocuments,
   ...proofDocuments,
   ...publicPresenceDocuments,

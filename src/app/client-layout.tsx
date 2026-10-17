@@ -78,7 +78,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundary>
       <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-        <div className="fixed right-4 top-4 z-[5001]">
+        <div className="fixed right-4 top-[4.5rem] z-[5001] md:top-4">
           <ThemeToggle />
         </div>
         <Navbar />

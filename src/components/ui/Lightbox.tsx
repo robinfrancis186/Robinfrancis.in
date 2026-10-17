@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import NextImage from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 
@@ -31,6 +31,7 @@ interface LightboxProps {
  */
 export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) => {
     const isOpen = index !== null;
+    const dialogRef = useRef<HTMLDialogElement | null>(null);
     const closeRef = useRef<HTMLButtonElement | null>(null);
     const restoreFocusRef = useRef<HTMLElement | null>(null);
 
@@ -47,44 +48,50 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
     useEffect(() => {
         if (!isOpen) return;
 
+        const dialog = dialogRef.current;
+        if (!dialog) return;
         restoreFocusRef.current = document.activeElement as HTMLElement | null;
+        if (!dialog.open) dialog.showModal();
         closeRef.current?.focus();
 
         const { overflow } = document.body.style;
         document.body.style.overflow = "hidden";
 
-        const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") onClose();
-            else if (event.key === "ArrowLeft") goPrev();
-            else if (event.key === "ArrowRight") goNext();
-        };
-
-        document.addEventListener("keydown", onKeyDown);
         return () => {
-            document.removeEventListener("keydown", onKeyDown);
             document.body.style.overflow = overflow;
+            if (dialog.open) dialog.close();
             restoreFocusRef.current?.focus?.();
         };
-    }, [isOpen, onClose, goPrev, goNext]);
+    }, [isOpen]);
 
     const item = index === null ? null : items[index];
 
     return (
-        <AnimatePresence>
-            {item && (
-                <motion.div
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label={item.title ? `${item.title}, full size` : "Image, full size"}
-                    className="fixed inset-0 z-[6000] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 sm:p-8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.18 }}
-                    onClick={(event) => {
-                        if (event.target === event.currentTarget) onClose();
-                    }}
-                >
+        <dialog
+            ref={dialogRef}
+            aria-label={item?.title ? `${item.title}, full size` : "Image, full size"}
+            onCancel={(event) => {
+                event.preventDefault();
+                onClose();
+            }}
+            onClick={(event) => {
+                if (event.target === event.currentTarget) onClose();
+            }}
+            className="fixed inset-0 z-[6000] m-0 h-full max-h-none w-full max-w-none border-0 bg-black/90 p-4 text-white backdrop:backdrop-blur-sm sm:p-8"
+        >
+            <motion.div
+                key={item?.img ?? "closed"}
+                className="flex h-full w-full items-center justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: item ? 1 : 0 }}
+                transition={{ duration: 0.18 }}
+                onKeyDown={(event) => {
+                    if (event.key === "ArrowLeft") goPrev();
+                    else if (event.key === "ArrowRight") goNext();
+                }}
+            >
+                {item && (
+                    <>
                     <button
                         ref={closeRef}
                         type="button"
@@ -142,9 +149,10 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                             </figcaption>
                         )}
                     </figure>
-                </motion.div>
-            )}
-        </AnimatePresence>
+                    </>
+                )}
+            </motion.div>
+        </dialog>
     );
 };
 

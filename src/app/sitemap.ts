@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { GALLERY_ITEMS } from "@/data/galleryItems";
+import { MY_EVENTS } from "@/data/myEvents";
 import { awards, mediaKit } from "@/data/profileProof";
 import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { absoluteUrl } from "@/lib/seo";
@@ -21,6 +22,7 @@ const routeLastModified = {
   gallery: "2026-08-03",
   card: "2026-08-18",
   resume: "2026-07-06",
+  myEvents: "2026-10-17",
 } as const;
 
 const homeAchievementImages = [
@@ -101,6 +103,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       routeLastModified.achievements,
     ),
     sitemapEntry("/press-kit/", 0.8, "monthly", [mediaKit.headshot], routeLastModified.pressKit),
+    sitemapEntry("/my-events/", 0.76, "monthly", MY_EVENTS.flatMap((event) => [
+      ...(event.image ? [event.image.src] : []),
+      ...(event.gallery?.map((image) => image.src) ?? []),
+      ...(event.sessions?.map((session) => session.image.src) ?? []),
+    ]), routeLastModified.myEvents),
+    ...MY_EVENTS.map((event) => sitemapEntry(`/my-events/${event.id}/`, 0.62, "yearly", [
+      ...(event.image ? [event.image.src] : []),
+      ...(event.gallery?.map((image) => image.src) ?? []),
+      ...(event.sessions?.map((session) => session.image.src) ?? []),
+    ], routeLastModified.myEvents)),
     sitemapEntry(
       "/blog/",
       0.8,

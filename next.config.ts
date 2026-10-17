@@ -39,6 +39,11 @@ const nextConfig: NextConfig = {
         { source: `/blog/${slug}`, destination, permanent: true },
       ]),
       {
+        source: "/my-events/:session(infinia-[a-z0-9-]+)/",
+        destination: "/my-events/techx-infinia/#:session",
+        permanent: true,
+      },
+      {
         source: "/speaking/",
         destination: "/achievements/",
         permanent: true,

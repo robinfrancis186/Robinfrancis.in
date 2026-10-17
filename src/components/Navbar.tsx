@@ -1,5 +1,5 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { Home, User, Briefcase, FileText, ImageIcon, Trophy } from "lucide-react";
+import { Home, User, Briefcase, FileText, ImageIcon, Trophy, CalendarDays } from "lucide-react";
 
 const Navbar = () => {
     const navItems = [
@@ -32,6 +32,11 @@ const Navbar = () => {
             name: "Gallery",
             link: "/gallery/",
             icon: <ImageIcon className="h-4 w-4 text-neutral-500 dark:text-white" />,
+        },
+        {
+            name: "My Events",
+            link: "/my-events/",
+            icon: <CalendarDays className="h-4 w-4 text-neutral-500 dark:text-white" />,
         },
     ];
 
