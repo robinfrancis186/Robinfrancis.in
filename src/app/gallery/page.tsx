@@ -27,7 +27,7 @@ const galleryJsonLd = [
       caption: ensureRobinFrancisAlt(item.alt, "gallery"),
       contentUrl: absoluteUrl(item.img),
       url: absoluteUrl(item.img),
-      dateCreated: item.date,
+      dateCreated: item.date || undefined,
       keywords: [item.category, "Robin Francis", "AI community", "IEEE", "inclusive innovation"],
       width: item.imageWidth,
       height: item.imageHeight,
@@ -99,7 +99,7 @@ export default function Page() {
                     height={item.imageHeight}
                   />
                   <figcaption>
-                    {item.title} - {item.date}
+                    {item.title}{item.date ? ` - ${item.date}` : ""}
                   </figcaption>
                 </figure>
               </li>
