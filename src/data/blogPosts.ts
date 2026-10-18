@@ -1,3 +1,5 @@
+import { DEVDAY_BENGALURU_POST } from "./devdayBengaluruPost.ts";
+
 export type StaticBlogPost = {
     id: string;
     slug: string;
@@ -10,6 +12,9 @@ export type StaticBlogPost = {
     gallery?: {
         src: string;
         alt: string;
+        caption?: string;
+        width?: number;
+        height?: number;
     }[];
     excerpt: string;
     metaDescription?: string;
@@ -25,6 +30,7 @@ export type StaticBlogPost = {
 };
 
 export const STATIC_BLOG_POSTS: StaticBlogPost[] = [
+    DEVDAY_BENGALURU_POST,
     {
         id: "static-11",
         slug: "devin-clay-pottery-met-code-kochi",

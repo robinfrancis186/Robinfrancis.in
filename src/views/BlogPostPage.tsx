@@ -93,6 +93,13 @@ function portableTextToPlainText(value: unknown): string {
 }
 
 const staticSectionHeadings = new Set([
+    "Rain, Traffic and a Very Good Reason to Travel",
+    "Walking Into My First DevDay",
+    "Two Humans, One AI Co-host",
+    "From an Impressive Demo to Something People Use",
+    "The People Between the Sessions",
+    "And Then Came the Pro 100 Surprise",
+    "Coming Home With More to Build",
     "A Different Kind of Tech Gathering",
     "From Clay to Code",
     "Pottery Is Therapy",
@@ -348,7 +355,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     <section aria-label={`${post.title} photo gallery`} className="mt-14">
                         <h2 className="text-3xl font-bold mb-6 font-geist">Moments from the journey</h2>
                         <div className="grid gap-4 sm:grid-cols-2">
-                            {post.gallery.map((image: { src: string; alt: string }, index: number) => (
+                            {post.gallery.map((image: NonNullable<StaticBlogPost["gallery"]>[number], index: number) => (
                                 <figure
                                     key={image.src}
                                     className={index === 2 ? "sm:col-span-2 overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900" : "overflow-hidden rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-800 bg-neutral-100 dark:bg-neutral-900"}
@@ -356,11 +363,12 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                                     <Image
                                         src={image.src}
                                         alt={ensureRobinFrancisAlt(image.alt, 'article')}
-                                        width={900}
-                                        height={560}
-                                        sizes="(min-width: 768px) 384px, 100vw"
-                                        className="h-full max-h-[520px] w-full object-cover"
+                                        width={image.width ?? 900}
+                                        height={image.height ?? 560}
+                                        sizes={index === 2 ? "(min-width: 768px) 768px, 100vw" : "(min-width: 768px) 384px, 100vw"}
+                                        className={image.width && image.height ? "h-auto w-full" : "h-full max-h-[520px] w-full object-cover"}
                                     />
+                                    {image.caption && <figcaption className="px-4 py-3 text-sm leading-6 text-muted-foreground">{image.caption}</figcaption>}
                                 </figure>
                             ))}
                         </div>

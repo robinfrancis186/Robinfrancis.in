@@ -26,6 +26,34 @@ export type SpeakingItem = {
 
 export const proofLinks: ProofLink[] = [
   {
+    title: "OpenAI DevDay Exchange 2026 official event page",
+    label: "OpenAI",
+    href: "https://events.openai.com/devdayexchange2026",
+    description: "OpenAI's event listing confirms Bengaluru on 16 October 2026 and describes the technical sessions, Codex workflows and builder conversations.",
+    category: "publication",
+  },
+  {
+    title: "Robin Francis's OpenAI DevDay Exchange Bengaluru reflection",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/posts/robinfrancis186_openai-devday-ai-ugcPost-7516914387102736384-sMEo/",
+    description: "Robin's first-person reflection on the people, technical themes and surprise Pro 100 plan at his first OpenAI DevDay.",
+    category: "publication",
+  },
+  {
+    title: "Anchit Nishant's DevDay Bengaluru live session recap",
+    label: "Speaker recap",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7517166269528248320/",
+    description: "Anchit's account credits Swagata Dutta Choudhury and their AI co-host Meera in a live session combining voice interaction and image generation.",
+    category: "publication",
+  },
+  {
+    title: "Pragya Misra's DevDay Bengaluru closing discussion recap",
+    label: "Speaker recap",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7516897868247543808/",
+    description: "Pragya's recap names the closing discussion's participants and describes the focus on building useful products for everyday needs.",
+    category: "publication",
+  },
+  {
     title: "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
     label: "The Week",
     href: "https://www.theweek.in/education/latest/2024/07/13/amal-jyothi-college-aces-hackathon-at-genai-conclave.html",
