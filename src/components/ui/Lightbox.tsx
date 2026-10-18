@@ -97,7 +97,7 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                         type="button"
                         onClick={onClose}
                         aria-label="Close full size view"
-                        className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                        className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                     >
                         <X className="h-5 w-5" />
                     </button>
@@ -108,7 +108,7 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                                 type="button"
                                 onClick={goPrev}
                                 aria-label="Previous image"
-                                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:left-4 sm:p-3"
+                                className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:left-4 sm:p-3"
                             >
                                 <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
                             </button>
@@ -116,7 +116,7 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                                 type="button"
                                 onClick={goNext}
                                 aria-label="Next image"
-                                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-4 sm:p-3"
+                                className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:right-4 sm:p-3"
                             >
                                 <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
                             </button>

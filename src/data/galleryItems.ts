@@ -13,6 +13,45 @@ export type GalleryItem = {
 
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
+    id: "gallery-openai-devday-bengaluru-builders",
+    img: "/images/blog/openai-devday-bengaluru/robin-francis-openai-devday-bengaluru-community.webp",
+    height: 420,
+    title: "OpenAI DevDay: Bengaluru Builders",
+    alt: "Robin Francis with fellow builders at the OpenAI DevDay Exchange Bengaluru backdrop",
+    description:
+      "My first OpenAI DevDay experience in Bengaluru: a group moment with fellow builders, new connections and familiar faces.",
+    category: "OpenAI DevDay",
+    date: "2026-10-16",
+    imageWidth: 2240,
+    imageHeight: 1680,
+  },
+  {
+    id: "gallery-openai-devday-community-selfie",
+    img: "/images/blog/openai-devday-bengaluru/robin-francis-devday-community-selfie.webp",
+    height: 420,
+    title: "OpenAI DevDay: Reconnecting",
+    alt: "Robin Francis taking a group selfie with fellow attendees at OpenAI DevDay Exchange Bengaluru",
+    description:
+      "Reconnecting with familiar faces and meeting fellow developers between sessions at OpenAI DevDay Exchange in Bengaluru.",
+    category: "OpenAI DevDay",
+    date: "2026-10-16",
+    imageWidth: 1920,
+    imageHeight: 1440,
+  },
+  {
+    id: "gallery-openai-devday-builder-mascot",
+    img: "/images/blog/openai-devday-bengaluru/robin-francis-devday-builder-mascot.webp",
+    height: 420,
+    title: "OpenAI DevDay: Builder Moments",
+    alt: "Robin Francis taking a selfie with a fellow attendee and a yellow builder mascot at OpenAI DevDay Exchange Bengaluru",
+    description:
+      "A light-hearted moment with a fellow attendee and the yellow builder mascot during my first OpenAI DevDay in Bengaluru.",
+    category: "OpenAI DevDay",
+    date: "2026-10-16",
+    imageWidth: 1920,
+    imageHeight: 1440,
+  },
+  {
     id: "gallery-watsonx-team",
     img: "/images/blog/1720937570476.webp",
     height: 500,
