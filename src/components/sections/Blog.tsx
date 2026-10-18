@@ -111,6 +111,7 @@ const Blog = () => {
                         <div className="p-6 md:p-10 space-y-6">
                             <ArticleActions
                                 title={selectedPost.title}
+                                articleSlug={selectedPost.slug}
                                 text={selectedPost.content || selectedPost.excerpt || ""}
                                 className="my-0"
                             />

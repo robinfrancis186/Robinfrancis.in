@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link2, Pause, Play, RotateCcw, RotateCw, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import ArticleLike from "@/components/blog/ArticleLike";
 
 type ListenState = "idle" | "playing" | "paused";
 type PlaybackRate = 0.85 | 1 | 1.25 | 1.5;
@@ -562,14 +563,17 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                     )}
                 </div>
 
-                <button
-                    type="button"
-                    onClick={handleShare}
-                    className="inline-flex w-fit items-center gap-3 text-base font-semibold text-neutral-800 transition-colors hover:text-primary dark:text-neutral-100"
-                >
-                    {supportsNativeShare ? <Share2 className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
-                    Share
-                </button>
+                <div className="flex shrink-0 flex-wrap items-center gap-5">
+                    {articleSlug && <ArticleLike key={articleSlug} slug={articleSlug} />}
+                    <button
+                        type="button"
+                        onClick={handleShare}
+                        className="inline-flex min-h-11 w-fit items-center gap-3 text-base font-semibold text-neutral-800 transition-colors hover:text-primary dark:text-neutral-100"
+                    >
+                        {supportsNativeShare ? <Share2 className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
+                        Share
+                    </button>
+                </div>
             </div>
 
             <p className="mt-3 min-h-5 text-sm text-neutral-500 dark:text-neutral-400" aria-live="polite">
