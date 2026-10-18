@@ -1,6 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { LeaderboardEntry } from "@/lib/jetpackLeaderboard";
+
+async function leaderboardRequest(body?: Record<string, unknown>): Promise<{
+    entries: LeaderboardEntry[]; runId: string; name: string;
+}> {
+    const response = await fetch("/api/jetpack/", {
+        method: body ? "POST" : "GET",
+        headers: body ? { "Content-Type": "application/json" } : undefined,
+        body: body ? JSON.stringify(body) : undefined,
+        cache: "no-store",
+        signal: AbortSignal.timeout(12000),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "The leaderboard is unavailable. Please try again.");
+    return data;
+}
 
 /**
  * Jetpack: the 404 page's endless flyer.
@@ -301,6 +317,20 @@ export default function JetpackRunner() {
     const [phase, setPhase] = useState<Phase>("ready");
     const [result, setResult] = useState({ score: 0, bits: 0 });
     const [best, setBest] = useState(0);
+    const [name, setName] = useState("");
+    const [joined, setJoined] = useState(false);
+    const [starting, setStarting] = useState(false);
+    const [startError, setStartError] = useState("");
+    const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+    const [boardState, setBoardState] = useState<"loading" | "ready" | "error">("loading");
+    const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+    const [saveError, setSaveError] = useState("");
+    const nameInput = useRef<HTMLInputElement>(null);
+    const chosenName = useRef("");
+    const startingRef = useRef(false);
+    const savingRef = useRef(false);
+    const runId = useRef("");
+    const pendingScore = useRef<{ runId: string; score: number; durationMs: number } | null>(null);
 
     const game = useRef({
         phase: "ready" as Phase,
@@ -311,6 +341,7 @@ export default function JetpackRunner() {
         speed: START_SPEED,
         distance: 0,
         score: 0,
+        durationMs: 0,
         bitCount: 0,
         combo: 0,
         comboTimer: 0,
@@ -334,16 +365,48 @@ export default function JetpackRunner() {
 
     const reduced = useRef(false);
 
+    const loadLeaderboard = useCallback(async () => {
+        setBoardState("loading");
+        try {
+            const data = await leaderboardRequest();
+            setEntries(data.entries);
+            setBoardState("ready");
+        } catch {
+            setBoardState("error");
+        }
+    }, []);
+
+    const saveScore = useCallback(async () => {
+        if (!pendingScore.current || savingRef.current) return;
+        savingRef.current = true;
+        setSaveState("saving");
+        setSaveError("");
+        try {
+            const data = await leaderboardRequest({ action: "finish", ...pendingScore.current });
+            pendingScore.current = null;
+            setEntries(data.entries);
+            setBoardState("ready");
+            setSaveState("saved");
+        } catch (error) {
+            setSaveState("error");
+            setSaveError(error instanceof Error ? error.message : "Could not save your score. Please retry.");
+        } finally {
+            savingRef.current = false;
+        }
+    }, []);
+
     useEffect(() => {
         reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         try {
             const stored = Number(window.localStorage.getItem("rf-jetpack-best")) || 0;
             setBest(stored);
             game.current.best = stored;
+            setName(window.localStorage.getItem("rf-jetpack-name") || "");
         } catch {
             /* storage unavailable; best stays session-local */
         }
-    }, []);
+        void loadLeaderboard();
+    }, [loadLeaderboard]);
 
     const reset = useCallback(() => {
         const g = game.current;
@@ -354,6 +417,7 @@ export default function JetpackRunner() {
             speed: START_SPEED,
             distance: 0,
             score: 0,
+            durationMs: 0,
             bitCount: 0,
             combo: 0,
             comboTimer: 0,
@@ -373,6 +437,41 @@ export default function JetpackRunner() {
         });
     }, []);
 
+    const beginRun = useCallback(async (holding: boolean) => {
+        if (!chosenName.current) {
+            nameInput.current?.focus();
+            return;
+        }
+        if (startingRef.current || pendingScore.current) return;
+        startingRef.current = true;
+        setStarting(true);
+        setStartError("");
+        game.current.holding = holding;
+        try {
+            const data = await leaderboardRequest({ action: "start", name: chosenName.current });
+            runId.current = data.runId;
+            chosenName.current = data.name;
+            setName(data.name);
+            setJoined(true);
+            try { window.localStorage.setItem("rf-jetpack-name", data.name); } catch { /* session-only name */ }
+            reset();
+            game.current.phase = "running";
+            if (document.hidden || !document.hasFocus()) {
+                game.current.phase = "paused";
+                game.current.holding = false;
+            }
+            setSaveState("idle");
+            setPhase(game.current.phase);
+            canvasRef.current?.focus({ preventScroll: true });
+        } catch (error) {
+            game.current.holding = false;
+            setStartError(error instanceof Error ? error.message : "Could not start. Please try again.");
+        } finally {
+            startingRef.current = false;
+            setStarting(false);
+        }
+    }, [reset]);
+
     const press = useCallback(() => {
         const g = game.current;
         if (g.phase === "running") {
@@ -389,11 +488,8 @@ export default function JetpackRunner() {
         // Keydown auto-repeats while a key is held, so without the release the
         // fatal input would restart the run before the score could be read.
         if (g.phase === "over" && (g.t < g.restartAt || g.needRelease)) return;
-        reset();
-        g.phase = "running";
-        g.holding = true;
-        setPhase("running");
-    }, [reset]);
+        void beginRun(true);
+    }, [beginRun]);
 
     const release = useCallback(() => {
         game.current.holding = false;
@@ -401,14 +497,15 @@ export default function JetpackRunner() {
     }, []);
 
     useEffect(() => {
-        const isTyping = () => {
+        const isUsingControl = () => {
             const a = document.activeElement;
-            return a instanceof HTMLInputElement || a instanceof HTMLTextAreaElement;
+            return a instanceof HTMLElement && !a.hasAttribute("data-flight-control")
+                && Boolean(a.closest("input, textarea, select, button, a, [contenteditable='true']"));
         };
         const keys = new Set(["Space", "ArrowUp", "KeyW", "Enter"]);
 
         const onDown = (e: KeyboardEvent) => {
-            if (!keys.has(e.code) || isTyping()) return;
+            if (!keys.has(e.code) || isUsingControl()) return;
             e.preventDefault();
             press();
         };
@@ -577,6 +674,8 @@ export default function JetpackRunner() {
             setPhase("over");
             setResult({ score: final, bits: g.bitCount });
             setBest(nextBest);
+            pendingScore.current = { runId: runId.current, score: final, durationMs: Math.round(g.durationMs) };
+            void saveScore();
         };
 
         /** Circle vs axis-aligned rect, via the closest point on the rect. */
@@ -609,6 +708,8 @@ export default function JetpackRunner() {
                 if (g.phase === "ready") g.y = HEIGHT / 2 + Math.sin(g.t * 2.2) * 12;
                 return;
             }
+
+            g.durationMs += dt * 1000;
 
             if (g.overdrive > 0) g.overdrive = Math.max(0, g.overdrive - dt * 1000);
 
@@ -1128,7 +1229,7 @@ export default function JetpackRunner() {
             themeWatcher.disconnect();
             sizeWatcher.disconnect();
         };
-    }, []);
+    }, [saveScore]);
 
     const overlay = (() => {
         if (phase === "running") return null;
@@ -1139,20 +1240,69 @@ export default function JetpackRunner() {
             const beaten = result.score >= best && result.score > 0;
             return {
                 title: beaten ? `New best: ${result.score}` : `Down at ${result.score}`,
-                body: `${result.bits} bits collected. Press space, or tap, to fly again`,
+                body: saveState === "saving" ? "Saving your score..."
+                    : saveState === "error" ? "Your score is waiting to be saved. Retry below."
+                    : `${result.bits} bits collected. Press space, or tap, to fly again`,
             };
         }
         return {
-            title: "Hold to fly",
-            body: "Space, or tap and hold. Thread the gates, grab the gold",
+            title: "Ready for takeoff?",
+            body: "Enter your name above to join the leaderboard",
         };
     })();
 
     return (
         <div className="w-full">
+            {!joined ? (
+                <form
+                    className="mb-4 rounded-2xl border border-border bg-muted/30 p-4 sm:p-5"
+                    onSubmit={(event) => {
+                        event.preventDefault();
+                        chosenName.current = name.trim();
+                        void beginRun(false);
+                    }}
+                >
+                    <label htmlFor="jetpack-player-name" className="block text-sm font-semibold">Your pilot name</label>
+                    <p id="jetpack-name-hint" className="mt-1 text-sm text-muted-foreground">Choose a name or nickname. It and your best score will be public.</p>
+                    <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                        <input
+                            ref={nameInput}
+                            id="jetpack-player-name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            required maxLength={24} autoComplete="nickname"
+                            aria-describedby="jetpack-name-hint jetpack-controls"
+                            placeholder="Enter your name"
+                            disabled={starting}
+                            className="min-w-0 flex-1 rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                        />
+                        <button type="submit" disabled={starting} className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">
+                            {starting ? "Preparing..." : "Start game"}
+                        </button>
+                    </div>
+                </form>
+            ) : (
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+                    <p className="min-w-0 break-words">Flying as <strong>{name}</strong></p>
+                    {(phase === "ready" || phase === "over") && !starting && saveState !== "saving" && saveState !== "error" && (
+                        <button type="button" className="rounded-lg px-3 py-2 text-primary underline underline-offset-4" onClick={() => {
+                            chosenName.current = "";
+                            setJoined(false);
+                            game.current.phase = "ready";
+                            setPhase("ready");
+                            setStartError("");
+                            setSaveState("idle");
+                        }}>Change name</button>
+                    )}
+                </div>
+            )}
+            <p id="jetpack-controls" className="mb-3 text-xs text-muted-foreground">Hold Space or touch and hold to climb. Release to descend. Avoid the gates and collect gold.</p>
+            {startError && <p role="alert" className="mb-3 text-sm text-destructive">{startError}</p>}
             <div className="liquid-glass relative overflow-hidden rounded-2xl">
                 <canvas
                     ref={canvasRef}
+                    tabIndex={joined ? 0 : -1}
+                    data-flight-control
                     role="img"
                     aria-label="Jetpack, a small flying game. Hold space or tap and hold to climb, release to descend, and avoid the gates."
                     onPointerDown={(event) => {
@@ -1170,7 +1320,7 @@ export default function JetpackRunner() {
                 {overlay && (
                     <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-background/55 text-center backdrop-blur-[2px]">
                         <p className="text-base font-semibold text-foreground">
-                            {overlay.title}
+                            {starting ? "Preparing your run..." : overlay.title}
                         </p>
                         <p className="px-6 text-xs text-muted-foreground">{overlay.body}</p>
                     </div>
@@ -1185,12 +1335,44 @@ export default function JetpackRunner() {
 
             <button
                 type="button"
+                data-flight-control
+                disabled={!joined || starting || saveState === "saving" || saveState === "error"}
                 onPointerDown={press}
                 onPointerUp={release}
                 className="sr-only focus:not-sr-only focus:mt-3 focus:inline-block focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:text-primary-foreground"
             >
                 {phase === "running" ? "Hold to fly" : "Start the game"}
             </button>
+
+            <div aria-live="polite" className="mt-3 text-sm">
+                {saveState === "saving" && <p>Saving your score...</p>}
+                {saveState === "saved" && <p className="text-muted-foreground">Score saved. Only your best run counts toward the leaderboard.</p>}
+                {saveState === "error" && <div>
+                    <p className="text-destructive">{saveError}</p>
+                    <button type="button" onClick={() => void saveScore()} className="mt-2 rounded-lg border border-border px-4 py-2 font-medium">Retry saving score</button>
+                </div>}
+            </div>
+
+            <section aria-labelledby="jetpack-leaderboard-title" className="mt-6 rounded-2xl border border-border bg-muted/20 p-4 sm:p-5">
+                <h2 id="jetpack-leaderboard-title" className="text-lg font-semibold">Leaderboard</h2>
+                <p className="mt-1 text-xs text-muted-foreground">Top 10 pilots · Best score per browser</p>
+                {boardState === "loading" && <p role="status" className="mt-4 text-sm text-muted-foreground">Loading scores...</p>}
+                {boardState === "error" && <div className="mt-4 text-sm">
+                    <p>Scores are unavailable right now.</p>
+                    <button type="button" onClick={() => void loadLeaderboard()} className="mt-2 rounded-lg border border-border px-4 py-2">Retry leaderboard</button>
+                </div>}
+                {boardState === "ready" && (entries.length ? (
+                    <ol className="mt-4 divide-y divide-border">
+                        {entries.map((entry, index) => (
+                            <li key={index} className="flex items-center gap-3 py-3 text-sm">
+                                <span className="w-6 shrink-0 font-mono text-muted-foreground">{index + 1}</span>
+                                <span className="min-w-0 flex-1 break-words font-medium">{entry.name}</span>
+                                <span className="shrink-0 font-mono tabular-nums">{entry.score.toLocaleString()} <span className="sr-only">points</span></span>
+                            </li>
+                        ))}
+                    </ol>
+                ) : <p className="mt-4 text-sm text-muted-foreground">No scores yet. Be the first to finish a run.</p>)}
+            </section>
         </div>
     );
 }
