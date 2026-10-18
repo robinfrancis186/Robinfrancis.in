@@ -99,7 +99,7 @@ export default function Page() {
                     height={item.imageHeight}
                   />
                   <figcaption>
-                    {item.title}{item.date ? ` - ${item.date}` : ""}
+                    {item.title}{item.date ? ` - ${item.date.slice(0, 4)}` : ""}
                   </figcaption>
                 </figure>
               </li>

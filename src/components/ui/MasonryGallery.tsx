@@ -97,8 +97,8 @@ export const MasonryGallery: React.FC<MasonryGalleryProps> = ({
                                     </span>
                                 )}
                                 {item.date && (
-                                    <time className="shrink-0 text-xs font-semibold leading-5 text-primary">
-                                        {item.date}
+                                    <time dateTime={item.date} className="shrink-0 text-xs font-semibold leading-5 text-primary">
+                                        {item.date.slice(0, 4)}
                                     </time>
                                 )}
                             </figcaption>

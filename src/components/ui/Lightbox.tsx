@@ -142,7 +142,7 @@ export const Lightbox = ({ items, index, onClose, onNavigate }: LightboxProps) =
                         {(item.title || item.date) && (
                             <figcaption className="flex flex-wrap items-center justify-center gap-x-3 text-center text-sm text-white/80">
                                 {item.title && <span className="font-medium">{item.title}</span>}
-                                {item.date && <span className="text-white/55">{item.date}</span>}
+                                {item.date && <time dateTime={item.date} className="text-white/55">{item.date.slice(0, 4)}</time>}
                                 <span className="text-white/40">
                                     {(index ?? 0) + 1} of {items.length}
                                 </span>
