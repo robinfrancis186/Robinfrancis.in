@@ -20,7 +20,7 @@ const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 200;
 
 const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-flash-latest";
-const PLAY_GAME_INTENT = /\b(?:open|launch|play|start)\s+(?:(?:the|this|that|my)\s+)?(?:crown of bharat(?:\s+game)?|game)\b/i;
+const PLAY_GAME_INTENT = /\b(?:open|launch|play|start)\s+(?:(?:the|this|that|my)\s+)?(?:crown of bharat(?:\s+game)?|(?:404\s+)?(?:jetpack(?:\s+runner)?\s+)?game|jetpack(?:\s+runner)?)\b/i;
 
 type CachedAnswer = { answer: string; sources: Source[]; at: number };
 type Source = { title: string; href: string };
@@ -175,10 +175,13 @@ export async function POST(request: NextRequest) {
     }
 
     if (PLAY_GAME_INTENT.test(question)) {
-        const game = findProjectDetail("crown-of-bharat");
-        if (game?.live) {
-            return reply(`Open ${game.title} using the link below.`, [{ title: `Play ${game.title}`, href: game.live }], "retrieval");
+        if (/\bcrown of bharat\b/i.test(question)) {
+            const game = findProjectDetail("crown-of-bharat");
+            if (game?.live) {
+                return reply(`Open ${game.title} using the link below.`, [{ title: `Play ${game.title}`, href: game.live }], "retrieval");
+            }
         }
+        return reply("The 404 page has a small jetpack game you can play.", [{ title: "Play the 404 game", href: "/404/" }], "retrieval");
     }
 
     const key = cacheKey(question);
