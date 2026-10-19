@@ -152,7 +152,7 @@ export function retrievalAnswer(question: string, passages: RetrievedPassage[]) 
     const sentences = best.text.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [];
     const relevant = sentences.map((sentence, index) => ({ sentence: sentence.trim(), index, score: terms.reduce((sum, term) => sum + countMatches(wordsOf(sentence), term), 0) }))
         .filter(entry => entry.sentence.length >= 40 && entry.sentence.length <= 700 && /[.!?]$/.test(entry.sentence))
-        .sort((a, b) => b.score - a.score || a.index - b.index).slice(0, 2).sort((a, b) => a.index - b.index);
+        .sort((a, b) => b.score - a.score || a.index - b.index).slice(0, 1);
     return {
         answer: relevant.length ? relevant.map(entry => entry.sentence).join(" ") : `The ${best.title} page has the closest information I could find. I do not have enough detail to give a more specific answer.`,
         sources: [{ title: best.title, href: best.href }],
