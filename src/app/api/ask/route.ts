@@ -20,7 +20,7 @@ const RELEVANCE_FLOOR = 22;
 const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 200;
 
-const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-3.5-flash-lite";
+const MODEL = process.env.OPENAI_ASK_MODEL ?? "gpt-4.1-mini-2025-04-14";
 const PLAY_GAME_INTENT = /\b(?:open|launch|play|start)\s+(?:(?:the|this|that|my)\s+)?(?:crown of bharat(?:\s+game)?|(?:404\s+)?(?:jetpack(?:\s+runner)?\s+)?game|jetpack(?:\s+runner)?)\b/i;
 
 type CachedAnswer = { answer: string; sources: Source[]; at: number };
@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
         return reply(fallback.answer, fallback.sources, "retrieval");
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
         return reply(fallback.answer, fallback.sources, "retrieval");
     }
@@ -197,30 +197,25 @@ export async function POST(request: NextRequest) {
     try {
         await consume("global", "site", LIMITS.global);
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent`;
+        const url = "https://api.openai.com/v1/chat/completions";
         const request = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-goog-api-key": apiKey,
+                Authorization: `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                contents: [
-                    ...history.map((turn) => ({
-                        role: turn.role === "assistant" ? "model" : "user",
-                        parts: [{ text: turn.content }],
-                    })),
+                model: MODEL,
+                messages: [
+                    { role: "system", content: SYSTEM_PROMPT },
+                    ...history,
                     {
                         role: "user",
-                        parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
+                        content: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}`,
                     },
                 ],
-                generationConfig: {
-                    maxOutputTokens: 2048,
-                    responseMimeType: "application/json",
-                    thinkingConfig: MODEL.startsWith("gemini-2.5") ? { thinkingBudget: 0 } : { thinkingLevel: "low" },
-                },
+                max_completion_tokens: 2048,
+                response_format: { type: "json_object" },
             }),
             signal: AbortSignal.timeout(15000),
         };
@@ -232,21 +227,19 @@ export async function POST(request: NextRequest) {
 
         if (!response.ok) {
             const failure = await response.json().catch(() => null);
-            const reason = failure?.error?.details?.[0]?.reason ?? failure?.error?.status;
-            const category = typeof reason === "string" && /^[A-Z0-9_]{1,80}$/.test(reason) ? reason : "UNKNOWN";
+            const reason = failure?.error?.code ?? failure?.error?.type;
+            const category = typeof reason === "string" && /^[A-Za-z0-9_]{1,80}$/.test(reason) ? reason : "UNKNOWN";
             const detail = providerDiagnostic(failure?.error?.message, [apiKey, question, ...history.map(turn => turn.content)]);
-            console.error(`Ask Gemini request failed: HTTP ${response.status} ${category}: ${detail}`);
+            console.error(`Ask OpenAI request failed: HTTP ${response.status} ${category}: ${detail}`);
             return reply(fallback.answer, fallback.sources, "retrieval");
         }
 
         const result = await response.json();
-        const text = result?.candidates?.[0]?.content?.parts
-            ?.map((part: { text?: string }) => part.text ?? "")
-            .join("");
-        const candidate = result?.candidates?.[0];
+        const candidate = result?.choices?.[0];
+        const text = candidate?.message?.content;
         const generated = parseGroundedAnswer(text, passages.length);
 
-        if (!generated || candidate?.finishReason !== "STOP") {
+        if (!generated || candidate?.finish_reason !== "stop") {
             return reply(fallback.answer, fallback.sources, "retrieval");
         }
         const sources = generated.sourceIds.map(id => ({ title: passages[id - 1].title, href: passages[id - 1].href }));
@@ -254,7 +247,7 @@ export async function POST(request: NextRequest) {
         writeCache(key, { answer: generated.answer, sources, at: Date.now() });
         return reply(generated.answer, sources, "model");
     } catch (error) {
-        console.error("Ask Gemini request failed", { reason: error instanceof Error ? error.name : "unknown" });
+        console.error("Ask OpenAI request failed", { reason: error instanceof Error ? error.name : "unknown" });
         // An outage should degrade the answer, not remove the feature.
         return reply(fallback.answer, fallback.sources, "retrieval");
     }
