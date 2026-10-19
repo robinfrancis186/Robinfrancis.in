@@ -230,7 +230,10 @@ export async function POST(request: NextRequest) {
         }
 
         if (!response.ok) {
-            console.error("Ask Gemini request failed", response.status);
+            const failure = await response.json().catch(() => null);
+            const reason = failure?.error?.details?.[0]?.reason ?? failure?.error?.status;
+            const category = typeof reason === "string" && /^[A-Z0-9_]{1,80}$/.test(reason) ? reason : "UNKNOWN";
+            console.error(`Ask Gemini request failed: HTTP ${response.status} ${category}`);
             return reply(fallback.answer, fallback.sources, "retrieval");
         }
 
