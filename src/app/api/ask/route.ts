@@ -215,7 +215,11 @@ export async function POST(request: NextRequest) {
                         parts: [{ text: `SOURCES\n${formatContext(passages)}\n\nQUESTION\n${question}` }],
                     },
                 ],
-                generationConfig: { maxOutputTokens: 2048, temperature: 0.2, responseMimeType: "application/json" },
+                generationConfig: {
+                    maxOutputTokens: 2048,
+                    responseMimeType: "application/json",
+                    thinkingConfig: MODEL.startsWith("gemini-2.5") ? { thinkingBudget: 0 } : { thinkingLevel: "minimal" },
+                },
             }),
             signal: AbortSignal.timeout(15000),
         };
@@ -244,8 +248,8 @@ export async function POST(request: NextRequest) {
 
         writeCache(key, { answer: generated.answer, sources, at: Date.now() });
         return reply(generated.answer, sources, "model");
-    } catch {
-        console.error("Ask Gemini request failed");
+    } catch (error) {
+        console.error("Ask Gemini request failed", { reason: error instanceof Error ? error.name : "unknown" });
         // An outage should degrade the answer, not remove the feature.
         return reply(fallback.answer, fallback.sources, "retrieval");
     }
