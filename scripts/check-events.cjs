@@ -23,16 +23,16 @@ function loadData(file) {
 async function main() {
   const { MY_EVENTS, matchesEventSearch, eventUnitName } = loadData("src/data/myEvents.ts");
   const { EVENT_IMAGE_SIZES } = loadData("src/data/eventImageSizes.ts");
-  assert.equal(MY_EVENTS.length, 91);
+  assert.equal(MY_EVENTS.length, 93);
   assert.equal(new Set(MY_EVENTS.map((event) => event.id)).size, MY_EVENTS.length);
   assert.equal(new Set(MY_EVENTS.map((event) => event.title.toLowerCase())).size, MY_EVENTS.length);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2023")).length, 18);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2024")).length, 62);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2025")).length, 4);
-  assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2026")).length, 7);
+  assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2026")).length, 9);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "  ")).length, MY_EVENTS.length);
   const community = MY_EVENTS.filter((event) => event.group === "Community events");
-  assert.equal(community.length, 12);
+  assert.equal(community.length, 14);
   for (const id of ["shesolve-2026", "thinkable-2026", "assistx-2026"]) {
     assert.equal(community.filter((event) => event.id === id).length, 1);
     assert(community.find((event) => event.id === id).story.paragraphs.some((text) => /across|programme-wide/.test(text)));
@@ -51,7 +51,7 @@ async function main() {
   assert.equal(community.filter((event) => event.id === "inclucode-2026").length, 1);
   assert.equal(community.filter((event) => event.id === "stride-2025").length, 1);
   assert.equal(community.filter((event) => event.id === "ieee-yess-2024").length, 1);
-  assert(community.every((event) => event.role && event.image && event.story.sourceUrl.startsWith("https://www.linkedin.com/posts/robinfrancis186_")));
+  assert(community.every((event) => event.role && event.image && ["www.linkedin.com", "luma.com", "robinfrancis.in"].includes(new URL(event.story.sourceUrl, "https://robinfrancis.in").hostname)));
   assert(community.some((event) => matchesEventSearch(event, "OpenAI 2026")));
   assert(community.some((event) => matchesEventSearch(event, "volunteer IndiaFOSS")));
   assert(MY_EVENTS.some((event) => matchesEventSearch(event, "2024 shone")));
