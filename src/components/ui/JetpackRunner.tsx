@@ -388,7 +388,7 @@ export default function JetpackRunner() {
             setEntries(data.entries);
             setBoardState("ready");
             setSaveState("saved");
-            trackEvent("game_score_saved", { game: "jetpack", score: data.entries.find(entry => entry.name === chosenName.current)?.score });
+            trackEvent("game_score_saved", { game: "jetpack" });
         } catch (error) {
             setSaveState("error");
             setSaveError(error instanceof Error ? error.message : "Could not save your score. Please retry.");
