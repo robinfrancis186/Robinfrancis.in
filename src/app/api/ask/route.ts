@@ -20,7 +20,7 @@ const RELEVANCE_FLOOR = 22;
 const CACHE_TTL_MS = 30 * 60 * 1000;
 const CACHE_MAX_ENTRIES = 200;
 
-const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-flash-latest";
+const MODEL = process.env.GEMINI_ASK_MODEL ?? "gemini-3.5-flash-lite";
 const PLAY_GAME_INTENT = /\b(?:open|launch|play|start)\s+(?:(?:the|this|that|my)\s+)?(?:crown of bharat(?:\s+game)?|(?:404\s+)?(?:jetpack(?:\s+runner)?\s+)?game|jetpack(?:\s+runner)?)\b/i;
 
 type CachedAnswer = { answer: string; sources: Source[]; at: number };

@@ -167,6 +167,7 @@ async function synthesize(apiKey, text, attempt = 1) {
     method: 'POST',
     headers,
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(120000),
   });
 
   if (response.ok) {
