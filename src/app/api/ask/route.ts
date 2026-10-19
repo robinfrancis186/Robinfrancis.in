@@ -5,6 +5,7 @@ import {
     guardQuestion,
     isSmallTalk,
     parseGroundedAnswer,
+    providerDiagnostic,
     SMALL_TALK_REPLY,
 } from "@/lib/askGuards";
 import { consume, isExhausted, LIMITS } from "@/lib/askLimits";
@@ -233,7 +234,8 @@ export async function POST(request: NextRequest) {
             const failure = await response.json().catch(() => null);
             const reason = failure?.error?.details?.[0]?.reason ?? failure?.error?.status;
             const category = typeof reason === "string" && /^[A-Z0-9_]{1,80}$/.test(reason) ? reason : "UNKNOWN";
-            console.error(`Ask Gemini request failed: HTTP ${response.status} ${category}`);
+            const detail = providerDiagnostic(failure?.error?.message, [apiKey, question, ...history.map(turn => turn.content)]);
+            console.error(`Ask Gemini request failed: HTTP ${response.status} ${category}: ${detail}`);
             return reply(fallback.answer, fallback.sources, "retrieval");
         }
 

@@ -104,3 +104,11 @@ export function parseGroundedAnswer(raw: unknown, sourceCount: number) {
         return /[.!?]$/.test(answer) && sourceIds.length ? { answer, sourceIds } : null;
     } catch { return null; }
 }
+
+export function providerDiagnostic(message: unknown, privateValues: string[]) {
+    let safe = typeof message === "string" ? message : "No provider detail";
+    for (const value of privateValues) {
+        if (value) safe = safe.replaceAll(value, "[redacted]");
+    }
+    return safe.slice(0, 240);
+}
