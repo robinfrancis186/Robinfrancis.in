@@ -3,6 +3,7 @@ import { EVENT_STORIES_2024, type EventStory } from "./eventStories2024";
 import { EVENT_STORIES_2024_LATE, INFINIA_SESSION_STORIES } from "./eventStories2024Late";
 import { EVENT_MEDIA } from "./eventMedia";
 import { COMMUNITY_EVENTS } from "./communityEvents";
+import { EDSOC_EVENTS_2026 } from "./edsocEvents2026";
 
 export type MyEvent = {
   id: string;
@@ -286,7 +287,7 @@ const corrections: Record<string, Partial<MyEvent>> = {
   "augmented-reality-using-unity": { endDate: "2024-10-09", dateLabel: "8 to 9 October 2024" },
 };
 
-export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents, ...COMMUNITY_EVENTS].map((event) => ({
+export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents, ...COMMUNITY_EVENTS, ...EDSOC_EVENTS_2026].map((event) => ({
   ...event,
   ...corrections[event.id],
   ...(EVENT_MEDIA[event.id] ? { image: EVENT_MEDIA[event.id][0], gallery: EVENT_MEDIA[event.id].slice(1) } : {}),

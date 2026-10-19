@@ -7,6 +7,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import BlobMascot from "@/components/ui/BlobMascot";
 import { trackEvent } from "@/lib/analytics";
 
 /*
@@ -31,12 +32,9 @@ function DeferredMascotAssistant() {
         aria-label="Ask RoSi, Robin's Super Intelligence"
         aria-haspopup="dialog"
         aria-expanded="false"
-        className="pointer-events-auto grid size-14 place-items-center rounded-[42%] bg-gradient-to-br from-cyan-500 to-slate-950 shadow-lg shadow-cyan-950/25 outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:size-16"
+        className="pointer-events-auto rounded-full transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
-        <span aria-hidden="true" className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-white shadow-sm" />
-          <span className="size-2.5 rounded-full bg-white shadow-sm" />
-        </span>
+        <BlobMascot size={64} label="" />
       </button>
     </div>
   );

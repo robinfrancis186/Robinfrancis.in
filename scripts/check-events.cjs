@@ -21,15 +21,31 @@ function loadData(file) {
 }
 
 async function main() {
-  const { MY_EVENTS, matchesEventSearch, eventUnitName } = loadData("src/data/myEvents.ts");
+  const { MY_EVENTS, matchesEventSearch, matchesEventTopic, eventUnitName } = loadData("src/data/myEvents.ts");
+  const { EDSOC_EVENTS_2026 } = loadData("src/data/edsocEvents2026.ts");
   const { EVENT_IMAGE_SIZES } = loadData("src/data/eventImageSizes.ts");
-  assert.equal(MY_EVENTS.length, 93);
+  assert.equal(MY_EVENTS.length, 105);
   assert.equal(new Set(MY_EVENTS.map((event) => event.id)).size, MY_EVENTS.length);
   assert.equal(new Set(MY_EVENTS.map((event) => event.title.toLowerCase())).size, MY_EVENTS.length);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2023")).length, 18);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2024")).length, 62);
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2025")).length, 4);
-  assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2026")).length, 9);
+  assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "2026")).length, 21);
+  assert.equal(EDSOC_EVENTS_2026.length, 12);
+  for (const event of EDSOC_EVENTS_2026) {
+    assert.equal(MY_EVENTS.filter((entry) => entry.id === event.id).length, 1);
+    assert.equal(event.year, 2026);
+    assert(event.role.includes("Student Activities Chair"), `Missing EdSoc team role: ${event.id}`);
+    assert.equal(event.unit, "IEEE Education Society Kerala Chapter");
+    assert(event.date && event.story.venue && event.gallery.length, `Incomplete EdSoc entry: ${event.id}`);
+    assert(!event.story.sourceUrl, `Report links must remain private: ${event.id}`);
+    assert(matchesEventSearch(event, "EdSoc 2026"), `Unsearchable EdSoc event: ${event.id}`);
+  }
+  assert.equal(EDSOC_EVENTS_2026.filter((event) => event.id.startsWith("witech-")).length, 3);
+  assert.equal(EDSOC_EVENTS_2026.filter((event) => event.id.startsWith("stride-forward-")).length, 3);
+  assert(EDSOC_EVENTS_2026.filter((event) => event.id.startsWith("stride-forward-") || event.id === "inclutalk-2026")
+    .every((event) => matchesEventTopic(event, "Assistive tech") && matchesEventTopic(event, "Talks")));
+  assert(matchesEventTopic(EDSOC_EVENTS_2026.find((event) => event.id === "witech-agentic-ai-lbsitw-2026"), "Workshops"));
   assert.equal(MY_EVENTS.filter((event) => matchesEventSearch(event, "  ")).length, MY_EVENTS.length);
   const community = MY_EVENTS.filter((event) => event.group === "Community events");
   assert.equal(community.length, 14);
