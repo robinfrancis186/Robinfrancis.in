@@ -13,7 +13,7 @@
 //
 // The MP3s are gitignored and served from Vercel Blob, so after generating:
 //
-//   vercel blob put public/audio/blog/<slug>.mp3 --pathname audio/blog/<slug>.mp3
+//   vercel blob put public/audio/blog/<slug>-<hash>.mp3 --pathname audio/blog/<slug>-<hash>.mp3
 //   node --experimental-strip-types scripts/generate-blog-audio.mjs --manifest-only \
 //     --base-url=https://<store>.public.blob.vercel-storage.com
 //
@@ -76,7 +76,7 @@ const manifestOnly = args.includes('--manifest-only');
 // which only works when the files are committed.
 const baseUrl = flag('base-url', process.env.BLOG_AUDIO_BASE_URL ?? '').replace(/\/$/, '');
 
-const audioUrl = (slug) => `${baseUrl}/audio/blog/${slug}.mp3`;
+const audioUrl = (filename) => `${baseUrl}/audio/blog/${filename}`;
 
 function readApiKey() {
   const name = provider.keyEnv;
@@ -245,15 +245,16 @@ async function main() {
   if (manifestOnly) {
     let repointed = 0;
     for (const post of STATIC_BLOG_POSTS) {
-      const localPath = path.join(audioDir, `${post.slug}.mp3`);
-      if (!fs.existsSync(localPath)) continue;
       const previous = manifest[post.slug];
       if (!previous?.contentHash || previous.contentHash !== blogNarrationHash(narrationText(post))) {
         console.log(`Skipping stale recording: ${post.slug}. Generate it before publishing.`);
         continue;
       }
+      const filename = path.basename(new URL(previous.src, 'https://localhost').pathname);
+      const localPath = path.join(audioDir, filename);
+      if (!fs.existsSync(localPath)) continue;
       manifest[post.slug] = {
-        src: audioUrl(post.slug),
+        src: audioUrl(filename),
         bytes: fs.statSync(localPath).size,
         characters: narrationText(post).length,
         voice: manifest[post.slug]?.voice ?? speaker,
@@ -275,12 +276,13 @@ async function main() {
   console.log(`\n🎙  ${providerName} ${provider.model} · voice "${speaker}" · speed ${speed}\n`);
 
   for (const post of queue) {
-    const outPath = path.join(audioDir, `${post.slug}.mp3`);
-
     const existing = manifest[post.slug];
     const text = narrationText(post);
     const contentHash = blogNarrationHash(text);
-    if (!force && fs.existsSync(outPath) && existing?.voice === speaker && existing?.provider === providerName && existing?.contentHash === contentHash) {
+    const filename = `${post.slug}-${contentHash}.mp3`;
+    const outPath = path.join(audioDir, filename);
+    const existingPath = existing?.src ? path.join(audioDir, path.basename(new URL(existing.src, 'https://localhost').pathname)) : outPath;
+    if (!force && fs.existsSync(existingPath) && existing?.voice === speaker && existing?.provider === providerName && existing?.contentHash === contentHash) {
       console.log(`⏭  ${post.slug}: already generated, skipping`);
       continue;
     }
@@ -315,7 +317,7 @@ async function main() {
     const mp3 = Buffer.concat(parts);
     fs.writeFileSync(outPath, mp3);
     manifest[post.slug] = {
-      src: audioUrl(post.slug),
+      src: audioUrl(filename),
       bytes: mp3.length,
       characters: text.length,
       voice: speaker,
