@@ -546,15 +546,16 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                     onLoadedMetadata={(event) => setNarrationSeconds(event.currentTarget.duration || 0)}
                     onDurationChange={(event) => { if (Number.isFinite(event.currentTarget.duration)) setNarrationSeconds(event.currentTarget.duration); }}
                     onTimeUpdate={(event) => {
-                        if (recordingFailed) return;
+                        if (recordingFailed || event.currentTarget.error) return;
                         const elapsed = Math.floor(event.currentTarget.currentTime);
                         elapsedRef.current = elapsed;
                         setElapsedSeconds(elapsed);
                     }}
-                    onPlaying={() => { setListenState("playing"); setShareStatus(""); }}
-                    onWaiting={() => { if (!recordingFailed) { setListenState("loading"); setShareStatus("Buffering narration…"); } }}
-                    onPause={() => { if (!recordingFailed) setListenState((current) => (current === "playing" ? "paused" : current)); }}
-                    onEnded={() => {
+                    onPlaying={(event) => { if (!recordingFailed && !event.currentTarget.error) { setListenState("playing"); setShareStatus(""); } }}
+                    onWaiting={(event) => { if (!recordingFailed && !event.currentTarget.error) { setListenState("loading"); setShareStatus("Buffering narration…"); } }}
+                    onPause={(event) => { if (!recordingFailed && !event.currentTarget.error) setListenState((current) => (current === "playing" ? "paused" : current)); }}
+                    onEnded={(event) => {
+                        if (recordingFailed || event.currentTarget.error) return;
                         setListenState("idle");
                         setElapsedSeconds(totalSeconds);
                         elapsedRef.current = totalSeconds;
