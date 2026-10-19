@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
                 generationConfig: {
                     maxOutputTokens: 2048,
                     responseMimeType: "application/json",
-                    thinkingConfig: MODEL.startsWith("gemini-2.5") ? { thinkingBudget: 0 } : { thinkingLevel: "minimal" },
+                    thinkingConfig: MODEL.startsWith("gemini-2.5") ? { thinkingBudget: 0 } : { thinkingLevel: "low" },
                 },
             }),
             signal: AbortSignal.timeout(15000),

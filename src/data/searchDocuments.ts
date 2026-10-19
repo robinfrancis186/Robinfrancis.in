@@ -19,8 +19,6 @@ const projectDocuments: SearchDocument[] = PROJECT_DETAILS.map((project) => ({
   section: project.category,
   description: project.summary,
   content: [
-    project.category,
-    project.summary,
     ...project.highlights,
     ...project.details.map((detail) => `${detail.heading}. ${detail.body}`),
   ].join(" "),
