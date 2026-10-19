@@ -247,8 +247,8 @@ const pageDocuments: SearchDocument[] = [
     description:
       "A Kerala-focused IEEE student branch membership-development playbook and verified scholarship, funding, and reporting-cycle guide.",
     content:
-      "IEEE membership development Kerala student branches funding scholarships IEEE R10 revival fund WIE International Scholarship SPAx branch rebate WIE funding SIGHT EPICS Tech4Good Merwin.",
-    keywords: ["IEEE", "membership development", "Kerala", "student branch", "scholarship", "funding", "rebate"],
+      "The independent membership-development guide helps IEEE Student Branch volunteers in Kerala plan membership sessions, estimate branch rebates, and find funding, scholarships, travel support, and event ideas. It links to official sources so volunteers can check eligibility, dates, and application cycles before planning.",
+    keywords: ["IEEE", "membership development", "Kerala", "student branch", "scholarship", "funding", "rebate", "R10 revival fund", "WIE International Scholarship", "SPAx", "SIGHT", "EPICS", "Tech4Good", "Merwin"],
   },
   {
     id: "page-gallery",
