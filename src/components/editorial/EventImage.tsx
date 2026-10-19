@@ -19,7 +19,7 @@ export function EventImage({ image, title, priority = false, compact = false }: 
     <figure className="bg-muted/40">
       <button type="button" onClick={() => setOpen(true)} aria-label={`Enlarge image: ${title}`}
         className={`relative block w-full p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ${compact ? "h-56" : ""}`}>
-        <Image src={image.src} alt={image.alt} width={width} height={height} priority={priority}
+        <Image src={image.src} alt={image.alt} width={width} height={height} priority={priority} fetchPriority={priority ? "high" : "auto"}
           sizes={compact ? "(max-width: 640px) 100vw, 340px" : `(max-width: 768px) 100vw, ${Math.min(width, 1024)}px`}
           className={`mx-auto h-auto w-auto max-w-full object-contain ${compact ? "max-h-48" : "max-h-[65vh]"}`} />
         <span className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-2 text-xs font-medium shadow-sm">

@@ -4,7 +4,7 @@ import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const projectDescription =
-  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, mobile-first food rescue, and public-interest technology.";
+  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, mobile-first food rescue, membership development, and public-interest technology.";
 
 const projects = [
   {
@@ -112,7 +112,7 @@ const projects = [
     name: "SoulSync",
     category: "AI wellness companion",
     description:
-      "An AI companion concept for cognitive wellness with emotion tracking, memory recall, and privacy-conscious caregiver support.",
+      "A Team Bits & Bytes concept for a digital companion in the silver economy, created for the IBM watsonx GenAI Challenge, where the team received second prize.",
     url: absoluteUrl("/projects/"),
     image: absoluteUrl("/images/project-soulsync.webp"),
     type: "SoftwareApplication",
@@ -124,11 +124,9 @@ const projects = [
     description:
       "A mobile-first Flutter pilot that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. Project screenshots show fictional local-demo data, not live listings or confirmed pickups.",
     url: "https://robinfrancis186.github.io/foodloop/",
-    image: absoluteUrl("/images/project-foodloop.webp"),
+    image: absoluteUrl("/images/project-foodloop.webp?v=20261009"),
     type: "SoftwareApplication",
     applicationCategory: "MobileApplication",
-    codeRepository: "https://github.com/robinfrancis186/foodloop",
-    sameAs: ["https://github.com/robinfrancis186/foodloop"],
   },
   {
     name: "TechX Infinia",

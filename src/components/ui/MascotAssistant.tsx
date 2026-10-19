@@ -54,8 +54,8 @@ const getVisitorId = () => {
     }
 };
 
-const MascotAssistant = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const MascotAssistant = ({ openOnMount = false }: { openOnMount?: boolean }) => {
+    const [isOpen, setIsOpen] = useState(openOnMount);
     const [turns, setTurns] = useState<Turn[]>([GREETING]);
     const [draft, setDraft] = useState("");
     const [status, setStatus] = useState<"idle" | "asking" | "error">("idle");
@@ -147,6 +147,8 @@ const MascotAssistant = () => {
                     throw new Error(payload?.error || "I could not answer that right now.");
                 }
 
+                trackEvent("assistant_answer", { source: payload?.source ?? "unknown", source_count: payload?.sources?.length ?? 0 });
+
                 turnCounter.current += 1;
                 setTurns((current) => [
                     ...current,
@@ -159,6 +161,7 @@ const MascotAssistant = () => {
                 ]);
                 setStatus("idle");
             } catch (error) {
+                trackEvent("assistant_error");
                 turnCounter.current += 1;
                 setTurns((current) => [
                     ...current,
@@ -249,6 +252,7 @@ const MascotAssistant = () => {
                                                     <a
                                                         key={source.href}
                                                         href={source.href}
+                                                        onClick={() => trackEvent("assistant_source_click", { link_url: source.href })}
                                                         target={/^https?:\/\//i.test(source.href) ? "_blank" : undefined}
                                                         rel={/^https?:\/\//i.test(source.href) ? "noopener noreferrer" : undefined}
                                                         className="rounded-full bg-background/70 px-2 py-0.5 text-[0.65rem] font-medium text-muted-foreground transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"

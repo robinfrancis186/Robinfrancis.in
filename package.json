@@ -11,6 +11,7 @@
     "start": "next start -p 5174",
     "preview": "next start -p 5174",
     "optimize:images": "node scripts/optimize-images.mjs",
+    "audio:sync": "node --experimental-strip-types scripts/generate-blog-audio.mjs --provider=openai --all",
     "analyze": "next experimental-analyze",
     "prebuild": "npm run optimize:images"
   },

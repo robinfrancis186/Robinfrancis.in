@@ -93,3 +93,14 @@ export function sanitizeAnswer(answer: string, maxLength = 1200) {
 
     return cleaned;
 }
+
+export function parseGroundedAnswer(raw: unknown, sourceCount: number) {
+    if (typeof raw !== "string") return null;
+    try {
+        const value = JSON.parse(raw);
+        if (typeof value.answer !== "string" || value.answer.length > 1200 || !Array.isArray(value.sourceIds)) return null;
+        const answer = sanitizeAnswer(value.answer);
+        const sourceIds: number[] = [...new Set<number>(value.sourceIds.filter((id: unknown) => typeof id === "number" && Number.isInteger(id) && id >= 1 && id <= sourceCount))].slice(0, 2);
+        return /[.!?]$/.test(answer) && sourceIds.length ? { answer, sourceIds } : null;
+    } catch { return null; }
+}

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 import ArticleLike from "@/components/blog/ArticleLike";
 
-type ListenState = "idle" | "playing" | "paused";
+type ListenState = "idle" | "loading" | "playing" | "paused";
 type PlaybackRate = 0.85 | 1 | 1.25 | 1.5;
 
 type ArticleActionsProps = {
@@ -210,7 +210,8 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
     const [supportsNativeShare, setSupportsNativeShare] = useState(false);
     const [narrationSeconds, setNarrationSeconds] = useState(0);
     const audioRef = useRef<HTMLAudioElement | null>(null);
-    const hasNarration = Boolean(audioSrc);
+    const [recordingFailed, setRecordingFailed] = useState(false);
+    const hasNarration = Boolean(audioSrc) && !recordingFailed;
     const mountedRef = useRef(true);
     const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
     const selectedVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
@@ -219,10 +220,10 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
     const elapsedRef = useRef(0);
     const timerRef = useRef<number | null>(null);
     const articleWords = useMemo(() => tokenize(`${title}. ${text}`), [title, text]);
-    const estimatedSeconds = useMemo(() => estimateAudioSeconds(articleWords.length, playbackRate), [articleWords.length, playbackRate]);
+    const estimatedSeconds = useMemo(() => estimateAudioSeconds(articleWords.length, 1), [articleWords.length]);
     // Real narration reports its own duration once metadata loads; until then the
     // word-count estimate keeps the label from flashing 0:00.
-    const totalSeconds = hasNarration && narrationSeconds > 0 ? Math.round(narrationSeconds / playbackRate) : estimatedSeconds;
+    const totalSeconds = hasNarration && narrationSeconds > 0 ? Math.round(narrationSeconds) : estimatedSeconds;
     const isActive = listenState !== "idle";
 
     useEffect(() => {
@@ -237,6 +238,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
             mountedRef.current = false;
             speechRequestRef.current += 1;
             voiceRequestAbortRef.current?.abort();
+            audioRef.current?.pause();
             if (timerRef.current) {
                 window.clearInterval(timerRef.current);
             }
@@ -266,11 +268,11 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
         }
     };
 
-    const startTimer = () => {
+    const startTimer = (rate: PlaybackRate) => {
         clearTimer();
         timerRef.current = window.setInterval(() => {
             setElapsedSeconds((current) => {
-                const next = Math.min(totalSeconds, current + 1);
+                const next = Math.min(totalSeconds, current + rate);
                 elapsedRef.current = next;
                 return next;
             });
@@ -283,11 +285,22 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
             typeof window.SpeechSynthesisUtterance !== "function"
         ) {
             setShareStatus("Audio playback is not supported in this browser.");
+            setListenState("idle");
             return;
         }
 
         const requestId = speechRequestRef.current + 1;
         speechRequestRef.current = requestId;
+        const previousUtterance = utteranceRef.current;
+        if (previousUtterance) {
+            previousUtterance.onend = null;
+            previousUtterance.onerror = null;
+        }
+        utteranceRef.current = null;
+        window.speechSynthesis.cancel();
+        clearTimer();
+        setListenState("loading");
+        setShareStatus("Preparing narration…");
         voiceRequestAbortRef.current?.abort();
         const voiceRequestAbort = new AbortController();
         voiceRequestAbortRef.current = voiceRequestAbort;
@@ -302,15 +315,22 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
         selectedVoiceRef.current = bestVoice ?? null;
         voiceRequestAbortRef.current = null;
         const safeSeconds = Math.min(Math.max(seconds, 0), totalSeconds);
-        const wordsPerSecond = (WORDS_PER_MINUTE * rate * NATURAL_SPEECH_RATE) / 60;
+        const wordsPerSecond = (WORDS_PER_MINUTE * NATURAL_SPEECH_RATE) / 60;
         const startWord = Math.min(articleWords.length - 1, Math.floor(safeSeconds * wordsPerSecond));
-        const spokenText = articleWords.slice(Math.max(0, startWord)).join(" ");
-
-        window.speechSynthesis.cancel();
-        clearTimer();
         setElapsedSeconds(safeSeconds);
+        elapsedRef.current = safeSeconds;
+        setShareStatus("");
 
-        const utterance = new window.SpeechSynthesisUtterance(spokenText || `${title}. ${text}`);
+        let wordIndex = Math.max(0, startWord);
+        const playChunk = () => {
+        if (requestId !== speechRequestRef.current || !mountedRef.current) return;
+        const chunkStart = wordIndex;
+        let spokenText = "";
+        // Short utterances avoid browsers silently stopping long articles mid-way.
+        while (wordIndex < articleWords.length && spokenText.length < 800) {
+            spokenText += `${spokenText ? " " : ""}${articleWords[wordIndex++]}`;
+        }
+        const utterance = new window.SpeechSynthesisUtterance(spokenText);
         if (bestVoice) {
             utterance.voice = bestVoice;
         }
@@ -318,25 +338,40 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
         utterance.rate = rate * NATURAL_SPEECH_RATE;
         utterance.pitch = NATURAL_SPEECH_PITCH;
         utterance.volume = 1;
+        utterance.onboundary = (event) => {
+            if (utteranceRef.current !== utterance || event.name !== "word") return;
+            const position = Math.min(totalSeconds, (chunkStart + tokenize(spokenText.slice(0, event.charIndex)).length) / wordsPerSecond);
+            elapsedRef.current = position;
+            setElapsedSeconds(position);
+        };
         utterance.onend = () => {
-            if (mountedRef.current) {
+            if (mountedRef.current && utteranceRef.current === utterance) {
+                if (wordIndex < articleWords.length) { playChunk(); return; }
+                utteranceRef.current = null;
                 clearTimer();
-                setElapsedSeconds(0);
+                setElapsedSeconds(totalSeconds);
+                elapsedRef.current = totalSeconds;
                 setListenState("idle");
+                trackEvent("article_audio_complete", { article_slug: articleSlug, engine: "browser" });
             }
         };
-        utterance.onerror = () => {
-            if (mountedRef.current) {
+        utterance.onerror = (event) => {
+            if (event.error === "canceled" || event.error === "interrupted") return;
+            if (mountedRef.current && utteranceRef.current === utterance) {
+                utteranceRef.current = null;
                 clearTimer();
                 setListenState("idle");
                 setShareStatus("Unable to play this article right now.");
+                trackEvent("article_audio_error", { article_slug: articleSlug, engine: "browser", error: event.error });
             }
         };
 
         utteranceRef.current = utterance;
         window.speechSynthesis.speak(utterance);
+        };
+        playChunk();
         setListenState("playing");
-        startTimer();
+        startTimer(rate);
     };
 
     const handleListen = () => {
@@ -361,24 +396,43 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
             }
 
             audio.playbackRate = playbackRate;
+            if (audio.ended) audio.currentTime = 0;
+            setListenState("loading");
             void audio.play().then(
-                () => setListenState("playing"),
-                () => setShareStatus("Unable to play this article right now.")
+                () => {
+                    setShareStatus("");
+                    setListenState(audio.paused ? "paused" : "playing");
+                },
+                (error: unknown) => {
+                    // Pausing or seeking can abort a pending play without a broken recording.
+                    if (error instanceof DOMException && error.name === "AbortError") {
+                        setListenState(audio.paused ? "paused" : "loading");
+                        return;
+                    }
+                    setRecordingFailed(true);
+                    setShareStatus("Saved narration is unavailable. Using your browser voice.");
+                    void speakFrom(elapsedRef.current);
+                }
             );
             return;
         }
 
         if (listenState === "playing") {
-            window.speechSynthesis.pause();
+            speechRequestRef.current += 1;
+            voiceRequestAbortRef.current?.abort();
+            if (utteranceRef.current) {
+                utteranceRef.current.onend = null;
+                utteranceRef.current.onerror = null;
+            }
+            utteranceRef.current = null;
+            window.speechSynthesis.cancel();
             clearTimer();
             setListenState("paused");
             return;
         }
 
         if (listenState === "paused") {
-            window.speechSynthesis.resume();
-            setListenState("playing");
-            startTimer();
+            void speakFrom(elapsedRef.current);
             return;
         }
 
@@ -387,21 +441,22 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
             article_slug: articleSlug,
             playback_rate: playbackRate,
         });
-        void speakFrom(elapsedRef.current);
+        void speakFrom(elapsedRef.current >= totalSeconds ? 0 : elapsedRef.current);
     };
 
     const handleSeek = (direction: -1 | 1) => {
-        if (hasNarration) {
-            const audio = audioRef.current;
-            if (audio) {
-                const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-                audio.currentTime = Math.min(Math.max(audio.currentTime + direction * SEEK_SECONDS, 0), duration);
-            }
-            return;
-        }
+        handleSeekTo(elapsedRef.current + direction * SEEK_SECONDS);
+    };
 
-        const nextElapsed = elapsedRef.current + direction * SEEK_SECONDS;
-        void speakFrom(nextElapsed);
+    const handleSeekTo = (seconds: number) => {
+        const nextElapsed = Math.min(Math.max(seconds, 0), totalSeconds);
+        elapsedRef.current = nextElapsed;
+        setElapsedSeconds(nextElapsed);
+        if (hasNarration && audioRef.current) {
+            if (Number.isFinite(audioRef.current.duration)) audioRef.current.currentTime = Math.min(nextElapsed, audioRef.current.duration);
+        } else if (listenState === "playing" || listenState === "loading") {
+            void speakFrom(nextElapsed);
+        }
     };
 
     const handleSpeedChange = () => {
@@ -472,7 +527,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
         }
     };
 
-    const listenLabel = listenState === "playing" ? "Pause article" : listenState === "paused" ? "Resume article" : "Listen to article";
+    const listenLabel = listenState === "playing" ? "Pause article" : listenState === "paused" ? "Resume article" : listenState === "loading" ? "Preparing narration" : "Listen to article";
     const ListenIcon = listenState === "playing" ? Pause : Play;
     const speedLabel = playbackRate === 1 ? "1x" : `${playbackRate}x`;
 
@@ -489,14 +544,23 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                     src={audioSrc}
                     preload="metadata"
                     onLoadedMetadata={(event) => setNarrationSeconds(event.currentTarget.duration || 0)}
-                    onTimeUpdate={(event) => setElapsedSeconds(Math.floor(event.currentTarget.currentTime))}
-                    onPlay={() => setListenState("playing")}
-                    onPause={() => setListenState((current) => (current === "playing" ? "paused" : current))}
+                    onDurationChange={(event) => { if (Number.isFinite(event.currentTarget.duration)) setNarrationSeconds(event.currentTarget.duration); }}
+                    onTimeUpdate={(event) => {
+                        if (recordingFailed) return;
+                        const elapsed = Math.floor(event.currentTarget.currentTime);
+                        elapsedRef.current = elapsed;
+                        setElapsedSeconds(elapsed);
+                    }}
+                    onPlaying={() => { setListenState("playing"); setShareStatus(""); }}
+                    onWaiting={() => { if (!recordingFailed) { setListenState("loading"); setShareStatus("Buffering narration…"); } }}
+                    onPause={() => { if (!recordingFailed) setListenState((current) => (current === "playing" ? "paused" : current)); }}
                     onEnded={() => {
                         setListenState("idle");
-                        setElapsedSeconds(0);
+                        setElapsedSeconds(totalSeconds);
+                        elapsedRef.current = totalSeconds;
+                        trackEvent("article_audio_complete", { article_slug: articleSlug, engine: "recording" });
                     }}
-                    onError={() => setShareStatus("Unable to play this article right now.")}
+                    onError={() => { setRecordingFailed(true); setShareStatus("Saved narration is unavailable. Press Play to use your browser voice."); }}
                     className="hidden"
                 />
             )}
@@ -511,6 +575,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                         )}
                         aria-label={listenLabel}
                         aria-pressed={listenState === "playing"}
+                        disabled={listenState === "loading"}
                     >
                         <ListenIcon className="h-4 w-4" fill="currentColor" aria-hidden="true" />
                     </button>
@@ -574,6 +639,23 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                         Share
                     </button>
                 </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
+                <span className="font-mono text-xs text-neutral-500 dark:text-neutral-400">{formatTime(elapsedSeconds)}</span>
+                <input
+                    type="range"
+                    min={0}
+                    max={totalSeconds}
+                    step={1}
+                    value={Math.min(elapsedSeconds, totalSeconds)}
+                    onChange={(event) => handleSeekTo(Number(event.currentTarget.value))}
+                    aria-label="Article playback position"
+                    className="h-6 w-full cursor-pointer accent-primary"
+                />
+                <span className="font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                    {hasNarration ? "−" : "About "}{formatTime(Math.max(0, totalSeconds - elapsedSeconds) / playbackRate)} remaining
+                </span>
             </div>
 
             <p className="mt-3 min-h-5 text-sm text-neutral-500 dark:text-neutral-400" aria-live="polite">

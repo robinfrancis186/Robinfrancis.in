@@ -5,6 +5,7 @@ export type BlogAudio = {
     characters: number;
     voice: string;
     provider: string;
+    contentHash?: string;
 };
 
 export const BLOG_AUDIO: Record<string, BlogAudio> = {
@@ -14,6 +15,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 4252,
         voice: "ash",
         provider: "openai",
+        contentHash: "111d5d3d",
     },
     "ieee-r10-volunteer-award": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-r10-volunteer-award.mp3",
@@ -21,6 +23,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 868,
         voice: "ash",
         provider: "openai",
+        contentHash: "11acb2ba",
     },
     "ieee-region-10-international-virtual-career-fair-2025": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-region-10-international-virtual-career-fair-2025.mp3",
@@ -28,6 +31,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 10497,
         voice: "ash",
         provider: "openai",
+        contentHash: "82c792e8",
     },
     "ieee-sahrdaya-student-branch-movement": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ieee-sahrdaya-student-branch-movement.mp3",
@@ -35,6 +39,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 10288,
         voice: "ash",
         provider: "openai",
+        contentHash: "5bb5e338",
     },
     "inclucode-2026-inclusive-software-innovation-buildathon": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/inclucode-2026-inclusive-software-innovation-buildathon.mp3",
@@ -42,6 +47,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 10773,
         voice: "ash",
         provider: "openai",
+        contentHash: "fabd0f76",
     },
     "ncc-thal-sainik-camp-national-bronze-medal-journey": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/ncc-thal-sainik-camp-national-bronze-medal-journey.mp3",
@@ -49,6 +55,7 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 14200,
         voice: "ash",
         provider: "openai",
+        contentHash: "44c0e79d",
     },
     "soulsync-emotional-wellness": {
         src: "https://py8vbishrjiymtmr.public.blob.vercel-storage.com/audio/blog/soulsync-emotional-wellness.mp3",
@@ -56,9 +63,12 @@ export const BLOG_AUDIO: Record<string, BlogAudio> = {
         characters: 1019,
         voice: "ash",
         provider: "openai",
+        contentHash: "4579f088",
     },
 };
 
-export function findBlogAudio(slug?: string) {
-    return slug ? BLOG_AUDIO[slug] ?? null : null;
+export function findBlogAudio(slug?: string, contentHash?: string) {
+    if (!slug) return null;
+    const audio = BLOG_AUDIO[slug];
+    return audio && (!audio.contentHash || audio.contentHash === contentHash) ? audio : null;
 }

@@ -80,7 +80,7 @@ const About = () => {
     const achievementLoop = [...achievements, ...achievements];
 
     return (
-        <section id="about" className="py-20 bg-background relative overflow-hidden">
+        <section className="py-20 bg-background relative overflow-hidden">
             <TracingBeam className="px-6">
                 <div className="max-w-3xl mx-auto antialiased pt-4 relative">
                     <motion.div

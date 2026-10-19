@@ -72,6 +72,10 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    localPatterns: [
+      { pathname: "/**", search: "" },
+      { pathname: "/images/project-foodloop.webp", search: "?v=20261009" },
+    ],
     remotePatterns: [
       {
         protocol: "https",

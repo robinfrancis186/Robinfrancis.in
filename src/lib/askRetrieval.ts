@@ -1,5 +1,7 @@
 import { SEARCH_DOCUMENTS } from "@/data/searchDocuments";
 import type { SearchDocument } from "@/lib/search";
+import { awards, mediaKit } from "@/data/profileProof";
+import { PROJECT_DETAILS } from "@/data/projectDetails";
 
 /**
  * Retrieval for the assistant. The site search in `search.ts` requires every
@@ -27,7 +29,7 @@ const STOPWORDS = new Set([
     "than", "that", "the", "their", "them", "then", "there", "these", "they",
     "this", "those", "to", "under", "up", "us", "use", "was", "we", "were",
     "what", "whats", "when", "where", "which", "who", "why", "will", "with",
-    "would", "you", "your",
+    "would", "you", "your", "francis", "won",
 ]);
 
 const normalize = (value: string) =>
@@ -115,12 +117,46 @@ export function retrievePassages(query: string, limit = 6): RetrievedPassage[] {
         title: doc.title,
         href: doc.href,
         section: doc.section,
-        text: `${doc.description} ${doc.content}`.replace(/\s+/g, " ").trim().slice(0, 1200),
+        text: `${doc.description} ${doc.content}`.replace(/\s+/g, " ").trim().slice(0, 3000),
         score: scoreDocument(doc, terms),
     }))
         .filter((passage) => passage.score > 0)
         .sort((left, right) => right.score - left.score)
         .slice(0, limit);
+}
+
+export function directAnswer(question: string) {
+    const generalTerms = termsOf(question).filter(term => !["list", "show", "name", "received"].includes(term));
+    if (/^(?:who is (?:he|robin(?: francis)?)|tell me about robin(?: francis)?|introduce robin(?: francis)?)[?.!]*$/i.test(question)) {
+        return { answer: mediaKit.shortBio, sources: [{ title: "About Robin Francis", href: "/press-kit/" }] };
+    }
+    if (/\b(awards?|recognitions?|achievements?|recognised|recognized)\b/i.test(question) && generalTerms.every(term => ["awards", "award", "recognitions", "recognition", "achievements", "achievement", "recognised", "recognized", "known", "famous"].includes(term))) {
+        return {
+            answer: `Robin's recognitions include ${awards.map(award => `${award.title} (${award.year})`).join("; ")}. The achievements page links the supporting records.`,
+            sources: [{ title: "Robin's awards and recognitions", href: "/achievements/#recognition-cards" }],
+        };
+    }
+    if (/\b(projects|built|building)\b/i.test(question) && generalTerms.every(term => ["projects", "project", "built", "build", "building", "work", "created"].includes(term))) {
+        return {
+            answer: `Robin's projects include ${PROJECT_DETAILS.slice(0, 6).map(project => project.title).join(", ")}. Explore the project pages for their purpose, screenshots, and implementation details.`,
+            sources: [{ title: "Robin's projects", href: "/projects/" }],
+        };
+    }
+    return null;
+}
+
+export function retrievalAnswer(question: string, passages: RetrievedPassage[]) {
+    const best = passages[0];
+    if (!best) return { answer: "I could not find that in Robin's site. You can reach him through the contact form.", sources: [{ title: "Contact Robin", href: "/#contact" }] };
+    const terms = termsOf(question);
+    const sentences = best.text.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [];
+    const relevant = sentences.map((sentence, index) => ({ sentence: sentence.trim(), index, score: terms.reduce((sum, term) => sum + countMatches(wordsOf(sentence), term), 0) }))
+        .filter(entry => entry.sentence.length >= 40 && entry.sentence.length <= 700 && /[.!?]$/.test(entry.sentence))
+        .sort((a, b) => b.score - a.score || a.index - b.index).slice(0, 2).sort((a, b) => a.index - b.index);
+    return {
+        answer: relevant.length ? relevant.map(entry => entry.sentence).join(" ") : `The ${best.title} page has the closest information I could find. I do not have enough detail to give a more specific answer.`,
+        sources: [{ title: best.title, href: best.href }],
+    };
 }
 
 /** The retrieved passages as a single block for the model's context. */

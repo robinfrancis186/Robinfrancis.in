@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { trackEvent } from '@/lib/analytics';
@@ -29,6 +28,7 @@ function ProjectImage({ src, alt, className, priority = false }: { src: string; 
             width={900}
             height={560}
             priority={priority}
+            fetchPriority={priority ? "high" : "auto"}
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             className={className}
         />
@@ -109,6 +109,16 @@ const ProjectCard = ({
 
 const ProjectsPage = () => {
     const [selectedProject, setSelectedProject] = useState<null | ProjectDetail>(null);
+    const projectDialogRef = useRef<HTMLDialogElement | null>(null);
+
+    useEffect(() => {
+        const dialog = projectDialogRef.current;
+        if (!dialog || !selectedProject || dialog.open) return;
+        dialog.showModal();
+        return () => {
+            if (dialog.open) dialog.close();
+        };
+    }, [Boolean(selectedProject)]);
 
     const openProject = (project: ProjectDetail) => {
         trackEvent('project_summary_open', {
@@ -165,9 +175,9 @@ const ProjectsPage = () => {
         slug: 'soulsync',
         title: 'SoulSync',
         category: 'AI Companion • Cognitive Wellness',
-        summary: 'An AI companion for emotional and cognitive wellness, built for the silver economy. It combines emotion tracking, memory recall, and privacy-conscious caregiver support, with models tuned to run on-device so personal context never leaves the phone. Team Bits & Bytes took second prize with it at the IBM watsonx GenAI Challenge.',
+        summary: 'A Team Bits & Bytes concept for a digital companion in the silver economy, created for the IBM watsonx GenAI Challenge, where the team received second prize.',
         image: '/images/project-soulsync.webp',
-        imageAlt: 'SoulSync AI companion dashboard showing emotion tracking and memory recall',
+        imageAlt: 'SoulSync concept art showing an illuminated AI brain for cognitive wellness',
         accent: 'emerald',
         live: 'https://robinfrancis.in/blog/soulsync-emotional-wellness/',
     };
@@ -177,10 +187,9 @@ const ProjectsPage = () => {
         title: 'FoodLoop',
         category: 'Food Rescue • India Pilot',
         summary: 'A mobile-first Flutter pilot for India that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. The screenshots show fictional local-demo data, not live food listings or confirmed pickups.',
-        image: '/images/project-foodloop.webp',
-        imageAlt: 'FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination',
+        image: '/images/project-foodloop.webp?v=20261009',
+        imageAlt: 'FoodLoop pilot overview with sample surplus food listings and collection details',
         accent: 'amber',
-        repo: 'https://github.com/robinfrancis186/foodloop',
         live: 'https://robinfrancis186.github.io/foodloop/',
         images: [
             { src: '/images/projects/foodloop-discover.webp', alt: 'FoodLoop mobile discovery screen with fictional sample food listings in Thrissur' },
@@ -323,12 +332,9 @@ const ProjectsPage = () => {
                 items={[homeBreadcrumb, { name: 'Projects', path: '/projects/' }]}
                 className="mb-8"
             />
-            <motion.section
+            <section
                 id="portfolio"
                 className="mt-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
             >
                 <div className="flex sm:mb-8 mb-6 items-end justify-between">
                     <div className="">
@@ -369,7 +375,7 @@ const ProjectsPage = () => {
                                     </div>
                                 </button>
 
-                                <ProjectCard project={soulSyncProject} onOpen={() => openProject(soulSyncProject)} imageClassName="h-56" />
+                                <ProjectCard project={soulSyncProject} onOpen={() => openProject(soulSyncProject)} imageClassName="h-56" priority />
 
                                 <button type="button" onClick={() => openProject(bulkyFiProject)} className="group relative overflow-hidden ring-1 ring-neutral-200 dark:ring-neutral-800 bg-white dark:bg-slate-900 rounded-3xl shadow-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
                                     <ProjectImage src={bulkyFiProject.image} alt={bulkyFiProject.imageAlt} priority className="h-72 w-full transition-transform duration-500 group-hover:scale-105 object-cover object-top" />
@@ -454,10 +460,21 @@ const ProjectsPage = () => {
                     </>
                 </div>
 
-                {selectedProject && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onClick={() => setSelectedProject(null)}>
-                        <div className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white text-neutral-950 shadow-2xl ring-1 ring-neutral-200 dark:bg-slate-950 dark:text-white dark:ring-neutral-800" onClick={(event) => event.stopPropagation()}>
-                            <button type="button" aria-label="Close project summary" onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black dark:bg-white/10 dark:hover:bg-white/20">
+                <dialog
+                    ref={projectDialogRef}
+                    aria-labelledby="project-detail-title"
+                    onCancel={(event) => {
+                        event.preventDefault();
+                        setSelectedProject(null);
+                    }}
+                    onClick={(event) => {
+                        if (event.target === event.currentTarget) setSelectedProject(null);
+                    }}
+                    className="fixed inset-0 m-0 h-full max-h-none w-full max-w-none border-0 bg-transparent p-4 backdrop:bg-black/70 backdrop:backdrop-blur-sm sm:p-6"
+                >
+                    {selectedProject && (
+                        <div className="relative mx-auto my-0 max-h-[calc(100dvh-2rem)] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white text-neutral-950 shadow-2xl ring-1 ring-neutral-200 dark:bg-slate-950 dark:text-white dark:ring-neutral-800 sm:my-[2vh] sm:max-h-[90vh]">
+                            <button autoFocus type="button" aria-label="Close project summary" onClick={() => setSelectedProject(null)} className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black dark:bg-white/10 dark:hover:bg-white/20">
                                 <X className="h-5 w-5" />
                             </button>
                             <ProjectImage src={selectedProject.image} alt={selectedProject.imageAlt} className="h-64 w-full object-cover object-top sm:h-80" />
@@ -500,8 +517,8 @@ const ProjectsPage = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </dialog>
 
                 <div className="mt-8 sm:mt-10 flex justify-center">
                     <a href="/#projects" className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 ring-1 ring-neutral-200 dark:ring-neutral-700 px-5 py-3 text-sm text-neutral-700 dark:text-neutral-300 hover:shadow dark:hover:bg-slate-800 transition-colors font-geist">
@@ -509,7 +526,7 @@ const ProjectsPage = () => {
                         <ArrowUpRight className="w-5 h-5" />
                     </a>
                 </div>
-            </motion.section>
+            </section>
         </main>
     );
 };

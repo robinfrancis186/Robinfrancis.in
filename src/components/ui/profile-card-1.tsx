@@ -1,4 +1,5 @@
 import { useState, type ComponentType } from "react";
+import Image from "next/image";
 import { ArrowUpRight, Github, Instagram, Linkedin, BookOpenText } from "lucide-react";
 import { XIcon } from "@/components/ui/icons/XIcon";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,7 @@ const ProfileCardDemo = () => {
         bio: "Available for meaningful AI, product, accessibility, and community collaborations.",
         imageSlides: [
             { src: "/images/card/robin-francis-primary.jpg", alt: "Robin Francis portrait", fit: "cover" as const, position: "50% 18%" },
-            { src: "/images/card/robin-francis-3d.png", alt: "Robin Francis 3D figure", fit: "contain" as const, position: "50% 50%" },
+            { src: "/images/card/robin-francis-3d.webp", alt: "Robin Francis 3D figure", fit: "contain" as const, position: "50% 50%" },
         ],
         socialLinks: [
             { id: "github", icon: Github, label: "GitHub", href: "https://github.com/robinfrancis186" },
@@ -212,9 +213,11 @@ const ProfileImage = ({
     slide: ProfileImageSlide;
     fallbackName: string;
 }) => (
-    <img
+    <Image
         src={slide.src}
         alt={ensureRobinFrancisAlt(slide.alt, "profile")}
+        fill
+        sizes="(min-width: 640px) 128px, 112px"
         className={`size-full rounded-full bg-white ${slide.fit === "contain" ? "object-contain" : "object-cover"}`}
         style={{ objectPosition: slide.position ?? "50% 50%" }}
         onError={(event) => {

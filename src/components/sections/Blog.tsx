@@ -51,7 +51,7 @@ const Blog = () => {
     };
 
     return (
-        <section id="blog" className="py-32 bg-background relative overflow-hidden">
+        <section className="py-32 bg-background relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]" />

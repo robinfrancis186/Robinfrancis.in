@@ -926,7 +926,7 @@ We helped opportunity travel beyond borders.`,
         image: "/images/blog/codex-nightline/codex-nightline-builders-inside-metro.webp",
         imageAlt: "Builders coding inside a moving Kochi Metro train during Codex Nightline 2026",
         excerpt:
-            "One hundred builders boarded an after-hours Kochi Metro train for Codex Nightline, a two-hour AI build sprint where the route itself became the deadline.",
+            "One hundred builders joined Codex Nightline on 18 July 2026, including a two-hour AI build sprint aboard a moving Kochi Metro train.",
         metaDescription:
             "My experience organizing and mentoring at Codex Nightline, the world's first AI build sprint inside a moving Kochi Metro train.",
         date: "2026-07-31",
@@ -1479,11 +1479,11 @@ We built a movement.`,
         image: "/images/blog/1720937570476.webp",
         seoTitle: "SoulSync: AI for Emotional and Cognitive Wellness",
         imageAlt: "Robin Francis and the SoulSync AI wellness project team at a technology event",
-        excerpt: "A deep dive into creating AI-enabled tools for elders and caregivers.",
+        excerpt: "The story behind SoulSync, our second-prize concept for a digital companion designed around older adults and the people who support them.",
         metaDescription:
-            "How SoulSync approaches cognitive wellness for elders: emotion tracking, memory recall, and caregiver support designed around dignity and privacy.",
+            "Robin Francis reflects on SoulSync, a Team Bits & Bytes concept for the silver economy that won second prize at the IBM watsonx GenAI Challenge.",
         date: "2026-01-12",
-        updatedAt: "2026-07-07",
+        updatedAt: "2026-10-19",
         proofTitles: [
             "The Week coverage of Team Bits & Bytes at the IBM watsonx GenAI Challenge",
             "IBM watsonx Challenge video coverage",
@@ -1511,7 +1511,21 @@ We built a movement.`,
             },
         ],
         content:
-            "SoulSync explores multimodal AI that monitors tone, pacing, and contextual cues to support elders and caregivers. We built lightweight models that run fully on-device to preserve privacy, and tuned them for low-light and low-bandwidth environments where typical cloud assistants fail.\n\nWe added adaptive prompts for different cognitive states, offered optional journaling summaries that can be shared with clinicians, and designed escalation paths that notify family when risk signals like sentiment drift, agitation, or prolonged silence appear. The system emphasizes consent, transparency, and clinician-in-the-loop review before deployment, so that automation augments human care rather than replacing it.\n\nA key learning: usability beats model novelty. Care teams preferred predictable, explainable actions, like asking a grounding question every few minutes, over complex opaque behaviors. This shaped our evaluation rubric for safety, comfort, and trust.",
+            `SoulSync began with a question: could a digital companion make everyday technology feel more thoughtful for older adults, without treating people as a set of signals to monitor?
+
+Our team, Bits & Bytes, explored that question during the IBM watsonx GenAI Challenge. The project was a concept for the silver economy, not a clinical product. That distinction matters. It would be easy to describe an AI idea in ambitious terms, but a useful story should be clear about what we proposed and what has actually been validated.
+
+The problem space was personal and practical. Many older adults want to stay independent while keeping meaningful connections with family and caregivers. Digital tools can help, but they can also create friction: interfaces may be difficult to use, reminders can feel impersonal, and sensitive information deserves more care than a generic chatbot can offer.
+
+We approached SoulSync as a digital companion concept. We wanted the interaction to feel calm, respectful, and easy to understand. Rather than starting with a list of AI features, we kept returning to basic design questions: who is this for, what would make a moment easier, and how can a person remain in control? Those questions helped us think about trust and dignity as part of the product, not as details to add at the end.
+
+The challenge also taught us to separate a compelling demonstration from evidence of real-world readiness. A prototype can communicate an idea, but it cannot establish clinical effectiveness, safety across different users, or long-term value for caregivers. Those questions would require co-design with older adults and care professionals, accessibility testing, privacy review, and careful evaluation before any real deployment.
+
+That is one reason the project stayed memorable for me. The work brought together generative AI, product thinking, and a population whose needs are often discussed without enough direct participation. It reminded us that technology for wellbeing should be judged by how it supports a person's choices and relationships, not by how much data it can collect.
+
+Team Bits & Bytes received second prize at the IBM watsonx GenAI Challenge. [The Week's report](https://www.theweek.in/education/latest/2024/07/13/amal-jyothi-college-aces-hackathon-at-genai-conclave.html) names the team and describes SoulSync as our app concept for the silver economy. The [challenge video coverage](https://www.youtube.com/watch?v=B0OYd-Bit2Y) offers another record of that experience.
+
+I am grateful to the teammates, mentors, and organisers who helped us shape and present the idea. For me, SoulSync is less a claim that AI can solve loneliness or cognitive decline, and more a reminder to begin with people, make limitations visible, and build with care.`,
     },
     {
         id: "static-2",
@@ -1522,11 +1536,11 @@ We built a movement.`,
         image: "/images/blog/blog2/1731994207232.webp",
         seoTitle: "IEEE Region 10 Outstanding Volunteer Award | Robin Francis",
         imageAlt: "Robin Francis featured in IEEE Region 10 volunteer recognition",
-        excerpt: "Reflections on leadership, community-building, and global recognition.",
+        excerpt: "What the 2024 IEEE Region 10 Outstanding Volunteer Award represents to me, and the student community that made the work possible.",
         metaDescription:
-            "What the IEEE Region 10 Outstanding Volunteer Award 2024 recognised: years of student-branch leadership, volunteer systems, and community programmes.",
+            "Robin Francis reflects on the IEEE Region 10 Outstanding Volunteer Award 2024, the IEEE Sahrdaya community, and the people behind student-led programmes.",
         date: "2025-12-18",
-        updatedAt: "2026-07-07",
+        updatedAt: "2026-10-19",
         proofTitles: [
             "IEEE Region 10 Outstanding Volunteer Award recipients",
             "INSPIRA IEEE Sahrdaya SB Magazine 2024",
@@ -1554,7 +1568,19 @@ We built a movement.`,
             },
         ],
         content:
-            "This write-up covers the leadership principles that scaled our student branches to more than 100 events per year. We formalized handover playbooks, paired every lead with a shadow, and ran quarterly retros so new teams inherited context instead of chaos.\n\nWe also built mentorship tracks with clear checkpoints: speaker sourcing, sponsorship decks, logistics checklists, and post-event surveys. That reduced failure points and improved member retention, industry partnerships, and funded innovation programs that kept running even after founders graduated.\n\nThe biggest unlock was data visibility. Simple dashboards for attendance, NPS, and volunteer load helped us rotate responsibilities before burnout and double down on formats that worked. Workshops and office hours outperformed large one-off summits.",
+            `When I learned that I had received the IEEE Region 10 Outstanding Volunteer Award for 2024, I thought first about the people around me. A student branch does not grow because of one chairperson. It grows when many volunteers feel welcome to contribute, learn, take responsibility, and help someone else do the same.
+
+The public [IEEE Region 10 recipients list](https://www.ieeer10.org/past-recipients-of-ieee-region-10-awards/) records Robin Francis of Kerala Section among the 2024 recipients. I value that recognition, but I do not see it as a personal finish line. It reflects a chapter of work shaped by the IEEE Sahrdaya Student Branch community, its faculty advisors, members, and volunteers.
+
+During my time as chairperson, our branch grew from 110 to 534 members, the Computer Society chapter grew from 163 to 300, and we conducted more than 136 programmes. Those numbers are part of the record, but they do not tell the full story. Behind each programme were people learning how to plan, communicate, make decisions, and support one another. A first event can help someone find their confidence. A role on a team can become a first experience of leadership. A handover can give the next group a stronger starting point.
+
+That is what I tried to focus on: building a community that could keep moving when a particular team or tenure ended. We shared responsibilities across societies, gave volunteers room to lead, and treated documentation and handovers as part of the work. Not every plan went smoothly. Academic schedules, permissions, budgets, and volunteer capacity all shaped what we could do. We learned by adjusting together, not by pretending every event was effortless.
+
+Recognition is meaningful, but the best measure of leadership is what other people are able to do afterwards. I am proudest when a volunteer who once hesitated to speak takes ownership of a programme, when a newer member finds a team where they belong, or when a succeeding committee improves on what we left behind.
+
+I have written more about that chapter in [From a Student Branch to a Movement](/blog/ieee-sahrdaya-student-branch-movement/), including the people, programmes, and lessons that shaped it. The [INSPIRA IEEE Sahrdaya SB Magazine 2024](https://cdnc.heyzine.com/files/uploaded/97d868213fc130fa21bf351552f7747c05e9778f.pdf) is another public record of the branch and its work.
+
+Thank you to every volunteer, mentor, advisor, senior, and junior who shared the responsibility with me. This award carries their effort with it. I accept it with gratitude, and with the reminder that community leadership is not about standing above a group. It is about helping more people stand beside you and lead.`,
     },
 ];
 

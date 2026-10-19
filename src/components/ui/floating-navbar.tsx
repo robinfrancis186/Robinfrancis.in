@@ -58,7 +58,7 @@ export const FloatingNav = ({
                     className={cn(
                         "transition-[transform,opacity] duration-200",
                         visible ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-[100px] opacity-0",
-                        "flex max-w-fit fixed top-4 inset-x-0 mx-auto glass-panel rounded-full z-[5000] px-3 sm:px-6 py-1 sm:py-1.5 items-center justify-center space-x-1 sm:space-x-4",
+                        "flex max-w-fit fixed top-4 inset-x-0 mx-auto glass-panel rounded-full z-[5000] px-3 sm:px-6 py-1 sm:py-1.5 items-center justify-center gap-x-0.5 sm:gap-x-4",
                         className
                     )}
                 >
@@ -72,7 +72,7 @@ export const FloatingNav = ({
                                 href={hashTarget}
                                 aria-label={navItem.name}
                                 className={cn(
-                                    "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
+                                    "relative dark:text-neutral-50 flex min-h-6 min-w-6 items-center justify-center space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
                                 )}
                             >
                                 <span className="block sm:hidden">{navItem.icon}</span>
@@ -88,7 +88,7 @@ export const FloatingNav = ({
                                 prefetch={false}
                                 aria-label={navItem.name}
                                 className={cn(
-                                    "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
+                                    "relative dark:text-neutral-50 flex min-h-6 min-w-6 items-center justify-center space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
                                 )}
                             >
                                 <span className="block sm:hidden">{navItem.icon}</span>

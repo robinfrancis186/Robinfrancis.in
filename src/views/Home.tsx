@@ -10,15 +10,17 @@ const FAQ = lazy(() => import('@/components/sections/FAQ'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 
 interface DeferredSectionProps {
+    id?: string;
     children: ReactNode;
     placeholderClassName?: string;
     rootMargin?: string;
 }
 
 const DeferredSection = ({
+    id,
     children,
     placeholderClassName = "min-h-[40vh]",
-    rootMargin = "1200px 0px",
+    rootMargin = "200px 0px",
 }: DeferredSectionProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -47,7 +49,7 @@ const DeferredSection = ({
     }, [isVisible, rootMargin]);
 
     return (
-        <div ref={containerRef}>
+        <div id={id} ref={containerRef} className="scroll-mt-24">
             {isVisible ? (
                 <Suspense fallback={<div className={placeholderClassName} />}>
                     {children}
@@ -63,13 +65,13 @@ const Home = () => {
     return (
         <main>
             <Hero />
-            <DeferredSection placeholderClassName="min-h-[48vh]" rootMargin="1600px 0px">
+            <DeferredSection id="about" placeholderClassName="min-h-[48vh]" rootMargin="0px">
                 <About />
             </DeferredSection>
-            <DeferredSection placeholderClassName="min-h-[44vh]">
+            <DeferredSection id="projects" placeholderClassName="min-h-[44vh]">
                 <Projects />
             </DeferredSection>
-            <DeferredSection placeholderClassName="min-h-[44vh]">
+            <DeferredSection id="blog" placeholderClassName="min-h-[44vh]">
                 <Blog />
             </DeferredSection>
             <DeferredSection placeholderClassName="min-h-[60vh]">
@@ -78,7 +80,7 @@ const Home = () => {
             <DeferredSection placeholderClassName="min-h-[28vh]">
                 <FAQ />
             </DeferredSection>
-            <DeferredSection placeholderClassName="min-h-[40vh]">
+            <DeferredSection id="contact" placeholderClassName="min-h-[40vh]">
                 <Contact />
             </DeferredSection>
         </main>

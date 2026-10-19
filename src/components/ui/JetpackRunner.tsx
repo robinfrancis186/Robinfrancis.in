@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { LeaderboardEntry } from "@/lib/jetpackLeaderboard";
+import { trackEvent } from "@/lib/analytics";
 
 async function leaderboardRequest(body?: Record<string, unknown>): Promise<{
     entries: LeaderboardEntry[]; runId: string; name: string;
@@ -387,6 +388,7 @@ export default function JetpackRunner() {
             setEntries(data.entries);
             setBoardState("ready");
             setSaveState("saved");
+            trackEvent("game_score_saved", { game: "jetpack", score: data.entries.find(entry => entry.name === chosenName.current)?.score });
         } catch (error) {
             setSaveState("error");
             setSaveError(error instanceof Error ? error.message : "Could not save your score. Please retry.");
@@ -453,6 +455,7 @@ export default function JetpackRunner() {
             chosenName.current = data.name;
             setName(data.name);
             setJoined(true);
+            trackEvent("game_start", { game: "jetpack" });
             try { window.localStorage.setItem("rf-jetpack-name", data.name); } catch { /* session-only name */ }
             reset();
             game.current.phase = "running";

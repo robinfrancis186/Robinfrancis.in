@@ -3,7 +3,7 @@ import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { MY_EVENTS, eventSearchText } from "@/data/myEvents";
 import { awards, mediaKit, proofLinks, speakingItems } from "@/data/profileProof";
-import { stripInlineMarkup } from "@/lib/inlineText";
+import { stripInlineMarkup } from "@/lib/inlineMarkup";
 import type { SearchDocument } from "@/lib/search";
 
 /*
@@ -157,18 +157,6 @@ const publicPresenceDocuments: SearchDocument[] = [
     date: "2026-09-26",
   },
   {
-    id: "x-post-devday-bengaluru",
-    title: "OpenAI DevDay Exchange in Bengaluru",
-    href: "https://x.com/robinfrancis186/status/2102783132412137879",
-    type: "Resource",
-    section: "X post · 23 September 2026",
-    description:
-      "Robin's public post says he was attending his first OpenAI DevDay Exchange in Bengaluru.",
-    content: "Robin's public post on 23 September 2026 says he attended his first OpenAI DevDay Exchange in Bengaluru.",
-    keywords: ["X", "Twitter", "OpenAI DevDay Exchange", "Bengaluru", "AI"],
-    date: "2026-09-23",
-  },
-  {
     id: "medium-enterprise-hackathons",
     title: "Why enterprises are watching hackathons more closely than ever",
     href: "https://robinfrancis186.medium.com/why-enterprises-are-watching-hackathons-more-closely-than-ever-e0a40ba39323",
@@ -251,6 +239,18 @@ const pageDocuments: SearchDocument[] = [
       "Source-backed IEEE, IBM watsonx, volunteer leadership, and humanitarian technology achievements.",
     content: awards.map((award) => `${award.title}. ${award.summary}`).join(" "),
     keywords: ["awards", "recognition", "IEEE Region 10", "IBM watsonx", "humanitarian"],
+  },
+  {
+    id: "page-ieee-membership-development",
+    title: "IEEE Membership Development in Kerala",
+    href: "https://ieee-kerala-membership-development.vercel.app/",
+    type: "Page",
+    section: "IEEE Student Branches",
+    description:
+      "A Kerala-focused IEEE student branch membership-development playbook and verified scholarship, funding, and reporting-cycle guide.",
+    content:
+      "IEEE membership development Kerala student branches funding scholarships IEEE R10 revival fund WIE International Scholarship SPAx branch rebate WIE funding SIGHT EPICS Tech4Good Merwin.",
+    keywords: ["IEEE", "membership development", "Kerala", "student branch", "scholarship", "funding", "rebate"],
   },
   {
     id: "page-gallery",

@@ -7,7 +7,7 @@ import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { absoluteUrl } from "@/lib/seo";
 
 const defaultLastModified = "2026-08-18";
-const blogTemplateLastModified = "2026-07-19";
+const blogTemplateLastModified = "2026-10-19";
 
 /*
  * Hand-maintained because a build timestamp would tell crawlers every page
@@ -15,14 +15,14 @@ const blogTemplateLastModified = "2026-07-19";
  * actually edited. Blog posts derive theirs from the post data instead.
  */
 const routeLastModified = {
-  home: "2026-10-09",
-  projects: "2026-10-09",
+  home: "2026-10-19",
+  projects: "2026-10-19",
   achievements: "2026-08-03",
   pressKit: "2026-07-29",
-  gallery: "2026-08-03",
-  card: "2026-08-18",
+  gallery: "2026-10-19",
+  card: "2026-10-19",
   resume: "2026-07-06",
-  myEvents: "2026-10-17",
+  myEvents: "2026-10-19",
 } as const;
 
 const homeAchievementImages = [
@@ -131,7 +131,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       "/card/",
       0.6,
       "monthly",
-      [mediaKit.headshot, "/images/card/robin-francis-3d.png"],
+      [mediaKit.headshot, "/images/card/robin-francis-3d.webp"],
       routeLastModified.card,
     ),
     sitemapEntry("/images/robin-francis-resume.pdf", 0.5, "monthly", [], routeLastModified.resume),

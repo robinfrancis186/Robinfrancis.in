@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { WavePath } from "@/components/ui/wave-path";
-import LottieIcon from '@/components/ui/LottieIcon';
+
+const LottieIcon = dynamic(() => import("@/components/ui/LottieIcon"), { ssr: false });
 
 const Footer = () => {
     const footerRef = useRef<HTMLElement | null>(null);
@@ -46,6 +48,7 @@ const Footer = () => {
 
                     <nav className="mb-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground md:mb-0">
                         <a href="/achievements/" className="hover:text-primary transition-colors">Achievements</a>
+                        <a href="https://ieee-kerala-membership-development.vercel.app/" className="hover:text-primary transition-colors">IEEE Branch Toolkit</a>
                         <a href="/my-events/" className="hover:text-primary transition-colors">My Events</a>
                         <a href="/press-kit/" className="hover:text-primary transition-colors">Press Kit</a>
                         <a href="/card/" className="hover:text-primary transition-colors">Profile Card</a>

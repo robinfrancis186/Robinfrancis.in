@@ -6,7 +6,7 @@ import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const galleryDescription =
-  "Photos of Robin Francis at IEEE events, AI community gatherings, inclusive innovation programs, awards, and student mentorship in Kerala.";
+  "Photos of Robin Francis at OpenAI DevDay Exchange Bengaluru, IndiaFOSS, IEEE events, inclusive innovation programmes, awards, and community gatherings.";
 
 const galleryJsonLd = [
   {
@@ -31,7 +31,7 @@ const galleryJsonLd = [
       keywords: [item.category, "Robin Francis", "AI community", "IEEE", "inclusive innovation"],
       width: item.imageWidth,
       height: item.imageHeight,
-      author: {
+      about: {
         "@type": "Person",
         name: "Robin Francis",
       },

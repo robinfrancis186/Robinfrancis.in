@@ -86,24 +86,24 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
     title: "SoulSync",
     category: "AI Companion • Cognitive Wellness",
     summary:
-      "An AI companion for emotional and cognitive wellness, built for the silver economy. It combines emotion tracking, memory recall, and privacy-conscious caregiver support, with models tuned to run on-device so personal context never leaves the phone.",
+      "A Team Bits & Bytes concept for a digital companion in the silver economy, created for the IBM watsonx GenAI Challenge, where the team received second prize.",
     image: "/images/project-soulsync.webp",
-    imageAlt: "SoulSync AI companion dashboard showing emotion tracking and memory recall",
+    imageAlt: "SoulSync concept art showing an illuminated AI brain for cognitive wellness",
     accent: "emerald",
     highlights: [
-      "Connects emotion tracking with memory recall.",
-      "Keeps caregiver support privacy-conscious and human-centred.",
+      "Explores a thoughtful digital companion concept for older adults.",
+      "Frames dignity, agency, and privacy as core design questions.",
       "Won second prize with Team Bits & Bytes at the IBM watsonx GenAI Challenge.",
     ],
-    stack: ["Applied AI", "On-device models", "Cognitive wellness", "Caregiver support"],
+    stack: ["Generative AI concept", "Silver economy", "Human-centred design"],
     details: [
       {
         heading: "Designed around continuity",
-        body: "SoulSync explores how an assistant can help people keep track of emotional moments and personal memories without turning care into a stream of disconnected notifications.",
+        body: "SoulSync was a challenge concept exploring how a digital companion could support older adults while preserving their agency and keeping interactions calm and understandable.",
       },
       {
         heading: "Privacy is part of the product",
-        body: "The concept treats personal context as sensitive by design. On-device processing is part of the product direction, so useful support does not require every detail of a person's life to leave their phone.",
+        body: "Privacy and trust were questions for the design, not validated product capabilities. The concept would need co-design with older adults and caregivers, accessibility review, and privacy testing before any real-world use.",
       },
     ],
   },
@@ -113,10 +113,9 @@ export const PROJECT_DETAILS: ProjectPageData[] = [
     category: "Food Rescue • India Pilot",
     summary:
       "A mobile-first Flutter pilot for India that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. The screenshots show fictional local-demo data, not live food listings or confirmed pickups.",
-    image: "/images/project-foodloop.webp",
-    imageAlt: "FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination",
+    image: "/images/project-foodloop.webp?v=20261009",
+    imageAlt: "FoodLoop pilot overview with sample surplus food listings and collection details",
     accent: "amber",
-    repo: "https://github.com/robinfrancis186/foodloop",
     live: "https://robinfrancis186.github.io/foodloop/",
     highlights: [
       "Helps kitchens share surplus food and nearby community members reserve portions for free.",

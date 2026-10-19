@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarDays } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { findMyEvent, MY_EVENTS, eventUnitName } from "@/data/myEvents";
 import { EventImage } from "@/components/editorial/EventImage";
+import { EVENT_IMAGE_SIZES } from "@/data/eventImageSizes";
 import { homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, ogDefaults, twitterDefaults } from "@/lib/seo";
 
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
       title: `${event.title} | My Events | Robin Francis`,
       description,
       url: absoluteUrl(canonical),
-      ...(event.image ? { images: [event.image.src] } : {}),
+      ...(event.image ? { images: [{ url: event.image.src, alt: event.image.alt }] } : {}),
     },
     twitter: {
       ...twitterDefaults,
@@ -53,14 +54,17 @@ export default async function Page({ params }: EventPageProps) {
   const canonical = absoluteUrl(`/my-events/${event.id}/`);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Event",
+    "@type": "WebPage",
     name: event.title,
     url: canonical,
-    description: event.story?.summary,
-    organizer: { "@type": "Organization", name: eventUnitName(event.unit) },
-    ...(event.date ? { startDate: event.date } : {}),
-    ...(event.endDate ? { endDate: event.endDate } : {}),
-    ...(event.image ? { image: absoluteUrl(event.image.src) } : {}),
+    description: event.story?.summary ?? event.title,
+    ...(event.image ? { primaryImageOfPage: {
+      "@type": "ImageObject",
+      contentUrl: absoluteUrl(event.image.src),
+      caption: event.image.alt,
+      width: EVENT_IMAGE_SIZES[event.image.src]?.[0],
+      height: EVENT_IMAGE_SIZES[event.image.src]?.[1],
+    } } : {}),
   };
 
   return (

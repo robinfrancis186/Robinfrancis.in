@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, type FormEvent } from "react";
+import { useEffect, useState, lazy, Suspense, type FormEvent } from "react";
 import GitHubActivity from "./GitHubActivity";
 import { trackEvent } from "@/lib/analytics";
 
@@ -16,6 +16,15 @@ const Contact = () => {
     const [website, setWebsite] = useState("");
     const [buttonStatus, setButtonStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [statusMessage, setStatusMessage] = useState("");
+    const [animatedBackground, setAnimatedBackground] = useState(false);
+
+    useEffect(() => {
+        const query = window.matchMedia("(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+        const update = () => setAnimatedBackground(query.matches);
+        update();
+        query.addEventListener("change", update);
+        return () => query.removeEventListener("change", update);
+    }, []);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -41,6 +50,7 @@ const Contact = () => {
             trackEvent("contact_submit_success", {
                 form_location: "home_contact",
             });
+            trackEvent("generate_lead", { form_name: "contact" });
             setName("");
             setEmail("");
             setMessage("");
@@ -56,7 +66,7 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="relative w-full overflow-hidden bg-background py-20 antialiased md:py-28">
+        <section className="relative w-full overflow-hidden bg-background py-20 antialiased md:py-28">
             <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,520px)] lg:px-8">
                 <div className="mx-auto w-full max-w-2xl lg:mx-0">
                     <h2 className="text-center font-sans text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground md:text-7xl lg:text-left">
@@ -143,10 +153,10 @@ const Contact = () => {
                 </div>
                 <GitHubActivity />
             </div>
-            <div className="absolute inset-0 z-0">
-                <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20" />}>
+            <div className="absolute inset-0 z-0 bg-gradient-to-b from-background to-muted/20">
+                {animatedBackground && <Suspense fallback={null}>
                     <DotScreenShader />
-                </Suspense>
+                </Suspense>}
             </div>
         </section>
     );

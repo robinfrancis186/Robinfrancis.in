@@ -112,7 +112,7 @@ const Hero = () => {
             </div>
 
             {/* Main Content Container */}
-            <div className="container mx-auto px-4 z-10 relative flex flex-col md:flex-row items-center justify-center h-full gap-8 lg:gap-12">
+            <div className="container mx-auto px-4 lg:pl-24 z-10 relative flex flex-col md:flex-row items-center justify-center h-full gap-8 lg:gap-12">
                 
                 {/* LEFT SIDE: Intro & CTA */}
                 <div className="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
@@ -196,8 +196,9 @@ const Hero = () => {
                         width={420}
                         height={550}
                         priority
+                        fetchPriority="high"
                         sizes="(min-width: 768px) 420px, (min-width: 640px) 320px, 280px"
-                        className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl dark:hidden"
+                        className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain md:drop-shadow-2xl dark:hidden"
                     />
                     <Image
                         src="/images/about/robin-dark.webp" 
@@ -205,8 +206,9 @@ const Hero = () => {
                         width={420}
                         height={550}
                         priority
+                        fetchPriority="high"
                         sizes="(min-width: 768px) 420px, (min-width: 640px) 320px, 280px"
-                        className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain drop-shadow-2xl hidden dark:block"
+                        className="w-[280px] sm:w-[320px] md:w-[420px] h-auto object-contain md:drop-shadow-2xl hidden dark:block"
                     />
                 </div>
 

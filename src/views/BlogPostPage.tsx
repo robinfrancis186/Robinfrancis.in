@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import { urlFor } from '../lib/sanity';
 import { PortableText } from '@portabletext/react';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
 import ArticleActions from '@/components/blog/ArticleActions';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { findBlogAudio } from '@/data/blogAudio';
-import { findStaticBlogPost, type StaticBlogPost } from '@/data/blogPosts';
+import { blogNarrationHash, blogNarrationText } from '@/lib/blogNarration';
+import type { StaticBlogPost } from '@/data/blogPosts';
 import { findProofLinks } from '@/data/profileProof';
 import { homeBreadcrumb } from '@/lib/breadcrumbs';
 import { getSafeLinkHref, renderInlineMarkup, stripInlineMarkup } from '@/lib/inlineText';
@@ -172,40 +170,8 @@ function getStaticListItems(paragraph: string) {
 }
 
 const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogPost | null; slugOverride?: string }) => {
-    const params = useParams<{ slug?: string }>();
-    const slug = slugOverride ?? params?.slug;
-    const [post, setPost] = useState<any>(initialPost ?? null);
-    const [loading, setLoading] = useState(!initialPost);
-
-    useEffect(() => {
-        if (!slug) return;
-
-        window.scrollTo(0, 0);
-
-        if (initialPost && initialPost.slug === slug) {
-            setPost(initialPost);
-            setLoading(false);
-            return;
-        }
-
-        const localPost = findStaticBlogPost(slug);
-        if (localPost) {
-            setPost(localPost);
-            setLoading(false);
-            return;
-        }
-
-        setPost(null);
-        setLoading(false);
-    }, [initialPost, slug]);
-
-    if (loading) {
-        return (
-            <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 max-w-3xl mx-auto bg-background text-foreground flex justify-center items-center">
-                <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-            </main>
-        );
-    }
+    const slug = slugOverride;
+    const post: any = initialPost;
 
     if (!post) {
         return (
@@ -241,10 +207,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                 ]}
                 className="mb-8"
             />
-            <motion.article
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+            <article
             >
                 <div className="mb-10">
                 <Link href="/blog/" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8">
@@ -270,6 +233,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                             width={1200}
                             height={720}
                             priority
+                            fetchPriority="high"
                             sizes="(min-width: 768px) 768px, 100vw"
                             className="w-full h-auto max-h-[600px] object-cover"
                         />
@@ -277,11 +241,15 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                 )}
 
                 <ArticleActions
+                    key={resolvedSlug}
                     title={post.title}
                     text={articleText}
                     articleSlug={resolvedSlug}
                     shareUrl={canonicalUrl}
-                    audioSrc={findBlogAudio(resolvedSlug)?.src}
+                    audioSrc={findBlogAudio(
+                        resolvedSlug,
+                        blogNarrationHash(blogNarrationText(post.title, articleText))
+                    )?.src}
                 />
 
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-geist prose-headings:font-geist">
@@ -401,7 +369,7 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
                     </section>
                 )}
 
-            </motion.article>
+            </article>
         </main>
     );
 };

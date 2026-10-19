@@ -25,7 +25,7 @@ export default function Projects() {
     };
 
     return (
-        <section id="projects" className="py-20 bg-background">
+        <section className="py-20 bg-background">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
                     Featured <span className="text-primary">Projects</span>
@@ -41,17 +41,17 @@ export default function Projects() {
                         variants={item}
                         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
                         image="/images/project-soulsync.webp"
-                        imageAlt="SoulSync AI Companion: facial recognition and emotion tracking wellness dashboard"
+                        imageAlt="SoulSync concept art showing an illuminated AI brain for cognitive wellness"
                         title="SoulSync"
-                        description="AI Companion for Cognitive Wellness. Features facial recognition, emotion tracking, and memory recall."
-                        tags={["AI", "Facial Recognition", "Wellness"]}
+                        description="A challenge concept for a thoughtful digital companion in the silver economy."
+                        tags={["AI Concept", "Silver Economy", "Human-Centred Design"]}
                     />
 
                     <GridItem
                         variants={item}
                         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-                        image="/images/project-foodloop.webp"
-                        imageAlt="FoodLoop local pilot dashboard showing fictional sample food listings and pickup coordination"
+                        image="/images/project-foodloop.webp?v=20261009"
+                        imageAlt="FoodLoop pilot overview with sample surplus food listings and collection details"
                         title="FoodLoop"
                         description="Mobile-first food rescue pilot for India. Helps kitchens share surplus and nearby communities reserve free portions for pickup."
                         tags={["Flutter", "Food Rescue", "India Pilot"]}
