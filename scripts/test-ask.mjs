@@ -45,6 +45,9 @@ assert.doesNotMatch(retrievalAnswer("FoodLoop pilot kitchens", retrievePassages(
 const membershipFallback = retrievalAnswer("IEEE membership development scholarships Kerala", retrievePassages("IEEE membership development scholarships Kerala"));
 assert.match(membershipFallback.answer, /guide helps IEEE Student Branch volunteers/);
 assert.doesNotMatch(membershipFallback.answer, /IEEE membership development Kerala student branches funding scholarships/);
+const comparison = retrievePassages("Compare the audiences for Robin’s IEEE membership-development guide and IEEE SIGHT Kerala website.").filter((passage, index, ranked) => index < 3 && (passage.explicitlyNamed || passage.score >= Math.max(22, ranked[0].score * 0.7)));
+assert.ok(comparison.some(passage => passage.href === "/projects/ieee-sight-kerala/"));
+assert.ok(comparison.some(passage => /membership-development/.test(passage.href)));
 assert.deepEqual(parseGroundedAnswer(JSON.stringify({answer:"Robin builds FoodLoop.",sourceIds:[2,2,9]}),2),{answer:"Robin builds FoodLoop.",sourceIds:[2]});
 for (const value of [null,"invalid",JSON.stringify({answer:"Unfinished award",sourceIds:[1]}),JSON.stringify({answer:"Complete but ungrounded.",sourceIds:[0,99,"1"]}),JSON.stringify({answer:"x".repeat(1300)+".",sourceIds:[1]})]) assert.equal(parseGroundedAnswer(value,2),null);
 console.log("RoSi checks passed: complete awards, project/event relevance, fallback citations and injection guard.");

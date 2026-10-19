@@ -16,6 +16,7 @@ export type RetrievedPassage = {
     section: string;
     text: string;
     score: number;
+    explicitlyNamed: boolean;
 };
 
 /** Question words and filler that would otherwise dominate the term list. */
@@ -112,6 +113,7 @@ const scoreDocument = (doc: SearchDocument, terms: string[]) => {
 export function retrievePassages(query: string, limit = 6): RetrievedPassage[] {
     const terms = termsOf(query);
     if (!terms.length) return [];
+    const namedQuery = ` ${normalize(query)} `;
 
     return SEARCH_DOCUMENTS.map((doc) => ({
         title: doc.title,
@@ -119,9 +121,10 @@ export function retrievePassages(query: string, limit = 6): RetrievedPassage[] {
         section: doc.section,
         text: `${doc.description} ${doc.content}`.replace(/\s+/g, " ").trim().slice(0, 3000),
         score: scoreDocument(doc, terms),
+        explicitlyNamed: doc.type === "Project" && namedQuery.includes(` ${normalize(doc.title)} `),
     }))
         .filter((passage) => passage.score > 0)
-        .sort((left, right) => right.score - left.score)
+        .sort((left, right) => Number(right.explicitlyNamed) - Number(left.explicitlyNamed) || right.score - left.score)
         .slice(0, limit);
 }
 

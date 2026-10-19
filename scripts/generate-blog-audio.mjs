@@ -6,14 +6,14 @@
 //   node --experimental-strip-types scripts/generate-blog-audio.mjs --provider=openai --slug=<slug>
 //
 // Two providers are supported: sarvam (bulbul:v3, voice "aditya") and openai
-// (gpt-4o-mini-tts, voice "ash" at speed 1.07, tuned to match aditya's pace).
+// (tts-1-hd, voice "onyx" at speed 1.07).
 // Reads SARVAM_API_KEY or OPENAI_API_KEY from .env.local. Posts already having an
 // MP3 from the same provider and voice are skipped unless --force is passed, so
 // re-runs never spend credit twice on the same text.
 //
 // The MP3s are gitignored and served from Vercel Blob, so after generating:
 //
-//   vercel blob put public/audio/blog/<slug>-<hash>.mp3 --pathname audio/blog/<slug>-<hash>.mp3
+//   vercel blob put public/audio/blog/<slug>-<voice>-<hash>.mp3 --pathname audio/blog/<slug>-<voice>-<hash>.mp3
 //   node --experimental-strip-types scripts/generate-blog-audio.mjs --manifest-only \
 //     --base-url=https://<store>.public.blob.vercel-storage.com
 //
@@ -30,8 +30,7 @@ const audioDir = path.join(rootDir, 'public/audio/blog');
 const manifestPath = path.join(rootDir, 'src/data/blogAudio.ts');
 
 // Two providers so a post can be narrated with whichever account has credit.
-// The OpenAI defaults are tuned to match Sarvam's "aditya": measured on the same
-// sentence, aditya runs 135 wpm and ash at speed 1.07 runs 134 wpm.
+// Keep one OpenAI voice across articles rather than mixing different narrators.
 const PROVIDERS = {
   sarvam: {
     endpoint: 'https://api.sarvam.ai/text-to-speech',
@@ -42,14 +41,11 @@ const PROVIDERS = {
   },
   openai: {
     endpoint: 'https://api.openai.com/v1/audio/speech',
-    model: 'gpt-4o-mini-tts',
+    model: 'tts-1-hd',
     maxChars: 4000, // API limit is 4096
-    defaultVoice: 'ash',
+    defaultVoice: 'onyx',
     defaultSpeed: 1.07,
     keyEnv: 'OPENAI_API_KEY',
-    instructions:
-      'Speak in Indian English with a warm, measured, reflective tone. Steady pace, calm and sincere, ' +
-      'like someone narrating a personal memoir. Do not sound theatrical or newsy.',
   },
 };
 
@@ -141,7 +137,6 @@ function requestFor(apiKey, text) {
         model: provider.model,
         voice: speaker,
         input: text,
-        instructions: provider.instructions,
         response_format: 'mp3',
         speed,
       },
@@ -280,7 +275,7 @@ async function main() {
     const existing = manifest[post.slug];
     const text = narrationText(post);
     const contentHash = blogNarrationHash(text);
-    const filename = `${post.slug}-${contentHash}.mp3`;
+    const filename = `${post.slug}-${speaker}-${contentHash}.mp3`;
     const outPath = path.join(audioDir, filename);
     const existingPath = existing?.src ? path.join(audioDir, path.basename(new URL(existing.src, 'https://localhost').pathname)) : outPath;
     if (!force && fs.existsSync(existingPath) && existing?.voice === speaker && existing?.provider === providerName && existing?.contentHash === contentHash) {

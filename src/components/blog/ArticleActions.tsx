@@ -542,7 +542,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                 <audio
                     ref={audioRef}
                     src={audioSrc}
-                    preload="metadata"
+                    preload="none"
                     onLoadedMetadata={(event) => setNarrationSeconds(event.currentTarget.duration || 0)}
                     onDurationChange={(event) => { if (Number.isFinite(event.currentTarget.duration)) setNarrationSeconds(event.currentTarget.duration); }}
                     onTimeUpdate={(event) => {
@@ -584,7 +584,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                         <>
                             <span className="font-medium text-neutral-800 dark:text-neutral-100">Listen to article</span>
                             <span className="h-6 w-px bg-neutral-300 dark:bg-neutral-700" aria-hidden="true" />
-                            <span className="font-mono text-sm text-neutral-500 dark:text-neutral-400">{formatTime(totalSeconds)}</span>
+                            <span className="font-mono text-sm text-neutral-500 dark:text-neutral-400">{hasNarration && narrationSeconds > 0 ? "" : "About "}{formatTime(totalSeconds)}</span>
                         </>
                     )}
 
@@ -654,7 +654,7 @@ const ArticleActions = ({ title, text, articleSlug, shareUrl, className, audioSr
                     className="h-6 w-full cursor-pointer accent-primary"
                 />
                 <span className="font-mono text-xs text-neutral-500 dark:text-neutral-400">
-                    {hasNarration ? "−" : "About "}{formatTime(Math.max(0, totalSeconds - elapsedSeconds) / playbackRate)} remaining
+                    {hasNarration && narrationSeconds > 0 ? "−" : "About "}{formatTime(Math.max(0, totalSeconds - elapsedSeconds) / playbackRate)} remaining
                 </span>
             </div>
 

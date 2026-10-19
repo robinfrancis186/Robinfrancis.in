@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
     }
 
     const passages = retrievePassages(retrievalQuery).filter((passage, index, ranked) =>
-        index < 3 && passage.score >= Math.max(RELEVANCE_FLOOR, (ranked[0]?.score ?? 0) * 0.7)
+        index < 3 && (passage.explicitlyNamed || passage.score >= Math.max(RELEVANCE_FLOOR, (ranked[0]?.score ?? 0) * 0.7))
     );
     const fallback = retrievalAnswer(retrievalQuery, passages);
 
