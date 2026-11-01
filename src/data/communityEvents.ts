@@ -77,7 +77,7 @@ export const COMMUNITY_EVENTS: MyEvent[] = [
     id: "inclucode-2026",
     title: "INCLUCODE 2026: Accessibility Buildathon",
     date: "2026-06-25", endDate: "2026-07-25", dateLabel: "25 June to 25 July 2026 · finale at 9:00 AM", year: 2026,
-    unit: "IEEE ATII and Codex Community", group: "Community events", role: "Co-host",
+    unit: "IEEE ATII and Codex Community", group: "Community events", role: "Organizing Chair",
     image: eventImage("inclucode-2026", 1, "INCLUCODE 2026 participants and organisers gathered at Sahrdaya"),
     gallery: [
       eventImage("inclucode-2026", 2, "INCLUCODE builders and volunteers outside Sahrdaya's main building"),
@@ -92,7 +92,7 @@ export const COMMUNITY_EVENTS: MyEvent[] = [
     story: {
       summary: "A Codex-powered accessibility buildathon focused on inclusive communication and independence, ending with an in-person prototype showcase at Sahrdaya.",
       paragraphs: [
-        "I co-hosted INCLUCODE with Vaishakh Suresh, bringing an accessibility-focused buildathon to Sahrdaya. IEEE ATII, Codex, STRIDE, IEEE IES Hubs & Nodes, FOSS United and IEEE Sahrdaya collaborated on a programme that moved from ideas into mentored product development and an in-person finale.",
+        "I served as Organizing Chair for INCLUCODE, working with Vaishakh Suresh to bring an accessibility-focused buildathon to Sahrdaya. IEEE ATII, Codex, STRIDE, IEEE IES Hubs & Nodes, FOSS United and IEEE Sahrdaya collaborated on a programme that moved from ideas into mentored product development and an in-person finale.",
         "Teams explored accessibility software, audio games for blind users, Malayalam speech technologies, cognitive tools and inclusive education. The journey recorded 571 registrations and 170 teams, with 32 finalist teams and 120 builders presenting solutions. Industry and academic mentors supported development, while judges and stakeholders reviewed the demonstrations at the finale on 25 July.",
         "The finale was also listed on Luma as “IncluCode - Powered by Codex: Kodakara,” scheduled for 25 July at 9:00 AM at Sahrdaya. Selected teams presented their prototypes to judges and stakeholders during the offline showcase.",
       ],

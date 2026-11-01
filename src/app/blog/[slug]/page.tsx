@@ -6,7 +6,8 @@ import { findProofLinks } from "@/data/profileProof";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { stripInlineMarkup } from "@/lib/inlineText";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, defaultSeoImage, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
+import { blogPostingJsonLd } from "@/lib/contentSeo";
+import { absoluteUrl, ogDefaults, seoDescription, serializeJsonLd, twitterDefaults } from "@/lib/seo";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const canonical = `/blog/${post.slug}/`;
-  const description = post.metaDescription ?? post.excerpt;
+  const description = seoDescription(post.metaDescription ?? post.excerpt);
   const metadataTitle = post.seoTitle ?? post.title;
 
   return {
@@ -55,10 +56,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.title,
       description,
       url: absoluteUrl(canonical),
-      images: [post.image],
+      images: [{ url: post.image, alt: post.imageAlt ?? post.title }],
       publishedTime: post.date,
       modifiedTime: post.updatedAt ?? post.date,
-      authors: ["Robin Francis"],
+      authors: [absoluteUrl("/")],
       tags: post.tags,
     },
     twitter: {
@@ -66,7 +67,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       card: "summary_large_image",
       title: post.title,
       description,
-      images: [post.image],
+      images: [{ url: post.image, alt: post.imageAlt ?? post.title }],
     },
   };
 }
@@ -84,57 +85,20 @@ export default async function Page({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const canonicalUrl = post ? absoluteUrl(`/blog/${post.slug}/`) : "";
   const blogPostPath = post ? `/blog/${post.slug}/` : `/blog/${slug}/`;
   const blogPostBreadcrumbJsonLd = breadcrumbJsonLd([
     homeBreadcrumb,
     { name: "Blog", path: "/blog/" },
     { name: post?.title ?? "Journal Article", path: blogPostPath },
   ]);
-  const articleImages = post?.image
-    ? [post.image, ...(post.gallery?.map((image) => image.src) ?? [])].map((image) => absoluteUrl(image))
-    : [absoluteUrl(defaultSeoImage)];
   const articleSources = post?.proofTitles ? findProofLinks(post.proofTitles) : [];
-  const articleJsonLd = post
-    ? [
-        {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": canonicalUrl,
-        },
-        headline: post.title,
-        description: post.metaDescription ?? post.excerpt,
-        image: articleImages,
-        author: {
-          "@type": "Person",
-          name: "Robin Francis",
-          url: `${siteUrl}/`,
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Robin Francis",
-          logo: {
-            "@type": "ImageObject",
-            url: absoluteUrl("/images/favicon-r.png"),
-          },
-        },
-        datePublished: post.date,
-        dateModified: post.updatedAt ?? post.date,
-        keywords: post.tags.join(", "),
-        articleSection: post.category,
-        citation: articleSources.map((source) => source.href),
-        },
-        blogPostBreadcrumbJsonLd,
-      ]
-    : [blogPostBreadcrumbJsonLd];
+  const articleJsonLd = [blogPostingJsonLd(post), blogPostBreadcrumbJsonLd];
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
       />
       {post && (
         <noscript>

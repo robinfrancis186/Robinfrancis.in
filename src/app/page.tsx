@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { HomeRoute } from "./_components/home-route";
-import { absoluteUrl, defaultSeoDescription, defaultSeoImage, defaultSeoKeywords, ogDefaults, organizationJsonLd, personJsonLd, siteUrl, twitterDefaults, websiteJsonLd } from "@/lib/seo";
+import FAQ from "@/components/sections/FAQ";
+import { SITE_FAQS } from "@/data/siteFaqs";
+import { absoluteUrl, defaultSeoDescription, defaultSeoImage, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const homeDescription = defaultSeoDescription;
 
 const homeJsonLd = [
-  personJsonLd,
-  organizationJsonLd,
-  websiteJsonLd,
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
@@ -22,12 +21,13 @@ const homeJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
-    name: ["Home", "About", "Projects", "Blog", "Achievements", "Gallery", "Press Kit", "Search", "Contact"],
+    name: ["Home", "About", "Projects", "Blog", "My Events", "Achievements", "Gallery", "Press Kit", "Search", "Contact"],
     url: [
       absoluteUrl("/"),
       absoluteUrl("/#about"),
       absoluteUrl("/projects/"),
       absoluteUrl("/blog/"),
+      absoluteUrl("/my-events/"),
       absoluteUrl("/achievements/"),
       absoluteUrl("/gallery/"),
       absoluteUrl("/press-kit/"),
@@ -38,32 +38,9 @@ const homeJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Who is Robin Francis?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Robin Francis is an AI innovator, software engineer, and community leader focused on accessible, people-centric technology.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What does Robin Francis build?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Robin builds AI-powered products, accessible web platforms, local-first tools, and community programs for social impact.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How can I contact Robin Francis?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Use the contact form on robinfrancis.in or email robinfrancis186@gmail.com.",
-        },
-      },
-    ],
+    mainEntity: SITE_FAQS.map(({ question, answer }) => ({
+      "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
   },
 ];
 
@@ -117,7 +94,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
       <noscript dangerouslySetInnerHTML={{ __html: noScriptSummary }} />
-      <HomeRoute />
+      <HomeRoute><FAQ /></HomeRoute>
     </>
   );
 }

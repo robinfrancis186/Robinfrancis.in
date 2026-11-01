@@ -14,6 +14,7 @@ const cardJsonLd = [
     url: absoluteUrl("/card/"),
     mainEntity: {
       "@type": "Person",
+      "@id": `${siteUrl}/#person`,
       name: "Robin Francis",
       url: `${siteUrl}/`,
       jobTitle: "AI Innovator and Community Leader",

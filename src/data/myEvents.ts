@@ -264,6 +264,7 @@ const legacyEvents: MyEvent[] = events.map(([id, title, date, unit, group, exist
 });
 
 const corrections: Record<string, Partial<MyEvent>> = {
+  "techx-infinia": { role: "Organizing Chair" },
   "machine-learning-using-python": { endDate: "2023-09-14", dateLabel: "13 to 14 September 2023" },
   "debate-competition": { date: "2023-11-06", dateLabel: "6 November 2023" },
   "pes-tournament": { title: "eFootball Tournament (PES)", unit: "CS", image: { src: "/images/events/2023/pes-tournament.webp", alt: "IEEE Computer Society eFootball tournament poster", kind: "poster" } },
@@ -287,7 +288,33 @@ const corrections: Record<string, Partial<MyEvent>> = {
   "augmented-reality-using-unity": { endDate: "2024-10-09", dateLabel: "8 to 9 October 2024" },
 };
 
-export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents, ...COMMUNITY_EVENTS, ...EDSOC_EVENTS_2026].map((event) => ({
+const proTalk2026: MyEvent = {
+  id: "protalk-series-1-2026",
+  title: "ProTalk Series: Conversations That Inspire",
+  date: "2026-07-07", year: 2026, dateLabel: "7 July 2026, 7:30 PM to 8:35 PM IST",
+  unit: "IEEE ProComm-TEMS Joint Chapter Kerala", group: "Society chapter",
+  role: "Chapter Secretary and event coordinator",
+  image: { src: "/images/events/protalk-2026/poster.webp", alt: "Inaugural ProTalk Series poster featuring Dr. Sudeendra Koushik and Dr. Mousiki Kar on AI, research and professional growth", kind: "poster" },
+  gallery: [
+    { src: "/images/events/protalk-2026/participants.webp", alt: "ProTalk speakers, organisers and participants gathered online, including Robin Francis", kind: "photo" },
+    { src: "/images/events/protalk-2026/presentation-mementos.webp", alt: "Dr. Mousiki Kar's Transforming Expertise into Influence presentation alongside digital mementos for both ProTalk speakers", kind: "document" },
+  ],
+  story: {
+    summary: "The inaugural ProTalk webinar brought 111 attendees together for talks on AI for research and innovation, engineering leadership and professional growth through IEEE TEMS.",
+    paragraphs: [
+      "As Secretary of the IEEE ProComm-TEMS Joint Chapter Kerala, I coordinated the inaugural ProTalk Series: Conversations That Inspire with Adhen C Tom and Brigit Thomas. Held on Google Meet on 7 July 2026, the national-level programme connected students, researchers, industry professionals, academics and IEEE volunteers. IEEE Student Branches at GECT, MACE, SAINTGITS and Toc H collaborated with the chapter.",
+      "Dr. Mini Ulanat, the chapter Chair, opened the programme with a presidential address, followed by speaker introductions by Vice-Chair Prof. Sunitha Beevi K. Dr. Mousiki Kar, introduced as IEEE TEMS Secretary, delivered Transforming Expertise into Influence. Her talk explored publications, conferences, professional networks, leadership, volunteering and Women in TEMS as ways to turn technical expertise into wider impact.",
+      "Dr. Sudeendra Koushik, introduced as IEEE TEMS President, formally inaugurated the series and delivered AI for Research and Innovation. Using industry examples, he connected research with real-world challenges and explored how AI, entrepreneurship and innovation can create practical value beyond academic outcomes.",
+      "An interactive Q&A gave participants the chance to discuss AI, research, innovation and TEMS initiatives directly with the speakers. We presented digital mementos before I delivered the vote of thanks. The event report records 78 IEEE members and 33 non-members in attendance, a total of 111 participants.",
+    ],
+    venue: "Google Meet (online)",
+    speakers: ["Dr. Sudeendra Koushik", "Dr. Mousiki Kar", "Dr. Mini Ulanat", "Prof. Sunitha Beevi K"],
+    highlights: ["111 attendees: 78 IEEE members and 33 non-members", "AI for Research and Innovation keynote", "Transforming Expertise into Influence talk", "Interactive Q&A and collaboration with four IEEE Student Branches"],
+    sourceLabel: "IEEE ProComm-TEMS Joint Chapter Kerala ProTalk Series inaugural event report",
+  },
+};
+
+export const MY_EVENTS: readonly MyEvent[] = [...events2023, ...legacyEvents, ...COMMUNITY_EVENTS, ...EDSOC_EVENTS_2026, proTalk2026].map((event) => ({
   ...event,
   ...corrections[event.id],
   ...(EVENT_MEDIA[event.id] ? { image: EVENT_MEDIA[event.id][0], gallery: EVENT_MEDIA[event.id].slice(1) } : {}),

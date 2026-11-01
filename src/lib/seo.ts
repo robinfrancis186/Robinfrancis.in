@@ -2,6 +2,8 @@ export const siteUrl = "https://robinfrancis.in";
 
 export const siteName = "Robin Francis";
 
+export const seoReviewedAt = "2026-11-01";
+
 export const xHandle = "@robinfrancis186";
 
 /*
@@ -182,4 +184,14 @@ export const websiteJsonLd = {
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
+}
+
+export function seoDescription(text: string) {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  if (normalized.length <= 160) return normalized;
+  return `${normalized.slice(0, 157).replace(/\s+\S*$/, "")}…`;
+}
+
+export function serializeJsonLd(value: unknown) {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
 }

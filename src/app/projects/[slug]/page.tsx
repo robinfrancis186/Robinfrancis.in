@@ -4,9 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { homeBreadcrumb } from "@/lib/breadcrumbs";
+import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { ensureRobinFrancisAlt } from "@/lib/imageSeo";
-import { absoluteUrl, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
+import { absoluteUrl, ogDefaults, seoDescription, serializeJsonLd, siteUrl, twitterDefaults } from "@/lib/seo";
 import { findProjectDetail, PROJECT_DETAILS } from "@/data/projectDetails";
 
 type ProjectPageProps = {
@@ -28,11 +28,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 
   const canonical = `/projects/${project.slug}/`;
-  const images = [project.image, ...(project.images?.map((image) => image.src) ?? [])];
+  const images = [{ url: project.image, alt: project.imageAlt }, ...(project.images ?? []).map((image) => ({ url: image.src, alt: image.alt }))];
+  const description = seoDescription(project.summary);
 
   return {
     title: `${project.title} | Robin Francis Projects`,
-    description: project.summary,
+    description,
     keywords: ["Robin Francis", project.title, project.category, ...project.stack],
     alternates: {
       canonical,
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       ...ogDefaults,
       type: "website",
       title: `${project.title} | Robin Francis Projects`,
-      description: project.summary,
+      description,
       url: absoluteUrl(canonical),
       images,
     },
@@ -50,8 +51,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       ...twitterDefaults,
       card: "summary_large_image",
       title: `${project.title} | Robin Francis Projects`,
-      description: project.summary,
-      images: [project.image],
+      description,
+      images: [{ url: project.image, alt: project.imageAlt }],
     },
   };
 }
@@ -72,13 +73,19 @@ export default async function Page({ params }: ProjectPageProps) {
   const projectJsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
+    "@id": `${canonicalUrl}#project`,
     name: project.title,
     description: project.summary,
     url: canonicalUrl,
+    mainEntityOfPage: canonicalUrl,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    inLanguage: "en",
+    keywords: [project.category, ...project.stack],
     image: allProjectImages.map((image) => absoluteUrl(image.src)),
     genre: project.category,
     creator: {
       "@type": "Person",
+      "@id": `${siteUrl}/#person`,
       name: "Robin Francis",
       url: `${siteUrl}/`,
     },
@@ -89,7 +96,9 @@ export default async function Page({ params }: ProjectPageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([projectJsonLd, breadcrumbJsonLd([
+          homeBreadcrumb, { name: "Projects", path: "/projects/" }, { name: project.title, path: `/projects/${project.slug}/` },
+        ])]) }}
       />
       <main className="min-h-screen bg-background px-4 pb-20 pt-32 text-foreground md:px-8">
         <div className="mx-auto max-w-6xl">

@@ -1,69 +1,30 @@
+# Public pages and their images/scripts remain crawlable. These rules are not access control.
 User-agent: *
 Allow: /
-Allow: /images/
-Allow: /assets/
-Disallow: /cms/
+Disallow: /api/
+Disallow: /cms
 
-# AI and LLM Bots (Generative Engine Optimization)
-# Explicitly allow AI crawlers to access the portfolio to be included in AI Overviews and ChatGPT
-User-agent: GPTBot
-Allow: /
-Disallow: /cms/
+# Search and answer-engine discovery. Access does not guarantee indexing or citation.
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: OAI-SearchBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Claude-User
 User-agent: ChatGPT-User
 Allow: /
-Disallow: /cms/
-User-agent: Google-Extended
-Allow: /
-Disallow: /cms/
-User-agent: CCBot
-Allow: /
-Disallow: /cms/
-User-agent: anthropic-ai
-Allow: /
-Disallow: /cms/
-User-agent: Claude-Web
-Allow: /
-Disallow: /cms/
-User-agent: ClaudeBot
-Allow: /
-Disallow: /cms/
-User-agent: PerplexityBot
-Allow: /
-Disallow: /cms/
-User-agent: OmgiliBot
-Allow: /
-Disallow: /cms/
-User-agent: FacebookBot
-Allow: /
-Disallow: /cms/
+Disallow: /api/
+Disallow: /cms
 
-# Search and user-initiated fetchers, listed separately from the training
-# crawlers above. These are the agents that fetch a page in order to cite it
-# in an answer, so they matter most for answer-engine visibility.
-User-agent: OAI-SearchBot
-Allow: /
-Disallow: /cms/
-User-agent: Claude-SearchBot
-Allow: /
-Disallow: /cms/
-User-agent: Claude-User
-Allow: /
-Disallow: /cms/
-User-agent: Perplexity-User
-Allow: /
-Disallow: /cms/
+# Existing training-crawler access is unchanged; it is independent of search inclusion.
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: ClaudeBot
+User-agent: CCBot
 User-agent: Applebot-Extended
 Allow: /
-Disallow: /cms/
-User-agent: Amazonbot
-Allow: /
-Disallow: /cms/
-User-agent: meta-externalagent
-Allow: /
-Disallow: /cms/
-User-agent: cohere-ai
-Allow: /
-Disallow: /cms/
+Disallow: /api/
+Disallow: /cms
 
-# Sitemaps
 Sitemap: https://robinfrancis.in/sitemap.xml

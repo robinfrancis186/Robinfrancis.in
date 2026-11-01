@@ -1,8 +1,5 @@
-const ROBIN_FRANCIS_NAME = /\brobin\s+francis\b/i;
-
 /**
- * Keeps rendered image descriptions useful to people and search engines while
- * adding one natural Robin Francis attribution when the source copy lacks it.
+ * Preserve the description of what is actually pictured, without adding SEO keywords.
  */
 export function ensureRobinFrancisAlt(
   description: string | null | undefined,
@@ -14,12 +11,7 @@ export function ensureRobinFrancisAlt(
     return `Robin Francis ${context} image`;
   }
 
-  if (ROBIN_FRANCIS_NAME.test(normalized)) {
-    return normalized;
-  }
-
-  // Drop any trailing stop so the appended attribution reads as its own clause.
-  return `${normalized.replace(/[.,;:]+$/, "")}. Robin Francis ${context}`;
+  return normalized;
 }
 
 export function seoImage(url: string, description: string, context?: string) {

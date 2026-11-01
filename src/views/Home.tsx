@@ -6,7 +6,6 @@ const About = lazy(() => import('@/components/sections/About'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
 const Blog = lazy(() => import('@/components/sections/Blog'))
 const ProofPuzzle = lazy(() => import('@/components/sections/ProofPuzzle'))
-const FAQ = lazy(() => import('@/components/sections/FAQ'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 
 interface DeferredSectionProps {
@@ -61,7 +60,7 @@ const DeferredSection = ({
     );
 };
 
-const Home = () => {
+const Home = ({ children }: { children: ReactNode }) => {
     return (
         <main>
             <Hero />
@@ -77,9 +76,7 @@ const Home = () => {
             <DeferredSection placeholderClassName="min-h-[60vh]">
                 <ProofPuzzle />
             </DeferredSection>
-            <DeferredSection placeholderClassName="min-h-[28vh]">
-                <FAQ />
-            </DeferredSection>
+            {children}
             <DeferredSection id="contact" placeholderClassName="min-h-[40vh]">
                 <Contact />
             </DeferredSection>

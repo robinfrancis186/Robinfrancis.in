@@ -5,9 +5,9 @@ import { ArrowLeft, CalendarDays } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { findMyEvent, MY_EVENTS, eventUnitName } from "@/data/myEvents";
 import { EventImage } from "@/components/editorial/EventImage";
-import { EVENT_IMAGE_SIZES } from "@/data/eventImageSizes";
 import { homeBreadcrumb } from "@/lib/breadcrumbs";
-import { absoluteUrl, ogDefaults, twitterDefaults } from "@/lib/seo";
+import { eventPageJsonLd } from "@/lib/contentSeo";
+import { absoluteUrl, ogDefaults, seoDescription, serializeJsonLd, twitterDefaults } from "@/lib/seo";
 
 type EventPageProps = { params: Promise<{ slug: string }> };
 
@@ -21,12 +21,13 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   const { slug } = await params;
   const event = findMyEvent(slug);
   if (!event) notFound();
-  const description = event.story?.summary ?? event.title;
+  const description = seoDescription(event.story?.summary ?? event.title);
   const canonical = `/my-events/${event.id}/`;
   return {
     title: `${event.title} | My Events | Robin Francis`,
     description,
-    alternates: { canonical },
+    keywords: [event.title, eventUnitName(event.unit), event.group, String(event.year), "Robin Francis"],
+    alternates: { canonical, languages: { en: canonical, "x-default": canonical } },
     openGraph: {
       ...ogDefaults,
       title: `${event.title} | My Events | Robin Francis`,
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
       card: event.image ? "summary_large_image" : "summary",
       title: `${event.title} | My Events | Robin Francis`,
       description,
-      ...(event.image ? { images: [event.image.src] } : {}),
+      ...(event.image ? { images: [{ url: event.image.src, alt: event.image.alt }] } : {}),
     },
   };
 }
@@ -51,25 +52,11 @@ export default async function Page({ params }: EventPageProps) {
   const dateLabel = event.dateLabel ?? (event.date ? new Intl.DateTimeFormat("en-IN", {
     day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
   }).format(new Date(`${event.date}T00:00:00Z`)) : String(event.year));
-  const canonical = absoluteUrl(`/my-events/${event.id}/`);
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: event.title,
-    url: canonical,
-    description: event.story?.summary ?? event.title,
-    ...(event.image ? { primaryImageOfPage: {
-      "@type": "ImageObject",
-      contentUrl: absoluteUrl(event.image.src),
-      caption: event.image.alt,
-      width: EVENT_IMAGE_SIZES[event.image.src]?.[0],
-      height: EVENT_IMAGE_SIZES[event.image.src]?.[1],
-    } } : {}),
-  };
+  const jsonLd = eventPageJsonLd(event);
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
       <main className="min-h-screen bg-background px-4 pb-20 pt-28 text-foreground sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumbs items={[
@@ -80,7 +67,7 @@ export default async function Page({ params }: EventPageProps) {
           <Link href="/my-events/" className="mb-8 inline-flex min-h-11 items-center gap-2 rounded-xl text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back to all events
           </Link>
-          <article className="overflow-hidden rounded-3xl border border-border bg-card">
+          <article id="event-story" className="scroll-mt-28 overflow-hidden rounded-3xl border border-border bg-card">
             {event.image ? (
               <EventImage image={event.image} title={event.title} priority />
             ) : null}
@@ -89,6 +76,7 @@ export default async function Page({ params }: EventPageProps) {
                 <CalendarDays className="h-4 w-4" aria-hidden="true" /> {event.group}
               </p>
               <h1 className="max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">{event.title}</h1>
+              <p className="mt-3 text-sm text-muted-foreground">Event recap by <Link href="/#about" rel="author" className="font-medium text-primary hover:underline">Robin Francis</Link></p>
               <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
                 <p><span className="font-semibold text-foreground">Date:</span> {event.date ? <time dateTime={event.date}>{dateLabel}</time> : dateLabel}</p>
                 <p><span className="font-semibold text-foreground">Organizing unit:</span> {eventUnitName(event.unit)}</p>
@@ -96,6 +84,7 @@ export default async function Page({ params }: EventPageProps) {
                 {event.story?.venue && <p><span className="font-semibold text-foreground">Where:</span> {event.story.venue}</p>}
               </div>
               {event.story && <div className="mt-8 max-w-3xl border-t border-border pt-6 text-base leading-8 text-muted-foreground">
+                <h2 className="mb-3 text-lg font-semibold text-foreground">About the event</h2>
                 <p className="text-lg font-medium text-foreground">{event.story.summary}</p>
                 {event.story.paragraphs.map((paragraph) => <p key={paragraph} className="mt-5">{paragraph}</p>)}
                 {event.story.speakers?.length ? <section className="mt-7" aria-labelledby="speakers-heading">

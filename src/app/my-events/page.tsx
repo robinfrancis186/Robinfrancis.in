@@ -26,10 +26,12 @@ const eventsJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": absoluteUrl("/my-events/#directory"),
     name: "My Events Directory | Robin Francis",
     description,
     url: absoluteUrl("/my-events/"),
-    isPartOf: { "@type": "WebSite", name: "Robin Francis", url: `${siteUrl}/` },
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    inLanguage: "en",
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: MY_EVENTS.length,
@@ -38,6 +40,7 @@ const eventsJsonLd = [
         position: index + 1,
         item: {
           "@type": "WebPage",
+          "@id": absoluteUrl(`/my-events/${event.id}/`),
           name: event.title,
           description: event.story?.summary,
           url: absoluteUrl(`/my-events/${event.id}/`),
@@ -57,7 +60,7 @@ export default function Page() {
         <section aria-labelledby="events-fallback-heading">
           <h1 id="events-fallback-heading">My Events Directory</h1>
           <p>{description}</p>
-          <ul>{MY_EVENTS.map((event) => <li key={event.id}>{event.date ? <time dateTime={event.date}>{event.dateLabel ?? event.date}</time> : event.dateLabel ?? event.year} · {event.title} · {event.unit}</li>)}</ul>
+          <ul>{MY_EVENTS.map((event) => <li key={event.id}>{event.date ? <time dateTime={event.date}>{event.dateLabel ?? event.date}</time> : event.dateLabel ?? event.year} · <a href={`/my-events/${event.id}/`}>{event.title}</a> · {event.unit}</li>)}</ul>
         </section>
       </noscript>
       <MyEventsRoute />

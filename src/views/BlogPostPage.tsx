@@ -217,12 +217,17 @@ const BlogPostPage = ({ initialPost, slugOverride }: { initialPost?: StaticBlogP
 
                     <div className="flex items-center gap-4 mb-6">
                         {tag && <span className="text-xs font-bold tracking-widest text-primary bg-primary/10 px-2 py-1 rounded">{tag.toUpperCase()}</span>}
-                        {date && <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase">{date}</span>}
+                        {date && <time dateTime={post.date} className="text-xs font-mono text-muted-foreground tracking-widest uppercase">{date}</time>}
                     </div>
 
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1] font-geist">
                         {post.title}
                     </h1>
+                    <p className="mb-5 text-sm text-muted-foreground">
+                        By <Link href="/#about" rel="author" className="font-medium text-primary hover:underline">Robin Francis</Link>
+                        {post.updatedAt && post.updatedAt !== post.date && <> · Updated <time dateTime={post.updatedAt}>{new Date(`${post.updatedAt}T00:00:00Z`).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time></>}
+                    </p>
+                    <p className="text-lg leading-8 text-muted-foreground">{excerpt}</p>
                 </div>
 
                 {imageUrl && (

@@ -1,25 +1,4 @@
-const faqs = [
-    {
-        question: "Who is Robin Francis?",
-        answer:
-            "Robin Francis is an AI innovator, community leader, and 3× hackathon winner focused on accessible, people-centric technology and scalable digital solutions.",
-    },
-    {
-        question: "What services does Robin offer?",
-        answer:
-            "Robin builds AI-driven products for accessibility, leads community engineering initiatives, and delivers scalable digital solutions for startups and social impact organizations.",
-    },
-    {
-        question: "How can I contact Robin Francis?",
-        answer:
-            "Use the contact form or email robinfrancis186@gmail.com. You can also connect via LinkedIn at https://www.linkedin.com/in/robin-francis-b43565175.",
-    },
-    {
-        question: "Where can I see Robin's work and achievements?",
-        answer:
-            "Visit the Projects and Achievements sections to see recent AI builds, community initiatives, and awards including IBM watsonx GenAI Challenge 1st Runner-Up and IEEE R10 Outstanding Volunteer Award 2024.",
-    },
-];
+import { SITE_FAQS } from "@/data/siteFaqs";
 
 const FAQ = () => {
     return (
@@ -35,7 +14,7 @@ const FAQ = () => {
                 </div>
 
                 <div className="max-w-4xl mx-auto grid gap-4">
-                    {faqs.map((faq) => (
+                    {SITE_FAQS.map((faq) => (
                         <div
                             key={faq.question}
                             className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md shadow-sm p-6 text-left"

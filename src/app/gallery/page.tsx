@@ -12,9 +12,12 @@ const galleryJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": absoluteUrl("/gallery/#gallery"),
     name: "Robin Francis Gallery",
     description: galleryDescription,
     url: absoluteUrl("/gallery/"),
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    inLanguage: "en",
     creator: {
       "@type": "Person",
       name: "Robin Francis",
@@ -27,7 +30,8 @@ const galleryJsonLd = [
       caption: ensureRobinFrancisAlt(item.alt, "gallery"),
       contentUrl: absoluteUrl(item.img),
       url: absoluteUrl(item.img),
-      dateCreated: item.date || undefined,
+      dateCreated: /^\d{4}-\d{2}-\d{2}$/.test(item.date) ? item.date : undefined,
+      temporalCoverage: item.date || undefined,
       keywords: [item.category, "Robin Francis", "AI community", "IEEE", "inclusive innovation"],
       width: item.imageWidth,
       height: item.imageHeight,

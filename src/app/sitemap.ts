@@ -4,10 +4,10 @@ import { GALLERY_ITEMS } from "@/data/galleryItems";
 import { MY_EVENTS } from "@/data/myEvents";
 import { awards, mediaKit } from "@/data/profileProof";
 import { PROJECT_DETAILS } from "@/data/projectDetails";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, seoReviewedAt } from "@/lib/seo";
 
 const defaultLastModified = "2026-08-18";
-const blogTemplateLastModified = "2026-10-19";
+const blogTemplateLastModified = seoReviewedAt;
 
 /*
  * Hand-maintained because a build timestamp would tell crawlers every page
@@ -70,7 +70,7 @@ function sitemapEntry(
 
   return {
     url: absoluteUrl(path),
-    lastModified: new Date(lastModified),
+    lastModified: new Date(path.endsWith(".pdf") ? lastModified : latestDate(seoReviewedAt, new Date(lastModified).toISOString().slice(0, 10))),
     changeFrequency,
     priority,
     ...(deduplicatedImages.length > 0

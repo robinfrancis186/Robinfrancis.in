@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BlogRoute } from "../_components/blog-route";
 import { STATIC_BLOG_POSTS } from "@/data/blogPosts";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
+import { blogPostingJsonLd } from "@/lib/contentSeo";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const blogDescription =
@@ -11,6 +12,9 @@ const blogJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Blog",
+    "@id": absoluteUrl("/blog/#blog"),
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    inLanguage: "en",
     name: "Robin Francis Journal",
     description: blogDescription,
     url: absoluteUrl("/blog/"),
@@ -19,35 +23,7 @@ const blogJsonLd = [
       name: "Robin Francis",
       url: `${siteUrl}/`,
     },
-    blogPost: STATIC_BLOG_POSTS.map((post) => ({
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.excerpt,
-      url: absoluteUrl(`/blog/${post.slug}/`),
-      datePublished: post.date,
-      dateModified: post.updatedAt ?? post.date,
-      image: absoluteUrl(post.image),
-      author: {
-        "@type": "Person",
-        name: "Robin Francis",
-        url: `${siteUrl}/`,
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "Robin Francis",
-        url: `${siteUrl}/`,
-        logo: {
-          "@type": "ImageObject",
-          url: absoluteUrl("/images/favicon-r.png"),
-        },
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": absoluteUrl(`/blog/${post.slug}/`),
-      },
-      articleSection: post.category,
-      keywords: post.tags.join(", "),
-    })),
+    blogPost: STATIC_BLOG_POSTS.map(blogPostingJsonLd),
   },
   breadcrumbJsonLd([homeBreadcrumb, { name: "Blog", path: "/blog/" }]),
 ];

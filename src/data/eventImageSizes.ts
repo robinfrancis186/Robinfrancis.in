@@ -1,5 +1,8 @@
 // Intrinsic sizes keep small archive originals from being stretched full-width.
 export const EVENT_IMAGE_SIZES: Record<string, [number, number]> = {
+"/images/events/protalk-2026/poster.webp": [1080,1350],
+"/images/events/protalk-2026/participants.webp": [1920,722],
+"/images/events/protalk-2026/presentation-mementos.webp": [954,342],
 "/images/events/edsoc-2026/eduzest-poster.webp": [703,523],
 "/images/events/edsoc-2026/eduzest-platform.webp": [701,794],
 "/images/events/edsoc-2026/f2f-team.webp": [1920,1080],

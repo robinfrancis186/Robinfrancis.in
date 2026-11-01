@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
   allowedDevOrigins: ["127.0.0.1", "localhost"],
+  async headers() {
+    return [{ source: "/api/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+  },
   async redirects() {
     return [
       {

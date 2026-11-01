@@ -8,6 +8,10 @@ import {
   defaultSeoKeywords,
   siteName,
   siteUrl,
+  organizationJsonLd,
+  personJsonLd,
+  serializeJsonLd,
+  websiteJsonLd,
 } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -65,6 +69,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
     googleBot: {
       index: true,
       follow: true,
@@ -81,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd([personJsonLd, organizationJsonLd, websiteJsonLd]) }} />
         <ClientLayout>{children}</ClientLayout>
         {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>

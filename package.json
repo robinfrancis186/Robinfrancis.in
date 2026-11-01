@@ -8,6 +8,7 @@
     "build": "node scripts/prepare-cms.cjs && node fix_cms_paths.cjs && next build",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
+    "check:seo": "node scripts/check-seo.cjs",
     "start": "next start -p 5174",
     "preview": "next start -p 5174",
     "optimize:images": "node scripts/optimize-images.mjs",

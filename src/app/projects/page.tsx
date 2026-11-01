@@ -1,169 +1,33 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ProjectsRoute } from "../_components/projects-route";
+import { PROJECT_DETAILS } from "@/data/projectDetails";
 import { breadcrumbJsonLd, homeBreadcrumb } from "@/lib/breadcrumbs";
 import { absoluteUrl, defaultSeoKeywords, ogDefaults, siteUrl, twitterDefaults } from "@/lib/seo";
 
 const projectDescription =
-  "Explore Robin Francis projects in AI engineering, accessibility, product strategy, autonomous QA, mobile-first food rescue, membership development, and public-interest technology.";
+  "Explore Robin Francis's AI, accessibility and community projects, with case studies, screenshots, implementation details and live demos.";
 
-const projects = [
-  {
-    name: "Argus",
-    category: "AI QA browser agent",
-    description:
-      "A local-first autonomous QA agent that scouts websites, deploys synthetic user personas, and returns evidence-backed bug reports.",
-    url: "https://github.com/robinfrancis186/argus.git",
-    image: absoluteUrl("/images/projects/argus.webp"),
-    type: "SoftwareApplication",
-    applicationCategory: "DeveloperApplication",
-    codeRepository: "https://github.com/robinfrancis186/argus.git",
-  },
-  {
-    name: "BulkyFi",
-    category: "Local-first certificate generator",
-    description:
-      "A browser-based tool for generating professional certificates from templates and recipient spreadsheets, with PDF and PNG export.",
-    url: "https://bulkyfi.vercel.app/",
-    image: absoluteUrl("/images/projects/bulkyfi-landing-v2.webp"),
-    type: "SoftwareApplication",
-    applicationCategory: "BusinessApplication",
-    codeRepository: "https://github.com/robinfrancis186/bulkyfi",
-    sameAs: ["https://github.com/robinfrancis186/bulkyfi"],
-  },
-  {
-    name: "STRIDE Website",
-    category: "Accessible public-interest website",
-    description:
-      "The official STRIDE Kerala website, built as a modern platform for assistive technology, social impact, ecosystem stories, and engagement.",
-    url: "https://stride.kerala.gov.in/",
-    image: absoluteUrl("/images/projects/stride-website.webp"),
-    type: "WebSite",
-    sameAs: ["https://kdisc.kerala.gov.in/en/social-enterprises-and-inclusion/"],
-  },
-  {
-    name: "IEEE SIGHT Kerala Website",
-    category: "Humanitarian technology website",
-    description:
-      "The official IEEE Kerala Section SIGHT website with 2026 leadership, mission, community projects, events, funding opportunities, and contact information.",
-    url: "https://sight.ieeekerala.org/",
-    image: absoluteUrl("/images/projects/ieee-sight-website.webp"),
-    type: "WebSite",
-    sameAs: ["https://github.com/robinfrancis186/ieee-sight-website-2026"],
-  },
-  {
-    name: "IEEE Kerala Membership Development",
-    category: "IEEE Student Branch membership development resource",
-    description:
-      "An independent, source-linked session guide for IEEE Student Branch volunteers across Kerala, with a membership playbook, rebate calculator, funding and scholarship research, IEEE Day offers, and event examples.",
-    url: "https://ieee-kerala-membership-development.vercel.app/",
-    image: absoluteUrl("/images/projects/ieee-membership-development/home.webp"),
-    type: "WebSite",
-  },
-  {
-    name: "Readit",
-    category: "Local-first personal library",
-    description:
-      "A private library and reader for books, periodicals, and PDFs, with searchable reading notes and bundled Malayalam and English dictionaries.",
-    url: "https://readit-opal.vercel.app/",
-    image: absoluteUrl("/images/projects/readit.webp"),
-    type: "SoftwareApplication",
-    applicationCategory: "EducationalApplication",
-    codeRepository: "https://github.com/robinfrancis186/readit",
-    sameAs: [
-      "https://github.com/robinfrancis186/readit",
-      "https://robinfrancis186.github.io/readit/",
-    ],
-  },
-  {
-    name: "Crown of Bharat",
-    category: "Indian-inspired 3D strategy game",
-    description:
-      "An Indian-inspired 3D strategy game for building a kingdom, upgrading buildings, preparing troops and heroes, and playing campaign, practice, or asynchronous online battles.",
-    url: "https://crown-of-bharat.vercel.app/",
-    image: absoluteUrl("/images/projects/crown-of-bharat.webp"),
-    type: "VideoGame",
-    applicationCategory: "GameApplication",
-    codeRepository: "https://github.com/robinfrancis186/crown-of-bharat",
-    sameAs: ["https://github.com/robinfrancis186/crown-of-bharat"],
-  },
-  {
-    name: "floodRISE",
-    category: "Flood-intelligence and emergency decision-support demo",
-    description:
-      "A human-verified flood-intelligence MVP demonstrated through a deterministic Chennai replay. The hosted preview is labeled demo data and is not a live emergency service.",
-    url: "https://floodrise.vercel.app/",
-    image: absoluteUrl("/images/projects/floodrise-preview.webp"),
-    type: "SoftwareApplication",
-    codeRepository: "https://github.com/robinfrancis186/floodRISE",
-    sameAs: ["https://github.com/robinfrancis186/floodRISE"],
-  },
-  {
-    name: "Rofin UI",
-    category: "Dependency-free vanilla web UI library",
-    description:
-      "An open-source, framework-independent UI library built with HTML, CSS, and vanilla JavaScript, with a live gallery of reusable components, effects, and page sections.",
-    url: "https://rofin-ui.vercel.app/",
-    image: absoluteUrl("/images/projects/rofin-ui-preview.webp"),
-    type: "SoftwareSourceCode",
-    codeRepository: "https://github.com/robinfrancis186/rofin-ui",
-    sameAs: ["https://github.com/robinfrancis186/rofin-ui"],
-  },
-  {
-    name: "SoulSync",
-    category: "AI wellness companion",
-    description:
-      "A Team Bits & Bytes concept for a digital companion in the silver economy, created for the IBM watsonx GenAI Challenge, where the team received second prize.",
-    url: absoluteUrl("/projects/"),
-    image: absoluteUrl("/images/project-soulsync.webp"),
-    type: "SoftwareApplication",
-    applicationCategory: "HealthApplication",
-  },
-  {
-    name: "FoodLoop",
-    category: "Mobile-first food rescue pilot for India",
-    description:
-      "A mobile-first Flutter pilot that helps kitchens share edible surplus, lets nearby community members reserve portions for free, and supports pickup handover. Project screenshots show fictional local-demo data, not live listings or confirmed pickups.",
-    url: "https://robinfrancis186.github.io/foodloop/",
-    image: absoluteUrl("/images/project-foodloop.webp?v=20261009"),
-    type: "SoftwareApplication",
-    applicationCategory: "MobileApplication",
-  },
-  {
-    name: "TechX Infinia",
-    category: "Emerging technology flagship event",
-    description:
-      "An emerging technology festival founded and led for more than 450 participants, spanning talks, an expo, and school outreach.",
-    url: absoluteUrl("/gallery/"),
-    image: absoluteUrl("/images/gallery/gallery-techx-infinia-audience.webp"),
-    type: "CreativeWork",
-  },
-  {
-    name: "IEEE Global Career Fair",
-    category: "Global virtual career fair",
-    description:
-      "Operations and Platform Team Lead, and Recruiter Outreach Team Lead for South India, for the 27-hour follow-the-sun IEEE Global Career Fair 2026: 11,020 candidates from 131 countries, 700+ jobs across 163 hiring locations, and 8,169 applications.",
-    url: absoluteUrl("/projects/ieee-global-career-fair/"),
-    image: absoluteUrl("/images/projects/ieee-global-career-fair-results.webp"),
-    type: "CreativeWork",
-  },
-  {
-    name: "IEEE R10 Career Fair",
-    category: "International virtual career fair",
-    description:
-      "Co-led IEEE Region 10's first international Virtual Career Fair in 2025, connecting 245 registrants with 31 global recruiters across 2,578 booth visits and 310 applications.",
-    url: absoluteUrl("/blog/ieee-region-10-international-virtual-career-fair-2025/"),
-    image: absoluteUrl("/images/blog/ieee-career-fair-2025/ieee-career-fair-2025-participation-outcomes.webp"),
-    type: "CreativeWork",
-  },
-];
+const projects = PROJECT_DETAILS.map((project) => ({
+  name: project.title,
+  category: project.category,
+  description: project.summary,
+  url: absoluteUrl(`/projects/${project.slug}/`),
+  image: absoluteUrl(project.image),
+  type: "CreativeWork",
+  sameAs: [project.live, project.repo].filter(Boolean),
+}));
 
 const projectsJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": absoluteUrl("/projects/#projects"),
     name: "Projects | Robin Francis",
     description: projectDescription,
     url: absoluteUrl("/projects/"),
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    inLanguage: "en",
     hasPart: projects.map((project) => ({
       "@type": project.type,
       name: project.name,
@@ -171,11 +35,10 @@ const projectsJsonLd = [
       genre: project.category,
       url: project.url,
       image: project.image,
-      applicationCategory: project.applicationCategory,
-      codeRepository: project.codeRepository,
       sameAs: project.sameAs,
       creator: {
         "@type": "Person",
+        "@id": `${siteUrl}/#person`,
         name: "Robin Francis",
         url: `${siteUrl}/`,
       },
@@ -257,6 +120,15 @@ export default function Page() {
         </section>
       </noscript>
       <ProjectsRoute />
+      <nav aria-labelledby="project-case-studies-heading" className="mx-auto max-w-6xl px-4 pb-16 md:px-8">
+        <h2 id="project-case-studies-heading" className="text-2xl font-semibold text-foreground">Explore project case studies</h2>
+        <p className="mt-2 text-muted-foreground">Go straight to the details, screenshots and implementation notes.</p>
+        <ul className="mt-5 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECT_DETAILS.map((project) => <li key={project.slug}>
+            <Link href={`/projects/${project.slug}/`} className="flex min-h-12 items-center rounded-xl border border-border px-4 py-3 text-primary transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">{project.title}</Link>
+          </li>)}
+        </ul>
+      </nav>
     </>
   );
 }
